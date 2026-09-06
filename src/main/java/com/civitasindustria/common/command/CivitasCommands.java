@@ -11,7 +11,7 @@ public final class CivitasCommands {
     private CivitasCommands() {}
 
     public static void register(RegisterCommandsEvent event) {
-        event.getDispatcher().register(Commands.literal("ci")
+        var root=Commands.literal("ci")
                 .then(Commands.literal("version").executes(context -> {
                     context.getSource().sendSuccess(() -> Component.literal(
                             "Civitas Industria " + version(CivitasIndustria.MOD_ID)
@@ -20,7 +20,9 @@ public final class CivitasCommands {
                             + " | NeoForge " + version("neoforge")
                             + " | Java " + System.getProperty("java.version")), false);
                     return 1;
-                })));
+                }));
+        RuntimeCommands.attach(root);
+        event.getDispatcher().register(root);
     }
 
     private static String version(String modId) {

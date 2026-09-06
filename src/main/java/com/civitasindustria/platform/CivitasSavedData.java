@@ -20,11 +20,21 @@ public final class CivitasSavedData extends SavedData {
         if(Files.exists(file)){
             try {
                 CompoundTag root=NbtIo.readCompressed(file,NbtAccounter.create(64L*1024*1024));
+                if(!root.contains("data",Tag.TAG_COMPOUND))throw new IOException("Missing data compound");
                 CompoundTag data=root.getCompound("data");
+                if(!data.contains("dataVersion",Tag.TAG_INT))throw new IOException("Missing integer schema");
                 int version=data.getInt("dataVersion");
                 if(version<1||version>DataMigrationManager.VERSION)throw new IOException("Unsupported schema "+version);
-                if(version==1&&!data.contains("snapshot")) state=new WorldState();
-                else state=DataMigrationManager.decode(data.getByteArray("snapshot"));
+                if(version==1&&!data.contains("snapshot")) {
+                    if(data.getAllKeys().size()!=1)throw new IOException("Unexpected foundation fields");
+                    state=new WorldState();
+                } else {
+                    if(!data.contains("snapshot",Tag.TAG_BYTE_ARRAY))throw new IOException("Missing snapshot bytes");
+                    byte[] snapshot=data.getByteArray("snapshot");
+                    if(snapshot.length<8||java.nio.ByteBuffer.wrap(snapshot).getInt(4)!=version)
+                        throw new IOException("Envelope/snapshot schema mismatch");
+                    state=DataMigrationManager.decode(snapshot);
+                }
             }catch(IOException|RuntimeException e){throw new IllegalStateException("Civitas data was not loaded; refusing to overwrite "+file,e);}
         }
         CivitasSavedData result=new CivitasSavedData(state);

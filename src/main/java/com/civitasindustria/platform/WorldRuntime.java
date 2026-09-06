@@ -22,6 +22,7 @@ public final class WorldRuntime {
     private static final Map<ResourceLocation,WorldRuntime> WORLDS=new HashMap<>();
     public final CivitasSavedData saved;
     public final Map<String,RollingMetrics> metrics=new LinkedHashMap<>();
+    private final Set<Long> pendingChunks=new LinkedHashSet<>();
     private final Map<CellPos,Integer> loadedCells=new HashMap<>();
     private final Map<Long,Set<Long>> machinesByChunk=new HashMap<>();
     private final NavigableSet<Long> machines=new TreeSet<>();
@@ -46,8 +47,11 @@ public final class WorldRuntime {
         if(!state().cells.containsKey(p)&&state().cells.size()>=DataMigrationManager.MAX_RECORDS)throw new IllegalStateException("Cell storage limit");
         return state().cells.computeIfAbsent(p,key->new CellData());
     }
-    public void emit(CellPos pos,Pollutant pollutant,double amount){cell(pos).add(pollutant,amount);if(loadedCells.containsKey(pos))active.add(pos);dirty();}
+    public void emit(CellPos pos,Pollutant pollutant,double amount){CellData target=cell(pos);target.add(pollutant,amount);target.acidPrecursorLoad=target.get(Pollutant.SOX)+target.get(Pollutant.NOX);if(loadedCells.containsKey(pos))active.add(pos);dirty();}
+    public void rescanChunk(ChunkPos pos){chunkUnloaded(pos);queueChunk(pos);}
+    public void queueChunk(ChunkPos pos){pendingChunks.add(pos.toLong());}
     public void chunkLoaded(LevelChunk chunk){
+        if(machinesByChunk.containsKey(chunk.getPos().toLong()))return;
         CellPos cell=CellPos.fromChunk(chunk.getPos().x,chunk.getPos().z);
         loadedCells.merge(cell,1,Integer::sum);if(state().cells.containsKey(cell))active.add(cell);
         Set<Long> positions=new HashSet<>();
@@ -56,6 +60,8 @@ public final class WorldRuntime {
         graphDirty=true;
     }
     public void chunkUnloaded(ChunkPos chunk){
+        pendingChunks.remove(chunk.toLong());
+        if(!machinesByChunk.containsKey(chunk.toLong()))return;
         CellPos cell=CellPos.fromChunk(chunk.x,chunk.z);
         loadedCells.computeIfPresent(cell,(p,n)->n<=1?null:n-1);if(!loadedCells.containsKey(cell)){active.remove(cell);threats.remove(cell);}
         Set<Long> positions=machinesByChunk.remove(chunk.toLong());
@@ -82,12 +88,20 @@ public final class WorldRuntime {
         if(total<.00001)state().rawLoad.remove(chunk);else state().rawLoad.put(chunk,total);
     }
     public void tick(ServerLevel level){
+        int discovered=0;
+        var pending=pendingChunks.iterator();
+        while(pending.hasNext()&&discovered++<8){
+            ChunkPos pos=new ChunkPos(pending.next());pending.remove();
+            LevelChunk chunk=level.getChunkSource().getChunkNow(pos.x,pos.z);
+            if(chunk!=null)chunkLoaded(chunk);
+        }
         long time=level.getGameTime();
         if(graphDirty){long start=System.nanoTime();rebuildCivilization();record("network",start,state().nodes.size());}
         if(time%ServerConfig.MAINTENANCE_INTERVAL.get()==0)maintain();
         if(time%ServerConfig.EMISSION_INTERVAL.get()==0)processMachines(level);
         if(time%ServerConfig.ENVIRONMENT_INTERVAL.get()==0)simulate(level);
-        if(time%100==0){threat(level);GameplayHooks.environmentEffects(level,this);}
+        if(time%100==0)GameplayHooks.environmentEffects(level,this);
+        // Threat orchestration below remains staged until the entity director is validated.
     }
     private void rebuildCivilization(){
         for(var network:networks)for(CellPos pos:network.cells()){CellData c=state().cells.get(pos);if(c!=null)c.civilization=CellData.Civilization.WILDERNESS;}
@@ -100,9 +114,7 @@ public final class WorldRuntime {
         for(var network:networks){
             int missed=Integer.MAX_VALUE;for(CellPos p:network.cells())missed=Math.min(missed,coreStatus.getOrDefault(p,Integer.MAX_VALUE));
             for(CellPos p:network.cells()){
-                boolean edge=List.of(p.offset(1,0),p.offset(-1,0),p.offset(0,1),p.offset(0,-1)).stream().anyMatch(n->!network.cells().contains(n));
-                cell(p).civilization=missed==Integer.MAX_VALUE?CellData.Civilization.FRONTIER:
-                    missed<2||!edge?CellData.Civilization.CIVILIZED:missed<5?CellData.Civilization.FRONTIER:CellData.Civilization.WILDERNESS;
+                cell(p).civilization=CivilizationGraph.maintenanceState(missed,network.boundaryDepth().get(p));
             }
         }
     }
@@ -175,14 +187,14 @@ public final class WorldRuntime {
         long start=System.nanoTime();Set<CellPos> online=new HashSet<>();
         for(var player:level.players())online.add(CellPos.fromBlock(player.blockPosition().getX(),player.blockPosition().getZ()));
         for(CellPos p:online){
-            CellData cell=cell(p);double industrial=0;
+            CellData cell=state().cells.get(p);if(cell==null)continue;double industrial=0;
             for(int x=0;x<4;x++)for(int z=0;z<4;z++)industrial+=state().rawLoad.getOrDefault(new IndustrialLoad.Chunk(p.x()*4+x,p.z()*4+z),0.0);
             cell.threatPressure=Math.max(0,industrial+cell.get(Pollutant.NOISE)*.1-(cell.civilization==CellData.Civilization.CIVILIZED?100:0));
             ThreatState threat=threats.computeIfAbsent(p,k->new ThreatState());var previous=threat.phase;
             threat.update(level.getGameTime(),true,cell.threatPressure,ServerConfig.THREAT_THRESHOLD.get(),ServerConfig.WARNING_TICKS.get(),6000);
             if(previous!=threat.phase&&threat.phase==ThreatState.Phase.WARNING)GameplayHooks.warn(level,p);
-            if(previous!=threat.phase&&threat.phase==ThreatState.Phase.ACTIVE)GameplayHooks.raid(level,p);
-            cell.lastThreatUpdate=level.getGameTime();
+            // ACTIVE wave dispatch awaits a validated entity director (see IMPLEMENTATION_PLAN section 5).
+            cell.lastThreatUpdate=level.getGameTime();dirty();
         }
         threats.keySet().removeIf(p->!online.contains(p));record("threat",start,online.size());
     }

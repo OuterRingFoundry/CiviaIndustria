@@ -9,8 +9,14 @@ public final class EnvironmentSimulator {
     private static final int[][] DIRECTIONS={{1,0},{-1,0},{0,1},{0,-1}};
     public int step(Map<CellPos,CellData> cells,Collection<CellPos> active,
                     Function<CellPos,Climate> climate,SimulationSettings s,long time) {
+        return step(cells,active,climate,s,time,DataMigrationManager.MAX_RECORDS);
+    }
+    public int step(Map<CellPos,CellData> cells,Collection<CellPos> active,
+                    Function<CellPos,Climate> climate,SimulationSettings s,long time,int recordLimit) {
+        if(recordLimit<cells.size())throw new IllegalArgumentException("Record limit below stored cell count");
+        Set<CellPos> reserved=new HashSet<>();
         Map<CellPos,double[]> deltas=new TreeMap<>();
-        List<CellPos> work=active.stream().filter(cells::containsKey).sorted().limit(s.maxCells()).toList();
+        List<CellPos> work=active.stream().distinct().filter(cells::containsKey).sorted().limit(s.maxCells()).toList();
         for(CellPos pos:work) {
             CellData c=cells.get(pos);
             Climate weather=climate.apply(pos);
@@ -33,13 +39,13 @@ public final class EnvironmentSimulator {
                 remaining-=deposition;
                 if(i<4) {
                     double transport=remaining*s.diffusion();
-                    delta[i]-=transport;
+
                     for(int[] direction:DIRECTIONS) {
                         boolean downwind=direction[0]==s.windX()&&direction[1]==s.windZ();
                         double weight=(1-s.windBias())/4+(downwind?s.windBias():0);
                         if(s.windX()==0&&s.windZ()==0) weight=.25;
                         double amount=transport*weight;
-                        if(amount>0) deltas.computeIfAbsent(pos.offset(direction[0],direction[1]),k->new double[Pollutant.values().length])[i]+=amount;
+                        if(amount>0) transfer(cells,deltas,reserved,recordLimit,pos,pos.offset(direction[0],direction[1]),i,amount);
                     }
                 } else if(i>=4&&i<=7&&weather.surfaceWater()) {
                     List<CellPos> downstream=new ArrayList<>(4);
@@ -50,8 +56,7 @@ public final class EnvironmentSimulator {
                     }
                     if(!downstream.isEmpty()) {
                         double runoff=remaining*s.waterRunoff();
-                        delta[i]-=runoff;
-                        for(CellPos next:downstream) deltas.computeIfAbsent(next,k->new double[Pollutant.values().length])[i]+=runoff/downstream.size();
+                        for(CellPos next:downstream) transfer(cells,deltas,reserved,recordLimit,pos,next,i,runoff/downstream.size());
                     }
                 }
             }
@@ -77,7 +82,27 @@ public final class EnvironmentSimulator {
             c.lastEnvironmentUpdate=time; c.lastEcologyUpdate=time;
             if(c.pristine()) cells.remove(pos);
         }
+        // Transport recipients below epsilon must not leave pristine historical records behind.
+        for(CellPos pos:deltas.keySet()) {
+            CellData c=cells.get(pos);if(c!=null&&c.pristine())cells.remove(pos);
+        }
         return work.size();
+    }
+    /** Refused transport stays at the source when record or concentration limits are reached. */
+    private static void transfer(Map<CellPos,CellData> cells,Map<CellPos,double[]> deltas,
+                                 Set<CellPos> reserved,int limit,CellPos source,CellPos target,int pollutant,double requested) {
+        if(requested<=0)return;
+        if(!cells.containsKey(target)&&!reserved.contains(target)) {
+            if(cells.size()+reserved.size()>=limit)return;
+            reserved.add(target);
+        }
+        double[] next=deltas.computeIfAbsent(target,k->new double[Pollutant.values().length]);
+        CellData existing=cells.get(target);
+        double value=existing==null?0:existing.pollutants[pollutant];
+        // Negative deltas are ignored for capacity: later source processing cannot overfill a target.
+        double accepted=Math.min(requested,Math.max(0,1_000_000-value-Math.max(0,next[pollutant])));
+        next[pollutant]+=accepted;
+        deltas.get(source)[pollutant]-=accepted;
     }
     private static double approach(double value,double target,double down,double up) {
         double result=value+(target-value)*(target<value?down:up);

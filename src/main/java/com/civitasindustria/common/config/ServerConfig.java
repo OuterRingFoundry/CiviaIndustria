@@ -26,6 +26,10 @@ public final class ServerConfig {
         GLOBAL_RAID_BUDGET=B.defineInRange("globalRaidBudget",80,1,80);
     public static final ModConfigSpec.DoubleValue THREAT_THRESHOLD=B.defineInRange("threatThreshold",100.0,1,1000000);
     public static final ModConfigSpec.BooleanValue THREATS=B.define("enableThreats",true), CORROSION=B.define("sampleAcidCorrosion",true);
+    public static final ModConfigSpec.BooleanValue EXPOSURE=B.define("environmentalExposure",true);
+    public static final ModConfigSpec.DoubleValue EXPOSURE_AQI=B.defineInRange("severeExposureAqi",500.0,1,10000000),
+        EXPOSURE_ACID=B.defineInRange("severeExposureAcid",500.0,1,2000000),
+        EXPOSURE_WATER=B.defineInRange("severeExposureWaterToxicity",500.0,1,1000000);
     public static final ModConfigSpec SPEC=B.build();
     private static ModConfigSpec.DoubleValue rate(String name,double value){return B.defineInRange(name,value,0,1);}
     public static SimulationSettings simulation(){return new SimulationSettings(AIR_DECAY.get(),DIFFUSION.get(),WET.get(),RUNOFF.get(),

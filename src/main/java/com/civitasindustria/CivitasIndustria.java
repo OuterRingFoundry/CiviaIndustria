@@ -14,8 +14,8 @@ import net.neoforged.neoforge.common.NeoForge;
 @Mod(CivitasIndustria.MOD_ID)
 public final class CivitasIndustria {
     public static final String MOD_ID = "civitas_industria";
-    /** Reserved schema version; Phase 0 creates no SavedData. */
-    public static final int DATA_VERSION = 1;
+    /** Shared with the domain snapshot codec. */
+    public static final int DATA_VERSION = com.civitasindustria.domain.DataMigrationManager.VERSION;
 
     public CivitasIndustria(IEventBus modBus, ModContainer container) {
         CivitasRegistries.register(modBus);
@@ -23,5 +23,6 @@ public final class CivitasIndustria {
         container.registerConfig(ModConfig.Type.COMMON, CommonConfig.SPEC);
         container.registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
         NeoForge.EVENT_BUS.addListener(CivitasCommands::register);
+        com.civitasindustria.platform.RuntimeEvents.register(NeoForge.EVENT_BUS);
     }
 }

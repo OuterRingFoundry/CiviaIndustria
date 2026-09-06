@@ -12,3 +12,6 @@ phase0-*.exit
 .source-update.json
 *-test.exit
 implementation-build.exit
+
+resume-evidence/
+resume-*.exit

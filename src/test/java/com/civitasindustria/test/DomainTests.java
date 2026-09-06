@@ -8,11 +8,16 @@ public final class DomainTests {
     private static void rejects(Runnable code){boolean thrown=false;try{code.run();}catch(IllegalArgumentException e){thrown=true;}check(thrown,"Invalid input accepted");}
     private static SimulationSettings settings(){return new SimulationSettings(.01,.12,.08,.1,.002,.003,.025,.3,1,0,.00001,1000);}
     public static void main(String[]args){
+        if(Arrays.asList(args).contains("--verify-failure"))throw new AssertionError("Intentional domain failure propagation probe");
         check(CellPos.fromBlock(-1,-64).equals(new CellPos(-1,-1)),"Negative blocks");
         check(CellPos.fromBlock(-65,63).equals(new CellPos(-2,0)),"Cell boundaries");
         check(CellPos.fromChunk(-1,-5).equals(new CellPos(-1,-2)),"Negative chunks");
         Set<CellPos> square=new HashSet<>();for(int x=0;x<4;x++)for(int z=0;z<4;z++)square.add(new CellPos(x,z));
         var graph=new CivilizationGraph();check(graph.rebuild(square).getFirst().perimeter()==16,"Square perimeter");
+        check(graph.rebuild(square).getFirst().boundaryDepth().get(new CellPos(1,1))==1,"Interior boundary depth");
+        check(CivilizationGraph.maintenanceState(5,1)==CellData.Civilization.FRONTIER,"Maintenance failure moves inward gradually");
+        check(CivilizationGraph.maintenanceState(8,1)==CellData.Civilization.WILDERNESS,"Interior eventually degrades");
+        check(CivilizationGraph.maintenanceState(0,1)==CellData.Civilization.CIVILIZED,"Maintenance recovery");
         square.remove(new CellPos(1,1));check(graph.rebuild(square).getFirst().perimeter()==20,"Interior holes");
         Map<IndustrialLoad.Chunk,Double> loads=Map.of(new IndustrialLoad.Chunk(0,0),100.0,new IndustrialLoad.Chunk(1,0),100.0);
         check(IndustrialLoad.effective(loads,new IndustrialLoad.Chunk(0,0),.35,.15)==135,"Border load");
@@ -52,6 +57,21 @@ public final class DomainTests {
         Map<CellPos,CellData> large=new TreeMap<>();List<CellPos> active=new ArrayList<>();
         for(int i=0;i<10000;i++){var pos=new CellPos(i*3,0);CellData cell=new CellData();cell.add(Pollutant.SOX,1);large.put(pos,cell);if(i<500)active.add(pos);}
         long start=System.nanoTime();check(simulator.step(large,active,p->rain,settings(),200)==500,"Active-set bound");
+        SimulationSettings conservative=new SimulationSettings(0,1,0,0,0,0,0,0,0,0,.00000001,1000);
+        Map<CellPos,CellData> capped=new TreeMap<>();CellPos cp=new CellPos(0,0);CellData cc=new CellData();cc.add(Pollutant.PM,100);capped.put(cp,cc);
+        simulator.step(capped,List.of(cp,cp),p->rain,conservative,1,1);
+        check(capped.size()==1&&cc.get(Pollutant.PM)==100,"Record cap retains refused transport and deduplicates work");
+        Map<CellPos,CellData> saturated=new TreeMap<>();
+        for(int x=-1;x<=1;x++)for(int z=-1;z<=1;z++){CellData cell=new CellData();cell.add(Pollutant.PM,1_000_000);saturated.put(new CellPos(x,z),cell);}
+        double beforeMass=saturated.values().stream().mapToDouble(v->v.get(Pollutant.PM)).sum();
+        simulator.step(saturated,List.of(cp),p->rain,conservative,1);
+        check(saturated.values().stream().mapToDouble(v->v.get(Pollutant.PM)).sum()==beforeMass,"Saturated neighbors do not delete transported mass");
+        Map<CellPos,CellData> cleanWater=new TreeMap<>();cleanWater.put(cp,new CellData());
+        simulator.step(cleanWater,List.of(cp),p->rain,conservative,2);
+        check(cleanWater.isEmpty(),"Zero runoff creates no pristine neighbor records");
+        Map<CellPos,CellData> trace=new TreeMap<>();CellData tiny=new CellData();tiny.add(Pollutant.PM,1e-9);trace.put(cp,tiny);
+        simulator.step(trace,List.of(cp),p->rain,conservative,2);
+        check(trace.isEmpty(),"Sub-epsilon transport recipients are compacted");
         System.out.println("Domain tests: "+checks+" checks passed; 500-cell rain step "+(System.nanoTime()-start)/1_000_000.0+" ms");
     }
 }

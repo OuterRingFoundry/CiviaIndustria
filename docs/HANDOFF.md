@@ -1,4 +1,7 @@
-# Resume here
+# Historical checkpoint handoff
+
+**Update:** the successor task resumed this checkpoint. Read [RECOVERY_REPORT.md](RECOVERY_REPORT.md)
+for current validation and remaining gaps. The original checkpoint record follows unchanged.
 
 ## Checkpoint identity and user direction
 
