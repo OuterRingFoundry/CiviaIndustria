@@ -20,7 +20,10 @@ public final class CivitasIndustria {
     public CivitasIndustria(IEventBus modBus, ModContainer container) {
         CivitasRegistries.register(modBus);
         com.civitasindustria.test.staging.StagingHarness.register(NeoForge.EVENT_BUS);
-        if(net.neoforged.fml.ModList.get().isLoaded("create"))com.civitasindustria.compat.create.CreateCargo.register(modBus);
+        if(net.neoforged.fml.ModList.get().isLoaded("create")){
+            com.civitasindustria.compat.create.CreateCargo.register(modBus);
+            com.civitasindustria.compat.create.RailwayRestartChecks.register(NeoForge.EVENT_BUS);
+        }
         modBus.addListener(com.civitasindustria.common.network.EnvironmentPayload::register);
         com.civitasindustria.platform.EcologyHooks.register(NeoForge.EVENT_BUS);
         com.civitasindustria.common.threat.ThreatDirector.register(NeoForge.EVENT_BUS);

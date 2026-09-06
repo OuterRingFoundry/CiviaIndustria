@@ -51,3 +51,15 @@ then start it separately and check saved counts and identities before promotion.
 Pregenerate only the intended staging/production world, with the pinned Chunky artifact,
 a reviewed 5000–6000 block radius and planned future rail corridors. Development scripts
 do not pregenerate or alter unknown worlds.
+
+## Additional disposable acceptance fixtures
+
+`scripts/test-railway-restart.py --output /new/railway-test` runs three dedicated-server
+processes against a new copy of the full-server GameTest world/mods. Twenty real Create
+train authorities travel along test graphs; saved quantities/positions and post-restart
+extraction are verified. This is not a substitute for scheduled physical railway testing.
+The Java hook is disabled unless the explicit `ciRailwayRestart` Gradle property is set.
+
+`scripts/run-staging.py --output /new/staging-test` runs the scoped 10,000-decoration,
+1,000-furnace, 500-cell workload. It deliberately excludes clients, moving trains and
+live raids. Both tools refuse existing outputs and leave all logs/worlds for inspection.

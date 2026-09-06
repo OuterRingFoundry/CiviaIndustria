@@ -1,12 +1,13 @@
 # Civitas Industria continuation
 
-Read docs/HANDOFF.md and docs/IMPLEMENTATION_PLAN.md before editing.
+Read docs/VALIDATION_REPORT.md and docs/IMPLEMENTATION_PLAN.md before editing.
+HANDOFF.md and RECOVERY_REPORT.md preserve earlier historical checkpoints.
 docs/REQUIREMENTS.md is the full design specification.
 
 The user's later instruction supersedes the original phase-by-phase pause rule:
 continue implementation and validation without requiring review after every phase.
-The successor task has resumed after EC2 replacement. Read docs/RECOVERY_REPORT.md
-for the latest validated milestone. This repository does not authorize a background task.
+The successor task has resumed after EC2 replacement. Read docs/VALIDATION_REPORT.md
+for the latest tested behavior, artifacts and outstanding acceptance gates. This repository does not authorize a background task.
 
 Keep the implementation simple where a simple solution meets the requirements.
 Build on the designated Ubuntu server under /data/.tmp, not on the disk-limited EC2 host.

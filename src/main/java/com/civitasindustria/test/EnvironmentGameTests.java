@@ -34,4 +34,26 @@ public final class EnvironmentGameTests {
         var raider=CivitasRegistries.RAIDER.get().create(h.getLevel());var event=new EntityJoinLevelEvent(raider,h.getLevel(),true);NeoForge.EVENT_BUS.post(event);
         if(!event.isCanceled())throw new AssertionError("Saved raid bypassed warning and budget");h.succeed();
     }
+    @GameTest(template="empty",batch="raid_online") public static void onlineRaidReservationAndLogout(GameTestHelper h){
+        var level=h.getLevel();var pos=h.absolutePos(new BlockPos(2,1,2));var cell=CellPos.fromBlock(pos.getX(),pos.getZ());
+        var runtime=WorldRuntime.get(level);var player=net.neoforged.neoforge.common.util.FakePlayerFactory.get(level,new com.mojang.authlib.GameProfile(UUID.randomUUID(),"CIRaid"));
+        player.setGameMode(net.minecraft.world.level.GameType.SURVIVAL);player.moveTo(pos.getX()+.5,pos.getY(),pos.getZ()+.5,0,0);
+        level.setBlock(pos,CivitasRegistries.CONTENT.get("civic_core").get().defaultBlockState(),3);runtime.nodePlaced(pos,player.getUUID(),WorldState.CivicNode.Kind.CORE);
+        int before=ThreatDirector.count();level.addNewPlayer(player);
+        var box=new net.minecraft.world.phys.AABB(cell.x()*64,level.getMinBuildHeight(),cell.z()*64,cell.x()*64+64,level.getMaxBuildHeight(),cell.z()*64+64);
+        try{
+            if(!ThreatDirector.online(level,cell,null))throw new AssertionError("Survival player not observed");
+            for(int attempt=0;attempt<20&&ThreatDirector.count()==before;attempt++)ThreatDirector.wave(level,cell);
+            var raiders=level.getEntities(CivitasRegistries.RAIDER.get(),box,e->true);int spawned=ThreatDirector.count()-before;
+            if(spawned<=0||spawned>com.civitasindustria.common.config.ServerConfig.RAID_CELL_BUDGET.get()||raiders.size()!=spawned)throw new AssertionError("Physical raid reservation mismatch: "+spawned+" / "+raiders.size());
+            raiders.getFirst().discard();if(ThreatDirector.count()!=before+spawned-1)throw new AssertionError("Entity removal leaked reservation");
+            NeoForge.EVENT_BUS.post(new net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent(player));
+            if(ThreatDirector.count()!=before||!level.getEntities(CivitasRegistries.RAIDER.get(),box,e->true).isEmpty())throw new AssertionError("Logout left physical raiders or reservations");
+        }finally{
+            level.removePlayerImmediately(player,net.minecraft.world.entity.Entity.RemovalReason.DISCARDED);runtime.nodeRemoved(pos);
+            for(var entity:level.getEntities(CivitasRegistries.RAIDER.get(),box,e->true))entity.discard();
+        }
+        h.succeed();
+    }
+
 }

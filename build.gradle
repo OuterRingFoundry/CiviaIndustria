@@ -32,6 +32,7 @@ neoForge {
             server()
             gameDirectory = project.file(providers.gradleProperty('ciServerDir').getOrElse('run'))
             if (providers.gradleProperty('ciStaging').isPresent()) systemProperty 'civitas.staging', 'true'
+            if (providers.gradleProperty('ciRailwayRestart').isPresent()) systemProperty 'civitas.railwayRestart', providers.gradleProperty('ciRailwayRestart').get()
             programArgument '--nogui'
         }
     }

@@ -14,7 +14,7 @@ modified; all server/client fixtures and pack outputs are under the designated `
 | Cargo and warehouses | Long-count item storage, homogeneous long-mB tanks, strict unsupported-stack rejection, quarantine, dirty warehouse ownership, bounded directional freight and encumbrance | GameTests exercise amounts beyond int range, simulations, transfers, ambiguous ports, destruction protection, removed items and future NBT |
 | Physical Create cargo | Custom mounted storage for crates/pallets; Create assembly, serialization and restoration use long authority | Five-billion-item contraption assembly/NBT/disassembly test; carriage travel across 2,048 graph blocks, carriage NBT round trip and post-travel extraction |
 | Commissioned factory | Data-driven foundation/calibration requirement, persisted commissioning state and production batches, load/foundation degradation | Actual factory BE GameTest across progress save/load and completion |
-| Threats | Online-survival-region warning/waves, hard entity reservations, targeted temporary disruption, shared defense credits, saved-raider refusal | Domain budget/warning tests; offline spawn refusal and saved-entity event test; live multiplayer combat remains untested |
+| Threats | Online-survival-region warning/waves, hard entity reservations, targeted temporary disruption, shared defense credits, saved-raider refusal | Domain budget/warning tests; offline refusal, real entity reservations/removal and simulated last-player logout; authenticated multiplayer combat remains untested |
 | Parcels | UUID ownership/trust, 3D indexed bounds, player actions, explosions, piston boundaries and documented flags | Domain persistence and real player event checks; no universal claim over third-party scripted world mutation |
 | Decoration/client | Six simple original animated decorations with no server animation ticker; bounded nine-cell ecological payload, tint/haze, stale cache clearing and config toggles | Codec bounds tests; actual full client with Embeddium, world entry, clean/polluted screenshots and clean shutdown |
 | Pack and operations | Exact official artifacts/checksums, dependency/side verification, KubeJS progression, isolated assembly, pinned loader installation, immutable manifest, offline full-instance backup/restore | Six server profiles; adversarial Python fixtures; standalone shipped-JAR boots and restored-world boots |
@@ -36,13 +36,13 @@ completed topology still scale with the changed network's size.
 ## Test record
 
 The mandatory build harness contains **51 domain checks**. The current GameTest suite
-contains **20 tests**. Optional-mod-specific methods explicitly skip their assertions
+contains **21 tests**. Optional-mod-specific methods explicitly skip their assertions
 when the relevant mod is absent: a green Civitas-only row is not evidence that Create
 or IE ran there. `pack/integration-results.json` identifies each profile's actual jars.
 
 Server evidence is retained under `/data/.tmp/civitas-industria-phase0`:
 
-- `continuation-release-build.log` and `continuation-release-matrix.log`: current build
+- `continuation-raid-cleanup.log` and `continuation-r4-matrix.log`: current build
   and six profiles (core, Create, IE, KubeJS, industry, full-server). Individual logs are
   `run-matrix-*/matrix.log`.
 - `continuation-restart-write.log`, `continuation-restart-read.log`: actual schema-3
@@ -52,11 +52,26 @@ Server evidence is retained under `/data/.tmp/civitas-industria-phase0`:
   The launcher can return zero after startup failure, so readiness, exception and
   file identity are checked instead of trusting its exit code.
 - `continuation-carriage.log`: real Create carriage assembly, graph travel and NBT
-  restoration. This is an API-driven graph fixture, **not a scheduled physical railway**
-  and not a server-process restart with trains in transit.
-- `continuation-client-final.log`: full client with Embeddium, clean tint `91bd59`,
-  polluted tint `969f55`, world screenshots at ticks 200 and 650, all dimensions saved
-  and successful exit. Screenshots are in `run-client-validation/screenshots/`.
+  restoration. This is an API-driven graph fixture, **not a scheduled physical railway**.
+  The separate process-restart fixture below covers persisted train authorities.
+- `continuation-railway-restart-r2.log` and `run-railway-restart-r2/{write,read,verify}.log`:
+  twenty actual Create train/carriage authorities saved across three server processes.
+  Each starts with 5,000,000,000 plus its index, travels 1,024 graph blocks before the
+  first shutdown, then another 1,024 after restart and extracts 64 items. A second
+  restart verifies exact remaining quantities and travelling-point positions.
+  `pack/railway-results.json` records scope. The test uses an explicit graph fixture;
+  it does not exercise scheduled physical track, station loading or railway signals.
+  The initial fixture failed to assemble in chunks whose entities were not loaded;
+  the corrected fixture explicitly loads only its disposable assembly area.
+- `continuation-raid-cleanup.log`: 21 passing GameTests, including physical raider
+  reservations, entity removal and last-player logout using an explicitly registered
+  survival fake player. This is an event/entity integration test, not human combat.
+- `continuation-client-recovery-r2.log`: full client with Embeddium, clean tint
+  `91bd59`, polluted `969f55`, disabled `91bd59`, and cleared-region `91bc58` (small
+  residual transport from neighboring cells). Actual screenshots at ticks 200, 650,
+  720 and 1100, all dimensions saved and successful exit. The fixture explicitly
+  resets regional injury; it tests presentation, not the duration of natural recovery.
+  Screenshots are in `run-client-validation/screenshots/`.
 - `scripts/test-verify-pack.py` (three tests), `scripts/test-backup.py` (two), and
   `scripts/test-instance.py` (two): dependency/hash adversaries, Java-compatible live
   world lock refusal, restore/checksum handling, properties rewrite tolerance and
@@ -64,8 +79,11 @@ Server evidence is retained under `/data/.tmp/civitas-industria-phase0`:
 
 The headless client uses Xvfb and Mesa software rendering at 1280×720. It establishes
 startup, actual world rendering and ecological response, not representative GPU frame
-rates. The environment has no audio/microphone and cannot retrieve the Yggdrasil
-public key endpoint. Authenticated remote client joins and voice transport are untested.
+rates. The environment has no audio/microphone. Earlier startup attempts timed out retrieving
+Minecraft authentication keys, although subsequent direct Python and Java probes
+returned HTTP 200. No proxy or authentication bypass was installed. Authenticated
+remote client joins and voice transport remain untested; no authenticated client
+session is available to this task.
 
 ## Performance scope
 
@@ -74,8 +92,9 @@ public key endpoint. Authenticated remote client joins and voice transport are u
 seeded rain/pollution cells and 1,200 measured ticks after warmup. Mean was 7.47 ms,
 p95 8.23 ms, maximum 34.37 ms, observed TPS 20.02 on the designated Xeon server.
 
-This final-source run is reproduced by `scripts/run-staging.py` in a new directory;
-`continuation-staging-final.log` records the result. It did **not** include authenticated clients, running trains, three populated
+This run is reproduced by `scripts/run-staging.py` in a new directory;
+`continuation-staging-final.log` records the result. It did **not** include authenticated
+clients, running trains, three populated
 civilization networks or an active player raid. It does not pass the required combined
 30-player/20-train staging gate or establish production capacity.
 
@@ -102,11 +121,12 @@ installed. Read OPERATIONS.md before preparing a separate staging environment.
 
 1. Build and exercise mine → 2,000+ block **physical scheduled railway** → processing →
    city warehouse, with multiple trains, chunk transitions, interruptions and a real
-   process restart while cargo is in transit. Existing carriage and contraption tests
-   validate storage adapters, not this complete gameplay route.
+   process restart during that scheduled route. The API-graph process-restart test
+   now validates train storage persistence, not this complete gameplay route.
 2. Validate authenticated remote clients, voice chat, multi-user claims, physical raid
    combat and return-warning behavior. This needs available authenticated clients and
-   a working authentication/network path; those are absent from the current environment.
+   a working authentication/network path. No authenticated client session is available
+   in the current environment.
 3. Run the complete combined staging workload: 30 players, three populated networks,
    20 moving trains, processing industry, warehouse traffic and a live raid under rain.
    Measure subsystem costs and representative 1080p/1440p dense-city rendering.
