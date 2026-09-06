@@ -29,3 +29,6 @@ tasks.named('processResources') {
         expand(mod_version: project.mod_version, neo_version: project.neo_version)
     }
 }
+
+// Forward console commands to the dedicated development server.
+tasks.withType(JavaExec).configureEach { standardInput = System.in }

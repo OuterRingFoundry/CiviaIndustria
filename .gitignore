@@ -5,3 +5,6 @@ run-*/
 .idea/
 *.iml
 *.log
+__pycache__/
+*.pyc
+phase0-*.exit

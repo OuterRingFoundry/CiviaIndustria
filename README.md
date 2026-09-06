@@ -42,7 +42,7 @@ Config specs are intentionally empty until settings have real consumers.
 Data components and creative tabs are deferred until content requires them.
 
 Exact development versions are recorded in pack/platform.lock.json.
-The pin is a development candidate, pending build and integration validation.
+The pin passed Phase 0 compilation and dedicated-server checks; full integration is pending.
 No third-party pack lockfile or production release is claimed.
 
 See docs/PHASE_0_REPORT.md for validation status and outstanding gates.
