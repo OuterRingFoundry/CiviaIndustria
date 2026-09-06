@@ -8,3 +8,7 @@ run-*/
 __pycache__/
 *.pyc
 phase0-*.exit
+
+.source-update.json
+*-test.exit
+implementation-build.exit

@@ -1,30 +1,40 @@
 package com.civitasindustria.common.registry;
-
 import com.civitasindustria.CivitasIndustria;
+import com.civitasindustria.common.civilization.CivicBlock;
+import com.civitasindustria.common.warehouse.*;
+import com.civitasindustria.domain.WorldState;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.*;
+import java.util.*;
 
-/** Empty registration roots. Content is introduced only in its approved phase. */
 public final class CivitasRegistries {
-    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(CivitasIndustria.MOD_ID);
-    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CivitasIndustria.MOD_ID);
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
-            DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, CivitasIndustria.MOD_ID);
-    public static final DeferredRegister<EntityType<?>> ENTITIES =
-            DeferredRegister.create(Registries.ENTITY_TYPE, CivitasIndustria.MOD_ID);
-    public static final DeferredRegister<MenuType<?>> MENUS =
-            DeferredRegister.create(Registries.MENU, CivitasIndustria.MOD_ID);
-
-    private CivitasRegistries() {}
-    public static void register(IEventBus bus) {
-        BLOCKS.register(bus);
-        ITEMS.register(bus);
-        BLOCK_ENTITIES.register(bus);
-        ENTITIES.register(bus);
-        MENUS.register(bus);
+    public static final DeferredRegister.Blocks BLOCKS=DeferredRegister.createBlocks(CivitasIndustria.MOD_ID);
+    public static final DeferredRegister.Items ITEMS=DeferredRegister.createItems(CivitasIndustria.MOD_ID);
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES=DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE,CivitasIndustria.MOD_ID);
+    public static final DeferredRegister<EntityType<?>> ENTITIES=DeferredRegister.create(Registries.ENTITY_TYPE,CivitasIndustria.MOD_ID);
+    public static final DeferredRegister<MenuType<?>> MENUS=DeferredRegister.create(Registries.MENU,CivitasIndustria.MOD_ID);
+    public static final Map<String,DeferredBlock<? extends Block>> CONTENT=new LinkedHashMap<>();
+    private static BlockBehaviour.Properties metal(){return BlockBehaviour.Properties.of().strength(3,6).sound(SoundType.METAL);}
+    static {
+        for(var kind:WorldState.CivicNode.Kind.values()){
+            String id=switch(kind){case CORE->"civic_core";case RELAY->"civic_relay";case LOGISTICS->"logistics_node";case DEFENSE->"defense_node";case MAINTENANCE->"maintenance_depot";};
+            CONTENT.put(id,BLOCKS.register(id,()->new CivicBlock(metal(),kind)));
+        }
+        for(String id:List.of("cargo_crate","pallet","bulk_tank","warehouse_controller","warehouse_port","cargo_loader","cargo_unloader","freight_terminal"))
+            CONTENT.put(id,BLOCKS.register(id,()->new StorageBlock(metal())));
+        CONTENT.put("warehouse_casing",BLOCKS.registerSimpleBlock("warehouse_casing",metal()));
+        for(String id:List.of("decorative_gear","decorative_fan","decorative_pump","decorative_gauge","decorative_piston","decorative_vent"))
+            CONTENT.put(id,BLOCKS.registerSimpleBlock(id,metal()));
+        for(var entry:CONTENT.entrySet())ITEMS.register(entry.getKey(),()->new BlockItem(entry.getValue().get(),new Item.Properties().stacksTo(entry.getKey().equals("cargo_crate")?1:64)));
     }
+    public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<CargoBlockEntity>> CARGO_ENTITY=BLOCK_ENTITIES.register("cargo",
+        ()->BlockEntityType.Builder.of(CargoBlockEntity::new,CONTENT.values().stream().map(DeferredBlock::get).filter(b->b instanceof StorageBlock).toArray(Block[]::new)).build(null));
+    public static void register(IEventBus bus){BLOCKS.register(bus);ITEMS.register(bus);BLOCK_ENTITIES.register(bus);ENTITIES.register(bus);MENUS.register(bus);}
 }

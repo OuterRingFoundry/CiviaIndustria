@@ -32,3 +32,15 @@ tasks.named('processResources') {
 
 // Forward console commands to the dedicated development server.
 tasks.withType(JavaExec).configureEach { standardInput = System.in }
+
+tasks.register('domainTest', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.civitasindustria.test.DomainTests'
+    standardInput = new ByteArrayInputStream(new byte[0])
+}
+tasks.named('test') {
+    dependsOn 'domainTest'
+    failOnNoDiscoveredTests = false // Assertions run in the dependency-free domainTest harness.
+}
+tasks.named('check') { dependsOn 'domainTest' }
