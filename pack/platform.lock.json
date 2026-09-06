@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "status": "phase-0-validated-development",
+  "minecraft": "1.21.1",
+  "neoforge": "21.1.249",
+  "java": 21,
+  "moddevgradle": "2.0.146",
+  "gradle": "9.2.1",
+  "source": "https://github.com/NeoForgeMDKs/MDK-1.21.1-ModDevGradle",
+  "productionApproved": false
+}
