@@ -1,0 +1,10 @@
+{
+  "target": "minecraft:smoker",
+  "industrial_load": 5,
+  "active_property": "lit",
+  "emissions": {
+    "particulate": 0.1,
+    "sulfur_oxides": 0.01,
+    "heat": 0.25
+  }
+}

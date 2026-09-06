@@ -1,0 +1,8 @@
+{
+  "target": "create:millstone",
+  "industrial_load": 5,
+  "active_property": "",
+  "emissions": {
+    "PM": 1
+  }
+}

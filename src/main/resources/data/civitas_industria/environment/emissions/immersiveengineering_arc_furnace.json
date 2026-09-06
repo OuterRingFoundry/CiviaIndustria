@@ -1,0 +1,8 @@
+{
+  "target": "immersiveengineering:arc_furnace",
+  "industrial_load": 50,
+  "active_property": "",
+  "emissions": {
+    "NOX": 12
+  }
+}

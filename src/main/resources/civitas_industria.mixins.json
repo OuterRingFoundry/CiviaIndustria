@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.civitasindustria.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "EnderCargoMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+    "EcologyTintMixin"
+  ]
+}

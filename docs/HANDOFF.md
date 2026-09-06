@@ -1,3 +1,6 @@
+> Current continuation: see [VALIDATION_REPORT.md](VALIDATION_REPORT.md).
+> This file is a historical record; its implementation status and pause instructions are superseded.
+
 # Historical checkpoint handoff
 
 **Update:** the successor task resumed this checkpoint. Read [RECOVERY_REPORT.md](RECOVERY_REPORT.md)

@@ -1,0 +1,407 @@
+{
+  "schema": 1,
+  "artifacts": [
+    {
+      "project_id": "LNytGWDc",
+      "project": "create",
+      "title": "Create",
+      "version_id": "UjX6dr61",
+      "version": "6.0.10+mc1.21.1",
+      "minecraft": "1.21.1",
+      "loader": "neoforge",
+      "side": "both",
+      "filename": "create-1.21.1-6.0.10.jar",
+      "url": "https://cdn.modrinth.com/data/LNytGWDc/versions/UjX6dr61/create-1.21.1-6.0.10.jar",
+      "size": 19123767,
+      "upstream_hashes": {
+        "sha512": "11cc8fc049d2f67f6548c7abfada6b82a3adb5c7ca410a742de04bbca76e03862c518721b88d806f6e6d768a4d68531fdb903a85859b25d1484d550cc7bafd4b",
+        "sha1": "0e97e49837bed766e6f28a4c95b04885d6acc353"
+      },
+      "license": {
+        "id": "LicenseRef-Create-Mod-License",
+        "name": "",
+        "url": "https://github.com/Creators-of-Create/Create/blob/HEAD/LICENSE.md"
+      },
+      "source_url": "https://github.com/Creators-of-Create/Create",
+      "project_url": "https://modrinth.com/mod/create",
+      "dependencies": []
+    },
+    {
+      "project_id": "tIm2nV03",
+      "project": "immersiveengineering",
+      "title": "Immersive Engineering",
+      "version_id": "uNRARSH2",
+      "version": "12.4.2-194",
+      "minecraft": "1.21.1",
+      "loader": "neoforge",
+      "side": "both",
+      "filename": "ImmersiveEngineering-1.21.1-12.4.2-194.jar",
+      "url": "https://cdn.modrinth.com/data/tIm2nV03/versions/uNRARSH2/ImmersiveEngineering-1.21.1-12.4.2-194.jar",
+      "size": 14232121,
+      "upstream_hashes": {
+        "sha512": "862523e84747a8b7eaa65f9b3c337fa832ef9efd0545c27f68e350e01f482c7a1242d0e4bdc2caff3d7eb033508b43a353fcd7150c9b544d0c05765ca2a551b3",
+        "sha1": "a4e90c2df8009040f6d022433c5d76635944dd59"
+      },
+      "license": {
+        "id": "LicenseRef-Custom",
+        "name": "",
+        "url": "https://github.com/BluSunrize/ImmersiveEngineering/blob/1.16.5/LICENSE"
+      },
+      "source_url": "https://github.com/BluSunrize/ImmersiveEngineering",
+      "project_url": "https://modrinth.com/mod/immersiveengineering",
+      "dependencies": []
+    },
+    {
+      "project_id": "umyGl7zF",
+      "project": "kubejs",
+      "title": "KubeJS",
+      "version_id": "Fw7O9eLd",
+      "version": "2101.7.2-build.374",
+      "minecraft": "1.21.1",
+      "loader": "neoforge",
+      "side": "both",
+      "filename": "kubejs-neoforge-2101.7.2-build.374.jar",
+      "url": "https://cdn.modrinth.com/data/umyGl7zF/versions/Fw7O9eLd/kubejs-neoforge-2101.7.2-build.374.jar",
+      "size": 2292654,
+      "upstream_hashes": {
+        "sha1": "1e921f327c8c5c9d64b33326ede412d87bfbd491",
+        "sha512": "8169980c5764884187fbd419cdf3d6a68f28331e0b7169b055348cf9ecf2210305bcb8445b84619bd70723cffee5978d544219a73a3867e4e25ec5a4e080403f"
+      },
+      "license": {
+        "id": "LGPL-3.0-only",
+        "name": "GNU Lesser General Public License v3.0 only",
+        "url": null
+      },
+      "source_url": "https://github.com/KubeJS-Mods/KubeJS",
+      "project_url": "https://modrinth.com/mod/kubejs",
+      "dependencies": [
+        {
+          "version_id": null,
+          "project_id": "iHLDc0eo",
+          "file_name": null,
+          "dependency_type": "required"
+        },
+        {
+          "version_id": null,
+          "project_id": "sk9knFPE",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ]
+    },
+    {
+      "project_id": "sk9knFPE",
+      "project": "rhino",
+      "title": "Rhino",
+      "version_id": "cQ4POTah",
+      "version": "2101.2.7-build.85+Rhino-1.21",
+      "minecraft": "1.21.1",
+      "loader": "neoforge",
+      "side": "both",
+      "filename": "rhino-2101.2.7-build.85.jar",
+      "url": "https://cdn.modrinth.com/data/sk9knFPE/versions/cQ4POTah/rhino-2101.2.7-build.85.jar",
+      "size": 882075,
+      "upstream_hashes": {
+        "sha1": "3c8d34c7efe9e42fc90506acbf9fc842d36f9a42",
+        "sha512": "0a6c7f4410281aeb03b815ec03487a8e80a4d3dae013d81282e447bf9c08144ef57318af614ea6d40b7d9a8c25031c557890ec792a5895a82467c1643116f693"
+      },
+      "license": {
+        "id": "MPL-2.0",
+        "name": "Mozilla Public License 2.0",
+        "url": null
+      },
+      "source_url": "https://github.com/KubeJS-Mods/Rhino",
+      "project_url": "https://modrinth.com/mod/rhino",
+      "dependencies": []
+    },
+    {
+      "project_id": "lhGA9TYQ",
+      "project": "architectury-api",
+      "title": "Architectury API",
+      "version_id": "1IiqEQGl",
+      "version": "13.0.11+neoforge",
+      "minecraft": "1.21.1",
+      "loader": "neoforge",
+      "side": "both",
+      "filename": "architectury-13.0.11-neoforge.jar",
+      "url": "https://cdn.modrinth.com/data/lhGA9TYQ/versions/1IiqEQGl/architectury-13.0.11-neoforge.jar",
+      "size": 584734,
+      "upstream_hashes": {
+        "sha512": "d9f7c3bb8162577dfb461ffdf04bd6a3563c7586934a0e2a744c14421beffb8286f0d88d4c758317003f20f99fe8072a39b9d675af061e036970d36db36027f0",
+        "sha1": "008656a0702801174b8ec245ed7aad1921d6e9f1"
+      },
+      "license": {
+        "id": "LGPL-3.0-only",
+        "name": "GNU Lesser General Public License v3.0 only",
+        "url": null
+      },
+      "source_url": "https://github.com/architectury/architectury",
+      "project_url": "https://modrinth.com/mod/architectury-api",
+      "dependencies": []
+    },
+    {
+      "project_id": "wbgfS34j",
+      "project": "framedblocks",
+      "title": "FramedBlocks",
+      "version_id": "FBXGqSP5",
+      "version": "10.6.1",
+      "minecraft": "1.21.1",
+      "loader": "neoforge",
+      "side": "both",
+      "filename": "FramedBlocks-10.6.1.jar",
+      "url": "https://cdn.modrinth.com/data/wbgfS34j/versions/FBXGqSP5/FramedBlocks-10.6.1.jar",
+      "size": 4306703,
+      "upstream_hashes": {
+        "sha512": "051d07cb372bfafd746ff658ef2ad3485606328e445099c17b499b14df6844a0c75e8c6decaff1267934fbd6dfaa0eb1938906b0dbeaa20500c1789b4175e3b6",
+        "sha1": "3007be0007d09c0225ca33b647461f342eac0503"
+      },
+      "license": {
+        "id": "LGPL-3.0-only",
+        "name": "GNU Lesser General Public License v3.0 only",
+        "url": null
+      },
+      "source_url": "https://github.com/XFactHD/FramedBlocks",
+      "project_url": "https://modrinth.com/mod/framedblocks",
+      "dependencies": []
+    },
+    {
+      "project_id": "wvMc8AJt",
+      "project": "lightmans-currency",
+      "title": "Lightman's Currency",
+      "version_id": "n2ynBeOK",
+      "version": "1.21-2.3.0.5",
+      "minecraft": "1.21.1",
+      "loader": "neoforge",
+      "side": "both",
+      "filename": "lightmanscurrency-1.21-2.3.0.5.jar",
+      "url": "https://cdn.modrinth.com/data/wvMc8AJt/versions/n2ynBeOK/lightmanscurrency-1.21-2.3.0.5.jar",
+      "size": 8073046,
+      "upstream_hashes": {
+        "sha512": "f9eaf1020fe77c36912f7eec1d7e6500d7465e6bdb829e737c4bdb8af6a1213d83771a9e84392d210e675c8e74294fa7f8c1f4f78386f2966896b6891019c451",
+        "sha1": "4d30c4edeaf19f269dceed84ef0bb7dbe53e1f57"
+      },
+      "license": {
+        "id": "Apache-2.0",
+        "name": "Apache License 2.0",
+        "url": null
+      },
+      "source_url": "https://github.com/Lightman314/LightmansCurrency",
+      "project_url": "https://modrinth.com/mod/lightmans-currency",
+      "dependencies": [
+        {
+          "version_id": null,
+          "project_id": "vvuO3ImH",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "nU0bVIaL",
+          "file_name": null,
+          "dependency_type": "optional"
+        }
+      ]
+    },
+    {
+      "project_id": "9eGKb6K1",
+      "project": "simple-voice-chat",
+      "title": "Simple Voice Chat",
+      "version_id": "2s7zUspF",
+      "version": "neoforge-1.21.1-2.6.22",
+      "minecraft": "1.21.1",
+      "loader": "neoforge",
+      "side": "both",
+      "filename": "voicechat-neoforge-1.21.1-2.6.22.jar",
+      "url": "https://cdn.modrinth.com/data/9eGKb6K1/versions/2s7zUspF/voicechat-neoforge-1.21.1-2.6.22.jar",
+      "size": 4918442,
+      "upstream_hashes": {
+        "sha512": "309e3b18e299b2bccf9128dbb05c2603a9860f7cd68858d23f8fdb8265ea85ec7fb1655c95b87c0a9522ae1fd6380b26e4a4c31207f9c7af80870fcc6207abad",
+        "sha1": "3b2001d8df61fe6dc03dcd5f5cd4a8f49821feb0"
+      },
+      "license": {
+        "id": "LicenseRef-All-Rights-Reserved",
+        "name": "",
+        "url": null
+      },
+      "source_url": "https://github.com/henkelmax/simple-voice-chat",
+      "project_url": "https://modrinth.com/mod/simple-voice-chat",
+      "dependencies": [
+        {
+          "version_id": null,
+          "project_id": "9eGKb6K1",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "9s6osm5g",
+          "file_name": null,
+          "dependency_type": "optional"
+        }
+      ]
+    },
+    {
+      "project_id": "nmDcB62a",
+      "project": "modernfix",
+      "title": "ModernFix",
+      "version_id": "5HLHxQ2F",
+      "version": "5.27.24+mc1.21.1",
+      "minecraft": "1.21.1",
+      "loader": "neoforge",
+      "side": "both",
+      "filename": "modernfix-neoforge-5.27.24+mc1.21.1.jar",
+      "url": "https://cdn.modrinth.com/data/nmDcB62a/versions/5HLHxQ2F/modernfix-neoforge-5.27.24%2Bmc1.21.1.jar",
+      "size": 604333,
+      "upstream_hashes": {
+        "sha512": "da13fa15b2c96a74a7d5f8ea94ea404c96237b97d52c9a77e7e34ac918d28c40760a68cf3897691b317d5119ab9b85035142c3624108b13dda3516c340b96131",
+        "sha1": "1fe7f8b4176e86507cc8ed5460b6acdd3dac5529"
+      },
+      "license": {
+        "id": "LGPL-3.0-only",
+        "name": "GNU Lesser General Public License v3.0 only",
+        "url": null
+      },
+      "source_url": "https://github.com/embeddedt/ModernFix",
+      "project_url": "https://modrinth.com/mod/modernfix",
+      "dependencies": []
+    },
+    {
+      "project_id": "uXXizFIs",
+      "project": "ferrite-core",
+      "title": "FerriteCore",
+      "version_id": "x7kQWVju",
+      "version": "7.0.3-neoforge",
+      "minecraft": "1.21.1",
+      "loader": "neoforge",
+      "side": "both",
+      "filename": "ferritecore-7.0.3-neoforge.jar",
+      "url": "https://cdn.modrinth.com/data/uXXizFIs/versions/x7kQWVju/ferritecore-7.0.3-neoforge.jar",
+      "size": 121559,
+      "upstream_hashes": {
+        "sha1": "9563692efb708b6b568df27a01ec52f6311928ef",
+        "sha512": "19af89a2075bb10a63884fa853ebf84b02c79dc3242430ecdad056fd764fdcde367a7303276b329df01b0736e2ef264c5d80c7dc92c6aebd244f556a230bb417"
+      },
+      "license": {
+        "id": "MIT",
+        "name": "MIT License",
+        "url": null
+      },
+      "source_url": "https://github.com/malte0811/FerriteCore",
+      "project_url": "https://modrinth.com/mod/ferrite-core",
+      "dependencies": []
+    },
+    {
+      "project_id": "4WWQxlQP",
+      "project": "servercore",
+      "title": "ServerCore",
+      "version_id": "6N9hXiRa",
+      "version": "1.5.19+1.21.1",
+      "minecraft": "1.21.1",
+      "loader": "neoforge",
+      "side": "server",
+      "filename": "servercore-neoforge-1.5.19+1.21.1.jar",
+      "url": "https://cdn.modrinth.com/data/4WWQxlQP/versions/6N9hXiRa/servercore-neoforge-1.5.19%2B1.21.1.jar",
+      "size": 1462674,
+      "upstream_hashes": {
+        "sha1": "62ce692654e09271b5c55cbb3a1ef7606d067132",
+        "sha512": "55b97df4cc46f52db85b96487188d73c62d511229d98859991c115414c5f1ab37f2f40a0f2edb5692220aa94d6c48b392b0a2d8593b3c3381b1fcbde2a728c8f"
+      },
+      "license": {
+        "id": "MIT",
+        "name": "MIT License",
+        "url": null
+      },
+      "source_url": "https://github.com/Wesley1808/ServerCore",
+      "project_url": "https://modrinth.com/mod/servercore",
+      "dependencies": []
+    },
+    {
+      "project_id": "l6YH9Als",
+      "project": "spark",
+      "title": "spark",
+      "version_id": "v5qtqRQi",
+      "version": "1.10.124-neoforge-1.21.1",
+      "minecraft": "1.21.1",
+      "loader": "neoforge",
+      "side": "server",
+      "filename": "spark-1.10.124-neoforge.jar",
+      "url": "https://cdn.modrinth.com/data/l6YH9Als/versions/v5qtqRQi/spark-1.10.124-neoforge.jar",
+      "size": 3642581,
+      "upstream_hashes": {
+        "sha512": "f86ce34f2759c69df82578c397ff55b666c84626229a98f598458b960c21b38c95d6bfef4772af7f963c4f4868e5e2d9aef6b99c1d51bab55bf45e0e6e6b5ed4",
+        "sha1": "9430cc2ab64ff89d698be593769fb9f9ee4efae6"
+      },
+      "license": {
+        "id": "GPL-3.0-only",
+        "name": "GNU General Public License v3.0 only",
+        "url": "https://github.com/lucko/spark/blob/master/LICENSE.txt"
+      },
+      "source_url": "https://github.com/lucko/spark",
+      "project_url": "https://modrinth.com/mod/spark",
+      "dependencies": []
+    },
+    {
+      "project_id": "sk9rgfiA",
+      "project": "embeddium",
+      "title": "Embeddium",
+      "version_id": "J7b96IEd",
+      "version": "1.0.15+mc1.21.1",
+      "minecraft": "1.21.1",
+      "loader": "neoforge",
+      "side": "client",
+      "filename": "embeddium-1.0.15+mc1.21.1.jar",
+      "url": "https://cdn.modrinth.com/data/sk9rgfiA/versions/J7b96IEd/embeddium-1.0.15%2Bmc1.21.1.jar",
+      "size": 1048745,
+      "upstream_hashes": {
+        "sha512": "d073cf52dcf2aeec3ac9f746d4571c7b4b1ad746fa11d4bcc5a21a264ae3119ac6d341d08cc9a70042cf0ddffc3b3ef3329ed30217035d4551c9d6788b6dc1e6",
+        "sha1": "56063839172a000d079272794bad366f2ad4cbbd"
+      },
+      "license": {
+        "id": "LGPL-3.0-only",
+        "name": "GNU Lesser General Public License v3.0 only",
+        "url": null
+      },
+      "source_url": "https://github.com/FiniteReality/embeddium",
+      "project_url": "https://modrinth.com/mod/embeddium",
+      "dependencies": [
+        {
+          "version_id": null,
+          "project_id": "4ZqxOvjD",
+          "file_name": null,
+          "dependency_type": "incompatible"
+        },
+        {
+          "version_id": null,
+          "project_id": "S1tndFDa",
+          "file_name": null,
+          "dependency_type": "incompatible"
+        }
+      ]
+    },
+    {
+      "project_id": "fALzjamp",
+      "project": "chunky",
+      "title": "Chunky",
+      "version_id": "LuFhm4eU",
+      "version": "1.4.23",
+      "minecraft": "1.21.1",
+      "loader": "neoforge",
+      "side": "server",
+      "filename": "Chunky-NeoForge-1.4.23.jar",
+      "url": "https://cdn.modrinth.com/data/fALzjamp/versions/LuFhm4eU/Chunky-NeoForge-1.4.23.jar",
+      "size": 340572,
+      "upstream_hashes": {
+        "sha1": "ab0c74743a653020fe2dfc4986b43e893947f3e9",
+        "sha512": "2db769dd723f243a21e1881e7c9f825e9c193da6f2bed454b70cb6fa9e51c57f63fdcf017c0657bbd26f7bba30815413e27c74d3c7be0783390a96ee9baa4bf7"
+      },
+      "license": {
+        "id": "GPL-3.0-only",
+        "name": "GNU General Public License v3.0 only",
+        "url": null
+      },
+      "source_url": "https://github.com/pop4959/Chunky",
+      "project_url": "https://modrinth.com/mod/chunky",
+      "dependencies": []
+    }
+  ]
+}

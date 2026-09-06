@@ -26,7 +26,7 @@ public final class CivicBlock extends Block {
     @Override protected ItemInteractionResult useItemOn(ItemStack stack,BlockState state,Level level,BlockPos pos,Player player,InteractionHand hand,BlockHitResult hit){
         if(stack.is(Items.IRON_INGOT)&&level instanceof ServerLevel server){
             var runtime=WorldRuntime.get(server);var node=runtime.state().nodes.get(pos.asLong());
-            if(node!=null&&(kind==WorldState.CivicNode.Kind.CORE||kind==WorldState.CivicNode.Kind.MAINTENANCE)){
+            if(node!=null&&(kind==WorldState.CivicNode.Kind.CORE||kind==WorldState.CivicNode.Kind.MAINTENANCE||kind==WorldState.CivicNode.Kind.DEFENSE)){
                 node.credits=Math.min(Long.MAX_VALUE-100000,node.credits)+ServerConfig.CREDIT_PER_INGOT.get();
                 if(!player.isCreative())stack.shrink(1);runtime.dirty();
                 player.displayClientMessage(Component.literal("Maintenance credits: "+node.credits),true);

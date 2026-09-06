@@ -22,6 +22,7 @@ public final class CivitasCommands {
                     return 1;
                 }));
         RuntimeCommands.attach(root);
+        ParcelCommands.attach(root);
         event.getDispatcher().register(root);
     }
 

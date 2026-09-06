@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "civitas_industria:block/civic_relay"
+    }
+  }
+}

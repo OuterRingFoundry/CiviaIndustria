@@ -1,0 +1,7 @@
+{
+  "input": "minecraft:raw_gold",
+  "output": "minecraft:gold_ingot",
+  "batch": 16,
+  "duration": 200,
+  "fuel": 2
+}

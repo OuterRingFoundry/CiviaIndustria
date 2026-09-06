@@ -4,7 +4,7 @@ import java.util.*;
 
 /** Domain snapshot format independent of Minecraft NBT. Bounded and deterministic. */
 public final class DataMigrationManager {
-    public static final int VERSION=2, MAX_RECORDS=100_000, MAX_BYTES=32*1024*1024;
+    public static final int VERSION=3, INVENTORY_VERSION=2, MAX_RECORDS=100_000, MAX_BYTES=32*1024*1024;
     private static final int MAGIC=0x43495649;
     public static byte[] encode(WorldState state) {
         try {
@@ -31,6 +31,10 @@ public final class DataMigrationManager {
                 out.writeUTF(p.name());out.writeInt(p.trusted().size());
                 for(UUID id:p.trusted().stream().sorted().toList())uuid(out,id);
                 out.writeInt(p.flags().size());for(Parcel.Flag flag:p.flags().stream().sorted().toList())out.writeUTF(flag.name());
+            }
+            writeSize(out,state.rawLoad.size());
+            for(var entry:state.rawLoad.entrySet().stream().sorted(Comparator.comparingInt((Map.Entry<IndustrialLoad.Chunk,Double> e)->e.getKey().x()).thenComparingInt(e->e.getKey().z())).toList()){
+                out.writeInt(entry.getKey().x());out.writeInt(entry.getKey().z());out.writeDouble(entry.getValue());
             }
             out.flush();if(bytes.size()>MAX_BYTES)throw new IllegalStateException("World snapshot exceeds safe size");
             return bytes.toByteArray();
@@ -71,6 +75,12 @@ public final class DataMigrationManager {
                 for(int n=size(in,Parcel.Flag.values().length);n>0;n--)flags.add(Parcel.Flag.valueOf(in.readUTF()));
                 s.parcels.add(new Parcel(id,owner,x,y,z,a,b,c,name,trusted,flags));
             }
+            if(version>=3){
+                count=size(in,MAX_RECORDS);for(int n=0;n<count;n++){
+                    var chunk=new IndustrialLoad.Chunk(in.readInt(),in.readInt());double load=number(in,1_000_000_000_000.0);
+                    if(s.rawLoad.put(chunk,load)!=null)throw new IOException("Duplicate industrial chunk");
+                }
+            }
             if(in.available()!=0)throw new IOException("Trailing snapshot data");
             return s;
         }catch(IOException|IllegalArgumentException e){throw new IllegalArgumentException("Refusing damaged or incompatible Civitas data",e);}
@@ -78,7 +88,7 @@ public final class DataMigrationManager {
     public static byte[] encodeInventory(BulkInventory inventory){
         try{
             ByteArrayOutputStream bytes=new ByteArrayOutputStream();DataOutputStream out=new DataOutputStream(bytes);
-            out.writeInt(VERSION);out.writeInt(inventory.maxKeys());out.writeLong(inventory.capacity());out.writeInt(inventory.contents().size());
+            out.writeInt(INVENTORY_VERSION);out.writeInt(inventory.maxKeys());out.writeLong(inventory.capacity());out.writeInt(inventory.contents().size());
             for(var e:inventory.contents().entrySet()){out.writeUTF(e.getKey());out.writeLong(e.getValue());}
             return bytes.toByteArray();
         }catch(IOException e){throw new UncheckedIOException(e);}
@@ -87,7 +97,7 @@ public final class DataMigrationManager {
         if(bytes.length>128*1024)throw new IllegalArgumentException("Cargo data too large");
         try{
             DataInputStream in=new DataInputStream(new ByteArrayInputStream(bytes));
-            if(in.readInt()!=VERSION)throw new IOException("Unsupported cargo data version");
+            if(in.readInt()!=INVENTORY_VERSION)throw new IOException("Unsupported cargo data version");
             BulkInventory inventory=new BulkInventory(in.readInt(),in.readLong());
             for(int n=size(in,256);n>0;n--){String key=in.readUTF();long count=in.readLong();
                 if(count<=0||inventory.count(key)!=0||inventory.insert(key,count,false)!=count)throw new IOException("Invalid cargo counts");}

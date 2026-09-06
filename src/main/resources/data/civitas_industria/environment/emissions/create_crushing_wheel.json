@@ -1,0 +1,8 @@
+{
+  "target": "create:crushing_wheel",
+  "industrial_load": 12,
+  "active_property": "",
+  "emissions": {
+    "PM": 3
+  }
+}

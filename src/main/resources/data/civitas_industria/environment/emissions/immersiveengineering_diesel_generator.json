@@ -1,0 +1,8 @@
+{
+  "target": "immersiveengineering:diesel_generator",
+  "industrial_load": 40,
+  "active_property": "",
+  "emissions": {
+    "NOX": 15
+  }
+}

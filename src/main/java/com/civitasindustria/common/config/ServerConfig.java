@@ -18,6 +18,7 @@ public final class ServerConfig {
         MAINTENANCE_EDGE=B.defineInRange("maintenancePerEdge",.25,0,100000), MAINTENANCE_AREA=B.defineInRange("maintenancePerCell",.0,0,100000);
     public static final ModConfigSpec.IntValue CREDIT_PER_INGOT=B.defineInRange("maintenanceCreditsPerIron",100,1,100000);
     public static final ModConfigSpec.LongValue WAREHOUSE_CAPACITY=B.defineInRange("warehouseCapacity",10000000L,1L,Long.MAX_VALUE/2);
+    public static final ModConfigSpec.LongValue TANK_CAPACITY=B.defineInRange("tankCapacityMb",10000000L,1000L,Long.MAX_VALUE/2);
     public static final ModConfigSpec.LongValue CRATE_CAPACITY=B.defineInRange("crateCapacity",100000L,1L,1000000000L);
     public static final ModConfigSpec.IntValue TRANSFER_BATCH=B.defineInRange("freightTransferBatch",256,1,4096);
     public static final ModConfigSpec.IntValue CARGO_NORMAL=B.defineInRange("cargoNormalLimit",512,1,1000000);
@@ -30,6 +31,8 @@ public final class ServerConfig {
     public static final ModConfigSpec.DoubleValue EXPOSURE_AQI=B.defineInRange("severeExposureAqi",500.0,1,10000000),
         EXPOSURE_ACID=B.defineInRange("severeExposureAcid",500.0,1,2000000),
         EXPOSURE_WATER=B.defineInRange("severeExposureWaterToxicity",500.0,1,1000000);
+    public static final ModConfigSpec.IntValue COMMISSION_TICKS=B.defineInRange("commissioningTicks",200,20,72000);
+    public static final ModConfigSpec.IntValue RAID_WAVE_SIZE=B.defineInRange("raidWaveSize",6,1,24), RAID_LIFETIME=B.defineInRange("raidLifetimeTicks",2400,200,6000);
     public static final ModConfigSpec SPEC=B.build();
     private static ModConfigSpec.DoubleValue rate(String name,double value){return B.defineInRange(name,value,0,1);}
     public static SimulationSettings simulation(){return new SimulationSettings(AIR_DECAY.get(),DIFFUSION.get(),WET.get(),RUNOFF.get(),

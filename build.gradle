@@ -10,9 +10,28 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 neoForge {
     version = project.neo_version
     runs {
-        client { client() }
+        client {
+            client()
+            gameDirectory = project.file('run-client-validation')
+            if (providers.gradleProperty('ciClientValidation').isPresent()) {
+                systemProperty 'civitas.validation', 'true'
+                programArgument '--quickPlaySingleplayer'
+                programArgument 'ci-validation'
+                programArgument '--width'
+                programArgument '1280'
+                programArgument '--height'
+                programArgument '720'
+            }
+        }
+        gameTestServer {
+            type = 'gameTestServer'
+            gameDirectory = project.file(providers.gradleProperty('ciGameTestDir').getOrElse('run-gametest'))
+            systemProperty 'neoforge.enabledGameTestNamespaces', 'civitas_industria'
+        }
         server {
             server()
+            gameDirectory = project.file(providers.gradleProperty('ciServerDir').getOrElse('run'))
+            if (providers.gradleProperty('ciStaging').isPresent()) systemProperty 'civitas.staging', 'true'
             programArgument '--nogui'
         }
     }
@@ -45,3 +64,8 @@ tasks.named('test') {
     failOnNoDiscoveredTests = false // Assertions run in the dependency-free domainTest harness.
 }
 tasks.named('check') { dependsOn 'domainTest' }
+
+// Optional runtime integration; compile against the exact lockfile artifact downloaded on the build server.
+dependencies {
+    compileOnly files(providers.gradleProperty('ciArtifactDirectory').getOrElse('../civitas-industria-artifacts') + '/create-1.21.1-6.0.10.jar')
+}

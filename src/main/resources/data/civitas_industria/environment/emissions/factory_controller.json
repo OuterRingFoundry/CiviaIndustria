@@ -1,0 +1,10 @@
+{
+  "target": "civitas_industria:factory_controller",
+  "industrial_load": 40,
+  "active_property": "active",
+  "emissions": {
+    "particulate": 1.0,
+    "sulfur_oxides": 0.2,
+    "heat": 2.0
+  }
+}

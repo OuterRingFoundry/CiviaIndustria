@@ -15,8 +15,8 @@ assert "level-name=smoke-world\n" in properties and "server-ip=127.0.0.1\n" in p
 target = run / "smoke-world" / "data" / "civitas_industria.dat"
 original = target.read_bytes()
 raw = gzip.decompress(original)
-field = b"\x03\x00\x0bdataVersion" + struct.pack(">i", 2)
-assert raw.count(field) == 1, "Expected one schema-2 envelope"
+field = b"\x03\x00\x0bdataVersion" + struct.pack(">i", 3)
+assert raw.count(field) == 1, "Expected one schema-3 envelope"
 cases = {
     "future": gzip.compress(raw.replace(field, field[:-4] + struct.pack(">i", 99))),
     "mismatch": gzip.compress(raw.replace(field, field[:-4] + struct.pack(">i", 1))),

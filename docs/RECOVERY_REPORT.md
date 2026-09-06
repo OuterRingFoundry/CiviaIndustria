@@ -1,3 +1,6 @@
+> Current continuation: see [VALIDATION_REPORT.md](VALIDATION_REPORT.md).
+> This file is a historical record; its implementation status and pause instructions are superseded.
+
 # Runtime recovery milestone
 
 This continues `314b4cd` on the designated development server in

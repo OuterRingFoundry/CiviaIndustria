@@ -1,0 +1,10 @@
+{
+  "target": "minecraft:blast_furnace",
+  "industrial_load": 15,
+  "active_property": "lit",
+  "emissions": {
+    "particulate": 0.4,
+    "sulfur_oxides": 0.1,
+    "heat": 1
+  }
+}

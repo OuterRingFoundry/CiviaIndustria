@@ -1,0 +1,14 @@
+{
+  "scope": "Synthetic Civitas workload; no authenticated clients or running trains",
+  "decorations": 10000,
+  "machines": 1000,
+  "active_furnaces": 200,
+  "warehouse_controllers": 20,
+  "seeded_rain_cells": 500,
+  "measured_ticks": 1200,
+  "mean_ms": 7.469809230833333,
+  "observed_tps": 20.01520508795332,
+  "p95_ms": 8.226072,
+  "max_ms": 34.365256,
+  "runtime_active_cells": 552
+}

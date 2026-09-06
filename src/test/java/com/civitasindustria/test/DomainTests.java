@@ -19,6 +19,8 @@ public final class DomainTests {
         check(CivilizationGraph.maintenanceState(8,1)==CellData.Civilization.WILDERNESS,"Interior eventually degrades");
         check(CivilizationGraph.maintenanceState(0,1)==CellData.Civilization.CIVILIZED,"Maintenance recovery");
         square.remove(new CellPos(1,1));check(graph.rebuild(square).getFirst().perimeter()==20,"Interior holes");
+        CivilizationGraph.RebuildJob job=new CivilizationGraph.RebuildJob(square);int graphSteps=0;while(!job.advance(2))graphSteps++;
+        check(graphSteps>1&&job.result().getFirst().perimeter()==20,"Incremental graph preserves holes and yields");
         Map<IndustrialLoad.Chunk,Double> loads=Map.of(new IndustrialLoad.Chunk(0,0),100.0,new IndustrialLoad.Chunk(1,0),100.0);
         check(IndustrialLoad.effective(loads,new IndustrialLoad.Chunk(0,0),.35,.15)==135,"Border load");
         BulkInventory source=new BulkInventory(4,10_000_000_000L),target=new BulkInventory(4,10_000_000_000L);
@@ -36,7 +38,11 @@ public final class DomainTests {
         state.parcels.add(new Parcel(UUID.randomUUID(),UUID.randomUUID(),-20,11,-20,20,20,20,"Upper",Set.of(),Set.of()));
         check(state.parcels.at(-1,11,-1).isPresent(),"3D parcel index");
         rejects(()->state.parcels.add(new Parcel(UUID.randomUUID(),owner,0,5,0,2,8,2,"Overlap",Set.of(),Set.of())));
+        state.rawLoad.put(new IndustrialLoad.Chunk(-99,101),234.5);
         byte[] encoded=DataMigrationManager.encode(state);
+        check(DataMigrationManager.decode(encoded).rawLoad.equals(state.rawLoad),"Industrial chunk persistence");
+        WorldState old=new WorldState();byte[] upgrade=DataMigrationManager.encode(old);upgrade=Arrays.copyOf(upgrade,upgrade.length-4);java.nio.ByteBuffer.wrap(upgrade).putInt(4,2);
+        check(DataMigrationManager.decode(upgrade).rawLoad.isEmpty(),"Explicit v2 migration without industrial records");
         check(Arrays.equals(encoded,DataMigrationManager.encode(DataMigrationManager.decode(encoded))),"Deterministic restart identity");
         byte[] future=encoded.clone();future[7]=99;rejects(()->DataMigrationManager.decode(future));
         rejects(()->DataMigrationManager.decode(Arrays.copyOf(encoded,20)));
@@ -72,6 +78,22 @@ public final class DomainTests {
         Map<CellPos,CellData> trace=new TreeMap<>();CellData tiny=new CellData();tiny.add(Pollutant.PM,1e-9);trace.put(cp,tiny);
         simulator.step(trace,List.of(cp),p->rain,conservative,2);
         check(trace.isEmpty(),"Sub-epsilon transport recipients are compacted");
+        EmissionClock clock=new EmissionClock();for(int i=0;i<5000;i++)clock.add(i,0);
+        double settled=0;for(int i=0;i<5000;i++)settled+=clock.sample(i,100,100);
+        check(settled==5000,"Sampling batches preserve steady-state emission totals");
+        clock.remove(1);clock.add(1,1000);check(clock.sample(1,1001,100)==.01,"Unloaded machines emit no offline backlog");
+        Commissioning commission=new Commissioning();check(!commission.begin(false,true),"Foundation commissioning gate");
+        check(commission.begin(true,true),"Commissioning starts");commission.update(true,true,100,200);check(commission.stage==Commissioning.Stage.COMMISSIONING,"Commissioning duration");
+        commission.update(true,true,100,200);check(commission.stage==Commissioning.Stage.READY,"Commissioning completes");
+        commission.update(false,true,20,200);check(commission.stage==Commissioning.Stage.DEGRADED,"Foundation removal degrades capital");
+        RaidBudget raids=new RaidBudget(3,2,1);UUID raid=UUID.randomUUID(),id=UUID.randomUUID();
+        check(raids.reserve(id,raid,"overworld",origin),"Raid reservation");
+        check(!raids.reserve(UUID.randomUUID(),raid,"overworld",origin),"Cell raid cap");
+        check(raids.reserve(UUID.randomUUID(),raid,"nether",origin),"Dimension isolated raid cells");
+        check(!raids.reserve(UUID.randomUUID(),raid,"end",origin),"Per raid cap");
+        check(raids.reserve(UUID.randomUUID(),UUID.randomUUID(),"end",origin),"Independent raid");
+        check(!raids.reserve(UUID.randomUUID(),UUID.randomUUID(),"other",origin),"Global raid cap");
+        raids.release(id);check(raids.reserve(UUID.randomUUID(),UUID.randomUUID(),"overworld",origin),"Released capacity reused");
         System.out.println("Domain tests: "+checks+" checks passed; 500-cell rain step "+(System.nanoTime()-start)/1_000_000.0+" ms");
     }
 }

@@ -1,0 +1,27 @@
+{
+  "replace": false,
+  "values": [
+    "civitas_industria:remediation_station",
+    "civitas_industria:civic_core",
+    "civitas_industria:civic_relay",
+    "civitas_industria:logistics_node",
+    "civitas_industria:defense_node",
+    "civitas_industria:maintenance_depot",
+    "civitas_industria:cargo_crate",
+    "civitas_industria:pallet",
+    "civitas_industria:warehouse_controller",
+    "civitas_industria:warehouse_port",
+    "civitas_industria:warehouse_casing",
+    "civitas_industria:cargo_loader",
+    "civitas_industria:cargo_unloader",
+    "civitas_industria:freight_terminal",
+    "civitas_industria:bulk_tank",
+    "civitas_industria:factory_controller",
+    "civitas_industria:decorative_gear",
+    "civitas_industria:decorative_fan",
+    "civitas_industria:decorative_pump",
+    "civitas_industria:decorative_gauge",
+    "civitas_industria:decorative_piston",
+    "civitas_industria:decorative_vent"
+  ]
+}

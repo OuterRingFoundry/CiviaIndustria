@@ -1,0 +1,8 @@
+{
+  "target": "immersiveengineering:crusher",
+  "industrial_load": 25,
+  "active_property": "",
+  "emissions": {
+    "PM": 10
+  }
+}

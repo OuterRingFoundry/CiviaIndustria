@@ -29,21 +29,21 @@ public final class RuntimeCommands {
             " | pollutants "+java.util.Arrays.toString(c.pollutants)+" | degradation "+c.degradation);
     }
     public static void attach(LiteralArgumentBuilder<CommandSourceStack> root) {
-        var env=Commands.literal("env").requires(s->s.hasPermission(2))
+        var env=Commands.literal("env")
             .then(Commands.literal("here").executes(c->inspect(c.getSource(),here(c.getSource()))))
             .then(Commands.literal("ecology").executes(c->inspect(c.getSource(),here(c.getSource()))))
             .then(Commands.literal("inspect")
                 .then(Commands.argument("x",IntegerArgumentType.integer(-468750,468749))
                 .then(Commands.argument("z",IntegerArgumentType.integer(-468750,468749))
                 .executes(c->inspect(c.getSource(),new CellPos(IntegerArgumentType.getInteger(c,"x"),IntegerArgumentType.getInteger(c,"z")))))))
-            .then(Commands.literal("simulate").executes(c->{runtime(c.getSource()).simulate(c.getSource().getLevel());return reply(c.getSource(),"CI simulation step complete");}))
+            .then(Commands.literal("simulate").requires(s->s.hasPermission(2)).executes(c->{runtime(c.getSource()).simulate(c.getSource().getLevel(),true);return reply(c.getSource(),"CI simulation step complete");}))
             .then(Commands.literal("acidrain").then(Commands.literal("status").executes(c->{
                 var s=c.getSource();var cell=runtime(s).state().cells.get(here(s));
                 return reply(s,"CI acid rain | precipitation "+s.getLevel().isRainingAt(BlockPos.containing(s.getPosition()))+
                     " | acid precursor "+(cell==null?0:cell.acidPrecursorLoad));
             })));
-        var add=Commands.literal("add");
-        var clear=Commands.literal("clear");
+        var add=Commands.literal("add").requires(s->s.hasPermission(2));
+        var clear=Commands.literal("clear").requires(s->s.hasPermission(2));
         for(Pollutant pollutant:Pollutant.values()) {
             String name=pollutant.name().toLowerCase(java.util.Locale.ROOT);
             add.then(Commands.literal(name).then(Commands.argument("amount",DoubleArgumentType.doubleArg(0,1000000)).executes(c->{
@@ -62,9 +62,9 @@ public final class RuntimeCommands {
             return reply(s,"CI cleared pollutants; ecological recovery remains gradual");
         }));
         root.then(env.then(add).then(clear));
-        root.then(Commands.literal("load").requires(s->s.hasPermission(2))
+        root.then(Commands.literal("load")
             .then(Commands.literal("here").executes(c->reply(c.getSource(),"CI industrial load "+runtime(c.getSource()).load(BlockPos.containing(c.getSource().getPosition())))))
-            .then(Commands.literal("rescan").then(Commands.argument("radius",IntegerArgumentType.integer(0,8)).executes(c->{
+            .then(Commands.literal("rescan").requires(s->s.hasPermission(2)).then(Commands.argument("radius",IntegerArgumentType.integer(0,8)).executes(c->{
                 var s=c.getSource();BlockPos pos=BlockPos.containing(s.getPosition());int radius=IntegerArgumentType.getInteger(c,"radius");
                 int count=0;
                 for(int x=-radius;x<=radius;x++)for(int z=-radius;z<=radius;z++){
@@ -73,10 +73,10 @@ public final class RuntimeCommands {
                 }
                 return reply(s,"CI queued "+count+" loaded chunks");
             }))));
-        root.then(Commands.literal("civilization").requires(s->s.hasPermission(2))
+        root.then(Commands.literal("civilization")
             .then(Commands.literal("status").executes(c->inspect(c.getSource(),here(c.getSource()))))
             .then(Commands.literal("networks").executes(c->reply(c.getSource(),"CI networks "+runtime(c.getSource()).networks().size()+" | nodes "+runtime(c.getSource()).state().nodes.size())))
-            .then(Commands.literal("recalculate").executes(c->{runtime(c.getSource()).recalculate();return reply(c.getSource(),"CI topology rebuild queued");})));
+            .then(Commands.literal("recalculate").requires(s->s.hasPermission(2)).executes(c->{runtime(c.getSource()).recalculate();return reply(c.getSource(),"CI topology rebuild queued");})));
         root.then(Commands.literal("perf").requires(s->s.hasPermission(2)).executes(c->{
             var s=c.getSource();var r=runtime(s);long now=System.currentTimeMillis()/1000;
             reply(s,"CI stored cells "+r.state().cells.size()+" | active cells "+r.dirtyEntries());

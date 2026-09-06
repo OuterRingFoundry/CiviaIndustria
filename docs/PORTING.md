@@ -13,3 +13,25 @@ compile the core, repair platform adapters and isolated integrations, migrate da
 run persistence/GameTests, test a copy of production, and perform a staging soak.
 Move through DEV, INTEGRATION, STAGING and PRODUCTION only after recorded gates pass.
 Full pack pins, hashes and optional-mod compatibility testing belong to integration work.
+
+## Current targeted Mixins
+
+- `EnderCargoMixin` cancels vanilla `AbstractContainerMenu.clicked` deposits of
+  bulk cargo into the player's Ender inventory. NeoForge 21.1.249 exposes no
+  equivalent cancellable slot-click event. Normal click, quick move and hotbar
+  swap are tested; withdrawing old contents remains allowed. Recheck slot and
+  click semantics on every Minecraft upgrade.
+- Client-only `EcologyTintMixin` adjusts the return values of the three
+  `BiomeColors.getAverage*Color` methods. The public block-color registration
+  event cannot intercept all existing vanilla/modded biome color callers.
+  Rendering mods may bypass these methods; client matrix testing is required.
+  It uses immutable regional snapshots, including when chunk meshing runs on
+  render workers. No world reference is retained in the snapshot.
+
+Create compilation uses the exact downloaded `create-1.21.1-6.0.10.jar` from
+`-PciArtifactDirectory=<artifact cache>` (default sibling civitas-industria-artifacts).
+The integration classes load only when Create is installed. Its mounted storage
+codec preserves sixteen long-count slots; fixed warehouse/factory/tank authorities
+cannot join contraptions. Mounted cargo deliberately has no menu: physical
+insert/extract interfaces are supported, while absolute int slot replacement is
+rejected because it cannot safely represent a long-count inventory.

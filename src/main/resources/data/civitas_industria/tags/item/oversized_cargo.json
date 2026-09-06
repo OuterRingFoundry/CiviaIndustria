@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "civitas_industria:warehouse_controller",
+    "civitas_industria:bulk_tank"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "active=true": {
+      "model": "civitas_industria:block/factory_controller"
+    },
+    "active=false": {
+      "model": "civitas_industria:block/factory_controller"
+    }
+  }
+}

@@ -1,0 +1,72 @@
+[
+  {
+    "project": "create",
+    "version": "6.0.10+mc1.21.1",
+    "side": "both"
+  },
+  {
+    "project": "immersiveengineering",
+    "version": "12.4.2-194",
+    "side": "both"
+  },
+  {
+    "project": "kubejs",
+    "version": "2101.7.2-build.374",
+    "side": "both"
+  },
+  {
+    "project": "rhino",
+    "version": "2101.2.7-build.85+Rhino-1.21",
+    "side": "both"
+  },
+  {
+    "project": "architectury-api",
+    "version": "13.0.11+neoforge",
+    "side": "both"
+  },
+  {
+    "project": "framedblocks",
+    "version": "10.6.1",
+    "side": "both"
+  },
+  {
+    "project": "lightmans-currency",
+    "version": "1.21-2.3.0.5",
+    "side": "both"
+  },
+  {
+    "project": "simple-voice-chat",
+    "version": "neoforge-1.21.1-2.6.22",
+    "side": "both"
+  },
+  {
+    "project": "modernfix",
+    "version": "5.27.24+mc1.21.1",
+    "side": "both"
+  },
+  {
+    "project": "ferrite-core",
+    "version": "7.0.3-neoforge",
+    "side": "both"
+  },
+  {
+    "project": "servercore",
+    "version": "1.5.19+1.21.1",
+    "side": "server"
+  },
+  {
+    "project": "spark",
+    "version": "1.10.124-neoforge-1.21.1",
+    "side": "server"
+  },
+  {
+    "project": "embeddium",
+    "version": "1.0.15+mc1.21.1",
+    "side": "client"
+  },
+  {
+    "project": "chunky",
+    "version": "1.4.23",
+    "side": "server"
+  }
+]

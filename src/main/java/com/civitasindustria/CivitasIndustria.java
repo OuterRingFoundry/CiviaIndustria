@@ -19,10 +19,17 @@ public final class CivitasIndustria {
 
     public CivitasIndustria(IEventBus modBus, ModContainer container) {
         CivitasRegistries.register(modBus);
+        com.civitasindustria.test.staging.StagingHarness.register(NeoForge.EVENT_BUS);
+        if(net.neoforged.fml.ModList.get().isLoaded("create"))com.civitasindustria.compat.create.CreateCargo.register(modBus);
+        modBus.addListener(com.civitasindustria.common.network.EnvironmentPayload::register);
+        com.civitasindustria.platform.EcologyHooks.register(NeoForge.EVENT_BUS);
+        com.civitasindustria.common.threat.ThreatDirector.register(NeoForge.EVENT_BUS);
         container.registerConfig(ModConfig.Type.SERVER, ServerConfig.SPEC);
         container.registerConfig(ModConfig.Type.COMMON, CommonConfig.SPEC);
         container.registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
         NeoForge.EVENT_BUS.addListener(CivitasCommands::register);
         com.civitasindustria.platform.RuntimeEvents.register(NeoForge.EVENT_BUS);
+        com.civitasindustria.platform.ParcelProtection.register(NeoForge.EVENT_BUS);
+        com.civitasindustria.platform.CargoMovement.register(NeoForge.EVENT_BUS);
     }
 }

@@ -1,0 +1,8 @@
+{
+  "target": "create:mechanical_mixer",
+  "industrial_load": 8,
+  "active_property": "",
+  "emissions": {
+    "NOISE": 2
+  }
+}

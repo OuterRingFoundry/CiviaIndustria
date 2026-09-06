@@ -1,9 +1,8 @@
 package com.civitasindustria.common.config;
-
 import net.neoforged.neoforge.common.ModConfigSpec;
-
-/** Reserved configuration scope; gameplay settings arrive with their owning systems. */
 public final class ClientConfig {
-    public static final ModConfigSpec SPEC = new ModConfigSpec.Builder().build();
-    private ClientConfig() {}
+    private static final ModConfigSpec.Builder B=new ModConfigSpec.Builder();
+    public static final ModConfigSpec.BooleanValue TINT=B.define("ecologicalTint",true),HAZE=B.define("environmentalHaze",true);
+    public static final ModConfigSpec SPEC=B.build();
+    private ClientConfig(){}
 }

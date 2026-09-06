@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "minecraft": "1.21.1",
+  "neoforge": "21.1.249",
+  "installer": {
+    "filename": "neoforge-21.1.249-installer.jar",
+    "url": "https://maven.neoforged.net/releases/net/neoforged/neoforge/21.1.249/neoforge-21.1.249-installer.jar",
+    "size": 6972110,
+    "sha256": "d88b448eab73cd65bdf1720844a4828262de30a15fc71bd04dd81acc61c5399a",
+    "upstream_sha1": "d94d4445a3dda42e7dd54f5c7f789aa78c822074"
+  }
+}

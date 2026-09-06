@@ -1,0 +1,8 @@
+{
+  "target": "create:mechanical_press",
+  "industrial_load": 8,
+  "active_property": "",
+  "emissions": {
+    "NOISE": 3
+  }
+}

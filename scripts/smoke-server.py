@@ -14,7 +14,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--runtime-write", action="store_true")
 parser.add_argument("--runtime-read", action="store_true")
 args = parser.parse_args()
-steps = [("ci version", ("Civitas Industria", "| data 2", "| Minecraft 1.21.1", "| NeoForge", "| Java 21"))]
+steps = [("ci version", ("Civitas Industria", "| data 3", "| Minecraft 1.21.1", "| NeoForge", "| Java 21"))]
 if args.runtime_write or args.runtime_read:
     for dimension in ("overworld", "the_nether", "the_end"):
         if args.runtime_write:

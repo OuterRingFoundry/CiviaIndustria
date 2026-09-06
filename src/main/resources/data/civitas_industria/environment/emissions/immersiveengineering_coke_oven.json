@@ -1,0 +1,8 @@
+{
+  "target": "immersiveengineering:coke_oven",
+  "industrial_load": 20,
+  "active_property": "",
+  "emissions": {
+    "SOX": 8
+  }
+}

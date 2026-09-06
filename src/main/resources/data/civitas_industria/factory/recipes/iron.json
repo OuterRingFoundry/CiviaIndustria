@@ -1,0 +1,7 @@
+{
+  "input": "minecraft:raw_iron",
+  "output": "minecraft:iron_ingot",
+  "batch": 16,
+  "duration": 200,
+  "fuel": 2
+}

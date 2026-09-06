@@ -22,6 +22,36 @@ public final class CivilizationGraph {
         }
         return List.copyOf(networks);
     }
+    /** Resumable topology work; each advance visits at most its explicit cell budget. */
+    public static final class RebuildJob {
+        private final Set<CellPos> occupied,unseen;
+        private final List<Network> result=new ArrayList<>();
+        private final ArrayDeque<CellPos> queue=new ArrayDeque<>(),depthQueue=new ArrayDeque<>();
+        private Set<CellPos> component=new HashSet<>();private Map<CellPos,Integer> depth=new HashMap<>();
+        private int perimeter;private boolean depths,done;
+        public RebuildJob(Set<CellPos> cells){occupied=Set.copyOf(cells);unseen=new HashSet<>(cells);}
+        public boolean advance(int budget){
+            if(budget<1)throw new IllegalArgumentException("Graph budget");
+            while(budget>0&&!done){
+                if(depths){
+                    if(depthQueue.isEmpty()){
+                        result.add(new Network(Set.copyOf(component),perimeter,Map.copyOf(depth)));component=new HashSet<>();depth=new HashMap<>();perimeter=0;depths=false;continue;
+                    }
+                    var p=depthQueue.remove();for(var n:neighbors(p))if(component.contains(n)&&!depth.containsKey(n)){depth.put(n,depth.get(p)+1);depthQueue.add(n);}budget--;continue;
+                }
+                if(queue.isEmpty()){
+                    if(!component.isEmpty()){depths=true;continue;}
+                    if(unseen.isEmpty()){done=true;break;}
+                    var p=unseen.iterator().next();unseen.remove(p);queue.add(p);
+                }
+                var p=queue.remove();component.add(p);boolean boundary=false;
+                for(var n:neighbors(p)){if(!occupied.contains(n)){perimeter++;boundary=true;}else if(unseen.remove(n))queue.add(n);}
+                if(boundary){depth.put(p,0);depthQueue.add(p);}budget--;
+            }
+            return done;
+        }
+        public List<Network> result(){if(!done)throw new IllegalStateException("Graph still building");return List.copyOf(result);}
+    }
     private static Map<CellPos,Integer> boundaryDepth(Set<CellPos> cells) {
         Map<CellPos,Integer> depth=new HashMap<>();ArrayDeque<CellPos> queue=new ArrayDeque<>();
         for(CellPos p:cells)if(neighbors(p).stream().anyMatch(n->!cells.contains(n))) {depth.put(p,0);queue.add(p);}

@@ -1,0 +1,6 @@
+{
+  "target": "civitas_industria:factory_controller",
+  "foundation_tag": "civitas_industria:heavy_foundations",
+  "foundation_radius": 1,
+  "calibration_item": "civitas_industria:calibration_kit"
+}
