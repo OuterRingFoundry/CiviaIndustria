@@ -36,15 +36,24 @@ completed topology still scale with the changed network's size.
 ## Test record
 
 The mandatory build harness contains **51 domain checks**. The current GameTest suite
-contains **21 tests**. Optional-mod-specific methods explicitly skip their assertions
+contains **23 tests**. Optional-mod-specific methods explicitly skip their assertions
 when the relevant mod is absent: a green Civitas-only row is not evidence that Create
 or IE ran there. `pack/integration-results.json` identifies each profile's actual jars.
 
 Server evidence is retained under `/data/.tmp/civitas-industria-phase0`:
 
-- `continuation-raid-cleanup.log` and `continuation-r4-matrix.log`: current build
-  and six profiles (core, Create, IE, KubeJS, industry, full-server). Individual logs are
+- `continuation-r7-matrix.log`: current six-profile regression run
+  (core, Create, IE, KubeJS, industry, full-server). Individual logs are
   `run-matrix-*/matrix.log`.
+- `continuation-freight-live-before.log` reproduces a newly placed freight block
+  failing to transfer until chunk reload. `continuation-freight-live-after.log`
+  passes all 23 GameTests after registering storage placement with the bounded work
+  queue. The regression delays placement until initial chunk discovery finishes and
+  relies on natural server ticks. `continuation-freight-early-index.log` additionally
+  covers placement before initial chunk indexing: that update now queues discovery
+  instead of disappearing. The combined workload reproduced seven idle loaders before
+  this fix, then all twenty transferred successfully. Factory automation separately rejects extraction
+  from raw-material/fuel slots; another natural-tick test proves production completes.
 - `continuation-restart-write.log`, `continuation-restart-read.log`: actual schema-3
   stop/restart, saved SOX/AQI 123 at negative coordinates in Overworld, Nether and End.
 - `continuation-refusal.log`: future version, mismatched envelope and truncated
@@ -63,6 +72,16 @@ Server evidence is retained under `/data/.tmp/civitas-industria-phase0`:
   it does not exercise scheduled physical track, station loading or railway signals.
   The initial fixture failed to assemble in chunks whose entities were not loaded;
   the corrected fixture explicitly loads only its disposable assembly area.
+- `continuation-physical-route-r9.log` and `run-physical-route-r9/{write,read,verify}.log`:
+  two initially empty trains load 64/128 raw iron from fixed mine stockpiles through
+  native portable storage interfaces. Native schedules drive separate 2,140-block
+  physical tracks, with a real process restart past 1,000 blocks. Destination
+  interfaces unload into calibrated factories and then city warehouses. Every tick
+  checks stock conservation; a final restart verifies 64/128 finished ingots. Mined
+  ore is seeded in the stockpiles; this does not simulate player mining or shared-line
+  signal contention. `pack/physical-route-results.json` records all three passes.
+  Earlier failures and diagnostics are retained. Live transfer uncovered the missing
+  placement registration described above; it was not a ServerCore throttling issue.
 - `continuation-raid-cleanup.log`: 21 passing GameTests, including physical raider
   reservations, entity removal and last-player logout using an explicitly registered
   survival fake player. This is an event/entity integration test, not human combat.
@@ -75,7 +94,9 @@ Server evidence is retained under `/data/.tmp/civitas-industria-phase0`:
 - `scripts/test-verify-pack.py` (three tests), `scripts/test-backup.py` (two), and
   `scripts/test-instance.py` (two): dependency/hash adversaries, Java-compatible live
   world lock refusal, restore/checksum handling, properties rewrite tolerance and
-  changed/unexpected config rejection. `validate-content.py` parses 153 JSON resources.
+  changed/unexpected config rejection. `test-fixture-process.py` adds two checks for
+  dedicated-daemon enforcement and detached-child cleanup after timeout.
+  `validate-content.py` parses 153 JSON resources.
 
 The headless client uses Xvfb and Mesa software rendering at 1280×720. It establishes
 startup, actual world rendering and ecological response, not representative GPU frame
@@ -98,6 +119,22 @@ clients, running trains, three populated
 civilization networks or an active player raid. It does not pass the required combined
 30-player/20-train staging gate or establish production capacity.
 
+The combined synthetic run in `pack/combined-staging-results.json` includes 30 fake
+survival players, three added civilization networks, twenty native moving Create
+train authorities, all twenty warehouses receiving traffic, active physical raiders,
+the 10,000 decorations, 1,000 furnaces and 500 rain cells. It explicitly confirms 200
+lit furnaces at completion and exact stock conservation in all train and warehouse
+supplies. Over 1,200 measured ticks, mean was 9.68 ms, p95 12.70 ms, maximum 23.86 ms
+and observed TPS 20.02. Timing spans the highest-priority pre-tick through the
+lowest-priority post-tick listener. Per-subsystem call timings are in the JSON.
+
+`continuation-staging-combined-r4.log` and `run-staging-combined-r4/staging.log`
+retain evidence. Train movement uses graph fixtures with controlled speed, with
+physical schedules tested separately above. Fake players do not send real client
+traffic; raids are explicitly triggered for the workload. Travel, cargo traffic and
+raid-activity counters include 200 warmup ticks. This strengthens server-side evidence
+but does not pass authenticated-client, voice or representative rendering gates.
+
 ## Distribution
 
 Exact sources, versions, sides, hashes and license metadata are in `pack/mods.lock.json`;
@@ -119,17 +156,16 @@ installed. Read OPERATIONS.md before preparing a separate staging environment.
 
 ## Remaining acceptance work
 
-1. Build and exercise mine → 2,000+ block **physical scheduled railway** → processing →
-   city warehouse, with multiple trains, chunk transitions, interruptions and a real
-   process restart during that scheduled route. The API-graph process-restart test
-   now validates train storage persistence, not this complete gameplay route.
+1. Playtest shared-track signalling, contested station traffic and player mining/loading
+   in realistic terrain. The isolated two-train mine-stockpile → physical scheduled
+   railway → commissioned processing → warehouse route and process restarts now pass.
 2. Validate authenticated remote clients, voice chat, multi-user claims, physical raid
    combat and return-warning behavior. This needs available authenticated clients and
    a working authentication/network path. No authenticated client session is available
    in the current environment.
-3. Run the complete combined staging workload: 30 players, three populated networks,
-   20 moving trains, processing industry, warehouse traffic and a live raid under rain.
-   Measure subsystem costs and representative 1080p/1440p dense-city rendering.
+3. Repeat combined staging with authenticated clients and real packet traffic, physical
+   rail schedules/signals and representative 1080p/1440p dense-city rendering. The
+   mixed synthetic server workload now passes with explicit limits described above.
 4. Playtest resource/progression economics, regional ore generation, factory throughput
    and ecology recovery. Commissioning currently governs the Civitas factory; it does
    not independently gate every advanced Create or IE machine. IE adapter tests use

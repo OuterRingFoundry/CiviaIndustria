@@ -25,6 +25,15 @@ public final class FactoryBlockEntity extends BlockEntity implements FactoryCont
         @Override public ItemStack extractItem(int slot,int amount,boolean simulate){return quarantine!=null?ItemStack.EMPTY:super.extractItem(slot,amount,simulate);}
         @Override protected void onContentsChanged(int slot){setChanged();}
     };
+    /** Automation may supply input/fuel and extract finished output; manual recovery uses inventory. */
+    public final net.neoforged.neoforge.items.IItemHandler automation=new net.neoforged.neoforge.items.IItemHandler(){
+        @Override public int getSlots(){return inventory.getSlots();}
+        @Override public ItemStack getStackInSlot(int slot){return inventory.getStackInSlot(slot);}
+        @Override public ItemStack insertItem(int slot,ItemStack stack,boolean simulate){return inventory.insertItem(slot,stack,simulate);}
+        @Override public ItemStack extractItem(int slot,int amount,boolean simulate){return slot==2?inventory.extractItem(slot,amount,simulate):ItemStack.EMPTY;}
+        @Override public int getSlotLimit(int slot){return inventory.getSlotLimit(slot);}
+        @Override public boolean isItemValid(int slot,ItemStack stack){return inventory.isItemValid(slot,stack);}
+    };
     public FactoryBlockEntity(BlockPos pos,BlockState state){super(CivitasRegistries.FACTORY_ENTITY.get(),pos,state);}
     @Override public Commissioning.Stage commissioningStage(){return commissioning.stage;}
     @Override public int parallelBatchSize(){return 16;}

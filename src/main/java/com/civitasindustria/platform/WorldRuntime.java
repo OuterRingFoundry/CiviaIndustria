@@ -84,6 +84,7 @@ public final class WorldRuntime {
     public void machineChanged(BlockPos pos){
         long chunk=new ChunkPos(pos).toLong();
         if(machinesByChunk.containsKey(chunk)){machinesByChunk.get(chunk).add(pos.asLong());machines.add(pos.asLong());}
+        else queueChunk(new ChunkPos(pos)); // Placement may precede the chunk's first indexed load.
     }
     public void nodePlaced(BlockPos pos,UUID owner,WorldState.CivicNode.Kind kind){
         if(state().nodes.size()>=DataMigrationManager.MAX_RECORDS)throw new IllegalStateException("Node limit");

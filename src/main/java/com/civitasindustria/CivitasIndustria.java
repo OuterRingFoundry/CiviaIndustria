@@ -23,6 +23,7 @@ public final class CivitasIndustria {
         if(net.neoforged.fml.ModList.get().isLoaded("create")){
             com.civitasindustria.compat.create.CreateCargo.register(modBus);
             com.civitasindustria.compat.create.RailwayRestartChecks.register(NeoForge.EVENT_BUS);
+            com.civitasindustria.compat.create.RailwayRouteChecks.register(NeoForge.EVENT_BUS);
         }
         modBus.addListener(com.civitasindustria.common.network.EnvironmentPayload::register);
         com.civitasindustria.platform.EcologyHooks.register(NeoForge.EVENT_BUS);

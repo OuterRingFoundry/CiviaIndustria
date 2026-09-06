@@ -54,7 +54,7 @@ public final class CivitasRegistries {
     public static final DeferredHolder<BlockEntityType<?>,BlockEntityType<com.civitasindustria.common.decoration.DecorativeEntity>> DECORATIVE_ENTITY=BLOCK_ENTITIES.register("decoration",
         ()->BlockEntityType.Builder.of(com.civitasindustria.common.decoration.DecorativeEntity::new,CONTENT.values().stream().map(DeferredBlock::get).filter(b->b instanceof com.civitasindustria.common.decoration.DecorativeBlock).toArray(Block[]::new)).build(null));
     public static void capabilities(net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent event){
-        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK,FACTORY_ENTITY.get(),(factory,side)->factory.inventory);
+        event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK,FACTORY_ENTITY.get(),(factory,side)->factory.automation);
         event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,TANK_ENTITY.get(),(tank,side)->tank);
         event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK,CARGO_ENTITY.get(),(cargo,side)->cargo.handler);
     }

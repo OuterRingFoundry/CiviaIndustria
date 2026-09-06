@@ -19,12 +19,24 @@ public final class FactoryGameTests {
         for(int i=0;i<10;i++)factory.step();
         if(factory.commissioningStage()!=Commissioning.Stage.READY)throw new AssertionError("Commissioning duration");
         factory.inventory.insertItem(0,new ItemStack(Items.RAW_IRON,16),false);factory.inventory.insertItem(1,new ItemStack(Items.COAL,2),false);
+        var port=h.getLevel().getCapability(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK,h.absolutePos(p),net.minecraft.core.Direction.EAST);
+        if(port==null||!port.extractItem(0,64,false).isEmpty()||!port.extractItem(1,64,false).isEmpty())throw new AssertionError("Factory automation stole input or fuel");
         for(int i=0;i<5;i++)factory.step();
         var saved=factory.saveWithFullMetadata(h.getLevel().registryAccess());factory.loadWithComponents(saved,h.getLevel().registryAccess());
         for(int i=0;i<5;i++)factory.step();
         if(factory.inventory.getStackInSlot(2).getCount()!=16||!factory.inventory.getStackInSlot(0).isEmpty()||!factory.inventory.getStackInSlot(1).isEmpty())throw new AssertionError("Batch did not conserve inputs/fuel across reload");
+        if(port.extractItem(2,64,true).getCount()!=16||factory.inventory.getStackInSlot(2).getCount()!=16||port.extractItem(2,64,false).getCount()!=16)throw new AssertionError("Finished output extraction or simulation failed");
         h.setBlock(p.below(),Blocks.AIR);factory.step();
         if(factory.commissioningStage()!=Commissioning.Stage.DEGRADED)throw new AssertionError("Foundation removal retained commissioning");
         h.succeed();
     }
+    @GameTest(template="empty",batch="factory_live",timeoutTicks=500)
+    public static void liveTickedProduction(GameTestHelper h){
+        var p=new BlockPos(3,2,3);for(int x=-1;x<=1;x++)for(int z=-1;z<=1;z++)h.setBlock(p.offset(x,-1,z),Blocks.IRON_BLOCK);
+        h.setBlock(p,CivitasRegistries.CONTENT.get("factory_controller").get());var factory=(FactoryBlockEntity)h.getBlockEntity(p);
+        if(!factory.beginCommissioning())throw new AssertionError("Live commissioning refused");
+        factory.inventory.insertItem(0,new ItemStack(Items.RAW_IRON,16),false);factory.inventory.insertItem(1,new ItemStack(Items.COAL,2),false);
+        h.runAfterDelay(440,()->{if(factory.inventory.getStackInSlot(2).getCount()!=16)throw new AssertionError("Live factory failed: stage="+factory.commissioningStage()+" progress="+factory.operationProgress());h.succeed();});
+    }
+
 }

@@ -55,7 +55,9 @@ Put a factory controller over a 3×3 iron-block foundation. Apply a calibration 
 wait the commissioning duration, and supply raw iron/copper/gold plus coal or charcoal.
 A batch converts sixteen raw materials into sixteen ingots with two fuel items.
 Foundation removal or excessive regional industrial load degrades commissioning.
-Inventory and in-progress work survive save/reload.
+Inventory and in-progress work survive save/reload. Automated freight supplies the
+input and fuel slots and extracts only finished ingots. Sneak interaction can recover
+remaining input and fuel manually.
 
 Active furnaces, supported Create machinery and IE master controllers contribute
 JSON-defined load and emissions. Air transport, rain deposition, downhill surface-water

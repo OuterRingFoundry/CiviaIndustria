@@ -30,6 +30,8 @@ Full pack pins, hashes and optional-mod compatibility testing belong to integrat
 
 Create compilation uses the exact downloaded `create-1.21.1-6.0.10.jar` from
 `-PciArtifactDirectory=<artifact cache>` (default sibling civitas-industria-artifacts).
+Its exact nested Jar-in-Jar libraries are also on the compile-only classpath for public
+station APIs; no extra runtime versions are downloaded.
 The integration classes load only when Create is installed. Its mounted storage
 codec preserves sixteen long-count slots; fixed warehouse/factory/tank authorities
 cannot join contraptions. Mounted cargo deliberately has no menu: physical

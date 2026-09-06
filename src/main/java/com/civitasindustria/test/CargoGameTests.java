@@ -111,6 +111,23 @@ public final class CargoGameTests {
         loader.transfer(30);check(destination.total()==64,"Repeated transfer duplicated cargo");
         h.succeed();
     }
+    @GameTest(template="empty",batch="freight_live",timeoutTicks=240)
+    public static void newlyPlacedFreightTicks(GameTestHelper h){
+        // Let initial chunk discovery finish before placing the automation block.
+        h.runAfterDelay(40,()->{
+            // A placement notification must also survive initial lifecycle discovery.
+            com.civitasindustria.platform.WorldRuntime.get(h.getLevel()).chunkUnloaded(new net.minecraft.world.level.ChunkPos(h.absolutePos(new BlockPos(3,1,3))));
+            var loader=crate(h,"cargo_loader",new BlockPos(3,1,3));
+            h.setBlock(new BlockPos(3,1,4),Blocks.CHEST);
+            var source=(net.minecraft.world.level.block.entity.ChestBlockEntity)h.getBlockEntity(new BlockPos(3,1,4));
+            source.setItem(0,new ItemStack(Items.IRON_INGOT,64));
+            var destination=crate(h,"cargo_crate",new BlockPos(3,1,2));
+            h.runAfterDelay(120,()->{
+                check(source.getItem(0).isEmpty()&&loader.total()==0&&destination.total()==64,"New freight block was not discovered without a chunk reload");
+                h.succeed();
+            });
+        });
+    }
     @GameTest(template="empty")
     public static void enderChestDepositAndWithdrawal(GameTestHelper h){
         var player=net.neoforged.neoforge.common.util.FakePlayerFactory.get(h.getLevel(),new com.mojang.authlib.GameProfile(java.util.UUID.randomUUID(),"CICargo"));

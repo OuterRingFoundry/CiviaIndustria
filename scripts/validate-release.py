@@ -4,7 +4,7 @@ import argparse,datetime,hashlib,json,subprocess,sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 def main():
- p=argparse.ArgumentParser();p.add_argument('--artifacts',required=True,type=Path);p.add_argument('--installer',required=True,type=Path);p.add_argument('--world',required=True,type=Path);p.add_argument('--output',required=True,type=Path);a=p.parse_args()
+ p=argparse.ArgumentParser();p.add_argument('--artifacts',required=True,type=Path);p.add_argument('--installer',required=True,type=Path);p.add_argument('--runtime-cache',type=Path);p.add_argument('--world',required=True,type=Path);p.add_argument('--output',required=True,type=Path);a=p.parse_args()
  if a.output.exists():raise ValueError('Release destination must be new')
  if not (a.world/'level.dat').exists():raise ValueError('Use the three-dimension smoke-test world')
  a.output.mkdir(parents=True);jar=ROOT/'build/libs/civitas_industria-0.0.1-dev.jar';results=[]
@@ -14,7 +14,8 @@ def main():
   results.append(stage);print(stage,'PASS',flush=True)
  for side in ('server','client'):
   run('assemble-'+side,'assemble-pack.py','--side',side,'--artifacts',a.artifacts,'--civitas',jar,'--output',a.output/side)
- run('install-runtime','install-runtime.py','--instance',a.output/'server','--installer',a.installer)
+ cache_args=['--runtime-cache',a.runtime_cache] if a.runtime_cache else []
+ run('install-runtime','install-runtime.py','--instance',a.output/'server','--installer',a.installer,*cache_args)
  run('verify-assembled','verify-instance.py',a.output/'server')
  run('standalone-boot','validate-distribution.py','--instance',a.output/'server','--world',a.world,'--output',a.output/'validated-server')
  run('finalize-dev','finalize-instance.py',a.output/'validated-server')

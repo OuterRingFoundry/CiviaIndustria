@@ -2,6 +2,7 @@
 """Smoke-test a shipped server JAR and exact runtime in a new isolated copy, never Gradle."""
 import argparse,hashlib,json,queue,shutil,subprocess,threading,time
 from pathlib import Path
+from fixture_config import isolate_voice
 from pack_manifest import properties
 ROOT=Path(__file__).resolve().parents[1]
 def main():
@@ -13,8 +14,9 @@ def main():
  if not (a.output/'world/level.dat').exists():raise ValueError('A saved validation world is required')
  (a.output/'eula.txt').write_text('eula=true\n');(a.output/'server.properties').write_text('server-ip=127.0.0.1\nserver-port=25589\nlevel-name=world\nonline-mode=true\nview-distance=4\nsimulation-distance=4\nmax-players=1\nsync-chunk-writes=true\n')
  (a.output/'user_jvm_args.txt').write_text('-Xms2G\n-Xmx8G\n-XX:ActiveProcessorCount=8\n')
+ voice=isolate_voice(a.output,24459)
  state=json.loads((a.output/'pack-state.json').read_text())
- for name in ('server.properties','user_jvm_args.txt','eula.txt'):
+ for name in ('server.properties','user_jvm_args.txt','eula.txt',voice):
   if name in state.get('properties',{}):state['properties'][name]=properties(a.output/name)
   else:state['files'][name]=hashlib.sha256((a.output/name).read_bytes()).hexdigest()
  (a.output/'pack-state.json').write_text(json.dumps(state,indent=2)+'\n')

@@ -32,7 +32,9 @@ neoForge {
             server()
             gameDirectory = project.file(providers.gradleProperty('ciServerDir').getOrElse('run'))
             if (providers.gradleProperty('ciStaging').isPresent()) systemProperty 'civitas.staging', 'true'
+            if (providers.gradleProperty('ciStagingCombined').isPresent()) systemProperty 'civitas.stagingCombined', 'true'
             if (providers.gradleProperty('ciRailwayRestart').isPresent()) systemProperty 'civitas.railwayRestart', providers.gradleProperty('ciRailwayRestart').get()
+            if (providers.gradleProperty('ciRailwayRoute').isPresent()) systemProperty 'civitas.railwayRoute', providers.gradleProperty('ciRailwayRoute').get()
             programArgument '--nogui'
         }
     }
@@ -68,5 +70,8 @@ tasks.named('check') { dependsOn 'domainTest' }
 
 // Optional runtime integration; compile against the exact lockfile artifact downloaded on the build server.
 dependencies {
-    compileOnly files(providers.gradleProperty('ciArtifactDirectory').getOrElse('../civitas-industria-artifacts') + '/create-1.21.1-6.0.10.jar')
+    def createArtifact = file(providers.gradleProperty('ciArtifactDirectory').getOrElse('../civitas-industria-artifacts') + '/create-1.21.1-6.0.10.jar')
+    compileOnly files(createArtifact)
+    // Public Create test APIs inherit types from these exact bundled libraries.
+    compileOnly files(zipTree(createArtifact).matching { include 'META-INF/jarjar/*.jar' })
 }

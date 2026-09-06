@@ -13,7 +13,7 @@ public class StorageBlock extends BaseEntityBlock {
     public static final MapCodec<StorageBlock> CODEC=simpleCodec(StorageBlock::new);
     public StorageBlock(Properties p){super(p);}
     @Override protected MapCodec<? extends BaseEntityBlock> codec(){return CODEC;}
-    @Override protected void onPlace(BlockState state,Level level,BlockPos pos,BlockState old,boolean moving){super.onPlace(state,level,pos,old,moving);WarehouseStructure.changed(level,pos);}
+    @Override protected void onPlace(BlockState state,Level level,BlockPos pos,BlockState old,boolean moving){super.onPlace(state,level,pos,old,moving);WarehouseStructure.changed(level,pos);if(level instanceof net.minecraft.server.level.ServerLevel server)com.civitasindustria.platform.WorldRuntime.get(server).machineChanged(pos);}
     @Override protected void onRemove(BlockState state,Level level,BlockPos pos,BlockState next,boolean moving){super.onRemove(state,level,pos,next,moving);WarehouseStructure.changed(level,pos);if(level instanceof net.minecraft.server.level.ServerLevel server)com.civitasindustria.platform.WorldRuntime.get(server).machineChanged(pos);}
     @Override public BlockEntity newBlockEntity(BlockPos pos,BlockState state){return new CargoBlockEntity(pos,state);}
     @Override protected RenderShape getRenderShape(BlockState state){return RenderShape.MODEL;}

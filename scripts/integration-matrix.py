@@ -2,6 +2,8 @@
 """Run isolated NeoForge GameTest profiles using previously verified exact artifacts."""
 import argparse,hashlib,json,shutil,subprocess,time
 from pathlib import Path
+from fixture_config import isolate_voice
+from fixture_process import run
 ROOT=Path(__file__).resolve().parents[1]
 PROFILES={'core':[], 'create':['create'], 'ie':['immersiveengineering'], 'kubejs':['kubejs','rhino','architectury-api'], 'industry':['create','immersiveengineering'], 'full-server':None}
 def main():
@@ -17,9 +19,10 @@ def main():
    if hashlib.sha256(source.read_bytes()).hexdigest()!=a['sha256']:raise ValueError('Artifact hash '+a['filename'])
    shutil.copy2(source,mods/a['filename'])
   if name=='full-server':shutil.copytree(ROOT/'pack/overrides',directory,dirs_exist_ok=True)
+  if name=='full-server':isolate_voice(directory,24462)
   logfile=directory/'matrix.log';start=time.time()
   with logfile.open('w') as out:
-   try:code=subprocess.run(['./gradlew','runGameTestServer',f'-PciGameTestDir={directory}'],cwd=ROOT,stdin=subprocess.DEVNULL,stdout=out,stderr=subprocess.STDOUT,timeout=900).returncode
+   try:code=run(['./gradlew','--no-daemon','runGameTestServer',f'-PciGameTestDir={directory}'],ROOT,out,900)
    except subprocess.TimeoutExpired:code=124
   text=logfile.read_text();passed=code==0 and 'required tests passed' in text and 'BUILD SUCCESSFUL' in text
   results[name]={'passed':passed,'exit':code,'seconds':round(time.time()-start,1),'log':str(logfile),'artifacts':sorted(expected)}
