@@ -1,0 +1,87 @@
+{
+  "core": {
+    "passed": true,
+    "required_tests": 33,
+    "expected_required_tests": 33,
+    "errors": [],
+    "exit": 0,
+    "seconds": 18.9,
+    "log": "/data/.tmp/civitas-industria-builds/dev-acceptance-r13/matrix/run-matrix-core/matrix.log",
+    "artifacts": []
+  },
+  "create": {
+    "passed": true,
+    "required_tests": 33,
+    "expected_required_tests": 33,
+    "errors": [],
+    "exit": 0,
+    "seconds": 21.5,
+    "log": "/data/.tmp/civitas-industria-builds/dev-acceptance-r13/matrix/run-matrix-create/matrix.log",
+    "artifacts": [
+      "create-1.21.1-6.0.10.jar"
+    ]
+  },
+  "ie": {
+    "passed": true,
+    "required_tests": 33,
+    "expected_required_tests": 33,
+    "errors": [],
+    "exit": 0,
+    "seconds": 19.6,
+    "log": "/data/.tmp/civitas-industria-builds/dev-acceptance-r13/matrix/run-matrix-ie/matrix.log",
+    "artifacts": [
+      "ImmersiveEngineering-1.21.1-12.4.2-194.jar"
+    ]
+  },
+  "kubejs": {
+    "passed": true,
+    "required_tests": 33,
+    "expected_required_tests": 33,
+    "errors": [],
+    "exit": 0,
+    "seconds": 23.3,
+    "log": "/data/.tmp/civitas-industria-builds/dev-acceptance-r13/matrix/run-matrix-kubejs/matrix.log",
+    "artifacts": [
+      "architectury-13.0.11-neoforge.jar",
+      "kubejs-neoforge-2101.7.2-build.374.jar",
+      "rhino-2101.2.7-build.85.jar"
+    ]
+  },
+  "industry": {
+    "passed": true,
+    "required_tests": 33,
+    "expected_required_tests": 33,
+    "errors": [],
+    "exit": 0,
+    "seconds": 28.0,
+    "log": "/data/.tmp/civitas-industria-builds/dev-acceptance-r13/matrix/run-matrix-industry/matrix.log",
+    "artifacts": [
+      "ImmersiveEngineering-1.21.1-12.4.2-194.jar",
+      "create-1.21.1-6.0.10.jar"
+    ]
+  },
+  "full-server": {
+    "passed": true,
+    "required_tests": 33,
+    "expected_required_tests": 33,
+    "errors": [],
+    "exit": 0,
+    "seconds": 27.0,
+    "log": "/data/.tmp/civitas-industria-builds/dev-acceptance-r13/matrix/run-matrix-full-server/matrix.log",
+    "artifacts": [
+      "Chunky-NeoForge-1.4.23.jar",
+      "FramedBlocks-10.6.1.jar",
+      "ImmersiveEngineering-1.21.1-12.4.2-194.jar",
+      "architectury-13.0.11-neoforge.jar",
+      "create-1.21.1-6.0.10.jar",
+      "ferritecore-7.0.3-neoforge.jar",
+      "kubejs-neoforge-2101.7.2-build.374.jar",
+      "lightmanscurrency-1.21-2.3.0.5.jar",
+      "modernfix-neoforge-5.27.24+mc1.21.1.jar",
+      "rhino-2101.2.7-build.85.jar",
+      "servercore-neoforge-1.5.19+1.21.1.jar",
+      "spark-1.10.124-neoforge.jar",
+      "voicechat-neoforge-1.21.1-2.6.22.jar"
+    ]
+  }
+}

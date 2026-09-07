@@ -1,0 +1,23 @@
+{
+  "packVersion": "0.1.0-beta.1",
+  "channel": "beta",
+  "sourceCommit": "f5f7bcc8f517bac10a877a78e604ac9cfd8781e5",
+  "minecraft": "1.21.1",
+  "neoforge": "21.1.249",
+  "java": 21,
+  "customJar": {
+    "filename": "civitas_industria-0.0.1-dev.jar",
+    "sha256": "9ae69f1e17b6c9afe765c860872db702ac2c67d6275855bade371bb4991bc7c8",
+    "size": 454425
+  },
+  "upstreamArtifactCount": 14,
+  "clientUpstreamArtifacts": 11,
+  "serverUpstreamArtifacts": 13,
+  "productionApproved": false,
+  "remainingAcceptance": [
+    "authenticated multiplayer, voice, claims and combat",
+    "representative GPU dense-city performance",
+    "mixed-direction junctions, terrain and economy/progression playtests",
+    "production deployment and operational acceptance"
+  ]
+}

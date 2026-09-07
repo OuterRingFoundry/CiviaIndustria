@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "publicArchives": {
+    "CiviaIndustria-0.1.0-beta.1.mrpack": "7ab3d4277da72f0efff79706cd9c64e2fa0c983d230fa5809577dd23485408df",
+    "CiviaIndustria-0.1.0-beta.1-server.zip": "c16c7cf77e9bcdf286ef89a912bc093bd0a72eef568a65a67b8ad9b2ba2ffb7c"
+  },
+  "checks": [
+    "fresh official downloads of all 14 pinned upstream artifacts",
+    "all upstream SHA-512 and size checks",
+    "mrpack SHA-1 and SHA-512 checks",
+    "server archive extraction and Java 21 runtime installation",
+    "client mrpack side selection and nested dependency validation",
+    "client/server mods and progression script byte-identical to tested r13 distribution",
+    "dedicated server startup using shipped JAR, three-dimension saved pollutants, clean stop",
+    "fresh official NeoForge installer download and SHA-256",
+    "public archives rebuilt byte-for-byte",
+    "public ZIP CRC and safe entry paths"
+  ],
+  "clientJarCount": 12,
+  "serverJarCount": 14,
+  "downloadNote": "All 14 official downloads verified from a fresh cache on the API workspace. The server installer reused the exact verified cache after its upstream requests stalled.",
+  "clientLauncherImportTested": false,
+  "humanAcceptanceComplete": false
+}
