@@ -42,12 +42,13 @@ public final class RailwayRouteChecks {
         var tag=new CompoundTag();tag.putIntArray("TargetTrack",new int[]{-2,0,0});tag.putBoolean("TargetDirection",false);tag.putBoolean("Ortho",true);
         station.edgePoint.read(tag,level.registryAccess(),false);((net.minecraft.world.level.block.entity.BlockEntity)station).setChanged();
     }
-    private static Train assemble(ServerLevel level,int x,int number)throws Exception{
-        var anchor=new BlockPos(x,-59,20);var bogeyBlock=(com.simibubi.create.content.trains.bogey.AbstractBogeyBlock<?>)block("create:small_bogey").getBlock();
+    static Train assembleAt(ServerLevel level,BlockPos anchor,int number,long quantity)throws Exception{
+        var bogeyBlock=(com.simibubi.create.content.trains.bogey.AbstractBogeyBlock<?>)block("create:small_bogey").getBlock();
         level.setBlock(anchor,bogeyBlock.defaultBlockState(),3);
         var burner=block("create:blaze_burner").setValue(com.simibubi.create.content.processing.burner.BlazeBurnerBlock.HEAT_LEVEL,com.simibubi.create.content.processing.burner.BlazeBurnerBlock.HeatLevel.SMOULDERING);
         level.setBlock(anchor.above(),burner,3);level.setBlock(anchor.above().north(),value(block("create:controls"),"facing","south"),3);
         var cargoPos=anchor.above().south();level.setBlock(cargoPos,CivitasRegistries.CONTENT.get("cargo_crate").get().defaultBlockState(),3);
+        if(quantity>0){var keys=new String[16];Arrays.fill(keys,"");keys[0]="minecraft:iron_ingot";var counts=new long[16];counts[0]=quantity;((CargoBlockEntity)level.getBlockEntity(cargoPos)).restoreMounted(keys,counts);}
         level.setBlock(cargoPos.east(),value(block("create:portable_storage_interface"),"facing","east"),3);
         var glue=new com.simibubi.create.content.contraptions.glue.SuperGlueEntity(level,new AABB(anchor.north()).expandTowards(1,1,2));level.addFreshEntity(glue);
         var contraption=new CarriageContraption(Direction.SOUTH);if(!contraption.assemble(level,anchor))throw new AssertionError("Physical carriage assembly failed");
@@ -58,6 +59,10 @@ public final class RailwayRouteChecks {
         var bogey=new CarriageBogey(bogeyBlock,false,new CompoundTag(),new TravellingPoint(first,last,edge,position+1,false),new TravellingPoint(first,last,edge,position-1,false));var carriage=new Carriage(bogey,null,0);
         var train=new Train(UUID.randomUUID(),UUID.randomUUID(),graph,List.of(carriage),List.of(),false,number);Create.RAILWAYS.addTrain(train);carriage.setContraption(level,contraption);contraption.removeBlocksFromWorld(level,BlockPos.ZERO);glue.discard();carriage.updateConductors();
         if(!contraption.blockConductors.getFirst())throw new AssertionError("Assembled blaze conductor or controls missing: "+contraption.blockConductors);
+        return train;
+    }
+    private static Train assemble(ServerLevel level,int x,int number)throws Exception{
+        var train=assembleAt(level,new BlockPos(x,-59,20),number,0);
         var destination=(StationBlockEntity)level.getBlockEntity(new BlockPos(x+2,-60,2160));if(destination.getStation()==null)throw new AssertionError("Destination station absent from graph");destination.getStation().name="CI_DEST_"+number;Create.RAILWAYS.markTracksDirty();
         return train;
     }

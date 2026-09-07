@@ -35,6 +35,7 @@ neoForge {
             if (providers.gradleProperty('ciStagingCombined').isPresent()) systemProperty 'civitas.stagingCombined', 'true'
             if (providers.gradleProperty('ciRailwayRestart').isPresent()) systemProperty 'civitas.railwayRestart', providers.gradleProperty('ciRailwayRestart').get()
             if (providers.gradleProperty('ciRailwayRoute').isPresent()) systemProperty 'civitas.railwayRoute', providers.gradleProperty('ciRailwayRoute').get()
+            if (providers.gradleProperty('ciSharedRailway').isPresent()) systemProperty 'civitas.sharedRailway', providers.gradleProperty('ciSharedRailway').get()
             programArgument '--nogui'
         }
     }
@@ -67,6 +68,12 @@ tasks.named('test') {
     failOnNoDiscoveredTests = false // Assertions run in the dependency-free domainTest harness.
 }
 tasks.named('check') { dependsOn 'domainTest' }
+tasks.register('ecologyBalanceReport', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.civitasindustria.test.EcologyBalanceReport'
+    standardInput = new ByteArrayInputStream(new byte[0])
+}
 
 // Optional runtime integration; compile against the exact lockfile artifact downloaded on the build server.
 dependencies {

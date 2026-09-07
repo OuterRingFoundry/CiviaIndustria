@@ -12,6 +12,20 @@ public final class DomainTests {
         check(CellPos.fromBlock(-1,-64).equals(new CellPos(-1,-1)),"Negative blocks");
         check(CellPos.fromBlock(-65,63).equals(new CellPos(-2,0)),"Cell boundaries");
         check(CellPos.fromChunk(-1,-5).equals(new CellPos(-1,-2)),"Negative chunks");
+        boolean coherent=true;int mineralCount=0,changedSeed=0,changedOre=0;
+        for(int x=-50;x<50;x++)for(int z=-50;z<50;z++){
+            boolean selected=MineralRegions.contains(1234,x*256,z*256,16,25,101);
+            if(selected)mineralCount++;
+            coherent &= selected==MineralRegions.contains(1234,x*256+255,z*256+255,16,25,101);
+            if(selected!=MineralRegions.contains(5678,x*256,z*256,16,25,101))changedSeed++;
+            if(selected!=MineralRegions.contains(1234,x*256,z*256,16,25,202))changedOre++;
+        }
+        check(coherent,"Mineral regions split within a region, including negative coordinates");
+        check(mineralCount>2300&&mineralCount<2700,"Mineral region coverage outside 23–27 percent over 10000 regions");
+        check(changedSeed>3000&&changedOre>3000,"Mineral regions must depend on world seed and ore salt");
+        check(!MineralRegions.contains(Long.MIN_VALUE,Integer.MIN_VALUE,Integer.MAX_VALUE,256,0,0)&&MineralRegions.contains(Long.MAX_VALUE,Integer.MAX_VALUE,Integer.MIN_VALUE,1,100,0),"Mineral extreme coordinates/coverage");
+        rejects(()->MineralRegions.contains(0,0,0,0,25,0));
+        rejects(()->MineralRegions.contains(0,0,0,16,101,0));
         Set<CellPos> square=new HashSet<>();for(int x=0;x<4;x++)for(int z=0;z<4;z++)square.add(new CellPos(x,z));
         var graph=new CivilizationGraph();check(graph.rebuild(square).getFirst().perimeter()==16,"Square perimeter");
         check(graph.rebuild(square).getFirst().boundaryDepth().get(new CellPos(1,1))==1,"Interior boundary depth");

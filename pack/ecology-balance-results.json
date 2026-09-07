@@ -1,0 +1,206 @@
+{
+  "scope": "Pure domain model; one hour of uninterrupted production, then twelve hours without emissions. Continuous rain, level connected surface water, fixed 17x17 active cells; transport outside the active window remains stored and is included in total mass. No pollutant or injury reset.",
+  "environmentIntervalTicks": 200,
+  "settings": "SimulationSettings[airDecay=0.01, diffusion=0.12, wetDeposition=0.08, waterRunoff=0.08, soilRecovery=0.001, ecologyRecovery=0.002, injury=0.025, windBias=0.3, windX=1, windZ=0, epsilon=1.0E-5, maxCells=512]",
+  "factory": {
+    "samples": [
+      {
+        "minutesAfterShutdown": 0,
+        "totalStoredPollutantMass": 653.7438311232718,
+        "aquaticHealth": 0.7619183524202019,
+        "vegetationHealth": 0.10644962538322454,
+        "aqi": 10.67221040801109,
+        "waterQuality": 75.73782464485052,
+        "soilToxicity": 154.77231937636293,
+        "soilAcidity": 30.954460880011034,
+        "biodiversity": 0.19839896973488166
+      },
+      {
+        "minutesAfterShutdown": 10,
+        "totalStoredPollutantMass": 613.6605606118576,
+        "aquaticHealth": 0.7697514587345768,
+        "vegetationHealth": 0.08640213588226558,
+        "aqi": 0.002182709322539229,
+        "waterQuality": 87.82012154588112,
+        "soilToxicity": 148.1751938039239,
+        "soilAcidity": 29.63503536281231,
+        "biodiversity": 0.11165279710469814
+      },
+      {
+        "minutesAfterShutdown": 30,
+        "totalStoredPollutantMass": 545.8107534288805,
+        "aquaticHealth": 0.8007275949079043,
+        "vegetationHealth": 0.10311682820062236,
+        "aqi": 0.0,
+        "waterQuality": 93.65737037708487,
+        "soilToxicity": 131.4124160947771,
+        "soilAcidity": 26.282476064261168,
+        "biodiversity": 0.09435280245638107
+      },
+      {
+        "minutesAfterShutdown": 60,
+        "totalStoredPollutantMass": 461.1764461727928,
+        "aquaticHealth": 0.8472712997676711,
+        "vegetationHealth": 0.1574521859873947,
+        "aqi": 0.0,
+        "waterQuality": 96.59746620573134,
+        "soilToxicity": 109.75499158895076,
+        "soilAcidity": 21.950992342225348,
+        "biodiversity": 0.10006282835837188
+      },
+      {
+        "minutesAfterShutdown": 120,
+        "totalStoredPollutantMass": 341.83106967867894,
+        "aquaticHealth": 0.9151286789409523,
+        "vegetationHealth": 0.31236545884621164,
+        "aqi": 0.0,
+        "waterQuality": 98.65033296047969,
+        "soilToxicity": 76.55966812342123,
+        "soilAcidity": 15.311929456424993,
+        "biodiversity": 0.1415561256648464
+      },
+      {
+        "minutesAfterShutdown": 240,
+        "totalStoredPollutantMass": 219.46135633417774,
+        "aquaticHealth": 0.9757301668942328,
+        "vegetationHealth": 0.6078743808217821,
+        "aqi": 0.0,
+        "waterQuality": 99.73206973741894,
+        "soilToxicity": 37.25216902908725,
+        "soilAcidity": 7.450431777638624,
+        "biodiversity": 0.31818757094922134
+      },
+      {
+        "minutesAfterShutdown": 480,
+        "totalStoredPollutantMass": 142.81674813931926,
+        "aquaticHealth": 0.9982696928936202,
+        "vegetationHealth": 0.8973171712669737,
+        "aqi": 0.0,
+        "waterQuality": 99.98897350970752,
+        "soilToxicity": 8.81971619213774,
+        "soilAcidity": 1.7639427582417746,
+        "biodiversity": 0.6961483783420213
+      },
+      {
+        "minutesAfterShutdown": 720,
+        "totalStoredPollutantMass": 125.84710078947117,
+        "aquaticHealth": 0.9998879431112989,
+        "vegetationHealth": 0.9751380934192244,
+        "aqi": 0.0,
+        "waterQuality": 99.9996223780087,
+        "soilToxicity": 2.0881305904394107,
+        "soilAcidity": 0.4176260044004834,
+        "biodiversity": 0.8925640674878639
+      }
+    ],
+    "minutesAfterShutdownUntilAllHealthAtLeast95Percent": -1,
+    "peakDegradation": 0.6786839146781309,
+    "particulatePer200Ticks": 2.0,
+    "sulfurPer200Ticks": 0.4
+  },
+  "sixteenFurnaces": {
+    "samples": [
+      {
+        "minutesAfterShutdown": 0,
+        "totalStoredPollutantMass": 2179.647492566494,
+        "aquaticHealth": 0.48991675480291413,
+        "vegetationHealth": 0.00036147056845090014,
+        "aqi": 35.57403559340362,
+        "waterQuality": 48.3600807824258,
+        "soilToxicity": 495.2714244541781,
+        "soilAcidity": 123.81785538461783,
+        "biodiversity": 0.003112770958018609
+      },
+      {
+        "minutesAfterShutdown": 10,
+        "totalStoredPollutantMass": 2046.0665300779847,
+        "aquaticHealth": 0.5023845413594915,
+        "vegetationHealth": 7.913158851368959e-05,
+        "aqi": 0.007276347393876902,
+        "waterQuality": 68.38484675295214,
+        "soilToxicity": 474.1606229333564,
+        "soilAcidity": 118.54015493344293,
+        "biodiversity": 0.0008001318675832318
+      },
+      {
+        "minutesAfterShutdown": 30,
+        "totalStoredPollutantMass": 1819.8684217374978,
+        "aquaticHealth": 0.5583042089123764,
+        "vegetationHealth": 0.0,
+        "aqi": 0.0,
+        "waterQuality": 81.5828250251756,
+        "soilToxicity": 420.51974617478214,
+        "soilAcidity": 105.1299317123806,
+        "biodiversity": 4.602501903364881e-05
+      },
+      {
+        "minutesAfterShutdown": 60,
+        "totalStoredPollutantMass": 1537.7049908483245,
+        "aquaticHealth": 0.6506222362417902,
+        "vegetationHealth": 0.0,
+        "aqi": 0.0,
+        "waterQuality": 89.49184209409403,
+        "soilToxicity": 351.21598533820156,
+        "soilAcidity": 87.80399229946043,
+        "biodiversity": 0.0
+      },
+      {
+        "minutesAfterShutdown": 120,
+        "totalStoredPollutantMass": 1139.816225188883,
+        "aquaticHealth": 0.7965055099932151,
+        "vegetationHealth": 0.0,
+        "aqi": 0.0,
+        "waterQuality": 95.63813151043003,
+        "soilToxicity": 244.99094654242603,
+        "soilAcidity": 61.24773382092671,
+        "biodiversity": 0.0
+      },
+      {
+        "minutesAfterShutdown": 240,
+        "totalStoredPollutantMass": 731.8391155915322,
+        "aquaticHealth": 0.938103873172907,
+        "vegetationHealth": 0.0652195880318419,
+        "aqi": 0.0,
+        "waterQuality": 99.11237430074006,
+        "soilToxicity": 119.20694505208493,
+        "soilAcidity": 29.801734893463106,
+        "biodiversity": 0.0064363734888245455
+      },
+      {
+        "minutesAfterShutdown": 480,
+        "totalStoredPollutantMass": 476.3039648076822,
+        "aquaticHealth": 0.9952983658216749,
+        "vegetationHealth": 0.6785629537510186,
+        "aqi": 0.0,
+        "waterQuality": 99.96325141091869,
+        "soilToxicity": 28.223092799514998,
+        "soilAcidity": 7.055772875626132,
+        "biodiversity": 0.3571799761685644
+      },
+      {
+        "minutesAfterShutdown": 720,
+        "totalStoredPollutantMass": 419.7632250437062,
+        "aquaticHealth": 0.9996858676778456,
+        "vegetationHealth": 0.9182933999899187,
+        "aqi": 0.0,
+        "waterQuality": 99.9984894544404,
+        "soilToxicity": 6.682018122534744,
+        "soilAcidity": 1.670504453864571,
+        "biodiversity": 0.7332446177782072
+      }
+    ],
+    "minutesAfterShutdownUntilAllHealthAtLeast95Percent": -1,
+    "peakDegradation": 0.8357467607191105,
+    "particulatePer200Ticks": 6.4,
+    "sulfurPer200Ticks": 1.6
+  },
+  "supplyComparison": {
+    "itemsPer200Ticks": 16,
+    "furnaceRawLoad": 160,
+    "coalPer16Items": 2,
+    "furnaceBlockEntities": 16,
+    "factoryRawLoad": 40,
+    "factoryBlockEntities": 1,
+    "note": "Equal theoretical iron-smelting throughput and fuel efficiency from current recipes/profiles; excludes transport, capital, IE power networks and player downtime. This does not measure CPU cost."
+  }
+}

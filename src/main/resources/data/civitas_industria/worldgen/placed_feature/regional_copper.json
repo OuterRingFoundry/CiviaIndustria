@@ -2,8 +2,14 @@
   "feature": "civitas_industria:regional_copper",
   "placement": [
     {
+      "type": "civitas_industria:mineral_region",
+      "region_chunks": 16,
+      "active_percent": 25,
+      "salt": 202
+    },
+    {
       "type": "minecraft:rarity_filter",
-      "chance": 24
+      "chance": 6
     },
     {
       "type": "minecraft:in_square"

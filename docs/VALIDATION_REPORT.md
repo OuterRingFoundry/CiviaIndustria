@@ -35,14 +35,14 @@ completed topology still scale with the changed network's size.
 
 ## Test record
 
-The mandatory build harness contains **51 domain checks**. The current GameTest suite
-contains **30 tests**. Optional-mod-specific methods explicitly skip their assertions
+The mandatory build harness contains **57 domain checks**. The current GameTest suite
+contains **33 tests**. Optional-mod-specific methods explicitly skip their assertions
 when the relevant mod is absent: a green Civitas-only row is not evidence that Create
 or IE ran there. `pack/integration-results.json` identifies each profile's actual jars.
 
 Server evidence is retained under `/data/.tmp/civitas-industria-phase0`:
 
-- `continuation-decor-matrix-r2.log`: current six-profile, 30-test regression run
+- `continuation-regions-heavy-matrix-r1.log`: current six-profile, 33-test regression run
   (core, Create, IE, KubeJS, industry, full-server). Individual logs are
   `run-matrix-*/matrix.log`.
 - `continuation-freight-live-before.log` reproduces a newly placed freight block
@@ -157,9 +157,10 @@ installed. Read OPERATIONS.md before preparing a separate staging environment.
 
 ## Remaining acceptance work
 
-1. Playtest shared-track signalling, contested station traffic and player mining/loading
-   in realistic terrain. The isolated two-train mine-stockpile → physical scheduled
-   railway → commissioned processing → warehouse route and process restarts now pass.
+1. Playtest junctions, mixed-direction traffic and player mining/loading in realistic
+   terrain. The two-train shared-line red-signal queue, contested station, restart and
+   release now pass, as does the mine-stockpile → physical railway → commissioned
+   processing → warehouse route. These bounded fixtures do not cover every railway layout.
 2. Validate authenticated remote clients, voice chat, multi-user claims, physical raid
    combat and return-warning behavior. This needs available authenticated clients and
    a working authentication/network path. No authenticated client session is available
@@ -170,7 +171,9 @@ installed. Read OPERATIONS.md before preparing a separate staging environment.
 4. Playtest resource/progression economics, regional ore generation, factory throughput
    and ecology recovery. Commissioning now governs the Civitas factory, Create crushing
    wheels and IE crusher/arc furnace/diesel generator. The formed powered IE crusher
-   is tested; powered arc/diesel production and balance still need coverage.
+   and powered arc/diesel production, foundation failure, BE reload and paid repair
+   are tested. A reproducible domain balance experiment measures twelve-hour recovery;
+   player economy and long-term enjoyment still need playtesting.
 5. Validate any additional third-party automation or portable-storage adapters before
    adding them. Mounted absolute int-sized `setStackInSlot` replacement is unsupported;
    insertion/extraction and the custom long-count serialization are the supported path.
@@ -247,3 +250,73 @@ is conserved. The 30 players are fake; no real client/voice packets are measured
 The current report records mean 7.52 ms, p95 11.28 ms, max 20.88 ms and 20.01 TPS.
 This is one server sample, not evidence of a guaranteed performance improvement over
 previous runs. No representative GPU or authenticated multiplayer gate is marked passed.
+
+## Mineral regions, powered heavy industry and shared railway
+
+The current DEV distribution is **dev-schema3-r11**, SHA-256
+`9ae69f1e17b6c9afe765c860872db702ac2c67d6275855bade371bb4991bc7c8`
+(454,425 bytes for the custom JAR). World schema 3 and cargo envelope 2 are unchanged.
+`continuation-release-r11.log` passes all eleven assembly, pinned-runtime installation,
+standalone boot, fingerprint, full backup, restore and restored-boot stages.
+
+`continuation-region-balance-build-r2.log` passes the mandatory 57-check build and the
+new ecology experiment. `continuation-regions-heavy-matrix-r1.log` and the six
+`run-matrix-*/matrix.log` files pass all 33 GameTests in every profile. Optional-specific
+assertions still skip when their mod is absent. `pack/integration-results.json` records
+the exact selected artifacts. Content validation still passes 170 JSON resources and
+19 original texture assets. Python pack/instance/backup/process fixtures also pass.
+
+The new powered IE tests form actual arc-furnace and diesel-generator templates with
+native structure formation, then use real item/energy/fluid ports. Before calibration,
+forty native helper calls leave processing state unchanged. After natural calibration,
+the arc furnace consumes energy and wears electrodes; the diesel generator consumes
+biodiesel and charges a real HV capacitor. Removing a foundation block suspends activity
+within the configured check interval. Both fixtures round-trip the owning BE while
+suspended, retain processing state for forty further ticks, pay for repair and resume.
+The arc output is exactly two ingots and one slag from one ore, with 102,400 energy
+consumed. These are fixture supplies and BE serialization checks, not player-built
+power networks or a process restart of IE machinery. Earlier underpowered fixture
+failures remain in `continuation-heavy-powered-r{1,2}-detail.log`; IE's 64,000-energy
+buffer needs replenishment during this recipe. `continuation-heavy-powered-r3.log`
+passes after accounting for energy actually accepted by the port.
+
+`continuation-shared-railway-r2.log` and `run-shared-railway-r2/{write,read,verify}.log`
+pass two actual scheduled trains on one physical track, three native signals and a
+contested station. The follower remains stopped at z=320.5 for sixty ticks behind red,
+survives a process restart and remains queued forty more ticks. The leading train then
+receives an exit schedule; the follower resumes to the station at z=400.5. A third
+process verifies final station positions and exact cargo: 5,000,000,000 and
+5,000,000,001 items. Every observed movement tick checks train separation, derailment
+and conservation. `pack/shared-railway-results.json` records the observations. No signal
+state, speed or occupancy is forced by the fixture. The earlier r1 run was stopped and
+retained after exposing the test's incorrect integer-coordinate stopping bound.
+
+Bonus ores now use a registered, bounded, stateless mineral-region placement filter.
+The seed and ore salt select 256×256-block regions with roughly 25% coverage. Increased
+attempt frequency within eligible regions preserves the previous approximate average
+bonus supply; ordinary vanilla ores remain. The registry/codec/placement GameTest and
+10,000-region domain sample cover seed independence, negative boundaries and invalid
+configuration. Only new terrain changes; no retrogen or per-tick terrain scan is added.
+See [BALANCE.md](BALANCE.md) for the supply assumptions and remaining terrain playtests.
+
+`pack/ecology-balance-results.json` records one hour of emissions followed by twelve
+hours with no emissions in a fixed rainy active area. No pollution or injury is reset.
+The factory's central vegetation reaches 97.51% but biodiversity remains at 89.26%;
+sixteen equivalent furnaces reach 91.83% and 73.32%. Neither reaches all-health 95% in
+the window. Transport leaving the active area stays stored and total mass is checked
+for non-increase after shutdown. This is a deterministic domain experiment, not a
+server timing result or a completed player-economy gate. No production rates changed.
+
+`continuation-client-regions-r1.log` additionally passes actual full-client world entry,
+all block states and six moving models, clean/polluted/disabled/recovered tint checks,
+screenshots and clean shutdown. The final screenshot was visually inspected: the industrial
+materials and inventory icons render without missing textures. This rerun includes the
+new worldgen registry. Rendering remains Xvfb/Mesa at 1280×720; authenticated clients, voice and representative GPU frame
+rates are still not established.
+
+`continuation-physical-route-r11.log` and `run-physical-route-r11/{write,read,verify}.log`
+pass the full two-train, 2,140-block mine-stockpile → physical rail → calibrated factory
+→ warehouse route on this exact source build. The shared carriage-assembly helper is
+therefore covered by both route fixtures. In-transit and final restarts preserve all
+stock; final warehouse totals are 64 and 128 iron ingots. The updated
+`pack/physical-route-results.json` identifies the run.

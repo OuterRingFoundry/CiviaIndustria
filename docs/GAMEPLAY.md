@@ -15,6 +15,11 @@ reverses the missed-payment counter. Defense nodes can also receive iron; each f
 node reduces local threat pressure and consumes upkeep while players are present.
 
 `/ci civilization`, `/ci load`, `/ci env` and `/ci perf` expose regional diagnostics.
+
+Ordinary vanilla ores remain available. Additional rich iron/copper/gold deposits cluster
+in seed-dependent 256×256-block mineral regions in newly generated Overworld terrain.
+Each mineral has independent regions; a promising iron district need not also be rich
+in gold. See [resource and ecology balance](BALANCE.md) for rates and recovery measurements.
 Use `/ci parcel create <name> <from> <to>` for a UUID-owned 3D claim, then the parcel
 trust and flag commands. Player placement, breaking, interaction and containers are
 checked; explosions cannot break claimed blocks. Pistons may move blocks within one

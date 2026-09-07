@@ -29,5 +29,7 @@ public final class CommissioningGameTests {
     }
     @GameTest(template="empty",timeoutTicks=300) public static void nativeCreateGate(GameTestHelper h){if(net.neoforged.fml.ModList.get().isLoaded("create"))com.civitasindustria.compat.create.CommissioningChecks.run(h);else h.succeed();}
     @GameTest(template="empty",batch="powered_ie",timeoutTicks=600) public static void poweredIEFactory(GameTestHelper h){if(net.neoforged.fml.ModList.get().isLoaded("immersiveengineering"))com.civitasindustria.compat.immersiveengineering.PoweredCrusherChecks.run(h);else h.succeed();}
+    @GameTest(template="empty",batch="powered_ie_arc",timeoutTicks=950) public static void poweredIEArc(GameTestHelper h){if(net.neoforged.fml.ModList.get().isLoaded("immersiveengineering"))com.civitasindustria.compat.immersiveengineering.PoweredHeavyMachineChecks.run(h,false);else h.succeed();}
+    @GameTest(template="empty",batch="powered_ie_diesel",timeoutTicks=950) public static void poweredIEDiesel(GameTestHelper h){if(net.neoforged.fml.ModList.get().isLoaded("immersiveengineering"))com.civitasindustria.compat.immersiveengineering.PoweredHeavyMachineChecks.run(h,true);else h.succeed();}
     @GameTest(template="empty") public static void nativeIEGate(GameTestHelper h){if(net.neoforged.fml.ModList.get().isLoaded("immersiveengineering"))com.civitasindustria.compat.immersiveengineering.CommissioningChecks.run(h);else h.succeed();}
 }
