@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+"""Regression: launcher exit zero and a success fragment cannot certify a suite."""
+import unittest
+from pathlib import Path
+from gametest_results import evaluate, required_test_count
+
+
+class GameTestResultsTests(unittest.TestCase):
+    good = 'All 33 required tests passed :)\nAll dimensions are saved\nBUILD SUCCESSFUL\n'
+
+    def test_complete_suite(self):
+        self.assertTrue(evaluate(self.good, 0, 33)['passed'])
+        self.assertEqual(required_test_count(Path(__file__).resolve().parents[1] /
+                         'src/main/java/com/civitasindustria/test'), 33)
+
+    def test_empty_partial_and_duplicate_summaries(self):
+        for text in (self.good.replace('33', '0'), self.good.replace('33', '32'),
+                     self.good + 'All 33 required tests passed', 'required tests passed\nBUILD SUCCESSFUL'):
+            with self.subTest(text=text):
+                self.assertFalse(evaluate(text, 0, 33)['passed'])
+        self.assertFalse(evaluate(self.good.replace('33', '0'), 0, 0)['passed'])
+
+    def test_crash_exit_and_unsaved_world(self):
+        for text, code in ((self.good, 1), (self.good.replace('All dimensions are saved', ''), 0),
+                           (self.good + 'Encountered an unexpected exception', 0),
+                           (self.good.replace('BUILD SUCCESSFUL', 'BUILD FAILED'), 0)):
+            with self.subTest(text=text, code=code):
+                self.assertFalse(evaluate(text, code, 33)['passed'])
+
+
+class StagingResultsTests(unittest.TestCase):
+    def test_recorded_combined_workload_and_adversaries(self):
+        import json
+        from staging_results import validate
+        report = json.loads((Path(__file__).resolve().parents[1] /
+                             'pack/combined-staging-results.json').read_text())
+        self.assertTrue(validate(report, True)['passed'])
+        for key, value in [('p95_ms', 45), ('mean_ms', 51), ('observed_tps', 15),
+                           ('p95_ms', float('nan')), ('max_ms', float('inf')),
+                           ('fake_players', 0), ('cargo_conserved', False),
+                           ('minimum_train_travel', 0), ('warehouses_receiving', 19),
+                           ('raid_active_ticks', 0), ('peak_raiders', 81)]:
+            with self.subTest(key=key, value=value):
+                with self.assertRaises(ValueError):
+                    validate({**report, key: value}, True)
+
+
+if __name__ == '__main__':
+    unittest.main()

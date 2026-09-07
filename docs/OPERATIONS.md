@@ -61,5 +61,41 @@ extraction are verified. This is not a substitute for scheduled physical railway
 The Java hook is disabled unless the explicit `ciRailwayRestart` Gradle property is set.
 
 `scripts/run-staging.py --output /new/staging-test` runs the scoped 10,000-decoration,
-1,000-furnace, 500-cell workload. It deliberately excludes clients, moving trains and
-live raids. Both tools refuse existing outputs and leave all logs/worlds for inspection.
+1,000-furnace, 500-cell workload. Without `--combined` it excludes clients, moving trains and live raids. With
+`--combined` it adds graph-travelling trains, fake players, warehouse traffic and raids;
+real clients and physical railway schedules remain outside that fixture. Both tools refuse existing outputs and leave all logs/worlds for inspection.
+
+
+## Reproduce the automated DEV acceptance suite
+
+Use Java 21 and Python 3.12+ (the designated server has Python 3.13 at
+`/home/frederick/anaconda3/bin/python`). The exact artifact cache must be beside the
+source checkout as `../civitas-industria-artifacts` for all existing launchers.
+
+```sh
+python scripts/validate-dev.py \
+  --artifacts /data/.tmp/civitas-industria-artifacts \
+  --installer /data/.tmp/civitas-industria-runtime/neoforge-21.1.249-installer.jar \
+  --runtime-cache /data/.tmp/civitas-industria-builds/dev-schema3-r11/server \
+  --output /data/.tmp/civitas-industria-builds/NEW-DEV-VALIDATION
+```
+
+The destination must not exist. Run only against this disposable development checkout:
+smoke save/refusal checks use its reserved `run/smoke-world`. The command verifies
+artifacts and tooling, builds, runs all six GameTest profiles in fresh directories,
+checks three-dimension saves/refusal, runs three railway restart fixtures and combined
+staging, then assembles server/client packs and validates standalone boot/backup/restore.
+`dev-validation.json` records each stage, its log, the source digest and built JAR hash.
+Failures remain recorded; an automated pass leaves human acceptance gates explicitly open.
+
+`python scripts/check-tooling.py` runs the regression suite. Standard unittest file
+discovery skips the repository's hyphenated test filenames, so use this explicit runner.
+The matrix requires exactly the number of required `@GameTest` methods in the current
+source, successful Gradle completion and confirmed world saves. Optional adapter
+assertions still skip in profiles without their mod.
+
+Railway/staging scripts accept `--fixture /path/to/run-matrix-full-server` to consume a
+fresh matrix world. `integration-matrix.py --output /new/path` retains independent
+results without overwriting earlier matrix evidence. GitHub CI now downloads locked
+compile dependencies and exercises tooling, domain, six-profile and save/refusal gates.
+Rendering, full distribution tests and large fixtures run on the designated server.

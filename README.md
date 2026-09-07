@@ -13,7 +13,8 @@ The exact Create, Immersive Engineering, KubeJS and supporting mod artifacts are
 - [Validation report](docs/VALIDATION_REPORT.md): tested behavior, evidence and remaining gates.
 - [Gameplay](docs/GAMEPLAY.md): acquisition, controls and supported interactions.
 - [Resource and ecology balance](docs/BALANCE.md): mineral regions, factory economics and measured recovery.
-- [Operations](docs/OPERATIONS.md): exact pack assembly, verification, backups and restore.
+- [Operations](docs/OPERATIONS.md): exact pack assembly, verification, backups, restore and the
+  `scripts/validate-dev.py` automated acceptance command.
 - [Implementation plan](docs/IMPLEMENTATION_PLAN.md) and [requirements](docs/REQUIREMENTS.md): full scope.
 - [Porting notes](docs/PORTING.md): optional adapters and Mixin limitations.
 

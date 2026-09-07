@@ -6,9 +6,9 @@ from pathlib import Path
 from fixture_config import isolate_voice
 ROOT=Path(__file__).resolve().parents[1]
 def main():
- p=argparse.ArgumentParser();p.add_argument('--output',required=True,type=Path);a=p.parse_args();a.output=a.output.resolve()
+ p=argparse.ArgumentParser();p.add_argument('--output',required=True,type=Path);p.add_argument('--fixture',type=Path,default=ROOT/'run-matrix-full-server');a=p.parse_args();a.output=a.output.resolve()
  if a.output.exists():raise ValueError('Railway test directory must be new')
- fixture=ROOT/'run-matrix-full-server'
+ fixture=a.fixture.resolve()
  a.output.mkdir(parents=True);shutil.copytree(fixture/'world',a.output/'world');shutil.copytree(fixture/'mods',a.output/'mods');shutil.copytree(ROOT/'pack/overrides',a.output,dirs_exist_ok=True)
  isolate_voice(a.output,24461)
  (a.output/'eula.txt').write_text('eula=true\n');(a.output/'server.properties').write_text('server-ip=127.0.0.1\nserver-port=25591\nlevel-name=world\nonline-mode=true\nview-distance=4\nsimulation-distance=4\nmax-players=1\n')

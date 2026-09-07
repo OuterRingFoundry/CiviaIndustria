@@ -5,6 +5,13 @@ Minecraft 1.21.1 · NeoForge 21.1.249 · Java 21 · Python 3.11+ for pack toolin
 
 ## Latest completed work
 
+- Repaired the stale Phase 0 CI workflow: pinned compile dependencies, explicit Python
+  regression runner, mandatory domain tests, six GameTest profiles and save/refusal tests.
+- Added a reproducible automated DEV suite with separate evidence directories and strict
+  test-count, clean-save, workload, cargo-conservation and performance checks.
+- Revalidated the modpack through all server/package stages and full-client rendering.
+  The client remains an Xvfb/Mesa development fixture, not authenticated multiplayer.
+
 - Rich bonus ores now cluster in deterministic mineral regions. Vanilla ores remain;
   the approximate average bonus supply is preserved. Existing chunks are unchanged.
 - Real formed IE arc-furnace and diesel-generator tests verify native ports, energy or
@@ -20,7 +27,7 @@ Minecraft 1.21.1 · NeoForge 21.1.249 · Java 21 · Python 3.11+ for pack toolin
 
 ## Verified checkpoint
 
-- **57 domain checks; 33 GameTests across all six mod profiles.**
+- **57 domain checks; 33 GameTests across all six mod profiles; 13 Python regression tests.**
 - Actual full-client startup, world rendering, all block/moving models, ecological tint
   response and clean shutdown with Embeddium. Xvfb/Mesa software rendering at 1280×720.
 - **All 11 distribution, standalone boot, backup, restore and restored-boot stages.**
@@ -29,15 +36,17 @@ Minecraft 1.21.1 · NeoForge 21.1.249 · Java 21 · Python 3.11+ for pack toolin
   route, including in-transit and final restarts, revalidated on this build.
 - Original content validation and Python pack/instance/backup/process tests pass.
 
-Current DEV pack: `/data/.tmp/civitas-industria-builds/dev-schema3-r11`.
+Current tested DEV pack: `/data/.tmp/civitas-industria-builds/dev-acceptance-r13/distribution`.
+Full suite evidence: `pack/dev-validation.json`; client evidence: `pack/client-validation.json`.
 Custom JAR SHA-256: `9ae69f1e17b6c9afe765c860872db702ac2c67d6275855bade371bb4991bc7c8`.
 World schema remains 3; compact cargo envelope remains 2.
 
-The prior combined workload (`continuation-staging-combined-r5.log`) passed with
-10,000 decorations, 1,000 furnaces (200 active), 20 moving trains, 20 receiving
-warehouses, 500 rain cells, three networks, raids and 30 fake players: **20.01 TPS,
-p95 11.28 ms, mean 7.52 ms, max 20.88 ms**. It is a prior server sample using graph
-trains and simulated players; shared physical signals are tested separately above.
+The current combined workload passed with 10,000 decorations, 1,000 furnaces (200
+active), 20 moving trains, 20 receiving warehouses, 500 rain cells, three networks,
+raids and 30 fake players: **20.02 TPS, p95 10.43 ms, mean 9.07 ms, max 26.02 ms**.
+All cargo was conserved and warehouses received 177,920 items. Graph trains and
+simulated players establish a scoped server workload; shared physical signals are
+covered separately. Real client packets and GPU performance remain open.
 
 ## Remaining acceptance work
 

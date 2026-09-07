@@ -1,6 +1,7 @@
 # Full remaining implementation plan
 
-This plan is a work queue, not a completion report. Read HANDOFF.md for the exact checkpoint.
+This plan preserves the work queue, not a completion report. Read VALIDATION_REPORT.md
+and STATUS.md for the current checkpoint; HANDOFF.md is historical.
 The original 80-section design remains authoritative in REQUIREMENTS.md. The user's later
 authorization removes the requirement to pause for review after each phase.
 

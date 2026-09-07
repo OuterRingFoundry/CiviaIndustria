@@ -320,3 +320,60 @@ pass the full two-train, 2,140-block mine-stockpile → physical rail → calibr
 therefore covered by both route fixtures. In-transit and final restarts preserve all
 stock; final warehouse totals are 64 and 128 iron ingots. The updated
 `pack/physical-route-results.json` identifies the run.
+
+
+## Reproducible acceptance continuation (2026-09-07 UTC)
+
+The current tested distribution is
+`/data/.tmp/civitas-industria-builds/dev-acceptance-r13/distribution`.
+Its `server` and `client` directories contain the assembled packs; `validated-server`,
+`restored` and `restored-boot` retain the standalone/restore fixtures. The custom JAR
+remains **454,425 bytes**, SHA-256
+`9ae69f1e17b6c9afe765c860872db702ac2c67d6275855bade371bb4991bc7c8`.
+No gameplay source or world/cargo schema changed in this continuation.
+
+1. Files: CI workflow; new `validate-dev.py`, explicit tooling runner and result-checking
+   modules/tests; matrix, railway/staging fixture arguments and save-refusal cleanup;
+   architecture, persistence, performance, operations/status documents and evidence JSON.
+2. Architecture: one sequential automated acceptance entry point, with fresh matrix and
+   fixture directories, per-stage logs/status, source fingerprint and built artifact hash.
+   CI now downloads pinned compile dependencies before attempting to compile Create/IE
+   adapters. The previous Phase 0-only workflow omitted those dependencies.
+3. Persistence: no new production state. World schema 3 and cargo envelope 2 are unchanged.
+   Save probes preserve original bytes and restore the disposable smoke world afterward.
+4. Update loops: no new game loops or tickers. Validation runs only through explicit commands.
+5. Network: no new game payloads or authentication changes. Mojang key/version requests
+   still intermittently time out; the tests do not interpret those as successful login.
+6. Tests: 13 Python regressions, including rejection of empty/partial/duplicated GameTest
+   summaries, nonzero exits, missing save confirmation, crashed runs, invalid timing data,
+   absent workload activity and failed cargo/performance gates. Standard unittest discovery
+   skips the hyphenated filenames; `check-tooling.py` explicitly loads each suite and
+   refuses empty suites. The failed initial discovery run is preserved under
+   `dev-acceptance-r12`; `dev-acceptance-r13` is the corrected completed suite.
+7. Performance: the combined synthetic server sample passed the enforced defaults
+   (p95 <45 ms, mean <=50 ms, observed TPS >=19.5). Measured 20.016 TPS, p95 10.426 ms,
+   mean 9.072 ms and max 26.023 ms. All 20 trains/warehouses were active, 177,920 items
+   arrived, cargo was conserved and peak raiders were six. This is one bounded sample
+   with fake players and graph trains, not production capacity or real packet evidence.
+8. Risks: authenticated multiplayer/voice/claims/combat, representative GPU rendering,
+   mixed-direction junction and realistic terrain/economy playtests remain open. No
+   staging/production promotion, pregeneration or scheduled operational backup was applied.
+   GitHub Actions execution is separate from the successful designated-server run.
+9. Results: `pack/dev-validation.json` records all 13 automated stages passed. The clean
+   build ran 57 domain checks; all six profiles passed exactly 33 required GameTests
+   and saved cleanly (optional assertions still skip without their mod). Three-dimension
+   save/restart and future/mismatched/truncated refusal passed. All three railway fixtures
+   passed write/read/verify phases. All 11 assembly/runtime/standalone/backup/restore stages
+   passed. KubeJS loaded the progression script with zero errors and warnings.
+
+`pack/client-validation.json` records the additional full-client test: verified client
+mods, actual world entry, all block/moving model checks, four tint/capture checkpoints
+and clean saved shutdown. It uses development classes with the pinned client mods under
+Xvfb/Mesa at 1280×720. The final screenshot was visually inspected: industrial materials and inventory icons
+render without missing textures. This does not establish authenticated client joins
+or representative 1080p/1440p GPU performance.
+The exact invocation and all four screenshots remain in the acceptance directory and
+`run-client-validation/screenshots/`, respectively.
+
+The complete planned production acceptance is still open. These results finish the
+available automated suite, not the human-client, gameplay-feedback or deployment gates.

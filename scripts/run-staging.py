@@ -4,11 +4,12 @@ import argparse,json,shutil,subprocess
 from pathlib import Path
 from fixture_config import isolate_voice
 from fixture_process import run
+from staging_results import validate
 ROOT=Path(__file__).resolve().parents[1]
 def main():
- p=argparse.ArgumentParser();p.add_argument('--output',required=True,type=Path);p.add_argument('--combined',action='store_true');a=p.parse_args();a.output=a.output.resolve()
+ p=argparse.ArgumentParser();p.add_argument('--output',required=True,type=Path);p.add_argument('--combined',action='store_true');p.add_argument('--max-p95-ms',type=float,default=45);p.add_argument('--min-tps',type=float,default=19.5);p.add_argument('--fixture',type=Path,default=ROOT/'run-matrix-full-server');a=p.parse_args();a.output=a.output.resolve()
  if a.output.exists():raise ValueError('Staging output must be new')
- fixture=ROOT/'run-matrix-full-server'
+ fixture=a.fixture.resolve()
  if not (fixture/'world/level.dat').exists():raise ValueError('Run the full-server GameTest profile first')
  a.output.mkdir(parents=True);shutil.copytree(fixture/'world',a.output/'world');shutil.copytree(fixture/'mods',a.output/'mods');shutil.copytree(ROOT/'pack/overrides',a.output,dirs_exist_ok=True)
  isolate_voice(a.output,24460)
@@ -19,6 +20,7 @@ def main():
  text=(a.output/'staging.log').read_text()
  if code or 'CIVITAS SYNTHETIC STAGING COMPLETE' not in text or 'All dimensions are saved' not in text:raise RuntimeError('Staging failed; retain '+str(a.output))
  report=json.loads((a.output/'staging-report.json').read_text())
- if report['measured_ticks']!=1200:raise ValueError('Incomplete staging measurement')
+ verdict=validate(report,a.combined,a.max_p95_ms,a.min_tps)
+ (a.output/'staging-validation.json').write_text(json.dumps(verdict,indent=2)+'\n')
  print(json.dumps(report,indent=2))
 if __name__=='__main__':main()
