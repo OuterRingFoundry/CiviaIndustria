@@ -1,0 +1,106 @@
+{
+  "textures": {
+    "maintenance_panel": "civitas_industria:block/maintenance_panel",
+    "steel_casing": "civitas_industria:block/steel_casing",
+    "brass_gear": "civitas_industria:block/brass_gear",
+    "particle": "civitas_industria:block/steel_casing"
+  },
+  "elements": [
+    {
+      "from": [
+        1,
+        0,
+        1
+      ],
+      "to": [
+        15,
+        2,
+        15
+      ],
+      "faces": {
+        "up": {
+          "texture": "#steel_casing"
+        },
+        "down": {
+          "texture": "#steel_casing"
+        },
+        "north": {
+          "texture": "#steel_casing"
+        },
+        "south": {
+          "texture": "#steel_casing"
+        },
+        "east": {
+          "texture": "#steel_casing"
+        },
+        "west": {
+          "texture": "#steel_casing"
+        }
+      }
+    },
+    {
+      "from": [
+        3,
+        2,
+        5
+      ],
+      "to": [
+        13,
+        15,
+        9
+      ],
+      "faces": {
+        "up": {
+          "texture": "#maintenance_panel"
+        },
+        "down": {
+          "texture": "#maintenance_panel"
+        },
+        "north": {
+          "texture": "#maintenance_panel"
+        },
+        "south": {
+          "texture": "#maintenance_panel"
+        },
+        "east": {
+          "texture": "#maintenance_panel"
+        },
+        "west": {
+          "texture": "#maintenance_panel"
+        }
+      }
+    },
+    {
+      "from": [
+        7,
+        7,
+        4
+      ],
+      "to": [
+        8,
+        13,
+        5
+      ],
+      "faces": {
+        "up": {
+          "texture": "#brass_gear"
+        },
+        "down": {
+          "texture": "#brass_gear"
+        },
+        "north": {
+          "texture": "#brass_gear"
+        },
+        "south": {
+          "texture": "#brass_gear"
+        },
+        "east": {
+          "texture": "#brass_gear"
+        },
+        "west": {
+          "texture": "#brass_gear"
+        }
+      }
+    }
+  ]
+}

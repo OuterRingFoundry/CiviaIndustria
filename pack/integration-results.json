@@ -2,14 +2,14 @@
   "core": {
     "passed": true,
     "exit": 0,
-    "seconds": 22.0,
+    "seconds": 20.4,
     "log": "/data/.tmp/civitas-industria-phase0/run-matrix-core/matrix.log",
     "artifacts": []
   },
   "create": {
     "passed": true,
     "exit": 0,
-    "seconds": 23.4,
+    "seconds": 20.5,
     "log": "/data/.tmp/civitas-industria-phase0/run-matrix-create/matrix.log",
     "artifacts": [
       "create-1.21.1-6.0.10.jar"
@@ -18,7 +18,7 @@
   "ie": {
     "passed": true,
     "exit": 0,
-    "seconds": 21.8,
+    "seconds": 17.1,
     "log": "/data/.tmp/civitas-industria-phase0/run-matrix-ie/matrix.log",
     "artifacts": [
       "ImmersiveEngineering-1.21.1-12.4.2-194.jar"
@@ -27,7 +27,7 @@
   "kubejs": {
     "passed": true,
     "exit": 0,
-    "seconds": 22.3,
+    "seconds": 18.0,
     "log": "/data/.tmp/civitas-industria-phase0/run-matrix-kubejs/matrix.log",
     "artifacts": [
       "architectury-13.0.11-neoforge.jar",
@@ -38,7 +38,7 @@
   "industry": {
     "passed": true,
     "exit": 0,
-    "seconds": 25.4,
+    "seconds": 23.1,
     "log": "/data/.tmp/civitas-industria-phase0/run-matrix-industry/matrix.log",
     "artifacts": [
       "ImmersiveEngineering-1.21.1-12.4.2-194.jar",
@@ -48,7 +48,7 @@
   "full-server": {
     "passed": true,
     "exit": 0,
-    "seconds": 22.7,
+    "seconds": 22.2,
     "log": "/data/.tmp/civitas-industria-phase0/run-matrix-full-server/matrix.log",
     "artifacts": [
       "Chunky-NeoForge-1.4.23.jar",

@@ -1,6 +1,8 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/orientable",
   "textures": {
-    "all": "minecraft:block/barrel_side"
+    "side": "civitas_industria:block/crate_side",
+    "front": "civitas_industria:block/crate_side",
+    "top": "civitas_industria:block/crate_top"
   }
 }

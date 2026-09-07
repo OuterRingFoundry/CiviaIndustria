@@ -1,0 +1,73 @@
+{
+  "textures": {
+    "tank_top": "civitas_industria:block/tank_top",
+    "brass_gear": "civitas_industria:block/brass_gear",
+    "particle": "civitas_industria:block/steel_casing"
+  },
+  "elements": [
+    {
+      "from": [
+        7,
+        4,
+        7
+      ],
+      "to": [
+        9,
+        11,
+        9
+      ],
+      "faces": {
+        "up": {
+          "texture": "#brass_gear"
+        },
+        "down": {
+          "texture": "#brass_gear"
+        },
+        "north": {
+          "texture": "#brass_gear"
+        },
+        "south": {
+          "texture": "#brass_gear"
+        },
+        "east": {
+          "texture": "#brass_gear"
+        },
+        "west": {
+          "texture": "#brass_gear"
+        }
+      }
+    },
+    {
+      "from": [
+        4,
+        10,
+        4
+      ],
+      "to": [
+        12,
+        12,
+        12
+      ],
+      "faces": {
+        "up": {
+          "texture": "#tank_top"
+        },
+        "down": {
+          "texture": "#tank_top"
+        },
+        "north": {
+          "texture": "#tank_top"
+        },
+        "south": {
+          "texture": "#tank_top"
+        },
+        "east": {
+          "texture": "#tank_top"
+        },
+        "west": {
+          "texture": "#tank_top"
+        }
+      }
+    }
+  ]
+}

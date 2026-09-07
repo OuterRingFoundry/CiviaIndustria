@@ -72,6 +72,7 @@ tasks.named('check') { dependsOn 'domainTest' }
 dependencies {
     def createArtifact = file(providers.gradleProperty('ciArtifactDirectory').getOrElse('../civitas-industria-artifacts') + '/create-1.21.1-6.0.10.jar')
     compileOnly files(createArtifact)
+    compileOnly files(providers.gradleProperty('ciArtifactDirectory').getOrElse('../civitas-industria-artifacts') + '/ImmersiveEngineering-1.21.1-12.4.2-194.jar')
     // Public Create test APIs inherit types from these exact bundled libraries.
     compileOnly files(zipTree(createArtifact).matching { include 'META-INF/jarjar/*.jar' })
 }

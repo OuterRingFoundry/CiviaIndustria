@@ -1,7 +1,20 @@
 {
   "variants": {
-    "": {
-      "model": "civitas_industria:block/decorative_piston"
+    "facing=north": {
+      "model": "civitas_industria:block/decorative_piston",
+      "y": 0
+    },
+    "facing=east": {
+      "model": "civitas_industria:block/decorative_piston",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "civitas_industria:block/decorative_piston",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "civitas_industria:block/decorative_piston",
+      "y": 270
     }
   }
 }

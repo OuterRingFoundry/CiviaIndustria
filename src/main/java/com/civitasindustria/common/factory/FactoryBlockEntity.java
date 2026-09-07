@@ -44,7 +44,7 @@ public final class FactoryBlockEntity extends BlockEntity implements FactoryCont
         var rule=requirements();if(level==null||rule==null)return false;
         var tag=net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.BLOCK,rule.foundationTag());
         for(int x=-rule.radius();x<=rule.radius();x++)for(int z=-rule.radius();z<=rule.radius();z++){
-            BlockPos p=worldPosition.offset(x,-1,z);if(!level.hasChunkAt(p)||!level.getBlockState(p).is(tag))return false;
+            BlockPos p=worldPosition.offset(x,-rule.depth(),z);if(!level.hasChunkAt(p)||!level.getBlockState(p).is(tag))return false;
         }
         return true;
     }

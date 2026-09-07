@@ -16,7 +16,7 @@ modified; all server/client fixtures and pack outputs are under the designated `
 | Commissioned factory | Data-driven foundation/calibration requirement, persisted commissioning state and production batches, load/foundation degradation | Actual factory BE GameTest across progress save/load and completion |
 | Threats | Online-survival-region warning/waves, hard entity reservations, targeted temporary disruption, shared defense credits, saved-raider refusal | Domain budget/warning tests; offline refusal, real entity reservations/removal and simulated last-player logout; authenticated multiplayer combat remains untested |
 | Parcels | UUID ownership/trust, 3D indexed bounds, player actions, explosions, piston boundaries and documented flags | Domain persistence and real player event checks; no universal claim over third-party scripted world mutation |
-| Decoration/client | Six simple original animated decorations with no server animation ticker; bounded nine-cell ecological payload, tint/haze, stale cache clearing and config toggles | Codec bounds tests; actual full client with Embeddium, world entry, clean/polluted screenshots and clean shutdown |
+| Decoration/client | Six original animated decorations with no server animation ticker; bounded nine-cell ecological payload, tint/haze, stale cache clearing and config toggles | Codec bounds tests; actual full client with Embeddium, world entry, clean/polluted screenshots and clean shutdown |
 | Pack and operations | Exact official artifacts/checksums, dependency/side verification, KubeJS progression, isolated assembly, pinned loader installation, immutable manifest, offline full-instance backup/restore | Six server profiles; adversarial Python fixtures; standalone shipped-JAR boots and restored-world boots |
 
 World schema is **3**; the independent cargo inventory envelope remains **2**.
@@ -36,13 +36,13 @@ completed topology still scale with the changed network's size.
 ## Test record
 
 The mandatory build harness contains **51 domain checks**. The current GameTest suite
-contains **23 tests**. Optional-mod-specific methods explicitly skip their assertions
+contains **30 tests**. Optional-mod-specific methods explicitly skip their assertions
 when the relevant mod is absent: a green Civitas-only row is not evidence that Create
 or IE ran there. `pack/integration-results.json` identifies each profile's actual jars.
 
 Server evidence is retained under `/data/.tmp/civitas-industria-phase0`:
 
-- `continuation-r7-matrix.log`: current six-profile regression run
+- `continuation-decor-matrix-r2.log`: current six-profile, 30-test regression run
   (core, Create, IE, KubeJS, industry, full-server). Individual logs are
   `run-matrix-*/matrix.log`.
 - `continuation-freight-live-before.log` reproduces a newly placed freight block
@@ -96,7 +96,8 @@ Server evidence is retained under `/data/.tmp/civitas-industria-phase0`:
   world lock refusal, restore/checksum handling, properties rewrite tolerance and
   changed/unexpected config rejection. `test-fixture-process.py` adds two checks for
   dedicated-daemon enforcement and detached-child cleanup after timeout.
-  `validate-content.py` parses 153 JSON resources.
+  `validate-content.py` parses 170 JSON resources and verifies the 19 original 32×32
+  textures and model references.
 
 The headless client uses Xvfb and Mesa software rendering at 1280×720. It establishes
 startup, actual world rendering and ecological response, not representative GPU frame
@@ -124,11 +125,11 @@ survival players, three added civilization networks, twenty native moving Create
 train authorities, all twenty warehouses receiving traffic, active physical raiders,
 the 10,000 decorations, 1,000 furnaces and 500 rain cells. It explicitly confirms 200
 lit furnaces at completion and exact stock conservation in all train and warehouse
-supplies. Over 1,200 measured ticks, mean was 9.68 ms, p95 12.70 ms, maximum 23.86 ms
-and observed TPS 20.02. Timing spans the highest-priority pre-tick through the
+supplies. Over 1,200 measured ticks, mean was 7.52 ms, p95 11.28 ms, maximum 20.88 ms
+and observed TPS 20.01. Timing spans the highest-priority pre-tick through the
 lowest-priority post-tick listener. Per-subsystem call timings are in the JSON.
 
-`continuation-staging-combined-r4.log` and `run-staging-combined-r4/staging.log`
+`continuation-staging-combined-r5.log` and `run-staging-combined-r5/staging.log`
 retain evidence. Train movement uses graph fixtures with controlled speed, with
 physical schedules tested separately above. Fake players do not send real client
 traffic; raids are explicitly triggered for the workload. Travel, cargo traffic and
@@ -167,9 +168,9 @@ installed. Read OPERATIONS.md before preparing a separate staging environment.
    rail schedules/signals and representative 1080p/1440p dense-city rendering. The
    mixed synthetic server workload now passes with explicit limits described above.
 4. Playtest resource/progression economics, regional ore generation, factory throughput
-   and ecology recovery. Commissioning currently governs the Civitas factory; it does
-   not independently gate every advanced Create or IE machine. IE adapter tests use
-   real master block entities/activity APIs, not complete powered multiblock factories.
+   and ecology recovery. Commissioning now governs the Civitas factory, Create crushing
+   wheels and IE crusher/arc furnace/diesel generator. The formed powered IE crusher
+   is tested; powered arc/diesel production and balance still need coverage.
 5. Validate any additional third-party automation or portable-storage adapters before
    adding them. Mounted absolute int-sized `setStackInSlot` replacement is unsupported;
    insertion/extraction and the custom long-count serialization are the supported path.
@@ -178,3 +179,71 @@ installed. Read OPERATIONS.md before preparing a separate staging environment.
 
 These are open requirements, not completed work or approval requests. User authorization
 to continue implementation remains in force. Preserve this distinction in future reports.
+
+## Original materials and advanced commissioning continuation
+
+Nineteen original 32×32 textures replace vanilla placeholders: sixteen block
+materials and three transparent inventory sprites. Factories have oriented amber/green
+panels; crates, tanks, warehouses and service infrastructure have distinct materials.
+All six decorations have different baked housings and locally animated parts. The
+pallet has a matching low model/selection shape. ART_DIRECTION.md and ART_PROMPTS.json
+record provenance, prompts and the deterministic model export script.
+
+Third-party commissioning is versioned and bound to dimension/position in the owning
+BE's persistent data. Unknown/corrupt payloads fail closed without replacement.
+Calibration consumes a kit; decommissioning grants no refund. Create movement refuses
+commissioned equipment. Crushing wheels use a 3×3 foundation three blocks below the
+center; IE uses its actual oriented multiblock footprint. Starter machines remain
+available to make kits. These are selective heavy-machine rules, not a claim that all
+third-party production is gated.
+
+`continuation-ie-powered-r2.log` passes 27 GameTests. The new tests cover paid progress,
+reload, moved/future payload refusal, natural Create-controller processing, all three
+IE master/helper gates and footprint degradation. The powered crusher fixture places
+IE's template, forms it through the native API, verifies dummy-to-master resolution,
+inserts cobblestone through an actual item port and charges through an actual energy
+port. Before calibration, 40 native helper calls leave processing NBT and energy
+unchanged and the collision handler cannot damage an animal. After 500 natural ticks,
+the queue is empty, energy has been consumed and exactly one gravel item is present.
+The input and energy are fixture supplies; this is not a player-built power network.
+
+`continuation-client-materials-r1.log` completed actual full-client world entry,
+model checks, clean/polluted/disabled/recovered captures and shutdown. The second run
+adds an operating factory and checks unculled model faces as well. Screenshots were
+visually inspected: original block faces and all three inventory icons rendered;
+there were no missing Civitas models/materials. This remains the Xvfb/Mesa client,
+not representative GPU performance or authenticated multiplayer/voice evidence.
+
+## Hand-operated decoration utilities
+
+The later user request adds useful functions to all six industrial decorations while
+retaining the no-server-ticker requirement. Gear controls provide variable redstone;
+fans consume charcoal for bounded PM removal; vents consume reagent for bounded
+SOX/NOX removal. Gauges report actual regional state. Hand pumps move at most 1,000 mB
+between directly adjacent Civitas tanks; piston heads mark the output for at most 16
+items between adjacent crates/pallets. There is no additional stored cargo, automatic
+purification, server animation loop or continuous scan. Endpoints must be loaded and
+accessible under the actor's parcel permissions.
+
+`continuation-decor-functions-r1.log` passes 30 core GameTests. Three additional tests
+cover filter payment and clean-air refusal, preserved ecological injury, gauge output,
+five-billion-unit fluid/item sources, incompatible fluid refusal, partial cargo
+acceptance, protected endpoints, native redstone reads, reload and future-data refusal.
+Optional Create/IE assertions do not run in this core row. `continuation-decor-matrix-r2.log` passes all six profiles with 30 tests;
+`continuation-client-decor-r3.log` passes the full client and complete material checks;
+`continuation-release-r10.log` passes all eleven standalone/backup/restore stages.
+The latest exact DEV distribution is `dev-schema3-r10`, fingerprinted in
+`pack/release-validation.json`. `continuation-physical-route-r10.log` also passed all
+three physical-route phases after the material/commissioning changes, before adding
+the hand utilities. The previous r8 release attempt is retained: Python 3.10 lacked
+`tomllib`; using the validated Python 3.13 runtime resolved it. The launcher now
+rejects Python older than 3.11 before creating a release directory.
+
+
+The post-utility combined workload passes in `continuation-staging-combined-r5.log`:
+10,000 gear regulators introduce no server ticker, all 200 furnaces remain active,
+20 native train authorities move, 20 warehouses receive 177,920 items, and all cargo
+is conserved. The 30 players are fake; no real client/voice packets are measured.
+The current report records mean 7.52 ms, p95 11.28 ms, max 20.88 ms and 20.01 TPS.
+This is one server sample, not evidence of a guaranteed performance improvement over
+previous runs. No representative GPU or authenticated multiplayer gate is marked passed.

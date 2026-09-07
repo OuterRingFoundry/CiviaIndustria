@@ -1,38 +1,70 @@
 {
   "textures": {
-    "base": "minecraft:block/iron_block",
-    "particle": "minecraft:block/iron_block"
+    "steel_casing": "civitas_industria:block/steel_casing",
+    "particle": "civitas_industria:block/steel_casing"
   },
   "elements": [
     {
       "from": [
+        1,
         0,
-        0,
-        0
+        1
       ],
       "to": [
-        16,
-        3,
-        16
+        15,
+        2,
+        15
       ],
       "faces": {
         "up": {
-          "texture": "#base"
+          "texture": "#steel_casing"
         },
         "down": {
-          "texture": "#base"
+          "texture": "#steel_casing"
         },
         "north": {
-          "texture": "#base"
+          "texture": "#steel_casing"
         },
         "south": {
-          "texture": "#base"
+          "texture": "#steel_casing"
         },
         "east": {
-          "texture": "#base"
+          "texture": "#steel_casing"
         },
         "west": {
-          "texture": "#base"
+          "texture": "#steel_casing"
+        }
+      }
+    },
+    {
+      "from": [
+        6,
+        2,
+        6
+      ],
+      "to": [
+        10,
+        7,
+        10
+      ],
+      "faces": {
+        "up": {
+          "texture": "#steel_casing"
+        },
+        "down": {
+          "texture": "#steel_casing"
+        },
+        "north": {
+          "texture": "#steel_casing"
+        },
+        "south": {
+          "texture": "#steel_casing"
+        },
+        "east": {
+          "texture": "#steel_casing"
+        },
+        "west": {
+          "texture": "#steel_casing"
         }
       }
     }

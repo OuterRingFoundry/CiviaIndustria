@@ -9,6 +9,7 @@ civic upkeep, bulk cargo and physical freight, warehouses and tanks, commissione
 parcels, bounded industrial raids, and client ecological tint/haze and decorative animation.
 The exact Create, Immersive Engineering, KubeJS and supporting mod artifacts are pinned.
 
+- [Current work status](STATUS.md): completed changes, checks and remaining acceptance work.
 - [Validation report](docs/VALIDATION_REPORT.md): tested behavior, evidence and remaining gates.
 - [Gameplay](docs/GAMEPLAY.md): acquisition, controls and supported interactions.
 - [Operations](docs/OPERATIONS.md): exact pack assembly, verification, backups and restore.

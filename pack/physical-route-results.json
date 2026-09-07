@@ -2,6 +2,6 @@
   "scope": "Fixed mine stockpiles physically loaded into two initially empty Create trains, autonomous schedules on 2140-block rail routes; process restart in transit; physical interfaces, commissioned factories and city warehouses; final restart conservation",
   "trains": 2,
   "processes": 3,
-  "output": "/data/.tmp/civitas-industria-phase0/run-physical-route-r9",
+  "output": "/data/.tmp/civitas-industria-phase0/run-physical-route-r10",
   "passed": true
 }

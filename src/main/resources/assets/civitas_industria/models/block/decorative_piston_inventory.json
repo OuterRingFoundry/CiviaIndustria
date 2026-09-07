@@ -1,0 +1,138 @@
+{
+  "textures": {
+    "unloader_front": "civitas_industria:block/unloader_front",
+    "steel_casing": "civitas_industria:block/steel_casing",
+    "tank_side": "civitas_industria:block/tank_side",
+    "particle": "civitas_industria:block/steel_casing"
+  },
+  "elements": [
+    {
+      "from": [
+        1,
+        0,
+        1
+      ],
+      "to": [
+        15,
+        2,
+        15
+      ],
+      "faces": {
+        "up": {
+          "texture": "#steel_casing"
+        },
+        "down": {
+          "texture": "#steel_casing"
+        },
+        "north": {
+          "texture": "#steel_casing"
+        },
+        "south": {
+          "texture": "#steel_casing"
+        },
+        "east": {
+          "texture": "#steel_casing"
+        },
+        "west": {
+          "texture": "#steel_casing"
+        }
+      }
+    },
+    {
+      "from": [
+        4,
+        4,
+        9
+      ],
+      "to": [
+        12,
+        12,
+        15
+      ],
+      "faces": {
+        "up": {
+          "texture": "#tank_side"
+        },
+        "down": {
+          "texture": "#tank_side"
+        },
+        "north": {
+          "texture": "#tank_side"
+        },
+        "south": {
+          "texture": "#tank_side"
+        },
+        "east": {
+          "texture": "#tank_side"
+        },
+        "west": {
+          "texture": "#tank_side"
+        }
+      }
+    },
+    {
+      "from": [
+        6,
+        6,
+        5
+      ],
+      "to": [
+        10,
+        10,
+        12
+      ],
+      "faces": {
+        "up": {
+          "texture": "#steel_casing"
+        },
+        "down": {
+          "texture": "#steel_casing"
+        },
+        "north": {
+          "texture": "#steel_casing"
+        },
+        "south": {
+          "texture": "#steel_casing"
+        },
+        "east": {
+          "texture": "#steel_casing"
+        },
+        "west": {
+          "texture": "#steel_casing"
+        }
+      }
+    },
+    {
+      "from": [
+        3,
+        3,
+        2
+      ],
+      "to": [
+        13,
+        13,
+        5
+      ],
+      "faces": {
+        "up": {
+          "texture": "#unloader_front"
+        },
+        "down": {
+          "texture": "#unloader_front"
+        },
+        "north": {
+          "texture": "#unloader_front"
+        },
+        "south": {
+          "texture": "#unloader_front"
+        },
+        "east": {
+          "texture": "#unloader_front"
+        },
+        "west": {
+          "texture": "#unloader_front"
+        }
+      }
+    }
+  ]
+}

@@ -2,6 +2,7 @@
 """Assemble, boot, back up, restore and reboot a new disposable DEV release candidate."""
 import argparse,datetime,hashlib,json,subprocess,sys
 from pathlib import Path
+if sys.version_info<(3,11):raise SystemExit('Release validation requires Python 3.11+ (tomllib); no output directory created')
 ROOT=Path(__file__).resolve().parents[1]
 def main():
  p=argparse.ArgumentParser();p.add_argument('--artifacts',required=True,type=Path);p.add_argument('--installer',required=True,type=Path);p.add_argument('--runtime-cache',type=Path);p.add_argument('--world',required=True,type=Path);p.add_argument('--output',required=True,type=Path);a=p.parse_args()

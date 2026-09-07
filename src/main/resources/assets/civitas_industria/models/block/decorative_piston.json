@@ -1,38 +1,71 @@
 {
   "textures": {
-    "base": "minecraft:block/iron_block",
-    "particle": "minecraft:block/iron_block"
+    "steel_casing": "civitas_industria:block/steel_casing",
+    "tank_side": "civitas_industria:block/tank_side",
+    "particle": "civitas_industria:block/steel_casing"
   },
   "elements": [
     {
       "from": [
+        1,
         0,
-        0,
-        0
+        1
       ],
       "to": [
-        16,
-        3,
-        16
+        15,
+        2,
+        15
       ],
       "faces": {
         "up": {
-          "texture": "#base"
+          "texture": "#steel_casing"
         },
         "down": {
-          "texture": "#base"
+          "texture": "#steel_casing"
         },
         "north": {
-          "texture": "#base"
+          "texture": "#steel_casing"
         },
         "south": {
-          "texture": "#base"
+          "texture": "#steel_casing"
         },
         "east": {
-          "texture": "#base"
+          "texture": "#steel_casing"
         },
         "west": {
-          "texture": "#base"
+          "texture": "#steel_casing"
+        }
+      }
+    },
+    {
+      "from": [
+        4,
+        4,
+        9
+      ],
+      "to": [
+        12,
+        12,
+        15
+      ],
+      "faces": {
+        "up": {
+          "texture": "#tank_side"
+        },
+        "down": {
+          "texture": "#tank_side"
+        },
+        "north": {
+          "texture": "#tank_side"
+        },
+        "south": {
+          "texture": "#tank_side"
+        },
+        "east": {
+          "texture": "#tank_side"
+        },
+        "west": {
+          "texture": "#tank_side"
         }
       }
     }

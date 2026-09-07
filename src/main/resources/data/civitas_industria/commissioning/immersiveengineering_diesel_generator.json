@@ -1,0 +1,8 @@
+{
+  "target": "immersiveengineering:diesel_generator",
+  "foundation_tag": "civitas_industria:heavy_foundations",
+  "foundation_radius": 1,
+  "foundation_depth": 1,
+  "foundation_mode": "multiblock",
+  "calibration_item": "civitas_industria:calibration_kit"
+}

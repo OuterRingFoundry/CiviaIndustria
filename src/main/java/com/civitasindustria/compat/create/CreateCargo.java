@@ -15,6 +15,8 @@ public final class CreateCargo {
     private static void setup(FMLCommonSetupEvent event){event.enqueueWork(()->{
         for(String name:new String[]{"cargo_crate","pallet"})MountedItemStorageType.REGISTRY.register(CivitasRegistries.CONTENT.get(name).get(),TYPE.get());
         BlockMovementChecks.registerMovementAllowedCheck((state,level,pos)->{
+            var machine=level.getBlockEntity(pos);
+            if(machine!=null&&!com.civitasindustria.common.factory.MachineCommissioning.movable(machine))return BlockMovementChecks.CheckResult.FAIL;
             if(mobile(state))return BlockMovementChecks.CheckResult.of(level.getBlockEntity(pos) instanceof CargoBlockEntity cargo&&!cargo.isQuarantined());
             if(net.minecraft.core.registries.BuiltInRegistries.BLOCK.getKey(state.getBlock()).getNamespace().equals("civitas_industria")&&level.getBlockEntity(pos)!=null)return BlockMovementChecks.CheckResult.FAIL;
             return BlockMovementChecks.CheckResult.PASS;

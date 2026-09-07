@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "side": "civitas_industria:block/steel_casing",
+    "front": "civitas_industria:block/factory_active",
+    "top": "civitas_industria:block/service_hatch"
+  }
+}

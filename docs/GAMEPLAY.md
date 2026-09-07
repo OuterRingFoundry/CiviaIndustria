@@ -79,3 +79,48 @@ are refused on load, so a restart cannot skip the return warning period.
 
 Decorative blocks have no server animation ticker. Empty-hand click toggles motion;
 sneak-click changes RPM. Persistent enabled/RPM/start-time values are sent only on edits.
+
+## Heavy-machine commissioning
+
+The Civitas factory, each Create crushing wheel, and IE crusher, arc furnace and
+diesel generator require calibration before processing. Starter presses, mixers,
+millstones and coke ovens remain available to produce the components needed for kits.
+Right-click a configured machine with a calibration kit to begin; one kit is consumed.
+Keep its foundation intact and regional load below the configured limit for 200 loaded
+server ticks (configurable). Removing foundation support or exceeding the load limit
+suspends production and requires a fresh paid calibration.
+
+The factory uses a 3×3 heavy-foundation pad one block below. Each crushing wheel uses
+its own 3×3 pad three blocks below its center, leaving processing/transport space below
+the wheels. IE uses heavy foundations under the whole oriented multiblock footprint,
+one block below its bottom layer; rotation and mirroring are accounted for. Iron blocks
+and the configured IE steel block qualify. A datapack can adjust the rules.
+
+Sneak-right-click with a kit to decommission an advanced third-party machine; this
+consumes no kit and grants no refund. Active calibration blocks Create movement.
+Calibration is bound to dimension and position; copied/moved data cannot authorize
+production at a new location. Valid decommissioned equipment can move and needs another
+kit to recommission. Unknown or corrupt calibration data is preserved and fails closed.
+
+## Industrial decoration utilities
+
+These blocks now provide small, hand-operated industrial tools. Right-click to use
+one; sneak-click with an empty hand changes animation speed. Transfer actions inspect
+only their two directly adjacent endpoints, and require your parcel interaction and
+container access at the utility and both endpoints.
+
+| Block | Function |
+| --- | --- |
+| Gear | Adjustable redstone source. Click toggles power; sneak-click changes RPM and signal strength, up to 15. Requires redstone permission in a claim. |
+| Fan | Use one charcoal to remove up to 25 regional PM. Clean air spends nothing. Empty-hand click toggles the fan animation. |
+| Pump | Click to lift up to 1,000 mB from the Civitas bulk tank immediately below into the one immediately above. Full, incompatible or unavailable tanks refuse transfer. |
+| Gauge | Click to read regional industrial load, AQI, water quality and ecological condition. |
+| Piston | Click to push up to 16 items from the crate/pallet behind it to the crate/pallet in front. The piston head marks the output face; placement faces you. |
+| Vent | Use one remediation reagent to remove up to 25 combined SOX/NOX, handling SOX first. Clean air spends nothing. Empty-hand click toggles its animation. |
+
+The fan and vent are manual filter-service actions, not automatic purification.
+They reduce existing airborne pollutants and leave vegetation/water recovery gradual.
+Pumps and pushers hold no inventory, accept partial transfers, and preserve long-count
+storage. For powered bulk automation, use the freight machines and industrial mods.
+These utilities add no server ticker or continuous neighborhood scan. Their moving
+parts still animate locally; only interactions change synchronized control parameters.

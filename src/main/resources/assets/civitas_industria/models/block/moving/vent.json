@@ -1,0 +1,104 @@
+{
+  "textures": {
+    "steel_casing": "civitas_industria:block/steel_casing",
+    "particle": "civitas_industria:block/steel_casing"
+  },
+  "elements": [
+    {
+      "from": [
+        3,
+        4,
+        4
+      ],
+      "to": [
+        13,
+        5,
+        12
+      ],
+      "faces": {
+        "up": {
+          "texture": "#steel_casing"
+        },
+        "down": {
+          "texture": "#steel_casing"
+        },
+        "north": {
+          "texture": "#steel_casing"
+        },
+        "south": {
+          "texture": "#steel_casing"
+        },
+        "east": {
+          "texture": "#steel_casing"
+        },
+        "west": {
+          "texture": "#steel_casing"
+        }
+      }
+    },
+    {
+      "from": [
+        3,
+        7,
+        4
+      ],
+      "to": [
+        13,
+        8,
+        12
+      ],
+      "faces": {
+        "up": {
+          "texture": "#steel_casing"
+        },
+        "down": {
+          "texture": "#steel_casing"
+        },
+        "north": {
+          "texture": "#steel_casing"
+        },
+        "south": {
+          "texture": "#steel_casing"
+        },
+        "east": {
+          "texture": "#steel_casing"
+        },
+        "west": {
+          "texture": "#steel_casing"
+        }
+      }
+    },
+    {
+      "from": [
+        3,
+        10,
+        4
+      ],
+      "to": [
+        13,
+        11,
+        12
+      ],
+      "faces": {
+        "up": {
+          "texture": "#steel_casing"
+        },
+        "down": {
+          "texture": "#steel_casing"
+        },
+        "north": {
+          "texture": "#steel_casing"
+        },
+        "south": {
+          "texture": "#steel_casing"
+        },
+        "east": {
+          "texture": "#steel_casing"
+        },
+        "west": {
+          "texture": "#steel_casing"
+        }
+      }
+    }
+  ]
+}

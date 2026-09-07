@@ -6,10 +6,10 @@
   "warehouse_controllers": 20,
   "seeded_rain_cells": 500,
   "measured_ticks": 1200,
-  "mean_ms": 9.676190706666667,
-  "observed_tps": 20.016654518777276,
-  "p95_ms": 12.701882,
-  "max_ms": 23.860371,
+  "mean_ms": 7.5170328575,
+  "observed_tps": 20.01472566294703,
+  "p95_ms": 11.279708,
+  "max_ms": 20.879752,
   "runtime_active_cells": 558,
   "observed_active_furnaces_at_end": 200,
   "activity_counters_include_200_tick_warmup": true,
@@ -30,33 +30,33 @@
       "processed": 0
     },
     "environment": {
-      "mean_60s_ms_per_call": 0.06733991220735787,
-      "max_300s_ms_per_call": 4.831645,
+      "mean_60s_ms_per_call": 0.057590610508757294,
+      "max_300s_ms_per_call": 5.458311,
       "processed": 3493
     },
     "ecology": {
-      "mean_60s_ms_per_call": 0.0013296822742474917,
-      "max_300s_ms_per_call": 0.066291,
+      "mean_60s_ms_per_call": 0.0011937331109257714,
+      "max_300s_ms_per_call": 0.040882,
       "processed": 3493
     },
     "industrial": {
-      "mean_60s_ms_per_call": 0.8619947173913043,
-      "max_300s_ms_per_call": 16.533592,
-      "processed": 2618124
+      "mean_60s_ms_per_call": 0.7490088423686406,
+      "max_300s_ms_per_call": 11.783489,
+      "processed": 2618045
     },
     "threat": {
-      "mean_60s_ms_per_call": 0.033426566666666664,
-      "max_300s_ms_per_call": 2.079756,
+      "mean_60s_ms_per_call": 0.030304583333333333,
+      "max_300s_ms_per_call": 1.09634,
       "processed": 280
     },
     "cargo": {
-      "mean_60s_ms_per_call": 0.0026421447324414715,
-      "max_300s_ms_per_call": 0.729929,
+      "mean_60s_ms_per_call": 0.0023610424103419517,
+      "max_300s_ms_per_call": 0.917298,
       "processed": 27980
     },
     "warehouse": {
       "mean_60s_ms_per_call": 0.0,
-      "max_300s_ms_per_call": 0.085247,
+      "max_300s_ms_per_call": 0.055971,
       "processed": 160
     },
     "parcel": {
@@ -66,7 +66,7 @@
     },
     "network": {
       "mean_60s_ms_per_call": 0.0,
-      "max_300s_ms_per_call": 1.249086,
+      "max_300s_ms_per_call": 1.078989,
       "processed": 9
     },
     "packets": {

@@ -1,0 +1,40 @@
+{
+  "textures": {
+    "brass_gear": "civitas_industria:block/brass_gear",
+    "particle": "civitas_industria:block/steel_casing"
+  },
+  "elements": [
+    {
+      "from": [
+        7,
+        7,
+        4
+      ],
+      "to": [
+        8,
+        13,
+        5
+      ],
+      "faces": {
+        "up": {
+          "texture": "#brass_gear"
+        },
+        "down": {
+          "texture": "#brass_gear"
+        },
+        "north": {
+          "texture": "#brass_gear"
+        },
+        "south": {
+          "texture": "#brass_gear"
+        },
+        "east": {
+          "texture": "#brass_gear"
+        },
+        "west": {
+          "texture": "#brass_gear"
+        }
+      }
+    }
+  ]
+}

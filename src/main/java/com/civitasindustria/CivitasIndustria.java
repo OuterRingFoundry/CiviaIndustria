@@ -25,6 +25,7 @@ public final class CivitasIndustria {
             com.civitasindustria.compat.create.RailwayRestartChecks.register(NeoForge.EVENT_BUS);
             com.civitasindustria.compat.create.RailwayRouteChecks.register(NeoForge.EVENT_BUS);
         }
+        com.civitasindustria.common.factory.MachineCommissioning.register(NeoForge.EVENT_BUS);
         modBus.addListener(com.civitasindustria.common.network.EnvironmentPayload::register);
         com.civitasindustria.platform.EcologyHooks.register(NeoForge.EVENT_BUS);
         com.civitasindustria.common.threat.ThreatDirector.register(NeoForge.EVENT_BUS);

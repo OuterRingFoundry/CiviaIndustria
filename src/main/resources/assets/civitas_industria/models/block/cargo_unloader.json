@@ -1,6 +1,8 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/orientable",
   "textures": {
-    "all": "minecraft:block/piston_side"
+    "side": "civitas_industria:block/steel_casing",
+    "front": "civitas_industria:block/unloader_front",
+    "top": "civitas_industria:block/service_hatch"
   }
 }

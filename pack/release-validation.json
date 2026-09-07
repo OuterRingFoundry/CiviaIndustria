@@ -1,9 +1,9 @@
 {
   "status": "DEV; remaining acceptance gates in docs/VALIDATION_REPORT.md",
-  "timestamp_utc": "2026-09-06T10:24:54.494951+00:00",
+  "timestamp_utc": "2026-09-07T02:20:27.111639+00:00",
   "civitas_jar": "civitas_industria-0.0.1-dev.jar",
-  "sha256": "07b1dcb4100d4ff601810f726acb3bb87f8c7847dd02184f11c0e805c3d40453",
-  "bytes": 328699,
+  "sha256": "caa470e8987ab9903538a2976521c882ee34396eb66ed4acbac82f05250e7890",
+  "bytes": 431493,
   "passed": [
     "assemble-server",
     "assemble-client",
@@ -17,7 +17,7 @@
     "verify-restored",
     "restored-boot"
   ],
-  "output": "/data/.tmp/civitas-industria-builds/dev-schema3-r7",
-  "server_instance": "/data/.tmp/civitas-industria-builds/dev-schema3-r7/validated-server",
-  "client_pack": "/data/.tmp/civitas-industria-builds/dev-schema3-r7/client"
+  "output": "/data/.tmp/civitas-industria-builds/dev-schema3-r10",
+  "server_instance": "/data/.tmp/civitas-industria-builds/dev-schema3-r10/validated-server",
+  "client_pack": "/data/.tmp/civitas-industria-builds/dev-schema3-r10/client"
 }

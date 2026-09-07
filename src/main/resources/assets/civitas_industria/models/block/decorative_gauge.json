@@ -1,38 +1,71 @@
 {
   "textures": {
-    "base": "minecraft:block/iron_block",
-    "particle": "minecraft:block/iron_block"
+    "maintenance_panel": "civitas_industria:block/maintenance_panel",
+    "steel_casing": "civitas_industria:block/steel_casing",
+    "particle": "civitas_industria:block/steel_casing"
   },
   "elements": [
     {
       "from": [
+        1,
         0,
-        0,
-        0
+        1
       ],
       "to": [
-        16,
-        3,
-        16
+        15,
+        2,
+        15
       ],
       "faces": {
         "up": {
-          "texture": "#base"
+          "texture": "#steel_casing"
         },
         "down": {
-          "texture": "#base"
+          "texture": "#steel_casing"
         },
         "north": {
-          "texture": "#base"
+          "texture": "#steel_casing"
         },
         "south": {
-          "texture": "#base"
+          "texture": "#steel_casing"
         },
         "east": {
-          "texture": "#base"
+          "texture": "#steel_casing"
         },
         "west": {
-          "texture": "#base"
+          "texture": "#steel_casing"
+        }
+      }
+    },
+    {
+      "from": [
+        3,
+        2,
+        5
+      ],
+      "to": [
+        13,
+        15,
+        9
+      ],
+      "faces": {
+        "up": {
+          "texture": "#maintenance_panel"
+        },
+        "down": {
+          "texture": "#maintenance_panel"
+        },
+        "north": {
+          "texture": "#maintenance_panel"
+        },
+        "south": {
+          "texture": "#maintenance_panel"
+        },
+        "east": {
+          "texture": "#maintenance_panel"
+        },
+        "west": {
+          "texture": "#maintenance_panel"
         }
       }
     }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "minecraft:item/clock"
+    "layer0": "civitas_industria:item/calibration_kit"
   }
 }

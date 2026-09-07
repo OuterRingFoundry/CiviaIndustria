@@ -1,0 +1,171 @@
+{
+  "textures": {
+    "steel_casing": "civitas_industria:block/steel_casing",
+    "tank_top": "civitas_industria:block/tank_top",
+    "tank_side": "civitas_industria:block/tank_side",
+    "brass_gear": "civitas_industria:block/brass_gear",
+    "particle": "civitas_industria:block/steel_casing"
+  },
+  "elements": [
+    {
+      "from": [
+        1,
+        0,
+        1
+      ],
+      "to": [
+        15,
+        2,
+        15
+      ],
+      "faces": {
+        "up": {
+          "texture": "#steel_casing"
+        },
+        "down": {
+          "texture": "#steel_casing"
+        },
+        "north": {
+          "texture": "#steel_casing"
+        },
+        "south": {
+          "texture": "#steel_casing"
+        },
+        "east": {
+          "texture": "#steel_casing"
+        },
+        "west": {
+          "texture": "#steel_casing"
+        }
+      }
+    },
+    {
+      "from": [
+        2,
+        2,
+        2
+      ],
+      "to": [
+        14,
+        5,
+        14
+      ],
+      "faces": {
+        "up": {
+          "texture": "#tank_side"
+        },
+        "down": {
+          "texture": "#tank_side"
+        },
+        "north": {
+          "texture": "#tank_side"
+        },
+        "south": {
+          "texture": "#tank_side"
+        },
+        "east": {
+          "texture": "#tank_side"
+        },
+        "west": {
+          "texture": "#tank_side"
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        3,
+        6
+      ],
+      "to": [
+        5,
+        6,
+        10
+      ],
+      "faces": {
+        "up": {
+          "texture": "#tank_side"
+        },
+        "down": {
+          "texture": "#tank_side"
+        },
+        "north": {
+          "texture": "#tank_side"
+        },
+        "south": {
+          "texture": "#tank_side"
+        },
+        "east": {
+          "texture": "#tank_side"
+        },
+        "west": {
+          "texture": "#tank_side"
+        }
+      }
+    },
+    {
+      "from": [
+        7,
+        4,
+        7
+      ],
+      "to": [
+        9,
+        11,
+        9
+      ],
+      "faces": {
+        "up": {
+          "texture": "#brass_gear"
+        },
+        "down": {
+          "texture": "#brass_gear"
+        },
+        "north": {
+          "texture": "#brass_gear"
+        },
+        "south": {
+          "texture": "#brass_gear"
+        },
+        "east": {
+          "texture": "#brass_gear"
+        },
+        "west": {
+          "texture": "#brass_gear"
+        }
+      }
+    },
+    {
+      "from": [
+        4,
+        10,
+        4
+      ],
+      "to": [
+        12,
+        12,
+        12
+      ],
+      "faces": {
+        "up": {
+          "texture": "#tank_top"
+        },
+        "down": {
+          "texture": "#tank_top"
+        },
+        "north": {
+          "texture": "#tank_top"
+        },
+        "south": {
+          "texture": "#tank_top"
+        },
+        "east": {
+          "texture": "#tank_top"
+        },
+        "west": {
+          "texture": "#tank_top"
+        }
+      }
+    }
+  ]
+}

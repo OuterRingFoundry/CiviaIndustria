@@ -37,3 +37,21 @@ codec preserves sixteen long-count slots; fixed warehouse/factory/tank authoriti
 cannot join contraptions. Mounted cargo deliberately has no menu: physical
 insert/extract interfaces are supported, while absolute int slot replacement is
 rejected because it cannot safely represent a long-count inventory.
+
+- Optional `CreateCrusherCommissioningMixin` cancels the native crushing-wheel
+  controller tick while either adjacent wheel lacks valid commissioning. Public
+  kinetic APIs do not provide a cancellable recipe-processing gate. Wheels can still
+  rotate; processing authority is checked on the server. Recheck controller behavior
+  and adjacent-wheel placement on every Create update.
+- Optional `IECommissioningMixin` cancels the native master helper's server tick when
+  a configured machine lacks valid commissioning. It clears the exact public state
+  synchronization field (`renderActive` for crusher, `active` for arc/diesel), so stale
+  activity does not remain visible or emit pollution. Check state serialization and
+  helper tick semantics on every IE update. `IECrusherCollisionMixin` also gates the
+  separate native entity-collision path, which can damage entities independently of
+  the helper tick. Primitive coke ovens remain ungated.
+
+IE compilation also uses the exact locked `ImmersiveEngineering-1.21.1-12.4.2-194.jar`
+on the compile-only classpath. Foundation coordinates come from its public oriented
+multiblock context. The gate stores a small versioned location-bound payload in the
+owning master BE's persistent data; it retains no global BE cache.

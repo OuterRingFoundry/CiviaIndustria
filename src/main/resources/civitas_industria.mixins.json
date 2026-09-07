@@ -4,7 +4,10 @@
   "package": "com.civitasindustria.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "EnderCargoMixin"
+    "EnderCargoMixin",
+    "CreateCrusherCommissioningMixin",
+    "IECommissioningMixin",
+    "IECrusherCollisionMixin"
   ],
   "injectors": {
     "defaultRequire": 1

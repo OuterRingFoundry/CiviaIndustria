@@ -1,10 +1,36 @@
 {
   "variants": {
-    "active=true": {
-      "model": "civitas_industria:block/factory_controller"
+    "active=false,facing=north": {
+      "model": "civitas_industria:block/factory_controller",
+      "y": 0
     },
-    "active=false": {
-      "model": "civitas_industria:block/factory_controller"
+    "active=true,facing=north": {
+      "model": "civitas_industria:block/factory_controller_active",
+      "y": 0
+    },
+    "active=false,facing=east": {
+      "model": "civitas_industria:block/factory_controller",
+      "y": 90
+    },
+    "active=true,facing=east": {
+      "model": "civitas_industria:block/factory_controller_active",
+      "y": 90
+    },
+    "active=false,facing=south": {
+      "model": "civitas_industria:block/factory_controller",
+      "y": 180
+    },
+    "active=true,facing=south": {
+      "model": "civitas_industria:block/factory_controller_active",
+      "y": 180
+    },
+    "active=false,facing=west": {
+      "model": "civitas_industria:block/factory_controller",
+      "y": 270
+    },
+    "active=true,facing=west": {
+      "model": "civitas_industria:block/factory_controller_active",
+      "y": 270
     }
   }
 }
