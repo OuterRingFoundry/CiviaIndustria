@@ -8,6 +8,7 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+from pack_manifest import built_mod_jar
 
 ROOT = Path(__file__).resolve().parents[1]
 MANUAL_GATES = [
@@ -77,7 +78,7 @@ def main():
     script('tooling-tests', 'check-tooling.py')
     script('content', 'validate-content.py')
     stage('clean-build', ['./gradlew', '--no-daemon', 'clean', 'compileJava', 'test', 'build'])
-    jar = ROOT / 'build/libs/civitas_industria-0.0.1-dev.jar'
+    jar = built_mod_jar(ROOT)
     report['civitas_jar_sha256'] = hashlib.sha256(jar.read_bytes()).hexdigest()
     script('integration-matrix', 'integration-matrix.py', '--artifacts', args.artifacts,
            '--output', args.output / 'matrix')
@@ -107,7 +108,7 @@ def main():
 
 def source_digest():
     digest = hashlib.sha256()
-    paths = [p for base in ('src', 'scripts', '.github') for p in (ROOT / base).rglob('*')
+    paths = [p for base in ('src', 'scripts', '.github', 'pack/overrides') for p in (ROOT / base).rglob('*')
              if p.is_file() and '__pycache__' not in p.parts]
     paths += [ROOT / name for name in ('build.gradle', 'settings.gradle', 'gradle.properties',
                                       'pack/mods.lock.json', 'pack/runtime.lock.json')]

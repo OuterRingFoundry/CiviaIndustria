@@ -1,0 +1,53 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "immersiveengineering"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "adpother"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "adchimneys"
+    }
+  ],
+  "display": {
+    "icon": {
+      "id": "civitas_industria:remediation_reagent"
+    },
+    "title": "Keep the filters working",
+    "description": "Automate filter supplies and remove byproducts. Exhaust changes the surrounding land over time.",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "acquire_0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "civitas_industria:remediation_reagent"
+          }
+        ]
+      }
+    },
+    "acquire_1": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "immersiveengineering:hemp_fabric"
+          }
+        ]
+      }
+    }
+  },
+  "parent": "civitas_industria:industry/filter"
+}

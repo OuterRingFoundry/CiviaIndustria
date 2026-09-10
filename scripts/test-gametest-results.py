@@ -6,26 +6,27 @@ from gametest_results import evaluate, required_test_count
 
 
 class GameTestResultsTests(unittest.TestCase):
-    good = 'All 33 required tests passed :)\nAll dimensions are saved\nBUILD SUCCESSFUL\n'
+    good = 'All 35 required tests passed :)\nAll dimensions are saved\nBUILD SUCCESSFUL\n'
 
     def test_complete_suite(self):
-        self.assertTrue(evaluate(self.good, 0, 33)['passed'])
+        self.assertTrue(evaluate(self.good, 0, 35)['passed'])
         self.assertEqual(required_test_count(Path(__file__).resolve().parents[1] /
-                         'src/main/java/com/civitasindustria/test'), 33)
+                         'src/main/java/com/civitasindustria/test'), 35)
 
     def test_empty_partial_and_duplicate_summaries(self):
-        for text in (self.good.replace('33', '0'), self.good.replace('33', '32'),
-                     self.good + 'All 33 required tests passed', 'required tests passed\nBUILD SUCCESSFUL'):
+        for text in (self.good.replace('35', '0'), self.good.replace('35', '34'),
+                     self.good + 'All 35 required tests passed', 'required tests passed\nBUILD SUCCESSFUL'):
             with self.subTest(text=text):
-                self.assertFalse(evaluate(text, 0, 33)['passed'])
-        self.assertFalse(evaluate(self.good.replace('33', '0'), 0, 0)['passed'])
+                self.assertFalse(evaluate(text, 0, 35)['passed'])
+        self.assertFalse(evaluate(self.good.replace('35', '0'), 0, 0)['passed'])
 
     def test_crash_exit_and_unsaved_world(self):
         for text, code in ((self.good, 1), (self.good.replace('All dimensions are saved', ''), 0),
                            (self.good + 'Encountered an unexpected exception', 0),
+                           (self.good + 'Parsing error loading recipe', 0),
                            (self.good.replace('BUILD SUCCESSFUL', 'BUILD FAILED'), 0)):
             with self.subTest(text=text, code=code):
-                self.assertFalse(evaluate(text, code, 33)['passed'])
+                self.assertFalse(evaluate(text, code, 35)['passed'])
 
 
 class StagingResultsTests(unittest.TestCase):

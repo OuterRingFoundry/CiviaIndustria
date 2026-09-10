@@ -5,7 +5,7 @@ license="All Rights Reserved"
 modId="civitas_industria"
 version="${mod_version}"
 displayName="Civitas Industria"
-description='''Industrial civilization foundation. Phase 0; no gameplay yet.'''
+description='''Industrial civilization, physical freight, commissioned factories and persistent regional ecology.'''
 [[dependencies.civitas_industria]]
 modId="neoforge"
 type="required"
@@ -21,3 +21,31 @@ side="BOTH"
 
 [[mixins]]
 config="civitas_industria.mixins.json"
+
+[[dependencies.civitas_industria]]
+modId="adpother"
+type="optional"
+versionRange="[9.1.10.0]"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.civitas_industria]]
+modId="create"
+type="optional"
+versionRange="[6.0.10]"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.civitas_industria]]
+modId="immersiveengineering"
+type="optional"
+versionRange="[12.4.2-194]"
+ordering="AFTER"
+side="BOTH"
+
+[[dependencies.civitas_industria]]
+modId="adchimneys"
+type="optional"
+versionRange="[11.1.10.0]"
+ordering="AFTER"
+side="BOTH"

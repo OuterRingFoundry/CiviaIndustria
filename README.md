@@ -7,7 +7,9 @@ Minecraft 1.21.1 · NeoForge 21.1.249 · Java 21 · ModDevGradle 2.0.146 · Grad
 The implementation includes regional industrial load and pollution, ecological consequences,
 civic upkeep, bulk cargo and physical freight, warehouses and tanks, commissioned factories,
 parcels, bounded industrial raids, and client ecological tint/haze and decorative animation.
-The exact Create, Immersive Engineering, KubeJS and supporting mod artifacts are pinned.
+The exact Create, Immersive Engineering, Pollution of the Realms, Advanced Chimneys,
+ForgeEndertech, KubeJS and supporting mod artifacts are pinned. See the
+[four-core integration guide](docs/FOUR_CORE_INTEGRATION.md) for the new progression.
 
 - [Current work status](STATUS.md): completed changes, checks and remaining acceptance work.
 - [Validation report](docs/VALIDATION_REPORT.md): tested behavior, evidence and remaining gates.

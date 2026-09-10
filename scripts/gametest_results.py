@@ -11,7 +11,9 @@ def required_test_count(source):
 def evaluate(text, exit_code, expected):
     counts = [int(n) for n in re.findall(r'All (\d+) required tests passed', text)]
     errors = [marker for marker in ('Encountered an unexpected exception',
-                                    'CIVITAS SHARED RAILWAY FAILED', 'BUILD FAILED')
+                                    'CIVITAS SHARED RAILWAY FAILED', 'BUILD FAILED',
+                                    'Parsing error loading recipe', 'Failed to parse recipe',
+                                    'Error loading KubeJS script')
               if marker in text]
     passed = (exit_code == 0 and expected > 0 and counts == [expected]
               and 'BUILD SUCCESSFUL' in text and 'All dimensions are saved' in text

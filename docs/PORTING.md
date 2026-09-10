@@ -55,3 +55,26 @@ IE compilation also uses the exact locked `ImmersiveEngineering-1.21.1-12.4.2-19
 on the compile-only classpath. Foundation coordinates come from its public oriented
 multiblock context. The gate stores a small versioned location-bound payload in the
 owning master BE's persistent data; it retains no global BE cache.
+
+## Pollution of the Realms 9.1.10.0 / Advanced Chimneys 11.1.10.0
+
+The optional adapter compiles against AdPother and ForgeEndertech 12.1.3.0. All
+third-party types stay in `compat/pollution`; the common runtime checks ModList
+before accessing it. `NativePollutionChangeMixin` targets
+`WorldData.tryChangePollutionLevelBy(ServerLevel, BlockPos, BlockState, int)` at
+TAIL, because no public NeoForge event announces changes to native pollution counters.
+Its only effect is waking the existing regional simulation. Injection is required
+when the target is present, so an incompatible upstream update fails visibly.
+
+The adapter reads `WorldData.getChunkPollution` / `PollutionInfo.getQuantity`, and
+uses `Emitter.Properties` / `SourceBase.emitAt` for factory exhaust. Native code
+owns delayed emission, pressure, chimney networks and finite filter inventories.
+Reverify these exact APIs, native config names, matching recipe IDs and actual
+factory-to-chimney tests before changing either upstream version. A chimney's
+presence alone grants no regional cleanup credit.
+
+The pack verifier mirrors FancyModLoader 4.0.43/4.0.44's `VersionSupportMatrix`
+for this exact runtime: MC 1.21.1 also accepts declarations permitting 1.21,
+and NeoForge 21.1.249 also accepts declarations permitting 21.0.166. JEI relies
+on that native compatibility rule. This is not a general relaxation for other
+Minecraft versions or arbitrary mod dependencies.

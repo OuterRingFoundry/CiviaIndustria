@@ -1,3 +1,22 @@
+# Four-core integration continuation — 2026-09-10
+
+The current work adds Pollution of the Realms 9.1.10.0, Advanced Chimneys
+11.1.10.0 and ForgeEndertech 12.1.3.0 to the existing Create/IE pack, with JEI
+on the client. The custom mod is now 0.2.0-dev.
+
+The first source build passed 57 domain checks. Initial pollution and four-core
+profiles passed 35 GameTests each. A stronger factory-to-chimney regression is
+being validated; previous green runs do not certify that added assertion.
+
+Shared processing recipes, consumable native filters, regional exposure accounting
+and a five-step advancement guide are implemented. See
+[the integration guide](docs/FOUR_CORE_INTEGRATION.md). This is active development;
+current full-pack, client and performance validation is not yet complete.
+
+---
+
+The prior checkpoint below is historical evidence for the earlier pack composition.
+
 # Civitas Industria — current development status
 
 **DEV integration. Production acceptance remains open.**

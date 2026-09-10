@@ -8,7 +8,9 @@ for path in root.rglob('*.json'):
  if '/environment/emissions/' in str(path):
   assert {'target','industrial_load','emissions'}<=data.keys(),path
  if '/recipe/' in str(path) and data.get('type','').startswith('minecraft:crafting'):
-  assert data['result']['id'].startswith('civitas_industria:'),path
+  assert ':' in data['result']['id'],path
+  if '/data/civitas_industria/' not in str(path):
+   assert data.get('neoforge:conditions'),path
   assert 1<=data['result'].get('count',1)<=64,path
 print(f'PASS: {count} JSON resources parse and content schemas match')
 # All project-owned model textures must exist and remain power-of-two Minecraft assets.

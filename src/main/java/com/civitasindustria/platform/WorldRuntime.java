@@ -19,6 +19,7 @@ import java.util.*;
 
 /** Transient identifiers only: no retained Level, Chunk, Player or BlockEntity references. */
 public final class WorldRuntime {
+    private static final boolean NATIVE_POLLUTION=net.neoforged.fml.ModList.get().isLoaded("adpother");
     private static final Map<ResourceLocation,WorldRuntime> WORLDS=new HashMap<>();
     public final CivitasSavedData saved;
     public final Map<String,RollingMetrics> metrics=new LinkedHashMap<>();
@@ -48,7 +49,8 @@ public final class WorldRuntime {
     }
     public static WorldRuntime get(ServerLevel level){return WORLDS.computeIfAbsent(level.dimension().location(),key->new WorldRuntime(level));}
     public static void unload(ServerLevel level){WORLDS.remove(level.dimension().location());}
-    public static void clear(){WORLDS.clear();}
+    public static void clear(){WORLDS.clear();if(NATIVE_POLLUTION)com.civitasindustria.compat.pollution.PollutionBridge.clearSources();}
+    public void nativePollutionChanged(CellPos pos){cell(pos);if(loadedCells.containsKey(pos))active.add(pos);}
     public WorldState state(){return saved.state;}
     public void dirty(){saved.setDirty();}
     public CellData cell(CellPos p){
@@ -71,6 +73,7 @@ public final class WorldRuntime {
         }
         machinesByChunk.put(chunk.getPos().toLong(),positions);machines.addAll(positions);
         for(long id:positions)emissionClock.add(id,chunk.getLevel().getGameTime());
+        if(NATIVE_POLLUTION && chunk.getLevel() instanceof ServerLevel level)com.civitasindustria.compat.pollution.PollutionBridge.discover(level,this,cell);
     }
     public void chunkUnloaded(ChunkPos chunk){
         pendingChunks.remove(chunk.toLong());reloadChunks.remove(chunk.toLong());
@@ -114,6 +117,7 @@ public final class WorldRuntime {
                 reloadChunks.addAll(machinesByChunk.keySet());pendingChunks.addAll(reloadChunks);
             }
             profileGeneration=generation;
+            if(NATIVE_POLLUTION)com.civitasindustria.compat.pollution.PollutionBridge.clearSources();
         }
         int discovered=0;
         var pending=pendingChunks.iterator();
@@ -195,8 +199,14 @@ public final class WorldRuntime {
                 var property=block.getBlock().getStateDefinition().getProperty(profile.activeProperty());
                 running=property!=null&&Boolean.TRUE.equals(block.getValue(property));
             }
-            if(running&&elapsed>0)for(var emission:profile.emissions().entrySet())
-                emissionBuffers.computeIfAbsent(CellPos.fromBlock(pos.getX(),pos.getZ()),p->new EnumMap<>(Pollutant.class)).merge(emission.getKey(),emission.getValue()*elapsed,Double::sum);
+            if(running&&elapsed>0){
+                boolean nativeAir=NATIVE_POLLUTION&&com.civitasindustria.compat.pollution.PollutionBridge.ownsAir(entity);
+                if(nativeAir)com.civitasindustria.compat.pollution.PollutionBridge.factoryEmission(level,entity,profile,elapsed);
+                for(var emission:profile.emissions().entrySet()){
+                    if(nativeAir&&(emission.getKey()==Pollutant.PM||emission.getKey()==Pollutant.SOX))continue;
+                    emissionBuffers.computeIfAbsent(CellPos.fromBlock(pos.getX(),pos.getZ()),p->new EnumMap<>(Pollutant.class)).merge(emission.getKey(),emission.getValue()*elapsed,Double::sum);
+                }
+            }
         }
         record("industrial",start,processed);
     }
@@ -208,6 +218,7 @@ public final class WorldRuntime {
         if(batch.isEmpty()){cellCursor=new CellPos(Integer.MIN_VALUE,Integer.MIN_VALUE);for(CellPos p:active){batch.add(p);if(batch.size()>=limit)break;}}
         if(!batch.isEmpty())cellCursor=batch.getLast();
         batch.removeIf(p->{var data=state().cells.get(p);return data==null||!force&&level.getGameTime()-data.lastEnvironmentUpdate<ServerConfig.ENVIRONMENT_INTERVAL.get();});
+        if(NATIVE_POLLUTION)for(CellPos pos:batch)com.civitasindustria.compat.pollution.PollutionBridge.expose(level,this,pos);
         int count=new EnvironmentSimulator().step(state().cells,batch,p->climate(level,p),ServerConfig.simulation(),level.getGameTime());
         // Only changed neighbors join the work set; no historical-world sweep on ordinary ticks.
         for(CellPos p:batch){if(!state().cells.containsKey(p))active.remove(p);

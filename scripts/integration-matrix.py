@@ -6,7 +6,7 @@ from fixture_config import isolate_voice
 from fixture_process import run
 from gametest_results import evaluate, required_test_count
 ROOT=Path(__file__).resolve().parents[1]
-PROFILES={'core':[], 'create':['create'], 'ie':['immersiveengineering'], 'kubejs':['kubejs','rhino','architectury-api'], 'industry':['create','immersiveengineering'], 'full-server':None}
+PROFILES={'core':[], 'create':['create'], 'ie':['immersiveengineering'], 'kubejs':['kubejs','rhino','architectury-api'], 'industry':['create','immersiveengineering'], 'pollution':['pollution-of-the-realms','advanced-chimneys','forgeendertech'], 'four-core':['create','immersiveengineering','pollution-of-the-realms','advanced-chimneys','forgeendertech','kubejs','rhino','architectury-api'], 'full-server':None}
 def main():
  p=argparse.ArgumentParser();p.add_argument('--artifacts',required=True,type=Path);p.add_argument('--profiles',nargs='+',choices=PROFILES,default=list(PROFILES));p.add_argument('--output',type=Path,help='New directory for isolated worlds, logs and report');args=p.parse_args();args.artifacts=args.artifacts.resolve()
  if args.output:
@@ -23,7 +23,8 @@ def main():
    source=args.artifacts/a['filename']
    if hashlib.sha256(source.read_bytes()).hexdigest()!=a['sha256']:raise ValueError('Artifact hash '+a['filename'])
    shutil.copy2(source,mods/a['filename'])
-  if name=='full-server':shutil.copytree(ROOT/'pack/overrides',directory,dirs_exist_ok=True)
+  if name in ('full-server','four-core','pollution'):shutil.copytree(ROOT/'pack/overrides',directory,dirs_exist_ok=True)
+  if name=='pollution':shutil.rmtree(directory/'kubejs',ignore_errors=True)
   if name=='full-server':isolate_voice(directory,24462)
   logfile=directory/'matrix.log';start=time.time()
   with logfile.open('w') as out:

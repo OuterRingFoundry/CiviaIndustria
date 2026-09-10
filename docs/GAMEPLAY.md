@@ -1,3 +1,15 @@
+# Four-core pack progression
+
+For the current pack, start with the [four-core gameplay guide](FOUR_CORE_INTEGRATION.md).
+Create, Immersive Engineering, Pollution of the Realms and Advanced Chimneys are all
+required pack components. The in-game advancement tab introduces their shared progression;
+JEI shows the current recipes. Filter materials are consumable, and clearing physical
+exhaust does not instantly heal damaged land.
+
+The controls and systems below remain part of the custom mod. In the full pack,
+JEI takes precedence over old crafting-cost descriptions because several infrastructure
+recipes now use components from the four core mods.
+
 # Current playable systems
 
 Build primitive tools normally, then make standardized components. The full pack's

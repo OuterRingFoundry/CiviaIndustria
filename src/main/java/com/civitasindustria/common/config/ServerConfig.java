@@ -33,6 +33,7 @@ public final class ServerConfig {
         EXPOSURE_WATER=B.defineInRange("severeExposureWaterToxicity",500.0,1,1000000);
     public static final ModConfigSpec.IntValue COMMISSION_TICKS=B.defineInRange("commissioningTicks",200,20,72000);
     public static final ModConfigSpec.IntValue RAID_WAVE_SIZE=B.defineInRange("raidWaveSize",6,1,24), RAID_LIFETIME=B.defineInRange("raidLifetimeTicks",2400,200,6000);
+    public static final ModConfigSpec.DoubleValue NATIVE_EXPOSURE=B.comment("Regional exposure per native airborne pollution unit per 200 ticks; physical filters reduce this input. Existing ecological injury recovers gradually.").defineInRange("nativePollutionExposure",0.01,0.0,1.0);
     public static final ModConfigSpec SPEC=B.build();
     private static ModConfigSpec.DoubleValue rate(String name,double value){return B.defineInRange(name,value,0,1);}
     public static SimulationSettings simulation(){return new SimulationSettings(AIR_DECAY.get(),DIFFUSION.get(),WET.get(),RUNOFF.get(),
