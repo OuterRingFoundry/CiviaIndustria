@@ -1,3 +1,86 @@
+# Four-core continuation — 2026-09-10
+
+The `0.2.0-dev` revision adds the requested four-core composition on Minecraft
+1.21.1 / NeoForge 21.1.249. Earlier reports below remain historical checkpoints.
+The exact releases and progression are in [FOUR_CORE_INTEGRATION.md](FOUR_CORE_INTEGRATION.md).
+
+The mandatory source build passed 57 domain checks, 13 Python regression checks,
+and content validation. All eight profiles passed 35 GameTests each; see
+`pack/four-core-integration-results.json` for the actual upstream JARs in each row.
+Native assertions run in the pollution, four-core and full-server profiles; optional
+assertions skipped in other profiles do not certify native behavior.
+
+The new native checks verify:
+
+- Empty filters refuse capture; finite filter material is consumed and spent
+  byproducts appear. Filter inventory survives NBT save/load.
+- Custom factory emissions enter the native delayed queue and travel through a
+  real metal chimney/filter arrangement. Eight carbon units consume one leaf and
+  produce one black dye. The queue is allowed 240 ticks for its bounded batches.
+- Carbon/dust/sulfur counters feed the exact configured regional exposure dose,
+  while existing ecological injury remains. Native-covered furnaces suppress the
+  former duplicate PM/SOX path.
+- Shared machine recipes load, IE's metal press returns the canonical Create iron
+  sheet, the native pump recipe contains a Create mechanical pump, and native
+  sulfur filters accept Civitas reagent with capacity 32.
+
+The first strengthened factory regression waited only 100 ticks and failed because
+native emissions drain in small batches every three seconds. Its evidence is kept
+under `/data/.tmp/civitas-four-core-tests-r2`. The corrected 240-tick assertion passed
+in the focused r3 run and in the complete eight-profile matrix. This changes the
+fixture's observation window, not filter cost or native queue behavior.
+
+Full-client validation passed with all four cores, their dependencies, JEI and
+Embeddium using the same development source. All existing Civitas block states and
+six moving models passed the model checks. The clean/polluted/disabled/recovered
+vegetation tints were `91bd59`, `969f55`, `91bd59`, `91bc58`; four screenshots and a
+clean world save were recorded. See `pack/four-core-client-validation.json`.
+Xvfb/Mesa at 1280×720 establishes client startup and this rendering fixture; it does
+not establish representative GPU performance, working microphone/audio, exhaustive
+native-block visuals or authenticated multiplayer. The development world still
+loaded after an authentication-key fetch error; the software renderer used a
+working fallback after its GLSL 4.60 probe failed.
+
+The full automated DEV suite finished successfully at 2026-09-10 09:05:25 UTC.
+All 13 top-level stages passed, including all 11 distribution stages. Current
+server evidence is under `/data/.tmp/civitas-four-core-acceptance-r1`, summarized in
+`pack/four-core-dev-validation.json` and `pack/four-core-release-validation.json`.
+The exact JAR SHA-256 is
+`64df95ce7f32ec9af9e06e06eed55cb5b14ab9677077a88e4ed24937c1d27dc1`;
+the validated source digest is
+`ee9cdd08f5bc91a2b7da79a08b9a0f74f889c5fc7d9fd53133ce33ad2aec331d`.
+
+Save/write/read and future/mismatched/truncated-save refusal passed. The three-process
+train restart fixture, the 2,140-block physical mine-stockpile → factory → warehouse
+route, and the shared physical track/signal/station fixture all passed. Cargo was
+conserved through restart. The `pack/four-core-*-results.json` files record their
+specific scope; seeded ore and bounded shared tracks do not establish a player economy
+or arbitrary junction traffic.
+
+The full four-core combined workload measured **20.02 TPS, mean 16.16 ms, p95 18.99 ms,
+max 47.05 ms** over 1,200 ticks. It included 10,000 decorations, 1,000 furnaces with
+200 confirmed active, 20 moving native graph-fixture trains, 20 receiving warehouses,
+500 seeded rain cells, three networks, physical raids and 30 simulated players.
+Warehouses received 177,920 items and cargo was conserved. See
+`pack/four-core-staging-report.json` and `pack/four-core-staging-validation.json`.
+Compared with the earlier fixture's p95 10.43 ms, this run costs more; the change in
+pack composition is not a controlled attribution of all added cost to one mod.
+The current result remains within the configured 45 ms p95 / 19.5 TPS gate.
+
+The distribution suite assembled client and server packs, installed the pinned
+runtime, booted the shipped JAR, finalized and verified its manifest, backed up and
+restored the instance, verified it, and booted the restored world. All stages passed.
+No production promotion or background backup schedule was performed.
+
+The generated `.mrpack` and server ZIP passed CRC/hash checks. The manifest contains
+all 18 exact upstream download references with correct sides, sizes and hashes, and
+both archives embed the exact accepted custom JAR. The extracted server installer
+successfully assembled a new instance and installed NeoForge using verified caches;
+its resulting pack/config/script manifest passed verification. See
+`pack/four-core-package-validation.json`. A GUI launcher import remains untested.
+
+---
+
 # September 2026 integration continuation
 
 This supersedes the implementation status in HANDOFF.md and RECOVERY_REPORT.md.

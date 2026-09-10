@@ -1,7 +1,7 @@
 # Four-core integration — development revision
 
 Minecraft 1.21.1, NeoForge 21.1.249, Java 21. This supersedes the beta's two-core
-pack composition. Earlier client/performance evidence does not certify this revision.
+pack composition. Current evidence is recorded separately from the earlier beta.
 
 ## Exact pack
 
@@ -86,8 +86,12 @@ saved native clouds. Sampling reads at most 16 loaded chunk counters per process
 region, within the existing region budget. It never loads a missing chunk. The bridge
 retains no world, chunk or entity references and adds no packets or save schema.
 
-The native mods have their own simulation costs. The old performance measurements
-cannot be carried forward to this composition without rerunning the workload.
+The native mods have their own simulation costs. The new full-pack combined server
+fixture measured 20.02 TPS, mean 16.16 ms and p95 18.99 ms over 1,200 ticks, with
+200 active furnaces, 20 moving graph-fixture trains, 20 receiving warehouses,
+500 seeded rain cells and 30 simulated players. Cargo was conserved. These results
+apply to the designated build server and this fixture; real clients, representative
+GPUs and arbitrary large native chimney networks require separate playtesting.
 
 ## Implementation and validation
 
@@ -101,6 +105,6 @@ cannot be carried forward to this composition without rerunning the workload.
   optional mods skips those assertions, and does not count as native integration proof.
 - Matrix adds `pollution` and `four-core` profiles to the previous six.
 
-Pending measurements and actual run evidence are recorded in the validation report.
+Actual run evidence and remaining acceptance gates are recorded in the validation report.
 This is a development revision, not a claim of authenticated multiplayer acceptance,
 representative GPU performance or a completed player economy playtest.

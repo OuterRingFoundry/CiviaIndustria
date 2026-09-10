@@ -1,17 +1,47 @@
-# Four-core integration continuation — 2026-09-10
+# Four-core integration — verified development build, 2026-09-10
 
-The current work adds Pollution of the Realms 9.1.10.0, Advanced Chimneys
-11.1.10.0 and ForgeEndertech 12.1.3.0 to the existing Create/IE pack, with JEI
-on the client. The custom mod is now 0.2.0-dev.
+**0.2.0-dev passed the complete automated DEV acceptance suite. Human and GPU
+acceptance remains open.** Minecraft 1.21.1 · NeoForge 21.1.249 · Java 21.
 
-The first source build passed 57 domain checks. Initial pollution and four-core
-profiles passed 35 GameTests each. A stronger factory-to-chimney regression is
-being validated; previous green runs do not certify that added assertion.
+The pack now includes Create 6.0.10, Immersive Engineering 12.4.2-194,
+Pollution of the Realms 9.1.10.0, Advanced Chimneys 11.1.10.0 and their required
+ForgeEndertech 12.1.3.0 dependency. JEI is included on the client. Shared plates,
+machine processing, consumable native filters, chimney-routed factory exhaust,
+regional exposure and a five-step advancement guide connect the four cores to the
+existing commissioning, freight, ecology and settlement systems.
+See [the integration guide](docs/FOUR_CORE_INTEGRATION.md).
 
-Shared processing recipes, consumable native filters, regional exposure accounting
-and a five-step advancement guide are implemented. See
-[the integration guide](docs/FOUR_CORE_INTEGRATION.md). This is active development;
-current full-pack, client and performance validation is not yet complete.
+- 57 domain checks, 13 Python checks, and 35 GameTests in all eight mod profiles.
+- Native filter payment/byproducts, factory-to-chimney routing, exact exposure dose
+  and loaded cross-mod recipes pass in the actual native-mod profiles.
+- Save/write/read and damaged-save refusal pass; physical freight delivery and
+  shared signals pass across real server restarts with exact cargo conservation.
+- Combined workload: 20.02 TPS, mean 16.16 ms, p95 18.99 ms, max 47.05 ms over
+  1,200 measured ticks. Includes 200 active furnaces, 20 moving graph-fixture trains,
+  20 receiving warehouses, 500 rain cells, raids and 30 simulated players.
+- All 11 distribution stages pass, including standalone shipped-JAR startup,
+  backup/restore and restored startup.
+- Full client with JEI and Embeddium passes world/model/tint checks and clean save
+  under Xvfb/Mesa at 1280×720. This does not certify a representative GPU or audio.
+
+Evidence: `pack/four-core-dev-validation.json`, `pack/four-core-client-validation.json`,
+`pack/four-core-integration-results.json`, and the other `pack/four-core-*.json` reports.
+Remote suite: `/data/.tmp/civitas-four-core-acceptance-r1`.
+Custom JAR SHA-256: `64df95ce7f32ec9af9e06e06eed55cb5b14ab9677077a88e4ed24937c1d27dc1`.
+Source SHA-256: `ee9cdd08f5bc91a2b7da79a08b9a0f74f889c5fc7d9fd53133ce33ad2aec331d`.
+World schema remains 3; compact cargo envelope remains 2.
+
+Client `.mrpack` and server bootstrap downloads are built with
+`scripts/package-four-core.py`, which refuses a JAR/source pair without matching
+completed acceptance evidence. Upstream JARs are referenced by official URLs and
+hashes; only the custom JAR and pack content are embedded. Both archive hashes and
+manifests passed checks; the extracted server installer successfully installed and
+verified a fresh instance using the cached pinned runtime.
+
+Authenticated multiplayer/voice, representative GPUs, player economy/balance,
+mixed-direction junctions and deliberate production promotion remain open. The
+native mods add simulation costs; the performance figures above apply to the tested
+server and fixture, not to this small EC2 instance or arbitrary player settlements.
 
 ---
 

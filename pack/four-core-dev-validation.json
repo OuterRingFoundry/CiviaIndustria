@@ -1,0 +1,189 @@
+{
+  "status": "automated-dev-passed; external acceptance open",
+  "started_utc": "2026-09-10T08:44:16.110888+00:00",
+  "scope": "Automated DEV tests only; production acceptance remains open",
+  "source_sha256": "ee9cdd08f5bc91a2b7da79a08b9a0f74f889c5fc7d9fd53133ce33ad2aec331d",
+  "stages": [
+    {
+      "name": "verify-artifacts",
+      "status": "passed",
+      "command": [
+        "/home/frederick/anaconda3/bin/python3",
+        "/data/.tmp/civitas-four-core/scripts/verify-pack.py",
+        "--directory",
+        "/data/.tmp/civitas-industria-artifacts",
+        "--side",
+        "client",
+        "--all-artifacts"
+      ],
+      "log": "/data/.tmp/civitas-four-core-acceptance-r1/verify-artifacts.log",
+      "seconds": 0.37
+    },
+    {
+      "name": "tooling-tests",
+      "status": "passed",
+      "command": [
+        "/home/frederick/anaconda3/bin/python3",
+        "/data/.tmp/civitas-four-core/scripts/check-tooling.py"
+      ],
+      "log": "/data/.tmp/civitas-four-core-acceptance-r1/tooling-tests.log",
+      "seconds": 1.32
+    },
+    {
+      "name": "content",
+      "status": "passed",
+      "command": [
+        "/home/frederick/anaconda3/bin/python3",
+        "/data/.tmp/civitas-four-core/scripts/validate-content.py"
+      ],
+      "log": "/data/.tmp/civitas-four-core-acceptance-r1/content.log",
+      "seconds": 0.06
+    },
+    {
+      "name": "clean-build",
+      "status": "passed",
+      "command": [
+        "./gradlew",
+        "--no-daemon",
+        "clean",
+        "compileJava",
+        "test",
+        "build"
+      ],
+      "log": "/data/.tmp/civitas-four-core-acceptance-r1/clean-build.log",
+      "seconds": 10.79
+    },
+    {
+      "name": "integration-matrix",
+      "status": "passed",
+      "command": [
+        "/home/frederick/anaconda3/bin/python3",
+        "/data/.tmp/civitas-four-core/scripts/integration-matrix.py",
+        "--artifacts",
+        "/data/.tmp/civitas-industria-artifacts",
+        "--output",
+        "/data/.tmp/civitas-four-core-acceptance-r1/matrix"
+      ],
+      "log": "/data/.tmp/civitas-four-core-acceptance-r1/integration-matrix.log",
+      "seconds": 204.74
+    },
+    {
+      "name": "save-write",
+      "status": "passed",
+      "command": [
+        "/home/frederick/anaconda3/bin/python3",
+        "/data/.tmp/civitas-four-core/scripts/smoke-server.py",
+        "--runtime-write"
+      ],
+      "log": "/data/.tmp/civitas-four-core-acceptance-r1/save-write.log",
+      "seconds": 22.37
+    },
+    {
+      "name": "save-read",
+      "status": "passed",
+      "command": [
+        "/home/frederick/anaconda3/bin/python3",
+        "/data/.tmp/civitas-four-core/scripts/smoke-server.py",
+        "--runtime-read"
+      ],
+      "log": "/data/.tmp/civitas-four-core-acceptance-r1/save-read.log",
+      "seconds": 23.53
+    },
+    {
+      "name": "save-refusal",
+      "status": "passed",
+      "command": [
+        "/home/frederick/anaconda3/bin/python3",
+        "/data/.tmp/civitas-four-core/scripts/check-save-refusal.py"
+      ],
+      "log": "/data/.tmp/civitas-four-core-acceptance-r1/save-refusal.log",
+      "seconds": 234.82
+    },
+    {
+      "name": "railway-restart",
+      "status": "passed",
+      "command": [
+        "/home/frederick/anaconda3/bin/python3",
+        "/data/.tmp/civitas-four-core/scripts/test-railway-restart.py",
+        "--fixture",
+        "/data/.tmp/civitas-four-core-acceptance-r1/matrix/run-matrix-full-server",
+        "--output",
+        "/data/.tmp/civitas-four-core-acceptance-r1/railway-restart"
+      ],
+      "log": "/data/.tmp/civitas-four-core-acceptance-r1/railway-restart.log",
+      "seconds": 85.93
+    },
+    {
+      "name": "physical-route",
+      "status": "passed",
+      "command": [
+        "/home/frederick/anaconda3/bin/python3",
+        "/data/.tmp/civitas-four-core/scripts/test-physical-route.py",
+        "--fixture",
+        "/data/.tmp/civitas-four-core-acceptance-r1/matrix/run-matrix-full-server",
+        "--output",
+        "/data/.tmp/civitas-four-core-acceptance-r1/physical-route"
+      ],
+      "log": "/data/.tmp/civitas-four-core-acceptance-r1/physical-route.log",
+      "seconds": 296.46
+    },
+    {
+      "name": "shared-railway",
+      "status": "passed",
+      "command": [
+        "/home/frederick/anaconda3/bin/python3",
+        "/data/.tmp/civitas-four-core/scripts/test-shared-railway.py",
+        "--fixture",
+        "/data/.tmp/civitas-four-core-acceptance-r1/matrix/run-matrix-full-server",
+        "--output",
+        "/data/.tmp/civitas-four-core-acceptance-r1/shared-railway"
+      ],
+      "log": "/data/.tmp/civitas-four-core-acceptance-r1/shared-railway.log",
+      "seconds": 145.18
+    },
+    {
+      "name": "combined-staging",
+      "status": "passed",
+      "command": [
+        "/home/frederick/anaconda3/bin/python3",
+        "/data/.tmp/civitas-four-core/scripts/run-staging.py",
+        "--combined",
+        "--fixture",
+        "/data/.tmp/civitas-four-core-acceptance-r1/matrix/run-matrix-full-server",
+        "--output",
+        "/data/.tmp/civitas-four-core-acceptance-r1/combined-staging"
+      ],
+      "log": "/data/.tmp/civitas-four-core-acceptance-r1/combined-staging.log",
+      "seconds": 163.57
+    },
+    {
+      "name": "distribution",
+      "status": "passed",
+      "command": [
+        "/home/frederick/anaconda3/bin/python3",
+        "/data/.tmp/civitas-four-core/scripts/validate-release.py",
+        "--artifacts",
+        "/data/.tmp/civitas-industria-artifacts",
+        "--installer",
+        "/data/.tmp/civitas-industria-runtime/neoforge-21.1.249-installer.jar",
+        "--world",
+        "/data/.tmp/civitas-four-core/run/smoke-world",
+        "--output",
+        "/data/.tmp/civitas-four-core-acceptance-r1/distribution",
+        "--runtime-cache",
+        "/data/.tmp/civitas-industria-builds/dev-acceptance-r13/distribution/server"
+      ],
+      "log": "/data/.tmp/civitas-four-core-acceptance-r1/distribution.log",
+      "seconds": 79.82
+    }
+  ],
+  "open_acceptance_gates": [
+    "Authenticated multiplayer, voice, shared claims and combat with real clients",
+    "Representative GPU dense-city rendering at 1080p and 1440p",
+    "Mixed-direction junction traffic, real terrain/mining and player economy playtests",
+    "Combined staging with authenticated clients and physical scheduled traffic",
+    "Deliberate production promotion, intended-world pregeneration and backup scheduling"
+  ],
+  "civitas_jar_sha256": "64df95ce7f32ec9af9e06e06eed55cb5b14ab9677077a88e4ed24937c1d27dc1",
+  "finished_utc": "2026-09-10T09:05:25.115615+00:00"
+}
