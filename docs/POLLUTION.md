@@ -30,8 +30,9 @@ path, including farm animals and compatible modded species. One-tick baby age
 advances from ServerCore's inactive ticking path use the same growth factor. Villagers and monsters
 are excluded; species with their own age implementation need separate compatibility.
 
-Crops retain at least 15% of their normal random-tick growth opportunities by default.
-Their rate is limited by both current severity and accumulated vegetation injury.
+Civitas retains at least 15% of otherwise-eligible random-tick crop growth
+opportunities by default. It honors growth cancellations already made by other mods;
+this floor does not override their restrictions. The rate is limited by both current severity and accumulated vegetation injury.
 Light pollution therefore has a small immediate effect, while damaged soil can
 remain unproductive after the air clears. The hook covers vanilla crops and modded
 plants that participate in NeoForge crop growth events, including IE hemp. Bonemeal
@@ -47,7 +48,8 @@ from older saves cannot safely be inferred or erased; only the new modifier is r
 Animal penalties use one removable maximum-health modifier. They preserve the base
 stat and other mods' modifiers, do not stack after saving/reloading, and never grant
 free healing when removed. Returning to clean conditions restores maximum capacity
-within five seconds; actual health still needs ordinary healing. Each animal's
+at the next environment sample (normally within five seconds of ticking); actual
+health still needs ordinary healing. Each animal's
 vanilla age remains the saved authority. No animal is processed while unloaded.
 
 ## Appearance and feedback

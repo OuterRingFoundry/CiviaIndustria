@@ -1,8 +1,9 @@
 # Four-core integration — development revision
 
 Pollution refinement in 0.3.0 adds graded vegetation/crop/animal effects and budgeted
-client updates. See [POLLUTION.md](POLLUTION.md) for behavior and tuning. The
-measurements below describe the earlier four-core checkpoint unless stated otherwise.
+client updates, original workshop models and the lime/sulfate recovery chain. See
+[POLLUTION.md](POLLUTION.md) for behavior and tuning and
+[PROCESS_CHAINS.md](PROCESS_CHAINS.md) for physical process logic and exact recipes.
 
 Minecraft 1.21.1, NeoForge 21.1.249, Java 21. This supersedes the beta's two-core
 pack composition. Current evidence is recorded separately from the earlier beta.
@@ -92,12 +93,12 @@ saved native clouds. Sampling reads at most 16 loaded chunk counters per process
 region, within the existing region budget. It never loads a missing chunk. The bridge
 retains no world, chunk or entity references and adds no packets or save schema.
 
-The native mods have their own simulation costs. The new full-pack combined server
-fixture measured 20.02 TPS, mean 16.16 ms and p95 18.99 ms over 1,200 ticks, with
-200 active furnaces, 20 moving graph-fixture trains, 20 receiving warehouses,
-500 seeded rain cells and 30 simulated players. Cargo was conserved. These results
-apply to the designated build server and this fixture; real clients, representative
-GPUs and arbitrary large native chimney networks require separate playtesting.
+The native mods have their own simulation costs. The final 0.3.0 combined server
+fixture measured 20.02 TPS, mean 19.63 ms, p95 23.06 ms, max 57.45 ms over 1,200 ticks,
+with 200 AI-enabled cows, 200 active furnaces, 20 moving train fixtures, 20 receiving
+warehouses, 500 rain cells and 30 simulated players. Cargo was conserved. These results
+apply to the designated server and this fixture; representative GPUs, authenticated
+clients and arbitrary large native chimney networks still require playtesting.
 
 ## Implementation and validation
 

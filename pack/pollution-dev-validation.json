@@ -1,0 +1,189 @@
+{
+  "status": "automated-dev-passed; external acceptance open",
+  "started_utc": "2026-09-10T13:29:11.385752+00:00",
+  "scope": "Automated DEV tests only; production acceptance remains open",
+  "source_sha256": "18d80e7c69343aaa736b88b041c626fde660f8cb870b20367daac38969ce77e0",
+  "stages": [
+    {
+      "name": "verify-artifacts",
+      "status": "passed",
+      "command": [
+        "/home/frederick/anaconda3/bin/python3",
+        "/data/.tmp/civitas-pollution-refinement/scripts/verify-pack.py",
+        "--directory",
+        "/data/.tmp/civitas-industria-artifacts",
+        "--side",
+        "client",
+        "--all-artifacts"
+      ],
+      "log": "/data/.tmp/civitas-pollution-acceptance-r4/verify-artifacts.log",
+      "seconds": 0.32
+    },
+    {
+      "name": "tooling-tests",
+      "status": "passed",
+      "command": [
+        "/home/frederick/anaconda3/bin/python3",
+        "/data/.tmp/civitas-pollution-refinement/scripts/check-tooling.py"
+      ],
+      "log": "/data/.tmp/civitas-pollution-acceptance-r4/tooling-tests.log",
+      "seconds": 1.32
+    },
+    {
+      "name": "content",
+      "status": "passed",
+      "command": [
+        "/home/frederick/anaconda3/bin/python3",
+        "/data/.tmp/civitas-pollution-refinement/scripts/validate-content.py"
+      ],
+      "log": "/data/.tmp/civitas-pollution-acceptance-r4/content.log",
+      "seconds": 0.07
+    },
+    {
+      "name": "clean-build",
+      "status": "passed",
+      "command": [
+        "./gradlew",
+        "--no-daemon",
+        "clean",
+        "compileJava",
+        "test",
+        "build"
+      ],
+      "log": "/data/.tmp/civitas-pollution-acceptance-r4/clean-build.log",
+      "seconds": 11.34
+    },
+    {
+      "name": "integration-matrix",
+      "status": "passed",
+      "command": [
+        "/home/frederick/anaconda3/bin/python3",
+        "/data/.tmp/civitas-pollution-refinement/scripts/integration-matrix.py",
+        "--artifacts",
+        "/data/.tmp/civitas-industria-artifacts",
+        "--output",
+        "/data/.tmp/civitas-pollution-acceptance-r4/matrix"
+      ],
+      "log": "/data/.tmp/civitas-pollution-acceptance-r4/integration-matrix.log",
+      "seconds": 206.45
+    },
+    {
+      "name": "save-write",
+      "status": "passed",
+      "command": [
+        "/home/frederick/anaconda3/bin/python3",
+        "/data/.tmp/civitas-pollution-refinement/scripts/smoke-server.py",
+        "--runtime-write"
+      ],
+      "log": "/data/.tmp/civitas-pollution-acceptance-r4/save-write.log",
+      "seconds": 21.12
+    },
+    {
+      "name": "save-read",
+      "status": "passed",
+      "command": [
+        "/home/frederick/anaconda3/bin/python3",
+        "/data/.tmp/civitas-pollution-refinement/scripts/smoke-server.py",
+        "--runtime-read"
+      ],
+      "log": "/data/.tmp/civitas-pollution-acceptance-r4/save-read.log",
+      "seconds": 20.17
+    },
+    {
+      "name": "save-refusal",
+      "status": "passed",
+      "command": [
+        "/home/frederick/anaconda3/bin/python3",
+        "/data/.tmp/civitas-pollution-refinement/scripts/check-save-refusal.py"
+      ],
+      "log": "/data/.tmp/civitas-pollution-acceptance-r4/save-refusal.log",
+      "seconds": 230.36
+    },
+    {
+      "name": "railway-restart",
+      "status": "passed",
+      "command": [
+        "/home/frederick/anaconda3/bin/python3",
+        "/data/.tmp/civitas-pollution-refinement/scripts/test-railway-restart.py",
+        "--fixture",
+        "/data/.tmp/civitas-pollution-acceptance-r4/matrix/run-matrix-full-server",
+        "--output",
+        "/data/.tmp/civitas-pollution-acceptance-r4/railway-restart"
+      ],
+      "log": "/data/.tmp/civitas-pollution-acceptance-r4/railway-restart.log",
+      "seconds": 82.56
+    },
+    {
+      "name": "physical-route",
+      "status": "passed",
+      "command": [
+        "/home/frederick/anaconda3/bin/python3",
+        "/data/.tmp/civitas-pollution-refinement/scripts/test-physical-route.py",
+        "--fixture",
+        "/data/.tmp/civitas-pollution-acceptance-r4/matrix/run-matrix-full-server",
+        "--output",
+        "/data/.tmp/civitas-pollution-acceptance-r4/physical-route"
+      ],
+      "log": "/data/.tmp/civitas-pollution-acceptance-r4/physical-route.log",
+      "seconds": 298.76
+    },
+    {
+      "name": "shared-railway",
+      "status": "passed",
+      "command": [
+        "/home/frederick/anaconda3/bin/python3",
+        "/data/.tmp/civitas-pollution-refinement/scripts/test-shared-railway.py",
+        "--fixture",
+        "/data/.tmp/civitas-pollution-acceptance-r4/matrix/run-matrix-full-server",
+        "--output",
+        "/data/.tmp/civitas-pollution-acceptance-r4/shared-railway"
+      ],
+      "log": "/data/.tmp/civitas-pollution-acceptance-r4/shared-railway.log",
+      "seconds": 139.73
+    },
+    {
+      "name": "combined-staging",
+      "status": "passed",
+      "command": [
+        "/home/frederick/anaconda3/bin/python3",
+        "/data/.tmp/civitas-pollution-refinement/scripts/run-staging.py",
+        "--combined",
+        "--fixture",
+        "/data/.tmp/civitas-pollution-acceptance-r4/matrix/run-matrix-full-server",
+        "--output",
+        "/data/.tmp/civitas-pollution-acceptance-r4/combined-staging"
+      ],
+      "log": "/data/.tmp/civitas-pollution-acceptance-r4/combined-staging.log",
+      "seconds": 159.76
+    },
+    {
+      "name": "distribution",
+      "status": "passed",
+      "command": [
+        "/home/frederick/anaconda3/bin/python3",
+        "/data/.tmp/civitas-pollution-refinement/scripts/validate-release.py",
+        "--artifacts",
+        "/data/.tmp/civitas-industria-artifacts",
+        "--installer",
+        "/data/.tmp/civitas-industria-runtime/neoforge-21.1.249-installer.jar",
+        "--world",
+        "/data/.tmp/civitas-pollution-refinement/run/smoke-world",
+        "--output",
+        "/data/.tmp/civitas-pollution-acceptance-r4/distribution",
+        "--runtime-cache",
+        "/data/.tmp/civitas-four-core-acceptance-r1/distribution/server"
+      ],
+      "log": "/data/.tmp/civitas-pollution-acceptance-r4/distribution.log",
+      "seconds": 68.74
+    }
+  ],
+  "open_acceptance_gates": [
+    "Authenticated multiplayer, voice, shared claims and combat with real clients",
+    "Representative GPU dense-city rendering at 1080p and 1440p",
+    "Mixed-direction junction traffic, real terrain/mining and player economy playtests",
+    "Combined staging with authenticated clients and physical scheduled traffic",
+    "Deliberate production promotion, intended-world pregeneration and backup scheduling"
+  ],
+  "civitas_jar_sha256": "2f06b4b605e31619dbb130c778ae4a6f9ead5ec5c7bcd4f55eb917916e62bf57",
+  "finished_utc": "2026-09-10T13:49:52.160523+00:00"
+}

@@ -1,0 +1,24 @@
+{
+  "scope": "Two native scheduled trains share physical track, three signals and a contested station; red-signal queue survives process restart; leading train departs and follower resumes; final restart verifies stations and five-billion-item cargo authorities",
+  "trains": 2,
+  "signals": 3,
+  "processes": 3,
+  "output": "/data/.tmp/civitas-pollution-acceptance-r4/shared-railway",
+  "passed": true,
+  "observations": {
+    "trains": [
+      {
+        "id": "a86e2e15-435f-470f-9acc-cab5327a5401",
+        "quantity": 5000000000
+      },
+      {
+        "id": "731a0e79-2fc8-49a2-9378-709e297e9941",
+        "quantity": 5000000001
+      }
+    ],
+    "queuedTicksBeforeRestart": 60,
+    "queuedPosition": 320.5,
+    "queuedTicksAfterRestart": 40,
+    "resumedFollowerPosition": 400.5
+  }
+}

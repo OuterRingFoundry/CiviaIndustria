@@ -1,10 +1,36 @@
-# Pollution refinement — active development
+# Pollution and workshop refinement — verified development build, 2026-09-10
 
-0.3.0-dev adds six pollution degrees, graded vegetation/water palettes, animal
-health and maturation effects, crop penalties and bounded rendering updates. The
-initial build passed 65 domain checks; current integration/client/workload validation
-is in progress. See [POLLUTION.md](docs/POLLUTION.md). Earlier evidence below does not
-certify this revision.
+**0.3.0-dev passed the complete automated DEV acceptance suite.** Minecraft 1.21.1,
+NeoForge 21.1.249, Java 21; the same four pinned industrial cores and dependencies.
+
+Pollution now has six degrees, continuous grass/foliage/water discoloration, crop
+penalties, reversible animal maximum-health penalties and slower passive maturation.
+Rendering and network updates use bounded work and deduplicated snapshots. See
+[POLLUTION.md](docs/POLLUTION.md) for configuration and recovery behavior.
+
+Precision parts use real Create sequenced assembly with shared plates, gears, IE wire
+and fasteners. Limestone/calcite becomes quicklime, hydrated lime and hemp-supported
+sorbent; native sulfur capture produces sulfate cake, then gypsum building panels.
+[PROCESS_CHAINS.md](docs/PROCESS_CHAINS.md) gives the exact costs and physical reasoning.
+Original warm iron/brass/teal textures and baked machine/ingredient models accompany
+the chain; [ART_DIRECTION.md](docs/ART_DIRECTION.md) records the assets and generation.
+
+- 65 domain checks, 13 Python checks, 214 JSON resources and 35 original textures.
+- All 36 GameTests pass in each of eight mod profiles, including actual assembly
+  progress, bucket return, paid sulfate capture, crop events, animal aging and recovery.
+- Full client passes all block/item/moving-model checks, adjacent-face visibility,
+  eight pollution captures, a daylight workshop capture and clean save.
+- All 13 automated acceptance stages and all 11 distribution stages pass; saves,
+  damaged-save refusal, physical freight and shared signals remain verified.
+- Mixed workload: 20.02 TPS, mean 19.63 ms, p95 23.06 ms, max 57.45 ms, including 200 AI-enabled
+  cows, 200 active furnaces, 20 moving train fixtures, 20 receiving warehouses,
+  500 rain cells, raids and 30 simulated players. Cargo is conserved.
+- Client/server download archives and the extracted server bootstrap pass exact
+  artifact/config verification. See `pack/pollution-package-validation.json`.
+
+Evidence is in `pack/pollution-*.json` and [VALIDATION_REPORT.md](docs/VALIDATION_REPORT.md).
+This is a tested development build. Authenticated multiplayer, representative GPUs,
+arbitrary junction traffic and player-economy balancing still require playtesting.
 
 ---
 

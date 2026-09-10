@@ -9,7 +9,14 @@ civic upkeep, bulk cargo and physical freight, warehouses and tanks, commissione
 parcels, bounded industrial raids, and client ecological tint/haze and decorative animation.
 The exact Create, Immersive Engineering, Pollution of the Realms, Advanced Chimneys,
 ForgeEndertech, KubeJS and supporting mod artifacts are pinned. See the
-[four-core integration guide](docs/FOUR_CORE_INTEGRATION.md) for the new progression.
+[four-core integration guide](docs/FOUR_CORE_INTEGRATION.md) for the progression.
+
+The 0.3.0 revision adds six pollution degrees, grass/water discoloration, slower crop
+and animal growth, reversible animal health penalties, and bounded client updates.
+[Pollution behavior and settings](docs/POLLUTION.md) explain the effects. Mechanical
+component assembly and lime-based sulfur recovery connect the four mods through
+[documented process chains](docs/PROCESS_CHAINS.md), with original workshop textures
+and baked 3D models described in the [art guide](docs/ART_DIRECTION.md).
 
 - [Current work status](STATUS.md): completed changes, checks and remaining acceptance work.
 - [Validation report](docs/VALIDATION_REPORT.md): tested behavior, evidence and remaining gates.

@@ -1,3 +1,90 @@
+# Pollution and process workshop — 0.3.0-dev, 2026-09-10
+
+This revision passed all 13 automated DEV stages at **2026-09-10T13:49:52.160523+00:00** on the
+designated server. The exact tested JAR is `civitas_industria-0.3.0-dev.jar` with SHA-256
+`2f06b4b605e31619dbb130c778ae4a6f9ead5ec5c7bcd4f55eb917916e62bf57`. The implementation/configuration source digest is
+`18d80e7c69343aaa736b88b041c626fde660f8cb870b20367daac38969ce77e0`. Historical reports below describe earlier builds.
+
+## Ecology and integration
+
+Six pollution degrees drive continuous crop and animal effects. Health uses one
+removable modifier, preserving base/other-mod attributes and avoiding free healing.
+Passive baby maturation slows; feeding, saved ages and adult breeding cooldowns retain
+their ordinary behavior. The native permanent join-time health reduction is replaced
+when the new animal system is enabled. Existing legacy base-health damage is not
+invented or erased. Animal sampling is staggered and uses due times so delayed AI
+updates do not indefinitely miss a modulo schedule. See [POLLUTION.md](POLLUTION.md).
+
+The mandatory build passed 65 domain checks, 13 Python regression checks, 214 resource
+JSON checks and 35 original 32×32 texture checks. All eight profiles passed 36 GameTests
+each. Native assertions run only where their mods are present; skipped optional tests
+do not certify compatibility. The actual four-core/full-server checks complete four
+Create deployer steps and the closing press with one deterministic component output,
+verify 250 mB slaking water and a returned manual-crafting bucket, consume sulfur
+filter reagent into sulfate cake, and reject the obsolete sulfur/fertilizer shortcut.
+Existing paid chimney routing, exposure accounting and canonical sheet checks pass.
+
+Animal/crop tests exercise real age ticks, an independent health modifier, NBT reload,
+recovery without healing, explicit feeding and 1,000 crop growth events. An earlier
+fixture used a too-strict absolute startup-tick floor; comparing age advancement with
+actual entity ticks corrected that test. The first sulfate test ran before native
+media initialization; its normal update delay is now respected. No production resource
+cost was relaxed. The r3 full acceptance run was deliberately interrupted after save
+checks to fix adjacent-face culling on the inset models. The complete r4 run certifies
+the final source. Failed/interrupted run directories were retained under `/data/.tmp`.
+
+## Visuals and logical cost
+
+The built-in image tool supplied 16 additional original material tiles. Technical grid
+crop and nearest-neighbor export produced the shipped textures. Baked JSON geometry
+covers the factory, treatment station, freight terminal, gypsum panels and process
+items; existing moving utilities use the new metal surfaces. Inset housings preserve
+neighboring visible faces. [ART_PROMPTS.json](ART_PROMPTS.json) records provenance;
+[PROCESS_CHAINS.md](PROCESS_CHAINS.md) explains recipes and the game-scale abstractions.
+
+The full client with JEI/Embeddium passed all registered block states, every inventory
+item and all six moving models, plus actual adjacent-face checks. Eight pollution
+captures and one daylight workshop capture were saved, followed by a clean world save.
+Grass tints for clean/light/moderate/heavy/severe/extreme were
+`91bd59`, `9bb45f`, `aaa469`, `a79966`, `8c7a53`, `787365`;
+disabling tint and recovery both returned `91bd59`. Evidence and
+screenshot hashes are in `pack/pollution-client-validation.json`.
+
+Client work is bounded to loaded columns/sections, with fixed queue caps and no
+synchronous whole-level tint-cache invalidation. Block-color lookups read immutable
+primitive-key snapshots. Unchanged packets are suppressed except for a heartbeat;
+climate reads are cached within each environmental step and empty pollutant channels
+are skipped. These are implementation cost reductions, not a measured GPU speedup.
+The Xvfb/Mesa fixture at 1280×720 does not establish representative FPS, audio or
+multiplayer behavior. Remote authentication/version requests can time out on this
+server without invalidating the explicitly checked local client/save results.
+
+## Full server and packaged build
+
+Save/write/read, future/mismatched/truncated-save refusal, three-process train
+persistence, the 2,140-block physical mine-stockpile → factory → warehouse route,
+and shared physical track/signals/station checks all pass. Cargo remains conserved.
+The full mixed workload measured **20.02 TPS, mean 19.63 ms, p95 23.06 ms, max 57.45 ms** over
+1,200 measured ticks, with 10,000 decorations, 1,000 furnaces (200 confirmed active),
+20 moving train fixtures, 20 receiving warehouses, 500 seeded rain cells, three
+networks, physical raids, 30 fake players and **200 AI-enabled cows**. At least
+749 animal ticks were observed, and 200 animals held the pollution health
+modifier. Warehouses received 177,920 items. This workload adds animals to the
+older baseline, so the timing difference alone is not an isolated before/after test.
+
+All 11 distribution stages passed, including standalone shipped-JAR startup,
+backup/restore and restored startup. The client/server archives embed that exact
+custom JAR and official download references for upstream dependencies. ZIP integrity,
+manifest hashes/sides, source identity and a fresh extracted server-bootstrap install
+were verified. See `pack/pollution-package-validation.json` and the other
+`pack/pollution-*.json` reports; complete server evidence is at `/data/.tmp/civitas-pollution-acceptance-r4`.
+
+Authenticated multiplayer, representative GPUs, arbitrary junction traffic,
+player-economy balance and production deployment remain external acceptance gates.
+No production world was replaced or publicly launched.
+
+---
+
 # Four-core continuation — 2026-09-10
 
 The `0.2.0-dev` revision adds the requested four-core composition on Minecraft
