@@ -32,8 +32,9 @@ def main():
     required={'create','immersiveengineering','pollution-of-the-realms','advanced-chimneys','forgeendertech'}
     if not required<={a['project'] for a in lock['artifacts']}:raise ValueError('Missing core mod/dependency')
     args.output.mkdir(parents=True)
-    name='CiviaIndustria-0.2.0-four-core-dev'
-    index={'formatVersion':1,'game':'minecraft','versionId':'0.2.0-four-core-dev','name':'Civia Industria — Four Core',
+    version='0.3.0-pollution-dev'
+    name='CiviaIndustria-'+version
+    index={'formatVersion':1,'game':'minecraft','versionId':version,'name':'Civia Industria — Four Core',
         'summary':'Industrial civilization with integrated Create, IE, Pollution of the Realms and Advanced Chimneys.',
         'dependencies':{'minecraft':'1.21.1','neoforge':'21.1.249'},'files':[]}
     for a in lock['artifacts']:
@@ -56,7 +57,7 @@ def main():
         relative=path.relative_to(ROOT/'pack/overrides').as_posix()
         boot['pack/overrides/'+relative]=path.read_bytes()
         client[('server-overrides/' if relative=='server.properties' else 'overrides/')+relative]=path.read_bytes()
-    readme=(ROOT/'docs/FOUR_CORE_INTEGRATION.md').read_text()+'\n## Installation\n\nClient: import the .mrpack in a Modrinth-compatible launcher.\nServer: extract the server archive, then run `python3 server-bootstrap/install.py --output NEW_SERVER_DIRECTORY`. Use Java 21 and Python 3.11+. Read and accept the Minecraft EULA before starting the server.\n'
+    readme=(ROOT/'docs/FOUR_CORE_INTEGRATION.md').read_text()+'\n'+(ROOT/'docs/POLLUTION.md').read_text()+'\n## Installation\n\nClient: import the .mrpack in a Modrinth-compatible launcher.\nServer: extract the server archive, then run `python3 server-bootstrap/install.py --output NEW_SERVER_DIRECTORY`. Use Java 21 and Python 3.11+. Read and accept the Minecraft EULA before starting the server.\n'
     archive(args.output/(name+'.mrpack'),client)
     archive(args.output/(name+'-server.zip'),{'README.md':readme.encode(),**{'server-bootstrap/'+k:v for k,v in boot.items()}})
     (args.output/'README.md').write_text(readme)

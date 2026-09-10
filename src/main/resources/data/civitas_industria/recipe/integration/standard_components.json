@@ -17,22 +17,96 @@
       "modid": "adchimneys"
     }
   ],
-  "type": "create:mixing",
-  "ingredients": [
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "tag": "c:plates/iron"
+  },
+  "transitional_item": {
+    "id": "civitas_industria:incomplete_precision_component"
+  },
+  "loops": 1,
+  "sequence": [
     {
-      "tag": "c:plates/iron"
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "civitas_industria:incomplete_precision_component"
+        },
+        {
+          "item": "create:cogwheel"
+        }
+      ],
+      "results": [
+        {
+          "id": "civitas_industria:incomplete_precision_component"
+        }
+      ]
     },
     {
-      "tag": "c:plates/copper"
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "civitas_industria:incomplete_precision_component"
+        },
+        {
+          "item": "immersiveengineering:wire_copper"
+        }
+      ],
+      "results": [
+        {
+          "id": "civitas_industria:incomplete_precision_component"
+        }
+      ]
     },
     {
-      "item": "minecraft:redstone"
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "civitas_industria:incomplete_precision_component"
+        },
+        {
+          "tag": "c:nuggets/iron"
+        }
+      ],
+      "results": [
+        {
+          "id": "civitas_industria:incomplete_precision_component"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "civitas_industria:incomplete_precision_component"
+        },
+        {
+          "tag": "c:nuggets/iron"
+        }
+      ],
+      "results": [
+        {
+          "id": "civitas_industria:incomplete_precision_component"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "civitas_industria:incomplete_precision_component"
+        }
+      ],
+      "results": [
+        {
+          "id": "civitas_industria:incomplete_precision_component"
+        }
+      ]
     }
   ],
   "results": [
     {
-      "id": "civitas_industria:precision_component",
-      "count": 6
+      "id": "civitas_industria:precision_component"
     }
   ]
 }

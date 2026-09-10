@@ -24,3 +24,19 @@ Run scripts/generate-material-models.py to rebuild the JSON models only. The old
 scripts/generate-content.py is an initial bootstrap and would overwrite later gameplay
 recipes/profiles; do not use it to refresh artwork. Changes to artwork itself should
 start from the recorded prompts or source image, then be inspected at game size.
+
+## 0.3.0 process workshop extension
+
+Sixteen additional original material tiles and bounded baked models give the factory,
+remediation station, freight terminal and process ingredients a warm iron/brass/teal
+workshop appearance compatible with Create's mechanical vocabulary. The textures are
+in `src/main/resources/assets/civitas_industria/textures/block/process/`; models are
+in the matching `models/block` and `models/item` directories. The complete set now has
+35 original 32×32 textures. New source art was generated with the built-in image tool;
+Pillow only split its equal 4×4 grid and resized it with nearest-neighbor sampling.
+The prompt, source hash and export dimensions are recorded in ART_PROMPTS.json.
+
+`generate-material-models.py` also runs `generate-process-models.py`, preserving these
+refinements when rebuilding. No custom renderer, block entity or packet is added for
+the new static geometry. Existing moving utilities retain their animations. Materials
+are shared across models and all process geometry stays inside the block/item bounds.

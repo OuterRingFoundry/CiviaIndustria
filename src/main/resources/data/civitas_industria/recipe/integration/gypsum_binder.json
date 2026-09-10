@@ -17,22 +17,13 @@
       "modid": "adchimneys"
     }
   ],
-  "type": "create:mixing",
-  "ingredients": [
-    {
-      "item": "immersiveengineering:dust_sulfur"
-    },
-    {
-      "item": "minecraft:bone_meal"
-    },
-    {
-      "item": "minecraft:bone_meal"
-    }
-  ],
-  "results": [
-    {
-      "id": "immersiveengineering:fertilizer",
-      "count": 4
-    }
-  ]
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "civitas_industria:sulfate_filter_cake"
+  },
+  "result": {
+    "id": "civitas_industria:gypsum_binder"
+  },
+  "experience": 0.1,
+  "cookingtime": 200
 }

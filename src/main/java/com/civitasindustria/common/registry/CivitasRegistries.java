@@ -20,6 +20,13 @@ public final class CivitasRegistries {
     public static final DeferredItem<Item> CALIBRATION_KIT=ITEMS.registerSimpleItem("calibration_kit");
     public static final DeferredItem<Item> PRECISION_COMPONENT=ITEMS.registerSimpleItem("precision_component");
     public static final DeferredItem<Item> REMEDIATION_REAGENT=ITEMS.registerSimpleItem("remediation_reagent");
+    public static final java.util.List<String> PROCESS_ITEMS=java.util.List.of("limestone_dust","quicklime","hydrated_lime","sulfate_filter_cake","gypsum_binder","incomplete_precision_component");
+    public static final java.util.Map<String,DeferredItem<Item>> PROCESS_CONTENT=new java.util.LinkedHashMap<>();
+    public static final DeferredRegister<net.minecraft.world.item.CreativeModeTab> TABS=DeferredRegister.create(Registries.CREATIVE_MODE_TAB,CivitasIndustria.MOD_ID);
+    public static final DeferredHolder<net.minecraft.world.item.CreativeModeTab,net.minecraft.world.item.CreativeModeTab> INDUSTRY_TAB=TABS.register("industry",()->net.minecraft.world.item.CreativeModeTab.builder()
+        .title(net.minecraft.network.chat.Component.translatable("itemGroup.civitas_industria.industry"))
+        .icon(()->new ItemStack(PRECISION_COMPONENT.get()))
+        .displayItems((parameters,output)->ITEMS.getEntries().forEach(item->output.accept(item.get()))).build());
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES=DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE,CivitasIndustria.MOD_ID);
     public static final DeferredRegister<EntityType<?>> ENTITIES=DeferredRegister.create(Registries.ENTITY_TYPE,CivitasIndustria.MOD_ID);
     public static final DeferredHolder<EntityType<?>,EntityType<com.civitasindustria.common.threat.IndustrialRaider>> RAIDER=ENTITIES.register("industrial_raider",
@@ -29,6 +36,7 @@ public final class CivitasRegistries {
     public static final Map<String,DeferredBlock<? extends Block>> CONTENT=new LinkedHashMap<>();
     private static BlockBehaviour.Properties metal(){return BlockBehaviour.Properties.of().strength(3,6).sound(SoundType.METAL);}
     static {
+        for(String id:PROCESS_ITEMS)PROCESS_CONTENT.put(id,ITEMS.registerSimpleItem(id));
         for(var kind:WorldState.CivicNode.Kind.values()){
             String id=switch(kind){case CORE->"civic_core";case RELAY->"civic_relay";case LOGISTICS->"logistics_node";case DEFENSE->"defense_node";case MAINTENANCE->"maintenance_depot";};
             CONTENT.put(id,BLOCKS.register(id,()->new CivicBlock(metal(),kind)));
@@ -37,6 +45,7 @@ public final class CivitasRegistries {
             CONTENT.put(id,BLOCKS.register(id,()->id.equals("cargo_loader")||id.equals("cargo_unloader")||id.equals("freight_terminal")?
                 new FreightBlock(metal().explosionResistance(3600000).pushReaction(net.minecraft.world.level.material.PushReaction.BLOCK)):
                 new StorageBlock(metal().explosionResistance(3600000).pushReaction(net.minecraft.world.level.material.PushReaction.BLOCK))));
+        CONTENT.put("gypsum_panel",BLOCKS.register("gypsum_panel",()->new Block(BlockBehaviour.Properties.of().strength(1.5f).sound(SoundType.STONE))));
         CONTENT.put("remediation_station",BLOCKS.register("remediation_station",()->new com.civitasindustria.common.environment.RemediationBlock(metal())));
         CONTENT.put("factory_controller",BLOCKS.register("factory_controller",()->new com.civitasindustria.common.factory.FactoryBlock(metal().explosionResistance(3600000).pushReaction(net.minecraft.world.level.material.PushReaction.BLOCK))));
         CONTENT.put("bulk_tank",BLOCKS.register("bulk_tank",()->new BulkTankBlock(metal().explosionResistance(3600000).pushReaction(net.minecraft.world.level.material.PushReaction.BLOCK))));
@@ -58,5 +67,5 @@ public final class CivitasRegistries {
         event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,TANK_ENTITY.get(),(tank,side)->tank);
         event.registerBlockEntity(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK,CARGO_ENTITY.get(),(cargo,side)->cargo.handler);
     }
-    public static void register(IEventBus bus){bus.addListener(CivitasRegistries::capabilities);bus.addListener(CivitasRegistries::attributes);BLOCKS.register(bus);ITEMS.register(bus);BLOCK_ENTITIES.register(bus);ENTITIES.register(bus);MENUS.register(bus);}
+    public static void register(IEventBus bus){bus.addListener(CivitasRegistries::capabilities);bus.addListener(CivitasRegistries::attributes);BLOCKS.register(bus);ITEMS.register(bus);TABS.register(bus);BLOCK_ENTITIES.register(bus);ENTITIES.register(bus);MENUS.register(bus);}
 }

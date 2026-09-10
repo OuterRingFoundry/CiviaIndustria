@@ -1,9 +1,9 @@
 {
   "textures": {
-    "steel_casing": "civitas_industria:block/steel_casing",
-    "tank_top": "civitas_industria:block/tank_top",
-    "tank_side": "civitas_industria:block/tank_side",
-    "brass_gear": "civitas_industria:block/brass_gear",
+    "steel_casing": "civitas_industria:block/process/workshop_iron",
+    "tank_top": "civitas_industria:block/process/workshop_bearing",
+    "brass_gear": "civitas_industria:block/process/workshop_brass",
+    "tank_side": "civitas_industria:block/process/workshop_tank",
     "particle": "civitas_industria:block/steel_casing"
   },
   "elements": [

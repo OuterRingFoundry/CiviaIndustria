@@ -19,6 +19,7 @@ import java.util.*;
 /** Disposable mixed server workload. Fake players do not measure client/network load. */
 final class CombinedLoad {
     private final List<Train> trains = new ArrayList<>();
+    private final List<net.minecraft.world.entity.animal.Cow> animals = new ArrayList<>();
     private final List<BlockPos> warehouses = new ArrayList<>();
     private final CellPos raidCell = new CellPos(20,74);
     private int chunks, wait, raidTicks, peakRaid;
@@ -49,6 +50,13 @@ final class CombinedLoad {
             level.setChunkForced(x>>4,z>>4,true);level.getChunk(x>>4,z>>4);
             player.setGameMode(GameType.SURVIVAL);player.getAbilities().invulnerable=true;
             player.moveTo(x+.5,-59,z+.5,0,0);level.addNewPlayer(player);
+        }
+        for(int n=0;n<200;n++){
+            int x=300+(n%20)*2,z=4358+(n/20)*2;
+            level.setChunkForced(x>>4,z>>4,true);level.getChunk(x>>4,z>>4);
+            var animal=net.minecraft.world.entity.EntityType.COW.create(level);
+            animal.setInvulnerable(true);animal.setPersistenceRequired();animal.setAge(n%2==0?-24000:0);
+            animal.moveTo(x+.5,-59,z+.5,0,0);level.addFreshEntity(animal);animals.add(animal);
         }
         for(int n=0;n<20;n++)trains.add(CarriageChecks.fixture(level,new BlockPos(2048+n*8,-59,4100),5_000_000_000L+n));
         startPosition=trains.getFirst().carriages.getFirst().getLeadingPoint().position;
@@ -88,7 +96,11 @@ final class CombinedLoad {
         double travelled=trains.stream().mapToDouble(t->t.carriages.getFirst().getLeadingPoint().position-startPosition).min().orElse(0);
         int networks=runtime.networks().size();
         if(trains.size()!=20||travelled<100||serving!=20||raidTicks<100||level.players().size()!=30||networks<3)throw new AssertionError("Mixed workload incomplete: trains="+trains.size()+" distance="+travelled+" warehouses="+serving+" raidTicks="+raidTicks+" players="+level.players().size()+" networks="+networks);
-        report.addProperty("scope","Combined synthetic server load: 30 fake players, 3 added networks, 20 native moving graph-fixture trains, warehouse traffic and explicitly triggered physical raids; no authenticated clients, client packets, voice or physical railway signals");
+        long affected=animals.stream().filter(a->a.getAttribute(net.minecraft.world.entity.ai.attributes.Attributes.MAX_HEALTH).getModifier(com.civitasindustria.platform.AnimalPollution.HEALTH)!=null).count();
+        int minTicks=animals.stream().mapToInt(a->a.tickCount).min().orElse(0);
+        if(animals.size()!=200||animals.stream().anyMatch(a->!a.isAlive()||a.isNoAi())||minTicks<100||affected==0)throw new AssertionError("Animal workload incomplete");
+        report.addProperty("animals_with_ai",animals.size());report.addProperty("minimum_animal_ticks",minTicks);report.addProperty("pollution_affected_animals",affected);
+        report.addProperty("scope","Combined synthetic server load: 30 fake players, 200 AI-enabled cows, 3 added networks, 20 native moving graph-fixture trains, warehouse traffic and explicitly triggered physical raids; no authenticated clients, client packets, voice or physical railway signals");
         report.addProperty("activity_counters_include_200_tick_warmup",true);report.addProperty("cargo_conserved",true);
         report.addProperty("fake_players",level.players().size());report.addProperty("networks_observed",networks);report.addProperty("moving_trains",20);report.addProperty("minimum_train_travel",travelled);report.addProperty("warehouses_receiving",serving);report.addProperty("warehouse_items_received",received);report.addProperty("raid_active_ticks",raidTicks);report.addProperty("peak_raiders",peakRaid);
     }

@@ -1,7 +1,7 @@
 {
   "textures": {
-    "steel_casing": "civitas_industria:block/steel_casing",
-    "tank_side": "civitas_industria:block/tank_side",
+    "steel_casing": "civitas_industria:block/process/workshop_iron",
+    "tank_side": "civitas_industria:block/process/workshop_tank",
     "particle": "civitas_industria:block/steel_casing"
   },
   "elements": [

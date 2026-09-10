@@ -141,3 +141,11 @@ Pumps and pushers hold no inventory, accept partial transfers, and preserve long
 storage. For powered bulk automation, use the freight machines and industrial mods.
 These utilities add no server ticker or continuous neighborhood scan. Their moving
 parts still animate locally; only interactions change synchronized control parameters.
+
+## Integrated workshop recipes
+
+The 0.3.0 four-core pack uses mechanical component assembly and a lime-based sulfur
+capture chain with spent sulfate recovered into gypsum panels. See
+[PROCESS_CHAINS.md](PROCESS_CHAINS.md) for the exact inputs, water costs, Create/IE
+machine choices, native filter servicing and the reasoning behind each operation.
+The new materials and 3D models appear in the Civitas Industria creative tab and JEI.

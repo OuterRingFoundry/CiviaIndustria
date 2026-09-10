@@ -27,6 +27,7 @@ public final class ClientValidation {
             var running=(com.civitasindustria.common.factory.FactoryBlockEntity)level.getBlockEntity(factory);running.beginCommissioning();
             running.inventory.insertItem(0,new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.RAW_IRON,64),false);running.inventory.insertItem(1,new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.COAL,64),false);
             int slot=0;for(var item:new net.minecraft.world.item.Item[]{com.civitasindustria.common.registry.CivitasRegistries.CALIBRATION_KIT.get(),com.civitasindustria.common.registry.CivitasRegistries.PRECISION_COMPONENT.get(),com.civitasindustria.common.registry.CivitasRegistries.REMEDIATION_REAGENT.get()})player.getInventory().setItem(slot++,new net.minecraft.world.item.ItemStack(item));
+            for(var item:com.civitasindustria.common.registry.CivitasRegistries.PROCESS_CONTENT.values())player.getInventory().setItem(slot++,new net.minecraft.world.item.ItemStack(item.get()));
             player.setGameMode(net.minecraft.world.level.GameType.CREATIVE);player.getAbilities().flying=true;player.onUpdateAbilities();player.connection.teleport(15,-52,18,140,30);
         });
         if(ticks==120){
@@ -35,14 +36,24 @@ public final class ClientValidation {
                 var model=mc.getBlockRenderer().getBlockModel(state);if(model==manager.getMissingModel())throw new AssertionError("Missing block model: "+state);
                 for(var direction:new net.minecraft.core.Direction[]{null,net.minecraft.core.Direction.UP,net.minecraft.core.Direction.DOWN,net.minecraft.core.Direction.NORTH,net.minecraft.core.Direction.SOUTH,net.minecraft.core.Direction.EAST,net.minecraft.core.Direction.WEST})for(var quad:model.getQuads(state,direction,net.minecraft.util.RandomSource.create(0)))if(quad.getSprite().contents().name().equals(net.minecraft.client.renderer.texture.MissingTextureAtlasSprite.getLocation()))throw new AssertionError("Missing material: "+state);
             }
+            for(var item:com.civitasindustria.common.registry.CivitasRegistries.ITEMS.getEntries()){
+                var model=mc.getItemRenderer().getModel(new net.minecraft.world.item.ItemStack(item.get()),mc.level,mc.player,0);
+                if(model==manager.getMissingModel())throw new AssertionError("Missing item model: "+item.getId());
+                for(var direction:new net.minecraft.core.Direction[]{null,net.minecraft.core.Direction.UP,net.minecraft.core.Direction.DOWN,net.minecraft.core.Direction.NORTH,net.minecraft.core.Direction.SOUTH,net.minecraft.core.Direction.EAST,net.minecraft.core.Direction.WEST})for(var quad:model.getQuads(null,direction,net.minecraft.util.RandomSource.create(0)))if(quad.getSprite().contents().name().equals(net.minecraft.client.renderer.texture.MissingTextureAtlasSprite.getLocation()))throw new AssertionError("Missing item material: "+item.getId());
+            }
             for(String name:DecorativeRenderer.PARTS)if(manager.getModel(DecorativeRenderer.model(name))==manager.getMissingModel())throw new AssertionError("Missing moving model: "+name);
-            org.slf4j.LoggerFactory.getLogger(ClientValidation.class).info("CIVITAS MATERIAL MODELS PASS: all block states and six moving models");
+            org.slf4j.LoggerFactory.getLogger(ClientValidation.class).info("CIVITAS MATERIAL MODELS PASS: all block states, all inventory items and six moving models");
         }
         if(ticks==900&&mc.getSingleplayerServer()!=null)mc.getSingleplayerServer().execute(()->mc.getSingleplayerServer().getPlayerList().getPlayers().getFirst().connection.teleport(12,-55,-9,35,23));
         if(ticks==1000)mc.options.hideGui=false;
-        if(ticks==220&&mc.getSingleplayerServer()!=null)mc.getSingleplayerServer().execute(()->{
+        if((ticks==220||ticks==320||ticks==420||ticks==520||ticks==600)&&mc.getSingleplayerServer()!=null)mc.getSingleplayerServer().execute(()->{
             var level=mc.getSingleplayerServer().overworld();var runtime=com.civitasindustria.platform.WorldRuntime.get(level);
-            for(int x=-1;x<=1;x++)for(int z=-1;z<=1;z++){var cell=runtime.cell(new com.civitasindustria.domain.CellPos(x,z));runtime.emit(new com.civitasindustria.domain.CellPos(x,z),com.civitasindustria.domain.Pollutant.SOX,1000);cell.vegetationHealth=cell.aquaticHealth=cell.biodiversity=cell.cropSuitability=.1;cell.degradation=.9;runtime.dirty();}
+            double degree=ticks<320?.15:ticks<420?.3:ticks<520?.5:ticks<600?.7:.95;
+            for(int x=-1;x<=1;x++)for(int z=-1;z<=1;z++){
+                var cell=runtime.cell(new com.civitasindustria.domain.CellPos(x,z));java.util.Arrays.fill(cell.pollutants,0);
+                runtime.emit(new com.civitasindustria.domain.CellPos(x,z),com.civitasindustria.domain.Pollutant.SOX,degree*500);
+                cell.vegetationHealth=cell.aquaticHealth=cell.biodiversity=cell.cropSuitability=1-degree;cell.degradation=degree;runtime.dirty();
+            }
         });
         if(ticks==680)com.civitasindustria.common.config.ClientConfig.TINT.set(false);
         if(ticks==760)com.civitasindustria.common.config.ClientConfig.TINT.set(true);
@@ -50,7 +61,7 @@ public final class ClientValidation {
             var runtime=com.civitasindustria.platform.WorldRuntime.get(mc.getSingleplayerServer().overworld());
             for(int x=-1;x<=1;x++)for(int z=-1;z<=1;z++){var cell=runtime.cell(new com.civitasindustria.domain.CellPos(x,z));java.util.Arrays.fill(cell.pollutants,0);cell.vegetationHealth=cell.aquaticHealth=cell.biodiversity=cell.cropSuitability=1;cell.degradation=0;runtime.dirty();}
         });
-        if(ticks==200||ticks==650||ticks==720||ticks==1100){
+        if(ticks==200||ticks==290||ticks==390||ticks==490||ticks==590||ticks==650||ticks==720||ticks==1100){
             int tint=net.minecraft.client.renderer.BiomeColors.getAverageGrassColor(mc.level,new net.minecraft.core.BlockPos(0,-61,0));
             if(ticks==200){
                 com.civitasindustria.common.config.ClientConfig.TINT.set(false);
@@ -63,6 +74,7 @@ public final class ClientValidation {
             org.slf4j.LoggerFactory.getLogger(ClientValidation.class).info("Client grass tint: {}",Integer.toHexString(net.minecraft.client.renderer.BiomeColors.getAverageGrassColor(mc.level,new net.minecraft.core.BlockPos(0,-61,0))));
             net.minecraft.client.Screenshot.grab(mc.gameDirectory,mc.getMainRenderTarget(),message->org.slf4j.LoggerFactory.getLogger(ClientValidation.class).info("Client capture: {}",message.getString()));
         }
+        if(ClientEnvironment.pendingColumns()>512||ClientEnvironment.pendingSections()>4096)throw new AssertionError("Unbounded tint rebuild work");
         if(ticks==1140)mc.stop();
     }
 }

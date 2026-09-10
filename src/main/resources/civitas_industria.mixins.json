@@ -8,7 +8,9 @@
     "CreateCrusherCommissioningMixin",
     "IECommissioningMixin",
     "IECrusherCollisionMixin",
-    "NativePollutionChangeMixin"
+    "NativePollutionChangeMixin",
+    "AnimalPollutionMixin",
+    "NativeAnimalHealthMixin"
   ],
   "injectors": {
     "defaultRequire": 1

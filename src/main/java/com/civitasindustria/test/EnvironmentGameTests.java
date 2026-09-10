@@ -18,12 +18,12 @@ public final class EnvironmentGameTests {
     @GameTest(template="empty") public static void boundedSnapshotCodec(GameTestHelper h){
         var buffer=new RegistryFriendlyByteBuf(Unpooled.buffer(),h.getLevel().registryAccess());
         try{
-            var sample=new EnvironmentPayload(ResourceLocation.parse("minecraft:the_nether"),List.of(new EnvironmentPayload.Sample(-1,-2,.3f,.5f,1)));
+            var sample=new EnvironmentPayload(ResourceLocation.parse("minecraft:the_nether"),List.of(new EnvironmentPayload.Sample(-1,-2,.3f,.5f,1,.8f)));
             EnvironmentPayload.CODEC.encode(buffer,sample);if(buffer.readableBytes()>256)throw new AssertionError("Oversized snapshot");
             if(!sample.equals(EnvironmentPayload.CODEC.decode(buffer)))throw new AssertionError("Snapshot round trip");
             buffer.clear();buffer.writeUtf("minecraft:overworld");buffer.writeByte(255);
             try{EnvironmentPayload.CODEC.decode(buffer);throw new AssertionError("Unbounded snapshot accepted");}catch(IllegalArgumentException expected){}
-            try{new EnvironmentPayload.Sample(0,0,Float.NaN,0,0);throw new AssertionError("NaN accepted");}catch(IllegalArgumentException expected){}
+            try{new EnvironmentPayload.Sample(0,0,Float.NaN,0,0,0);throw new AssertionError("NaN accepted");}catch(IllegalArgumentException expected){}
         }finally{buffer.release();}
         h.succeed();
     }

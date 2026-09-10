@@ -17,6 +17,34 @@
     {
       "name": "remediation_reagent",
       "prompt": "Use case: stylized-concept. Asset type: a production Minecraft inventory item sprite for Civitas Industria, remediation_reagent. Depict a squat clear glass reagent jar with pale teal mineral granules, a brass-coloured metal lid and a small simple green leaf-shaped mark without any text. One single item only, centered with generous transparent margin on all sides. Genuine transparent background, no backdrop, no ground shadow. Original crisp 32-by-32 logical-pixel artwork shown enlarged, nearest-neighbor square pixels, no antialiasing, no soft gradients. Chunky recognisable silhouette and strong contrast at tiny inventory size. Cohesive restrained charcoal steel, worn brass, warm leather and teal accents; vanilla-friendly industrial pixel art. No letters, numbers, words, labels, logos, watermark or surrounding UI. Output only this isolated transparent item sprite."
+    },
+    {
+      "name": "process_materials_atlas",
+      "prompt": "Create an ORIGINAL production texture atlas for a Minecraft industrial mod, compatible in visual language with Create mod: warm brass, cast iron, pale galvanized steel, timber, muted teal, restrained grime and hand-built mechanical craftsmanship. This is one game texture atlas, not a scene or a model render. Square 1024x1024 image. EXACTLY a 4 by 4 grid of equal square tiles, edge to edge with NO gutters, borders between tiles, padding, perspective, words, numbers, labels, logos or captions. Each tile is a flat straight-on orthographic surface designed as chunky low-resolution 32x32 pixel art enlarged to its tile; sharp square pixels, small coherent palette, broad readable shapes, NOT photorealistic and no fine grain noise. All tiles have opaque backgrounds. The 16 tiles in reading order are: row1: (1) pale warm-gray riveted iron casing with simple corner bolts, (2) golden brushed brass plate with slight edge wear, (3) dark charcoal cast iron with a shallow recessed square panel, (4) warm oak plank material with iron strap. Row2: (5) horizontal steel ventilation grille with dark slots, (6) cream analog round pressure gauge face in brass housing with a single red needle and simple dark tick marks but NO digits, (7) muted teal painted tank steel with brass fastening band, (8) pale rough chalk limestone stone surface. Row3: (9) wound reddish copper-wire coil on a dark backing, (10) square brass bearing plate with a central round dark shaft hole and four bolts, (11) beige woven hemp filter cloth surface, (12) loose pale cream quicklime powder granules. Row4: (13) tan kraft paper sack surface with stitched seams and no printed marks, (14) damp gray sulfate filter-cake granules, (15) pale blue opaque wash-liquid inspection window with a dark iron frame, (16) brass wire filter mesh with dark backing. Keep coherent top-left pixel-art highlights without cast shadows. Clear physically plausible materials and high legibility at actual 32x32 game scale. Do not copy any existing mod texture.",
+      "source_size": [
+        1254,
+        1254
+      ],
+      "export": "Pillow equal 4x4 crop, nearest-neighbor 32x32 export only; no repaint",
+      "source_sha256": "e1465365433d7162810a1584434158f651a4666631232219799199490fe52c49",
+      "tiles": [
+        "filter_cloth",
+        "filter_mesh",
+        "limestone_surface",
+        "quicklime_granules",
+        "sorbent_sack",
+        "sulfate_cake",
+        "wash_window",
+        "workshop_bearing",
+        "workshop_brass",
+        "workshop_cast_iron",
+        "workshop_coil",
+        "workshop_gauge",
+        "workshop_iron",
+        "workshop_tank",
+        "workshop_timber",
+        "workshop_vent"
+      ]
     }
   ]
 }

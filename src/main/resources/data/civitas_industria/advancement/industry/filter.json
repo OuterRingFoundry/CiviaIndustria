@@ -22,7 +22,7 @@
       "id": "adpother:iron_filter_frame"
     },
     "title": "Capture before you vent",
-    "description": "Install leaves for carbon, wool or reagent for sulfur, and paper for dust.",
+    "description": "Install carbon media, lime sorbent for sulfur, and paper or hemp for dust.",
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": false

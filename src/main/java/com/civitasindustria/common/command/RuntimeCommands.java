@@ -25,6 +25,9 @@ public final class RuntimeCommands {
         CellData c=runtime(s).state().cells.get(p);
         if(c==null)return reply(s,"CI cell "+p+" | unstored pristine wilderness");
         return reply(s,"CI cell "+p+" | "+c.civilization+" | ecology "+c.ecology()+
+            " | pollution "+PollutionEffects.degree(PollutionEffects.severity(c))+" "+Math.round(PollutionEffects.severity(c)*100)+"%"+
+            " | crop rate "+String.format(java.util.Locale.ROOT,"%.2fx",PollutionEffects.cropRate(c,com.civitasindustria.common.config.ServerConfig.CROP_MIN_GROWTH.get()))+
+            " | animal health/growth "+String.format(java.util.Locale.ROOT,"%.2fx/%.2fx",com.civitasindustria.common.config.ServerConfig.ANIMAL_EFFECTS.get()?PollutionEffects.rate(PollutionEffects.severity(c),com.civitasindustria.common.config.ServerConfig.ANIMAL_MIN_HEALTH.get()):1,com.civitasindustria.common.config.ServerConfig.ANIMAL_EFFECTS.get()?PollutionEffects.rate(PollutionEffects.severity(c),com.civitasindustria.common.config.ServerConfig.ANIMAL_MIN_GROWTH.get()):1)+
             " | AQI "+c.aqi()+" | WQI "+c.waterQuality()+" | acid "+c.acidPrecursorLoad+
             " | pollutants "+java.util.Arrays.toString(c.pollutants)+" | degradation "+c.degradation);
     }

@@ -1,7 +1,7 @@
 {
   "textures": {
+    "steel_casing": "civitas_industria:block/process/workshop_iron",
     "maintenance_panel": "civitas_industria:block/maintenance_panel",
-    "steel_casing": "civitas_industria:block/steel_casing",
     "particle": "civitas_industria:block/steel_casing"
   },
   "elements": [

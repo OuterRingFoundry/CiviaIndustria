@@ -17,23 +17,22 @@
       "modid": "adchimneys"
     }
   ],
-  "type": "create:mixing",
+  "type": "create:compacting",
   "ingredients": [
     {
-      "item": "immersiveengineering:slag"
+      "item": "civitas_industria:hydrated_lime"
     },
     {
-      "item": "create:limestone"
+      "item": "civitas_industria:hydrated_lime"
     },
     {
-      "item": "minecraft:bone_meal"
+      "item": "immersiveengineering:hemp_fiber"
     }
   ],
   "results": [
     {
       "id": "civitas_industria:remediation_reagent",
-      "count": 6
+      "count": 2
     }
-  ],
-  "heat_requirement": "heated"
+  ]
 }

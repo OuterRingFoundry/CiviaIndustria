@@ -1,0 +1,52 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "immersiveengineering"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "adpother"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "adchimneys"
+    }
+  ],
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "item": "civitas_industria:gypsum_binder"
+    },
+    {
+      "item": "civitas_industria:gypsum_binder"
+    },
+    {
+      "item": "civitas_industria:gypsum_binder"
+    },
+    {
+      "item": "civitas_industria:gypsum_binder"
+    },
+    {
+      "item": "minecraft:paper"
+    },
+    {
+      "item": "minecraft:paper"
+    },
+    {
+      "type": "neoforge:single",
+      "fluid": "minecraft:water",
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "id": "civitas_industria:gypsum_panel",
+      "count": 4
+    }
+  ]
+}

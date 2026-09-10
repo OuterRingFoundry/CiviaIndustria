@@ -34,6 +34,10 @@ public final class ServerConfig {
     public static final ModConfigSpec.IntValue COMMISSION_TICKS=B.defineInRange("commissioningTicks",200,20,72000);
     public static final ModConfigSpec.IntValue RAID_WAVE_SIZE=B.defineInRange("raidWaveSize",6,1,24), RAID_LIFETIME=B.defineInRange("raidLifetimeTicks",2400,200,6000);
     public static final ModConfigSpec.DoubleValue NATIVE_EXPOSURE=B.comment("Regional exposure per native airborne pollution unit per 200 ticks; physical filters reduce this input. Existing ecological injury recovers gradually.").defineInRange("nativePollutionExposure",0.01,0.0,1.0);
+    public static final ModConfigSpec.BooleanValue ANIMAL_EFFECTS=B.comment("Gradual regional penalties to animal maximum health and passive baby growth; recovery never grants free healing.").define("animalPollutionEffects",true);
+    public static final ModConfigSpec.DoubleValue ANIMAL_MIN_HEALTH=B.defineInRange("animalMinimumHealthFactor",.6,.1,1);
+    public static final ModConfigSpec.DoubleValue ANIMAL_MIN_GROWTH=B.defineInRange("animalMinimumGrowthFactor",.35,.05,1);
+    public static final ModConfigSpec.DoubleValue CROP_MIN_GROWTH=B.defineInRange("cropMinimumGrowthFactor",.15,.05,1);
     public static final ModConfigSpec SPEC=B.build();
     private static ModConfigSpec.DoubleValue rate(String name,double value){return B.defineInRange(name,value,0,1);}
     public static SimulationSettings simulation(){return new SimulationSettings(AIR_DECAY.get(),DIFFUSION.get(),WET.get(),RUNOFF.get(),

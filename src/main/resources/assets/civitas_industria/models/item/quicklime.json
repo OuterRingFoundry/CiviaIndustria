@@ -1,0 +1,138 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "quicklime_granules": "civitas_industria:block/process/quicklime_granules",
+    "sorbent_sack": "civitas_industria:block/process/sorbent_sack",
+    "particle": "civitas_industria:block/process/workshop_iron"
+  },
+  "elements": [
+    {
+      "from": [
+        3,
+        1,
+        4
+      ],
+      "to": [
+        13,
+        10,
+        12
+      ],
+      "faces": {
+        "up": {
+          "texture": "#sorbent_sack"
+        },
+        "down": {
+          "texture": "#sorbent_sack"
+        },
+        "north": {
+          "texture": "#sorbent_sack"
+        },
+        "south": {
+          "texture": "#sorbent_sack"
+        },
+        "east": {
+          "texture": "#sorbent_sack"
+        },
+        "west": {
+          "texture": "#sorbent_sack"
+        }
+      }
+    },
+    {
+      "from": [
+        4,
+        10,
+        5
+      ],
+      "to": [
+        12,
+        12,
+        11
+      ],
+      "faces": {
+        "up": {
+          "texture": "#quicklime_granules"
+        },
+        "down": {
+          "texture": "#quicklime_granules"
+        },
+        "north": {
+          "texture": "#quicklime_granules"
+        },
+        "south": {
+          "texture": "#quicklime_granules"
+        },
+        "east": {
+          "texture": "#quicklime_granules"
+        },
+        "west": {
+          "texture": "#quicklime_granules"
+        }
+      }
+    },
+    {
+      "from": [
+        3,
+        9,
+        4
+      ],
+      "to": [
+        4,
+        12,
+        12
+      ],
+      "faces": {
+        "up": {
+          "texture": "#sorbent_sack"
+        },
+        "down": {
+          "texture": "#sorbent_sack"
+        },
+        "north": {
+          "texture": "#sorbent_sack"
+        },
+        "south": {
+          "texture": "#sorbent_sack"
+        },
+        "east": {
+          "texture": "#sorbent_sack"
+        },
+        "west": {
+          "texture": "#sorbent_sack"
+        }
+      }
+    },
+    {
+      "from": [
+        12,
+        9,
+        4
+      ],
+      "to": [
+        13,
+        12,
+        12
+      ],
+      "faces": {
+        "up": {
+          "texture": "#sorbent_sack"
+        },
+        "down": {
+          "texture": "#sorbent_sack"
+        },
+        "north": {
+          "texture": "#sorbent_sack"
+        },
+        "south": {
+          "texture": "#sorbent_sack"
+        },
+        "east": {
+          "texture": "#sorbent_sack"
+        },
+        "west": {
+          "texture": "#sorbent_sack"
+        }
+      }
+    }
+  ]
+}

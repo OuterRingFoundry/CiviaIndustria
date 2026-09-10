@@ -1,5 +1,9 @@
 # Four-core integration — development revision
 
+Pollution refinement in 0.3.0 adds graded vegetation/crop/animal effects and budgeted
+client updates. See [POLLUTION.md](POLLUTION.md) for behavior and tuning. The
+measurements below describe the earlier four-core checkpoint unless stated otherwise.
+
 Minecraft 1.21.1, NeoForge 21.1.249, Java 21. This supersedes the beta's two-core
 pack composition. Current evidence is recorded separately from the earlier beta.
 
@@ -29,25 +33,27 @@ Official projects: [Create](https://modrinth.com/mod/create),
 ## Playable progression
 
 1. Build a basic Create workshop and an IE coke oven/blast furnace. Ordinary stone
-   chimneys, leaves, wool and paper remain accessible before steel or commissioning.
+   chimneys, leaves and paper remain accessible before steel or commissioning.
+   Basic sulfur media comes from milling/firing/slaking limestone or calcite.
 2. Make shared iron/copper/gold sheets with a Create press or IE metal press.
    Either form of a tagged metal plate works in infrastructure recipes. Create can
    also press IE steel and aluminum; heated mixing can make IE electrum/constantan.
-3. Manufacture precision components from shared plates, copper and redstone. Mixing
-   increases batch yield. These components connect factory, freight and ventilation
-   progression, while starter processing remains available to make calibration kits.
+3. Assemble a precision component from one shared iron plate, a Create cogwheel,
+   IE copper wire and two iron fasteners. Hand crafting and the five-stage Create
+   deployer/press sequence use the same costs and yield one finished component.
 4. Fit an iron filter frame to the workshop exhaust. Upgrade through gold and diamond
    frames using components, steel and Create precision mechanisms. Metal pumps need
    an actual Create mechanical pump and IE mechanical components. A crafted filter
    frame still needs consumable filter material installed in its inventory.
 5. Grow IE hemp: press fiber into paper for dust filters or use hemp fabric for more
-   capacity. Carbon filters accept leaves, charcoal or hemp fabric. Sulfur filters
-   accept wool or Civitas remediation reagent. Heated mixing of IE slag, Create
-   limestone and bone meal produces six reagent units. Existing hand crafting remains.
+   capacity. Carbon filters accept leaves, charcoal or hemp fabric. Mill limestone
+   or calcite, fire the dust into quicklime, and mix with water into hydrated lime.
+   Support two lime units with hemp fiber to make two alkaline treatment reagent.
 6. Automate native filter inputs and extract spent byproducts using item capabilities.
-   Each material unit has a finite capacity. Reagent captures 32 sulfur units and
-   produces IE sulfur dust, which can be mixed with bone meal into fertilizer. This
-   is a consumptive chain; no recipe regenerates reagent from its own byproducts.
+   Hydrated lime captures 16 sulfur units; reagent captures 32. Each consumed unit
+   produces sulfate filter cake. Fire the cake into gypsum binder and compact it with
+   paper and water into building panels. See [PROCESS_CHAINS.md](PROCESS_CHAINS.md)
+   for exact costs, assembly steps and the physical reasoning.
 7. Build an exhaust route and commission heavy processing on its foundation. The
    consolidated factory recipe now uses Create mechanisms, IE engineering blocks,
    steel plates and a gold filter frame. The frame in the recipe is a construction

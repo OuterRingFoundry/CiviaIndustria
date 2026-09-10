@@ -9,6 +9,24 @@ public final class DomainTests {
     private static SimulationSettings settings(){return new SimulationSettings(.01,.12,.08,.1,.002,.003,.025,.3,1,0,.00001,1000);}
     public static void main(String[]args){
         if(Arrays.asList(args).contains("--verify-failure"))throw new AssertionError("Intentional domain failure propagation probe");
+        check(PollutionEffects.degree(.049)==PollutionEffects.Degree.CLEAN && PollutionEffects.degree(.05)==PollutionEffects.Degree.LIGHT
+            && PollutionEffects.degree(.2)==PollutionEffects.Degree.MODERATE && PollutionEffects.degree(.4)==PollutionEffects.Degree.HEAVY
+            && PollutionEffects.degree(.6)==PollutionEffects.Degree.SEVERE && PollutionEffects.degree(.8)==PollutionEffects.Degree.EXTREME,"Six severity boundaries");
+        CellData exposure=new CellData();check(PollutionEffects.severity(exposure)==0&&PollutionEffects.cropRate(exposure,.15)==1,"Clean conditions preserve growth");
+        boolean monotonic=true;double prior=1;
+        for(int n=0;n<=500;n++){exposure.pollutants[Pollutant.PM.ordinal()]=n;double factor=PollutionEffects.rate(PollutionEffects.severity(exposure),.35);monotonic&=factor<=prior+1e-9&&factor>=.35-1e-9;prior=factor;}
+        check(monotonic,"Maturation penalty is continuous, monotonic and bounded");
+        check(Math.abs(PollutionEffects.rate(1,.6)-.6)<1e-9&&Math.abs(PollutionEffects.cropRate(exposure,.15)-.15)<1e-9,"Extreme effects retain health and crop floors");
+        exposure.pollutants[Pollutant.PM.ordinal()]=0;exposure.degradation=.8;exposure.vegetationHealth=.2;
+        check(PollutionEffects.severity(exposure)==.8&&PollutionEffects.vegetation(exposure)>.79,"Removing emissions does not erase ecological injury");
+        exposure.degradation=0;exposure.add(Pollutant.SOIL_TOXICITY,250);
+        check(PollutionEffects.severity(exposure)==1,"Soil contamination independently affects ecology");
+        int biome=0x91bd59;boolean continuous=true;
+        for(double boundary:new double[]{.4,.75}){
+            int a=PollutionVisuals.tint(biome,boundary-1e-6,false),b=PollutionVisuals.tint(biome,boundary+1e-6,false);
+            for(int shift=0;shift<=16;shift+=8)continuous&=Math.abs(((a>>shift)&255)-((b>>shift)&255))<=1;
+        }
+        check(continuous&&PollutionVisuals.tint(biome,0,false)==biome&&PollutionVisuals.tint(biome,1,false)==0x747269,"Palette continuity, pristine biome and wasteland endpoint");
         check(CellPos.fromBlock(-1,-64).equals(new CellPos(-1,-1)),"Negative blocks");
         check(CellPos.fromBlock(-65,63).equals(new CellPos(-2,0)),"Cell boundaries");
         check(CellPos.fromChunk(-1,-5).equals(new CellPos(-1,-2)),"Negative chunks");
@@ -86,6 +104,10 @@ public final class DomainTests {
         double beforeMass=saturated.values().stream().mapToDouble(v->v.get(Pollutant.PM)).sum();
         simulator.step(saturated,List.of(cp),p->rain,conservative,1);
         check(saturated.values().stream().mapToDouble(v->v.get(Pollutant.PM)).sum()==beforeMass,"Saturated neighbors do not delete transported mass");
+        int[] climateCalls={0};Map<CellPos,CellData> cachedClimate=new TreeMap<>();
+        CellData mixed=new CellData();mixed.add(Pollutant.W_ACIDITY,20);mixed.add(Pollutant.W_TOXICITY,20);cachedClimate.put(cp,mixed);
+        simulator.step(cachedClimate,List.of(cp),p->{climateCalls[0]++;return rain;},settings(),1);
+        check(climateCalls[0]<=5,"Climate sampled once per source/neighbor despite multiple water channels");
         Map<CellPos,CellData> cleanWater=new TreeMap<>();cleanWater.put(cp,new CellData());
         simulator.step(cleanWater,List.of(cp),p->rain,conservative,2);
         check(cleanWater.isEmpty(),"Zero runoff creates no pristine neighbor records");

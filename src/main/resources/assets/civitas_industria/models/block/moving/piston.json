@@ -1,7 +1,7 @@
 {
   "textures": {
     "unloader_front": "civitas_industria:block/unloader_front",
-    "steel_casing": "civitas_industria:block/steel_casing",
+    "steel_casing": "civitas_industria:block/process/workshop_iron",
     "particle": "civitas_industria:block/steel_casing"
   },
   "elements": [

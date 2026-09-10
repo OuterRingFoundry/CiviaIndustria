@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "side": "civitas_industria:block/process/limestone_surface",
+    "bottom": "civitas_industria:block/process/filter_cloth",
+    "top": "civitas_industria:block/process/filter_cloth"
+  }
+}

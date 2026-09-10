@@ -1,3 +1,13 @@
+# Pollution refinement — active development
+
+0.3.0-dev adds six pollution degrees, graded vegetation/water palettes, animal
+health and maturation effects, crop penalties and bounded rendering updates. The
+initial build passed 65 domain checks; current integration/client/workload validation
+is in progress. See [POLLUTION.md](docs/POLLUTION.md). Earlier evidence below does not
+certify this revision.
+
+---
+
 # Four-core integration — verified development build, 2026-09-10
 
 **0.2.0-dev passed the complete automated DEV acceptance suite. Human and GPU
