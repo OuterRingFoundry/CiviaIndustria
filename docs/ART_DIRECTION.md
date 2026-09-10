@@ -38,5 +38,6 @@ The prompt, source hash and export dimensions are recorded in ART_PROMPTS.json.
 
 `generate-material-models.py` also runs `generate-process-models.py`, preserving these
 refinements when rebuilding. No custom renderer, block entity or packet is added for
-the new static geometry. Existing moving utilities retain their animations. Materials
+the new static geometry. Inset housings use non-occluding rendering so adjacent solid
+blocks retain their exposed faces. Existing moving utilities retain their animations. Materials
 are shared across models and all process geometry stays inside the block/item bounds.

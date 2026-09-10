@@ -43,11 +43,11 @@ public final class CivitasRegistries {
         }
         for(String id:List.of("cargo_crate","pallet","warehouse_controller","warehouse_port","cargo_loader","cargo_unloader","freight_terminal"))
             CONTENT.put(id,BLOCKS.register(id,()->id.equals("cargo_loader")||id.equals("cargo_unloader")||id.equals("freight_terminal")?
-                new FreightBlock(metal().explosionResistance(3600000).pushReaction(net.minecraft.world.level.material.PushReaction.BLOCK)):
+                new FreightBlock((id.equals("freight_terminal")?metal().noOcclusion():metal()).explosionResistance(3600000).pushReaction(net.minecraft.world.level.material.PushReaction.BLOCK)):
                 new StorageBlock(metal().explosionResistance(3600000).pushReaction(net.minecraft.world.level.material.PushReaction.BLOCK))));
         CONTENT.put("gypsum_panel",BLOCKS.register("gypsum_panel",()->new Block(BlockBehaviour.Properties.of().strength(1.5f).sound(SoundType.STONE))));
-        CONTENT.put("remediation_station",BLOCKS.register("remediation_station",()->new com.civitasindustria.common.environment.RemediationBlock(metal())));
-        CONTENT.put("factory_controller",BLOCKS.register("factory_controller",()->new com.civitasindustria.common.factory.FactoryBlock(metal().explosionResistance(3600000).pushReaction(net.minecraft.world.level.material.PushReaction.BLOCK))));
+        CONTENT.put("remediation_station",BLOCKS.register("remediation_station",()->new com.civitasindustria.common.environment.RemediationBlock(metal().noOcclusion())));
+        CONTENT.put("factory_controller",BLOCKS.register("factory_controller",()->new com.civitasindustria.common.factory.FactoryBlock(metal().noOcclusion().explosionResistance(3600000).pushReaction(net.minecraft.world.level.material.PushReaction.BLOCK))));
         CONTENT.put("bulk_tank",BLOCKS.register("bulk_tank",()->new BulkTankBlock(metal().explosionResistance(3600000).pushReaction(net.minecraft.world.level.material.PushReaction.BLOCK))));
         CONTENT.put("warehouse_casing",BLOCKS.register("warehouse_casing",()->new WarehouseCasingBlock(metal())));
         for(String id:List.of("decorative_gear","decorative_fan","decorative_pump","decorative_gauge","decorative_piston","decorative_vent"))
