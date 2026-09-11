@@ -35,3 +35,9 @@ The user's continuation authorization remains in force; historical phase/checkpo
 instructions in older reports are superseded. No background task or production deployment
 is configured. Follow the validation report rather than interpreting registrations or passing
 small tests as completion of the multiplayer and railway acceptance requirements.
+
+## Optional client tools
+
+[AEW Map Survey](tools/aew-map-survey/README.md) is an independent NeoForge 1.21.1
+client tool for temporary mapping within the connected server’s viewing limit.
+It has its own build, tests and installation instructions and does not require Civitas.
