@@ -13,6 +13,15 @@ neoForge {
         client {
             client()
             gameDirectory = project.file(providers.gradleProperty('ciClientDir').getOrElse('run-client-validation'))
+            if (providers.gradleProperty('ciRedesignValidation').isPresent()) {
+                systemProperty 'civitas.redesignValidation', 'true'
+                programArgument '--quickPlaySingleplayer'
+                programArgument 'ci-validation'
+                programArgument '--width'
+                programArgument '1280'
+                programArgument '--height'
+                programArgument '720'
+            }
             if (providers.gradleProperty('ciCreativeValidation').isPresent()) {
                 systemProperty 'civitas.creativeValidation', 'true'
                 programArgument '--quickPlaySingleplayer'
@@ -51,6 +60,7 @@ neoForge {
             gameDirectory = project.file(providers.gradleProperty('ciServerDir').getOrElse('run'))
             if (providers.gradleProperty('ciStaging').isPresent()) systemProperty 'civitas.staging', 'true'
             if (providers.gradleProperty('ciStagingCombined').isPresent()) systemProperty 'civitas.stagingCombined', 'true'
+            if (providers.gradleProperty('ciEconomyRestart').isPresent()) systemProperty 'civitas.economyRestart', providers.gradleProperty('ciEconomyRestart').get()
             if (providers.gradleProperty('ciResidenceRestart').isPresent()) systemProperty 'civitas.residenceRestart', providers.gradleProperty('ciResidenceRestart').get()
             if (providers.gradleProperty('ciRailwayRestart').isPresent()) systemProperty 'civitas.railwayRestart', providers.gradleProperty('ciRailwayRestart').get()
             if (providers.gradleProperty('ciRailwayRoute').isPresent()) systemProperty 'civitas.railwayRoute', providers.gradleProperty('ciRailwayRoute').get()

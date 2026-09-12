@@ -1,6 +1,13 @@
 {
   "replace": false,
   "values": [
-    "#c:storage_blocks"
+    {
+      "id": "#c:storage_blocks",
+      "required": false
+    },
+    "minecraft:iron_block",
+    "minecraft:gold_block",
+    "minecraft:copper_block",
+    "minecraft:coal_block"
   ]
 }
