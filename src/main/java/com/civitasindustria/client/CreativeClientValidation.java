@@ -107,7 +107,10 @@ public final class CreativeClientValidation {
                 if (!port.handler.insertItem(0,new ItemStack(Items.IRON_INGOT,32),false).isEmpty() || warehouse.total()!=32)
                     throw new AssertionError("Gallery warehouse port did not share controller storage");
                 LOG.info("CIVITAS CREATIVE WAREHOUSE PASS: 3x3 ring formed; port inserted 32 items into controller");
-                level.getServer().getPlayerList().getPlayers().getFirst().connection.teleport(32,-57,25,0,25);
+                var observer=level.getServer().getPlayerList().getPlayers().getFirst();
+                observer.getAbilities().flying=true;
+                observer.onUpdateAbilities();
+                observer.connection.teleport(32,-53,22,0,30);
             });
         }
         if (ticks == 350) { mc.options.hideGui=true; mc.getToasts().clear(); }
