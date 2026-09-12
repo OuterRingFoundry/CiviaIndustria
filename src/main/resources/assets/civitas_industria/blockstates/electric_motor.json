@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "civitas_industria:block/electric_motor"
+    },
+    "facing=south": {
+      "model": "civitas_industria:block/electric_motor",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "civitas_industria:block/electric_motor",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "civitas_industria:block/electric_motor",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "civitas_industria:block/electric_motor",
+      "x": 270
+    },
+    "facing=down": {
+      "model": "civitas_industria:block/electric_motor",
+      "x": 90
+    }
+  }
+}

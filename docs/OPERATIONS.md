@@ -1,3 +1,5 @@
+For the active EC2 layout and historical artifact recovery, see [WORKSPACE.md](WORKSPACE.md).
+
 # Reproducible development and operations
 
 This is a DEV integration build. Do not promote it until the release matrix is complete.
@@ -10,9 +12,9 @@ server; the artifact cache belongs beside the source checkout or is selected wit
 2. `python scripts/verify-pack.py --directory /absolute/cache --side server --all-artifacts`
    verifies the downloaded combined cache and nested dependencies.
 3. `./gradlew build runGameTestServer` tests the mod. `scripts/integration-matrix.py`
-   runs six isolated server profiles; logs and worlds remain in separate run directories.
+   runs eight isolated server profiles; logs and worlds remain in separate run directories.
 4. `python scripts/assemble-pack.py --side server --artifacts /absolute/cache
-   --civitas build/libs/civitas_industria-0.0.1-dev.jar --output /new/instance`
+   --civitas build/libs/civitas_industria-0.4.0-dev.jar --output /new/instance`
    builds and validates an exact server pack. Use `--side client` for the client pack.
    Existing destinations are refused. Obtain NeoForge 21.1.249 from its official installer;
    no third-party jar is committed or publicly redistributed by this repository.
@@ -61,5 +63,73 @@ extraction are verified. This is not a substitute for scheduled physical railway
 The Java hook is disabled unless the explicit `ciRailwayRestart` Gradle property is set.
 
 `scripts/run-staging.py --output /new/staging-test` runs the scoped 10,000-decoration,
-1,000-furnace, 500-cell workload. It deliberately excludes clients, moving trains and
-live raids. Both tools refuse existing outputs and leave all logs/worlds for inspection.
+1,000-furnace, 500-cell workload. Without `--combined` it excludes clients, moving trains and live raids. With
+`--combined` it adds graph-travelling trains, fake players, warehouse traffic and raids;
+real clients and physical railway schedules remain outside that fixture. Both tools refuse existing outputs and leave all logs/worlds for inspection.
+
+
+## Reproduce the automated DEV acceptance suite
+
+Use Java 21 and Python 3.12+ (the designated server has Python 3.13 at
+`/home/frederick/anaconda3/bin/python`). The exact artifact cache must be beside the
+source checkout as `../civitas-industria-artifacts` for all existing launchers.
+
+```sh
+python scripts/validate-dev.py \
+  --artifacts /data/.tmp/civitas-industria-artifacts \
+  --installer /data/.tmp/civitas-industria-runtime/neoforge-21.1.249-installer.jar \
+  --runtime-cache /data/.tmp/civitas-industria-builds/dev-schema3-r11/server \
+  --output /data/.tmp/civitas-industria-builds/NEW-DEV-VALIDATION
+```
+
+The destination must not exist. Run only against this disposable development checkout:
+smoke save/refusal checks use its reserved `run/smoke-world`. The command verifies
+artifacts and tooling, builds, runs all eight GameTest profiles in fresh directories,
+checks three-dimension saves/refusal, runs three railway restart fixtures and combined
+staging, then assembles server/client packs and validates standalone boot/backup/restore.
+`dev-validation.json` records each stage, its log, the source digest and built JAR hash.
+Failures remain recorded; an automated pass leaves human acceptance gates explicitly open.
+
+`python scripts/check-tooling.py` runs the regression suite. Standard unittest file
+discovery skips the repository's hyphenated test filenames, so use this explicit runner.
+The matrix requires exactly the number of required `@GameTest` methods in the current
+source, successful Gradle completion and confirmed world saves. Optional adapter
+assertions still skip in profiles without their mod.
+
+Railway/staging scripts accept `--fixture /path/to/run-matrix-full-server` to consume a
+fresh matrix world. `integration-matrix.py --output /new/path` retains independent
+results without overwriting earlier matrix evidence. GitHub CI now downloads locked
+compile dependencies and exercises tooling, domain, eight-profile and save/refusal gates.
+Rendering, full distribution tests and large fixtures run on the designated server.
+
+
+## Remaining acceptance procedures
+
+The [external acceptance runbook](ACCEPTANCE_RUNBOOK.md) defines the next multiplayer,
+representative GPU, mixed-direction railway and player-progression sessions, with
+specific evidence requirements. These sessions remain unrun. The accepted 0.3.0-dev
+server distribution is `/data/.tmp/civitas-pollution-acceptance-r4/distribution`;
+use a new disposable instance for each session and preserve the accepted artifacts.
+
+
+## 0.4.0 expansion development commands
+
+The authorized build endpoint is `frederick@100.98.111.18`; the expansion checkout is
+`/data/.tmp/civitas-steampunk-expansion`. Use supplied SSH authentication without
+putting passwords or private keys in scripts, commits or documentation. The preserved
+0.3.0 directories are historical acceptance evidence.
+
+The focused server command is `python scripts/integration-matrix.py --artifacts
+/data/.tmp/civitas-industria-artifacts --profiles core full-server --output /new/checks`.
+The workbench/power checks join the existing suite in these two profiles; skipped
+optional adapters are not credited as tested in the core profile.
+
+For a **disposable copied** client instance, `./gradlew --no-daemon runClient
+-PciWorkshopValidation -PciClientDir=/path/to/copied/client` loads the reserved
+`ci-validation` world and constructs the explicit workshop/raider inspection scene.
+This opt-in fixture alters that world, supplies test energy/materials, sends real menu
+button packets, captures images and stops the client. Never point it at a player world.
+Its generated fixture raiders have AI disabled for the three-role lineup. The final
+segment enables one breaker and checks an actual defense-credit sabotage; the lineup
+screenshots alone do not establish combat AI or balance. Rendering under Xvfb/Mesa remains
+a development check, not a representative GPU measurement.

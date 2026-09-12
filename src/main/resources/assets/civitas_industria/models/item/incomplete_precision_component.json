@@ -1,0 +1,75 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "workshop_bearing": "minecraft:block/iron_block",
+    "workshop_brass": "minecraft:block/gold_block",
+    "workshop_iron": "minecraft:block/iron_block",
+    "particle": "minecraft:block/iron_block"
+  },
+  "elements": [
+    {
+      "from": [
+        2,
+        3,
+        3
+      ],
+      "to": [
+        14,
+        5,
+        13
+      ],
+      "faces": {
+        "up": {
+          "texture": "#workshop_iron"
+        },
+        "down": {
+          "texture": "#workshop_iron"
+        },
+        "north": {
+          "texture": "#workshop_iron"
+        },
+        "south": {
+          "texture": "#workshop_iron"
+        },
+        "east": {
+          "texture": "#workshop_iron"
+        },
+        "west": {
+          "texture": "#workshop_iron"
+        }
+      }
+    },
+    {
+      "from": [
+        4,
+        5,
+        5
+      ],
+      "to": [
+        12,
+        7,
+        13
+      ],
+      "faces": {
+        "up": {
+          "texture": "#workshop_bearing"
+        },
+        "down": {
+          "texture": "#workshop_brass"
+        },
+        "north": {
+          "texture": "#workshop_brass"
+        },
+        "south": {
+          "texture": "#workshop_brass"
+        },
+        "east": {
+          "texture": "#workshop_brass"
+        },
+        "west": {
+          "texture": "#workshop_brass"
+        }
+      }
+    }
+  ]
+}

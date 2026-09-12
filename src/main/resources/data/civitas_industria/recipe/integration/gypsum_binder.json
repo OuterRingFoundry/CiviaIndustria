@@ -1,0 +1,21 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "immersiveengineering"
+    }
+  ],
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "civitas_industria:sulfate_filter_cake"
+  },
+  "result": {
+    "id": "civitas_industria:gypsum_binder"
+  },
+  "experience": 0.1,
+  "cookingtime": 200
+}

@@ -14,16 +14,19 @@ public final class EnvironmentSimulator {
     public int step(Map<CellPos,CellData> cells,Collection<CellPos> active,
                     Function<CellPos,Climate> climate,SimulationSettings s,long time,int recordLimit) {
         if(recordLimit<cells.size())throw new IllegalArgumentException("Record limit below stored cell count");
+        Map<CellPos,Climate> weatherCache=new HashMap<>();
+        Function<CellPos,Climate> weatherAt=p->weatherCache.computeIfAbsent(p,climate);
         Set<CellPos> reserved=new HashSet<>();
         Map<CellPos,double[]> deltas=new TreeMap<>();
         List<CellPos> work=active.stream().distinct().filter(cells::containsKey).sorted().limit(s.maxCells()).toList();
         for(CellPos pos:work) {
             CellData c=cells.get(pos);
-            Climate weather=climate.apply(pos);
+            Climate weather=weatherAt.apply(pos);
             double[] delta=deltas.computeIfAbsent(pos,k->new double[Pollutant.values().length]);
             for(Pollutant p:Pollutant.values()) {
                 int i=p.ordinal();
                 double value=c.get(p);
+                if(value==0)continue; // No decay, deposition or downstream lookup for an empty channel.
                 double decay=i<4?s.airDecay():(p==Pollutant.HEAT||p==Pollutant.NOISE?Math.min(1,s.airDecay()*8):s.soilRecovery());
                 delta[i]-=value*decay;
                 double remaining=value*(1-decay);
@@ -51,7 +54,7 @@ public final class EnvironmentSimulator {
                     List<CellPos> downstream=new ArrayList<>(4);
                     for(int[] d:DIRECTIONS) {
                         CellPos neighbor=pos.offset(d[0],d[1]);
-                        Climate n=climate.apply(neighbor);
+                        Climate n=weatherAt.apply(neighbor);
                         if(n.surfaceWater()&&n.altitude()<=weather.altitude()) downstream.add(neighbor);
                     }
                     if(!downstream.isEmpty()) {
@@ -71,7 +74,7 @@ public final class EnvironmentSimulator {
         }
         for(CellPos pos:work) {
             CellData c=cells.get(pos);
-            Climate weather=climate.apply(pos);
+            Climate weather=weatherAt.apply(pos);
             double stress=Math.clamp((c.aqi()+c.get(Pollutant.SOIL_ACIDITY)+c.get(Pollutant.SOIL_TOXICITY))/200,0,1);
             double waterStress=1-c.waterQuality()/100;
             c.vegetationHealth=approach(c.vegetationHealth,1-stress,s.injury(),s.ecologyRecovery()*weather.recovery());

@@ -1,6 +1,108 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "minecraft:block/block",
   "textures": {
-    "layer0": "civitas_industria:item/remediation_reagent"
-  }
+    "filter_cloth": "minecraft:block/iron_block",
+    "workshop_brass": "minecraft:block/gold_block",
+    "workshop_cast_iron": "minecraft:block/iron_block",
+    "workshop_tank": "minecraft:block/iron_block",
+    "particle": "minecraft:block/iron_block"
+  },
+  "elements": [
+    {
+      "from": [
+        4,
+        2,
+        4
+      ],
+      "to": [
+        12,
+        11,
+        12
+      ],
+      "faces": {
+        "up": {
+          "texture": "#workshop_tank"
+        },
+        "down": {
+          "texture": "#workshop_tank"
+        },
+        "north": {
+          "texture": "#filter_cloth"
+        },
+        "south": {
+          "texture": "#workshop_tank"
+        },
+        "east": {
+          "texture": "#workshop_tank"
+        },
+        "west": {
+          "texture": "#workshop_tank"
+        }
+      }
+    },
+    {
+      "from": [
+        3,
+        11,
+        3
+      ],
+      "to": [
+        13,
+        13,
+        13
+      ],
+      "faces": {
+        "up": {
+          "texture": "#workshop_brass"
+        },
+        "down": {
+          "texture": "#workshop_brass"
+        },
+        "north": {
+          "texture": "#workshop_brass"
+        },
+        "south": {
+          "texture": "#workshop_brass"
+        },
+        "east": {
+          "texture": "#workshop_brass"
+        },
+        "west": {
+          "texture": "#workshop_brass"
+        }
+      }
+    },
+    {
+      "from": [
+        4,
+        1,
+        4
+      ],
+      "to": [
+        12,
+        2,
+        12
+      ],
+      "faces": {
+        "up": {
+          "texture": "#workshop_cast_iron"
+        },
+        "down": {
+          "texture": "#workshop_cast_iron"
+        },
+        "north": {
+          "texture": "#workshop_cast_iron"
+        },
+        "south": {
+          "texture": "#workshop_cast_iron"
+        },
+        "east": {
+          "texture": "#workshop_cast_iron"
+        },
+        "west": {
+          "texture": "#workshop_cast_iron"
+        }
+      }
+    }
+  ]
 }

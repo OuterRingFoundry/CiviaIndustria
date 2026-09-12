@@ -24,3 +24,42 @@ Run scripts/generate-material-models.py to rebuild the JSON models only. The old
 scripts/generate-content.py is an initial bootstrap and would overwrite later gameplay
 recipes/profiles; do not use it to refresh artwork. Changes to artwork itself should
 start from the recorded prompts or source image, then be inspected at game size.
+
+## 0.3.0 process workshop extension
+
+Sixteen additional original material tiles and bounded baked models give the factory,
+remediation station, freight terminal and process ingredients a warm iron/brass/teal
+workshop appearance compatible with Create's mechanical vocabulary. The textures are
+in `src/main/resources/assets/civitas_industria/textures/block/process/`; models are
+in the matching `models/block` and `models/item` directories. The complete set now has
+35 original 32×32 textures. New source art was generated with the built-in image tool;
+Pillow only split its equal 4×4 grid and resized it with nearest-neighbor sampling.
+The prompt, source hash and export dimensions are recorded in ART_PROMPTS.json.
+
+`generate-material-models.py` also runs `generate-process-models.py`, preserving these
+refinements when rebuilding. No custom renderer, block entity or packet is added for
+the new static geometry. Inset housings use non-occluding rendering so adjacent solid
+blocks retain their exposed faces. Existing moving utilities retain their animations. Materials
+are shared across models and all process geometry stays inside the block/item bounds.
+
+
+## 0.4.0 precision machinery and rivet scavengers
+
+`generate-workshop-content.py` creates the original universal workbench, exposed chuck
+and drill, electrical motor/dynamo housings and shaft rotors, plus machined-part items.
+The geometry reuses the established workshop iron/brass/cast-iron/coil/gauge material
+palette. A native teal-and-brass menu provides actual inventory, operation selection,
+energy/progress and stop reasons. It is rendered by game GUI code, not a static mockup.
+
+The rivet scavenger has a native articulated model with role-dependent proportions,
+a tool arm and boiler backpack. An original generated iron/teal skin is bound as a
+standalone entity texture; brass and glass details use separate material layers.
+`STEAMPUNK_ART.json` records the exact built-in image prompt, raw-image dimensions and
+hash, and model generator paths. No generated image was repainted or resampled in
+this expansion. Block/item tiles remain 32×32; the standalone entity skin uses the
+original generated dimensions with normalized model UV coordinates.
+
+Animation reads local time/native rotation or synchronized role/windup state. No
+server ticker dedicated to animation or per-frame custom packet is introduced. The client fixture
+captures the workbench GUI and three raider silhouettes; combat tuning and representative
+GPU performance remain separate acceptance work.

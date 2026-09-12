@@ -1,6 +1,173 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "minecraft:block/block",
   "textures": {
-    "layer0": "civitas_industria:item/precision_component"
-  }
+    "workshop_bearing": "minecraft:block/iron_block",
+    "workshop_brass": "minecraft:block/gold_block",
+    "workshop_cast_iron": "minecraft:block/iron_block",
+    "workshop_coil": "minecraft:block/iron_block",
+    "workshop_iron": "minecraft:block/iron_block",
+    "particle": "minecraft:block/iron_block"
+  },
+  "elements": [
+    {
+      "from": [
+        2,
+        3,
+        3
+      ],
+      "to": [
+        14,
+        5,
+        13
+      ],
+      "faces": {
+        "up": {
+          "texture": "#workshop_iron"
+        },
+        "down": {
+          "texture": "#workshop_iron"
+        },
+        "north": {
+          "texture": "#workshop_iron"
+        },
+        "south": {
+          "texture": "#workshop_iron"
+        },
+        "east": {
+          "texture": "#workshop_iron"
+        },
+        "west": {
+          "texture": "#workshop_iron"
+        }
+      }
+    },
+    {
+      "from": [
+        4,
+        5,
+        5
+      ],
+      "to": [
+        12,
+        7,
+        13
+      ],
+      "faces": {
+        "up": {
+          "texture": "#workshop_bearing"
+        },
+        "down": {
+          "texture": "#workshop_brass"
+        },
+        "north": {
+          "texture": "#workshop_brass"
+        },
+        "south": {
+          "texture": "#workshop_brass"
+        },
+        "east": {
+          "texture": "#workshop_brass"
+        },
+        "west": {
+          "texture": "#workshop_brass"
+        }
+      }
+    },
+    {
+      "from": [
+        3,
+        5,
+        3
+      ],
+      "to": [
+        7,
+        8,
+        5
+      ],
+      "faces": {
+        "up": {
+          "texture": "#workshop_cast_iron"
+        },
+        "down": {
+          "texture": "#workshop_cast_iron"
+        },
+        "north": {
+          "texture": "#workshop_coil"
+        },
+        "south": {
+          "texture": "#workshop_cast_iron"
+        },
+        "east": {
+          "texture": "#workshop_cast_iron"
+        },
+        "west": {
+          "texture": "#workshop_cast_iron"
+        }
+      }
+    },
+    {
+      "from": [
+        2,
+        5,
+        6
+      ],
+      "to": [
+        4,
+        7,
+        10
+      ],
+      "faces": {
+        "up": {
+          "texture": "#workshop_cast_iron"
+        },
+        "down": {
+          "texture": "#workshop_cast_iron"
+        },
+        "north": {
+          "texture": "#workshop_cast_iron"
+        },
+        "south": {
+          "texture": "#workshop_cast_iron"
+        },
+        "east": {
+          "texture": "#workshop_cast_iron"
+        },
+        "west": {
+          "texture": "#workshop_cast_iron"
+        }
+      }
+    },
+    {
+      "from": [
+        12,
+        5,
+        6
+      ],
+      "to": [
+        14,
+        7,
+        10
+      ],
+      "faces": {
+        "up": {
+          "texture": "#workshop_cast_iron"
+        },
+        "down": {
+          "texture": "#workshop_cast_iron"
+        },
+        "north": {
+          "texture": "#workshop_cast_iron"
+        },
+        "south": {
+          "texture": "#workshop_cast_iron"
+        },
+        "east": {
+          "texture": "#workshop_cast_iron"
+        },
+        "west": {
+          "texture": "#workshop_cast_iron"
+        }
+      }
+    }
+  ]
 }

@@ -21,6 +21,8 @@ public final class CivitasIndustria {
         CivitasRegistries.register(modBus);
         com.civitasindustria.common.worldgen.MineralRegionPlacement.register(modBus);
         com.civitasindustria.test.staging.StagingHarness.register(NeoForge.EVENT_BUS);
+        com.civitasindustria.test.ResidenceRestartChecks.register(NeoForge.EVENT_BUS);
+        com.civitasindustria.test.EconomyRestartChecks.register(NeoForge.EVENT_BUS);
         if(net.neoforged.fml.ModList.get().isLoaded("create")){
             com.civitasindustria.compat.create.CreateCargo.register(modBus);
             com.civitasindustria.compat.create.RailwayRestartChecks.register(NeoForge.EVENT_BUS);

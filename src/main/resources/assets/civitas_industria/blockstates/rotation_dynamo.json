@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "civitas_industria:block/rotation_dynamo"
+    },
+    "facing=south": {
+      "model": "civitas_industria:block/rotation_dynamo",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "civitas_industria:block/rotation_dynamo",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "civitas_industria:block/rotation_dynamo",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "civitas_industria:block/rotation_dynamo",
+      "x": 270
+    },
+    "facing=down": {
+      "model": "civitas_industria:block/rotation_dynamo",
+      "x": 90
+    }
+  }
+}

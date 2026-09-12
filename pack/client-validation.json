@@ -1,0 +1,24 @@
+{
+  "scope": "Full client mods, development classes, world rendering and tint/model checks; Xvfb/Mesa 1280x720, no authenticated multiplayer or representative GPU performance",
+  "passed": true,
+  "checks": {
+    "exit_zero": true,
+    "models": true,
+    "saved": true,
+    "gradle": true,
+    "tint_capture_200": true,
+    "tint_capture_650": true,
+    "tint_capture_720": true,
+    "tint_capture_1100": true,
+    "four_screenshots": true
+  },
+  "seconds": 85.8,
+  "screenshots": [
+    "/data/.tmp/civitas-industria-phase0/run-client-validation/screenshots/2026-09-07_15.33.37.png",
+    "/data/.tmp/civitas-industria-phase0/run-client-validation/screenshots/2026-09-07_15.33.59.png",
+    "/data/.tmp/civitas-industria-phase0/run-client-validation/screenshots/2026-09-07_15.34.03.png",
+    "/data/.tmp/civitas-industria-phase0/run-client-validation/screenshots/2026-09-07_15.34.22.png"
+  ],
+  "log": "/data/.tmp/civitas-industria-builds/dev-acceptance-r13/client-validation.log",
+  "civitas_jar_sha256": "9ae69f1e17b6c9afe765c860872db702ac2c67d6275855bade371bb4991bc7c8"
+}

@@ -1,0 +1,106 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "sulfate_cake": "minecraft:block/iron_block",
+    "workshop_cast_iron": "minecraft:block/iron_block",
+    "particle": "minecraft:block/iron_block"
+  },
+  "elements": [
+    {
+      "from": [
+        3,
+        2,
+        3
+      ],
+      "to": [
+        13,
+        4,
+        13
+      ],
+      "faces": {
+        "up": {
+          "texture": "#workshop_cast_iron"
+        },
+        "down": {
+          "texture": "#workshop_cast_iron"
+        },
+        "north": {
+          "texture": "#workshop_cast_iron"
+        },
+        "south": {
+          "texture": "#workshop_cast_iron"
+        },
+        "east": {
+          "texture": "#workshop_cast_iron"
+        },
+        "west": {
+          "texture": "#workshop_cast_iron"
+        }
+      }
+    },
+    {
+      "from": [
+        4,
+        4,
+        4
+      ],
+      "to": [
+        12,
+        7,
+        12
+      ],
+      "faces": {
+        "up": {
+          "texture": "#sulfate_cake"
+        },
+        "down": {
+          "texture": "#sulfate_cake"
+        },
+        "north": {
+          "texture": "#sulfate_cake"
+        },
+        "south": {
+          "texture": "#sulfate_cake"
+        },
+        "east": {
+          "texture": "#sulfate_cake"
+        },
+        "west": {
+          "texture": "#sulfate_cake"
+        }
+      }
+    },
+    {
+      "from": [
+        5,
+        7,
+        5
+      ],
+      "to": [
+        11,
+        8,
+        11
+      ],
+      "faces": {
+        "up": {
+          "texture": "#sulfate_cake"
+        },
+        "down": {
+          "texture": "#sulfate_cake"
+        },
+        "north": {
+          "texture": "#sulfate_cake"
+        },
+        "south": {
+          "texture": "#sulfate_cake"
+        },
+        "east": {
+          "texture": "#sulfate_cake"
+        },
+        "west": {
+          "texture": "#sulfate_cake"
+        }
+      }
+    }
+  ]
+}

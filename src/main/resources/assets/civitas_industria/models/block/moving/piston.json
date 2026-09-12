@@ -1,8 +1,8 @@
 {
   "textures": {
-    "unloader_front": "civitas_industria:block/unloader_front",
-    "steel_casing": "civitas_industria:block/steel_casing",
-    "particle": "civitas_industria:block/steel_casing"
+    "unloader_front": "minecraft:block/iron_block",
+    "steel_casing": "minecraft:block/iron_block",
+    "particle": "minecraft:block/polished_andesite"
   },
   "elements": [
     {

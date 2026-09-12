@@ -38,7 +38,13 @@ public final class ParcelCommands {
                         WorldRuntime.get(s.getLevel()).state().parcels.add(p);WorldRuntime.get(s.getLevel()).dirty();return reply(s,"Created parcel "+p.name());
                     }catch(IllegalArgumentException e){throw INVALID.create(e.getMessage());}
                 })))))
-            .then(Commands.literal("remove").executes(c->{var s=c.getSource();var p=here(s,true);WorldRuntime.get(s.getLevel()).state().parcels.remove(p.id());WorldRuntime.get(s.getLevel()).dirty();return reply(s,"Removed parcel "+p.name());}));
+            .then(Commands.literal("remove").executes(c->{
+                var s=c.getSource();var p=here(s,true);
+                var residences=com.civitasindustria.platform.ResidenceSavedData.get(s.getLevel());
+                if(residences.registry.removeParcel(s.getLevel().dimension().location().toString(),p.id())>0)residences.setDirty();
+                WorldRuntime.get(s.getLevel()).state().parcels.remove(p.id());WorldRuntime.get(s.getLevel()).dirty();
+                return reply(s,"Removed parcel "+p.name());
+            }));
         for(boolean trust:new boolean[]{true,false})parcel.then(Commands.literal(trust?"trust":"untrust").then(Commands.argument("player",UuidArgument.uuid()).executes(c->{
             var s=c.getSource();var p=here(s,true);var trusted=new HashSet<>(p.trusted());var id=UuidArgument.getUuid(c,"player");if(trust)trusted.add(id);else trusted.remove(id);
             if(trusted.size()>64)throw INVALID.create("Trust limit 64");

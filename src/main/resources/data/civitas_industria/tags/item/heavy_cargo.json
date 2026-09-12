@@ -1,8 +1,13 @@
 {
   "replace": false,
   "values": [
-    "minecraft:anvil",
-    "minecraft:water_bucket",
-    "minecraft:lava_bucket"
+    {
+      "id": "#c:storage_blocks",
+      "required": false
+    },
+    "minecraft:iron_block",
+    "minecraft:gold_block",
+    "minecraft:copper_block",
+    "minecraft:coal_block"
   ]
 }

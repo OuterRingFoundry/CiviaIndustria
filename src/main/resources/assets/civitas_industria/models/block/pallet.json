@@ -1,8 +1,8 @@
 {
   "textures": {
-    "crate_top": "civitas_industria:block/crate_top",
-    "crate_side": "civitas_industria:block/crate_side",
-    "particle": "civitas_industria:block/steel_casing"
+    "crate_top": "minecraft:block/barrel_top",
+    "crate_side": "minecraft:block/barrel_side",
+    "particle": "minecraft:block/polished_andesite"
   },
   "elements": [
     {

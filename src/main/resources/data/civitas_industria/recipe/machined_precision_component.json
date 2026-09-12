@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "civitas_industria:precision_shaft"
+    },
+    {
+      "item": "civitas_industria:gear_blank"
+    },
+    {
+      "item": "civitas_industria:mounting_plate"
+    },
+    {
+      "item": "minecraft:copper_ingot"
+    }
+  ],
+  "result": {
+    "id": "civitas_industria:precision_component",
+    "count": 2
+  }
+}

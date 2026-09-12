@@ -1,0 +1,78 @@
+{
+  "scope": "Combined synthetic server load: 30 fake players, 3 added networks, 20 native moving graph-fixture trains, warehouse traffic and explicitly triggered physical raids; no authenticated clients, client packets, voice or physical railway signals",
+  "decorations": 10000,
+  "machines": 1000,
+  "active_furnaces": 200,
+  "warehouse_controllers": 20,
+  "seeded_rain_cells": 500,
+  "measured_ticks": 1200,
+  "mean_ms": 16.163567184999998,
+  "observed_tps": 20.016239714384337,
+  "p95_ms": 18.99396,
+  "max_ms": 47.053004,
+  "runtime_active_cells": 558,
+  "observed_active_furnaces_at_end": 200,
+  "activity_counters_include_200_tick_warmup": true,
+  "cargo_conserved": true,
+  "fake_players": 30,
+  "networks_observed": 3,
+  "moving_trains": 20,
+  "minimum_train_travel": 549.1074795789419,
+  "warehouses_receiving": 20,
+  "warehouse_items_received": 177920,
+  "raid_active_ticks": 1399,
+  "peak_raiders": 6,
+  "timing_scope": "ServerTick highest-priority pre through lowest-priority post listener",
+  "subsystems": {
+    "civilization": {
+      "mean_60s_ms_per_call": 1.055611,
+      "max_300s_ms_per_call": 1.055611,
+      "processed": 3
+    },
+    "environment": {
+      "mean_60s_ms_per_call": 0.120173325,
+      "max_300s_ms_per_call": 14.991688,
+      "processed": 3494
+    },
+    "ecology": {
+      "mean_60s_ms_per_call": 0.0015355291666666667,
+      "max_300s_ms_per_call": 0.101774,
+      "processed": 3494
+    },
+    "industrial": {
+      "mean_60s_ms_per_call": 0.7662842933333334,
+      "max_300s_ms_per_call": 18.069977,
+      "processed": 2628883
+    },
+    "threat": {
+      "mean_60s_ms_per_call": 0.0407293,
+      "max_300s_ms_per_call": 2.019778,
+      "processed": 280
+    },
+    "cargo": {
+      "mean_60s_ms_per_call": 0.002644784625,
+      "max_300s_ms_per_call": 1.213857,
+      "processed": 27980
+    },
+    "warehouse": {
+      "mean_60s_ms_per_call": 0.0,
+      "max_300s_ms_per_call": 0.0685,
+      "processed": 160
+    },
+    "parcel": {
+      "mean_60s_ms_per_call": 0.0,
+      "max_300s_ms_per_call": 0.0,
+      "processed": 0
+    },
+    "network": {
+      "mean_60s_ms_per_call": 0.0,
+      "max_300s_ms_per_call": 2.430966,
+      "processed": 9
+    },
+    "packets": {
+      "mean_60s_ms_per_call": 0.0,
+      "max_300s_ms_per_call": 0.0,
+      "processed": 0
+    }
+  }
+}

@@ -1,19 +1,29 @@
 {
   "replace": false,
   "values": [
-    "minecraft:coal",
-    "minecraft:charcoal",
-    "minecraft:raw_iron",
-    "minecraft:raw_copper",
-    "minecraft:raw_gold",
-    "minecraft:iron_ingot",
-    "minecraft:copper_ingot",
-    "minecraft:gold_ingot",
-    "minecraft:iron_block",
-    "minecraft:copper_block",
     {
-      "id": "#c:ingots/steel",
+      "id": "#c:ingots",
       "required": false
-    }
+    },
+    {
+      "id": "#c:raw_materials",
+      "required": false
+    },
+    {
+      "id": "#c:ores",
+      "required": false
+    },
+    {
+      "id": "#c:plates",
+      "required": false
+    },
+    {
+      "id": "immersiveengineering:slag",
+      "required": false
+    },
+    "#minecraft:coals",
+    "minecraft:iron_ingot",
+    "minecraft:gold_ingot",
+    "minecraft:copper_ingot"
   ]
 }

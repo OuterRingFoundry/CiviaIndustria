@@ -7,6 +7,7 @@ from pathlib import Path
 import signal
 import struct
 import subprocess
+from fixture_process import run as run_fixture
 
 root = Path(__file__).resolve().parents[1]
 run = root / "run"
@@ -29,15 +30,8 @@ try:
         target.write_bytes(damaged)
         before = hashlib.sha256(damaged).hexdigest()
         with (logs / (name + ".log")).open("w") as output:
-            process = subprocess.Popen(["bash", "./gradlew", "--console=plain", "runServer"],
-                cwd=root, stdin=subprocess.DEVNULL, stdout=output, stderr=subprocess.STDOUT,
-                start_new_session=True)
-            try:
-                code = process.wait(timeout=180)
-            except subprocess.TimeoutExpired:
-                os.killpg(process.pid, signal.SIGKILL)
-                process.wait()
-                raise
+            code = run_fixture(["bash", "./gradlew", "--no-daemon", "--console=plain", "runServer"],
+                               root, output, 180)
         log = (logs / (name + ".log")).read_text()
         # Minecraft catches startup exceptions and can exit 0; Gradle success is not a boot oracle.
         assert "Done (" not in log, f"{name}: incompatible save reached server readiness"

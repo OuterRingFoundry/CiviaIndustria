@@ -1,0 +1,60 @@
+{
+  "status": "focused-development-checks-passed; external acceptance open",
+  "date_utc": "2026-09-10T15:37:33.507639+00:00",
+  "version": "0.4.0-dev",
+  "source_sha256": "3a9bf40e4446ee6ee24bd384e489e5e9e794b206047091b5b4bf8a9f38268cef",
+  "jar": "civitas_industria-0.4.0-dev.jar",
+  "jar_sha256": "1057353cbd5b2a91b145021ae503f2bbe273df82c9ba77dc8bf2d8e141d4f89e",
+  "jar_bytes": 1770107,
+  "server_checkout": "/data/.tmp/civitas-steampunk-expansion",
+  "build_log": "/data/.tmp/civitas-steampunk-expansion/workshop-build-delivery-r3.log",
+  "build_log_sha256": "3fbbc8234bb05f4ee376a1b4cbddc7f18d20d30676e92548752ad6a8ded08b5e",
+  "domain_checks": 65,
+  "tooling_checks": 13,
+  "resource_json_checks": 249,
+  "textures": 36,
+  "server_profiles": {
+    "core": 38,
+    "full-server": 38
+  },
+  "server_evidence": "pack/steampunk-integration-results.json",
+  "client_log": "/data/.tmp/civitas-steampunk-expansion/workshop-client-action.log",
+  "client_log_sha256": "19fea8d7b5c89e5387146c767d85edda133f48b1d3d1f105bfc4507cf5a0d2a6",
+  "client_checks": [
+    "Actual server menu open, mode-button packets and data synchronization for all three operations",
+    "All registered block-state/item models and spindle/rotor models loaded",
+    "Rendered workbench and original three-role mechanical raider lineup",
+    "Live breaker AI reached indexed defense and consumed two credits",
+    "Clean world save and successful client exit"
+  ],
+  "screenshots": {
+    "2026-09-10_23.27.27.png": "4e5cc4d0344c4ed8596a176f67f0cc6caa103e4e457f6612cb61ed779f9eecce",
+    "2026-09-10_23.27.34.png": "664199e6a93e2abf125b391f6cd55420ef816723658c98655ec85611c7c6d0f7",
+    "2026-09-10_23.27.38.png": "350f8f502f205869510591285a2cb1b6cd6ee1509a5f5478c6b93ddcc2b9a073",
+    "2026-09-10_23.27.42.png": "2e3bada9121aaf4d1ff245a433f923982df4dc881d958b9a4c7f30f786d787c4",
+    "2026-09-10_23.27.46.png": "09c07b8d761ed15b7001b844a845dfb605b5d9c82021360068236278897a988b",
+    "2026-09-10_23.27.48.png": "8cbce29b9f8ee40474fa64be03d2109bc1115fcebc5e4c1653ccc45f4d932893"
+  },
+  "behavior_checks": [
+    "Paid calibration and machining, exact turning output, energy and tool wear",
+    "Energy simulation, paused unpowered processing, progress NBT and future-data quarantine",
+    "Output-only automatic extraction and revoked open-menu access",
+    "Native Create rotation, stress capacity, lossy conversion and brownout",
+    "Actual IE LV connector/copper-wire delivery to the workbench"
+  ],
+  "scope_notes": [
+    "Xvfb/Mesa 1280x720; no representative GPU or authenticated multiplayer acceptance",
+    "Only core and full-server profiles selected; optional checks skip when their mods are absent",
+    "No repeated large staging, full railway, distribution or backup suite in this expansion",
+    "The final server profiles include the guard against inherited villager zombification; no dedicated villager-kill runtime probe was run",
+    "A raw-log review found missing converter loot items in the initial Create-absent run; conditional loot loading and a parser-error regression corrected it before the final profiles",
+    "Source and asset identity matches the built development JAR; this is not a full release acceptance certificate"
+  ],
+  "remaining": [
+    "Group combat, interruptible windups/unreachable siege layouts and balancing",
+    "Residence declarations and resource-paid civic service depots",
+    "Treasury-funded physical contracts and district heat",
+    "Authenticated multiplayer, representative GPU and complex railway acceptance",
+    "Production promotion remains unperformed"
+  ]
+}

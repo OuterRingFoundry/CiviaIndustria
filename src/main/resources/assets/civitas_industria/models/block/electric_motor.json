@@ -1,0 +1,238 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "workshop_gauge": "minecraft:block/iron_block",
+    "workshop_bearing": "minecraft:block/iron_block",
+    "workshop_brass": "minecraft:block/gold_block",
+    "workshop_iron": "minecraft:block/iron_block",
+    "workshop_cast_iron": "minecraft:block/iron_block",
+    "workshop_coil": "minecraft:block/iron_block",
+    "particle": "minecraft:block/iron_block"
+  },
+  "elements": [
+    {
+      "from": [
+        1,
+        0,
+        2
+      ],
+      "to": [
+        15,
+        3,
+        15
+      ],
+      "faces": {
+        "up": {
+          "texture": "#workshop_cast_iron"
+        },
+        "down": {
+          "texture": "#workshop_cast_iron"
+        },
+        "north": {
+          "texture": "#workshop_cast_iron"
+        },
+        "south": {
+          "texture": "#workshop_cast_iron"
+        },
+        "east": {
+          "texture": "#workshop_cast_iron"
+        },
+        "west": {
+          "texture": "#workshop_cast_iron"
+        }
+      }
+    },
+    {
+      "from": [
+        2,
+        3,
+        5
+      ],
+      "to": [
+        14,
+        12,
+        14
+      ],
+      "faces": {
+        "up": {
+          "texture": "#workshop_iron"
+        },
+        "down": {
+          "texture": "#workshop_iron"
+        },
+        "north": {
+          "texture": "#workshop_iron"
+        },
+        "south": {
+          "texture": "#workshop_iron"
+        },
+        "east": {
+          "texture": "#workshop_iron"
+        },
+        "west": {
+          "texture": "#workshop_iron"
+        }
+      }
+    },
+    {
+      "from": [
+        4,
+        4,
+        3
+      ],
+      "to": [
+        12,
+        11,
+        5
+      ],
+      "faces": {
+        "up": {
+          "texture": "#workshop_brass"
+        },
+        "down": {
+          "texture": "#workshop_brass"
+        },
+        "north": {
+          "texture": "#workshop_brass"
+        },
+        "south": {
+          "texture": "#workshop_brass"
+        },
+        "east": {
+          "texture": "#workshop_brass"
+        },
+        "west": {
+          "texture": "#workshop_brass"
+        }
+      }
+    },
+    {
+      "from": [
+        5,
+        5,
+        1
+      ],
+      "to": [
+        11,
+        10,
+        3
+      ],
+      "faces": {
+        "up": {
+          "texture": "#workshop_bearing"
+        },
+        "down": {
+          "texture": "#workshop_bearing"
+        },
+        "north": {
+          "texture": "#workshop_bearing"
+        },
+        "south": {
+          "texture": "#workshop_bearing"
+        },
+        "east": {
+          "texture": "#workshop_bearing"
+        },
+        "west": {
+          "texture": "#workshop_bearing"
+        }
+      }
+    },
+    {
+      "from": [
+        3,
+        12,
+        6
+      ],
+      "to": [
+        13,
+        14,
+        13
+      ],
+      "faces": {
+        "up": {
+          "texture": "#workshop_coil"
+        },
+        "down": {
+          "texture": "#workshop_coil"
+        },
+        "north": {
+          "texture": "#workshop_coil"
+        },
+        "south": {
+          "texture": "#workshop_coil"
+        },
+        "east": {
+          "texture": "#workshop_coil"
+        },
+        "west": {
+          "texture": "#workshop_coil"
+        }
+      }
+    },
+    {
+      "from": [
+        13,
+        5,
+        7
+      ],
+      "to": [
+        16,
+        10,
+        12
+      ],
+      "faces": {
+        "up": {
+          "texture": "#workshop_gauge"
+        },
+        "down": {
+          "texture": "#workshop_gauge"
+        },
+        "north": {
+          "texture": "#workshop_gauge"
+        },
+        "south": {
+          "texture": "#workshop_gauge"
+        },
+        "east": {
+          "texture": "#workshop_gauge"
+        },
+        "west": {
+          "texture": "#workshop_gauge"
+        }
+      }
+    },
+    {
+      "from": [
+        1,
+        5,
+        6
+      ],
+      "to": [
+        2,
+        11,
+        13
+      ],
+      "faces": {
+        "up": {
+          "texture": "#workshop_cast_iron"
+        },
+        "down": {
+          "texture": "#workshop_cast_iron"
+        },
+        "north": {
+          "texture": "#workshop_cast_iron"
+        },
+        "south": {
+          "texture": "#workshop_cast_iron"
+        },
+        "east": {
+          "texture": "#workshop_cast_iron"
+        },
+        "west": {
+          "texture": "#workshop_cast_iron"
+        }
+      }
+    }
+  ]
+}

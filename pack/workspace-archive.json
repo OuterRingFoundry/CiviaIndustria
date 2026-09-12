@@ -1,0 +1,36 @@
+{
+  "date_utc": "2026-09-11",
+  "server": "frederick@100.98.111.18",
+  "archive": "/data/.tmp/civitas-ec2-archive-2026-09-11",
+  "files": 131,
+  "bytes": 212648417,
+  "selected": [
+    "artifacts/pollution-downloads",
+    "artifacts/four-core-validation",
+    "artifacts/beta-dependencies-verified.json",
+    "artifacts/pollution-art",
+    "artifacts/civitas_industria-0.2.0-dev.jar",
+    "artifacts/pollution-final-client",
+    "artifacts/civitas_industria-0.0.1-dev.jar",
+    "artifacts/pollution-validation",
+    "artifacts/beta-client-import-check",
+    "artifacts/beta-dependencies",
+    "artifacts/four-core-downloads",
+    "artifacts/beta-server-assembly-check",
+    "artifacts/pollution-process-client",
+    "artifacts/civia-client-validation.png",
+    "CiviaIndustria-beta"
+  ],
+  "verification": "Every file size and SHA-256 matched before local removal. Complete beta history bundle separately verified.",
+  "manifest_sha256": "ff528f64921ac98127bbe52549a35aa0eaa6df219e0bf22574cf710873b72619",
+  "beta_bundle_sha256": "c8fc4a78ca7bd06095a248127e1d9cf29a74af0423c0cd8958b41184479f6d5d",
+  "beta_branch": "publish-beta-pack",
+  "beta_commit": "c5dda4e492a008a033be35ee9e350834bc0cd51b",
+  "kept_local": [
+    "CiviaIndustria (active source, Git history, docs, scripts, resource assets)",
+    "artifacts/steampunk-client",
+    "artifacts/steampunk-validation",
+    "artifacts/civitas_industria-0.4.0-dev.jar",
+    "artifacts/civitas_industria-0.4.0-dev.jar.sha256"
+  ]
+}

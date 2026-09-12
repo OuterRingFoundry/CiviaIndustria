@@ -1,0 +1,646 @@
+{
+  "create": {
+    "id": "create",
+    "version": "6.0.10",
+    "jar": "create-1.21.1-6.0.10.jar",
+    "dependencies": [
+      {
+        "modId": "neoforge",
+        "type": "required",
+        "versionRange": "[21.1.219,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "minecraft",
+        "type": "required",
+        "versionRange": "[1.21.1]",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "flywheel",
+        "type": "required",
+        "versionRange": "[1.0.0,2.0)",
+        "ordering": "AFTER",
+        "side": "CLIENT"
+      },
+      {
+        "modId": "ponder",
+        "type": "required",
+        "versionRange": "[1.0.82,)",
+        "ordering": "AFTER",
+        "side": "BOTH"
+      },
+      {
+        "modId": "sodium",
+        "type": "optional",
+        "reason": "Versions before 0.6.9 do not include the neccesary APIs Create needs to work properly with Sodium.",
+        "versionRange": "[0.6.9,)",
+        "ordering": "NONE",
+        "side": "CLIENT"
+      },
+      {
+        "modId": "lithium",
+        "type": "optional",
+        "reason": "Versions before 0.14.7 crash when paired with Create, Update Lithium.",
+        "versionRange": "[0.14.7,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "journeymap",
+        "type": "optional",
+        "reason": "Versions before 1.21.1-6.0.0-beta.46 do not contain the APIs Create requires to work with JourneyMap.",
+        "versionRange": "[1.21.1-6.0.0-beta.46,)",
+        "ordering": "NONE",
+        "side": "CLIENT"
+      },
+      {
+        "modId": "xaeroworldmap",
+        "type": "optional",
+        "reason": "Versions before 1.40.2 do not contain the classes Create requires to work with Xaero's World Map.",
+        "versionRange": "[1.40.2,)",
+        "ordering": "NONE",
+        "side": "CLIENT"
+      },
+      {
+        "modId": "radium",
+        "type": "incompatible",
+        "reason": "Radium is a unofficial port of Lithium, Lithium is now natively available for NeoForge and does not suffer from the same issues radium does, use Lithium instead.",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "palladium",
+        "type": "incompatible",
+        "reason": "Palladium does not improve memory usage by anything meaningful, and results in broken visuals for Create's blocks with connected textures.",
+        "ordering": "NONE",
+        "side": "BOTH"
+      }
+    ]
+  },
+  "flywheel": {
+    "id": "flywheel",
+    "version": "1.0.6",
+    "jar": "create-1.21.1-6.0.10.jar!META-INF/jarjar/flywheel-neoforge-1.21.1-1.0.6.jar",
+    "dependencies": [
+      {
+        "modId": "minecraft",
+        "type": "required",
+        "versionRange": "[1.21.1,1.21.2)",
+        "side": "CLIENT"
+      },
+      {
+        "modId": "neoforge",
+        "type": "required",
+        "versionRange": "[21.1.66,)",
+        "side": "CLIENT"
+      },
+      {
+        "modId": "embeddium",
+        "type": "optional",
+        "versionRange": "[0.3.25,)",
+        "side": "CLIENT"
+      },
+      {
+        "modId": "sodium",
+        "type": "optional",
+        "versionRange": "[0.6.0-beta.2,)",
+        "side": "CLIENT"
+      }
+    ]
+  },
+  "ponder": {
+    "id": "ponder",
+    "version": "1.0.82+mc1.21.1",
+    "jar": "create-1.21.1-6.0.10.jar!META-INF/jarjar/ponder-neoforge-1.0.82+mc1.21.1.jar",
+    "dependencies": [
+      {
+        "modId": "neoforge",
+        "type": "required",
+        "versionRange": "[21.1.206,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "minecraft",
+        "type": "required",
+        "versionRange": "[1.21.1]",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "flywheel",
+        "type": "required",
+        "versionRange": "[1.0.0,2.0)",
+        "ordering": "AFTER",
+        "side": "CLIENT"
+      }
+    ]
+  },
+  "immersiveengineering": {
+    "id": "immersiveengineering",
+    "version": "12.4.2-194",
+    "jar": "ImmersiveEngineering-1.21.1-12.4.2-194.jar",
+    "dependencies": [
+      {
+        "modId": "neoforge",
+        "type": "required",
+        "versionRange": "[21.1.164,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "minecraft",
+        "type": "required",
+        "versionRange": "[1.21.1]",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "jei",
+        "type": "optional",
+        "versionRange": "[19.10.0.126,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      }
+    ]
+  },
+  "kubejs": {
+    "id": "kubejs",
+    "version": "2101.7.2-build.374",
+    "jar": "kubejs-neoforge-2101.7.2-build.374.jar",
+    "dependencies": [
+      {
+        "modId": "neoforge",
+        "type": "required",
+        "versionRange": "[21.1.199,)",
+        "ordering": "AFTER",
+        "side": "BOTH"
+      },
+      {
+        "modId": "rhino",
+        "type": "required",
+        "versionRange": "[2101.2.7-build.81,)",
+        "ordering": "AFTER",
+        "side": "BOTH"
+      },
+      {
+        "modId": "jei",
+        "type": "optional",
+        "versionRange": "[19.25.0.322,)",
+        "ordering": "AFTER",
+        "side": "CLIENT"
+      },
+      {
+        "modId": "roughlyenoughitems",
+        "type": "optional",
+        "versionRange": "[16.0.799,)",
+        "ordering": "AFTER",
+        "side": "CLIENT"
+      },
+      {
+        "modId": "emi",
+        "type": "optional",
+        "versionRange": "[1.1.22,)",
+        "ordering": "AFTER",
+        "side": "CLIENT"
+      },
+      {
+        "modId": "betteradvancedtooltips",
+        "type": "optional",
+        "versionRange": "[2101.1.0-build.1,)",
+        "ordering": "BEFORE",
+        "side": "CLIENT"
+      }
+    ]
+  },
+  "betteradvancedtooltips": {
+    "id": "betteradvancedtooltips",
+    "version": "2101.1.0-build.1",
+    "jar": "kubejs-neoforge-2101.7.2-build.374.jar!META-INF/jarjar/better-advanced-tooltips-2101.1.0-build.1.jar",
+    "dependencies": [
+      {
+        "modId": "neoforge",
+        "type": "required",
+        "versionRange": "[21.1.199,)",
+        "ordering": "NONE",
+        "side": "CLIENT"
+      }
+    ]
+  },
+  "rhino": {
+    "id": "rhino",
+    "version": "2101.2.7-build.85",
+    "jar": "rhino-2101.2.7-build.85.jar",
+    "dependencies": []
+  },
+  "architectury": {
+    "id": "architectury",
+    "version": "13.0.11",
+    "jar": "architectury-13.0.11-neoforge.jar",
+    "dependencies": [
+      {
+        "modId": "minecraft",
+        "type": "required",
+        "versionRange": "[1.21,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "neoforge",
+        "type": "required",
+        "versionRange": "[21.0.110-beta,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      }
+    ]
+  },
+  "framedblocks": {
+    "id": "framedblocks",
+    "version": "10.6.1",
+    "jar": "FramedBlocks-10.6.1.jar",
+    "dependencies": [
+      {
+        "modId": "neoforge",
+        "type": "required",
+        "versionRange": "[21.1.205,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "minecraft",
+        "type": "required",
+        "versionRange": "[1.21,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "athena",
+        "type": "optional",
+        "versionRange": "[4.0.0,)",
+        "ordering": "NONE",
+        "side": "CLIENT"
+      },
+      {
+        "modId": "atlasviewer",
+        "type": "optional",
+        "versionRange": "[9.1.0,)",
+        "ordering": "NONE",
+        "side": "CLIENT"
+      },
+      {
+        "modId": "buildinggadgets",
+        "type": "optional",
+        "versionRange": "[3.14.0,)",
+        "ordering": "AFTER",
+        "side": "BOTH"
+      },
+      {
+        "modId": "create",
+        "type": "optional",
+        "versionRange": "[6.0.2,)",
+        "ordering": "AFTER",
+        "side": "BOTH"
+      },
+      {
+        "modId": "diagonalblocks",
+        "type": "optional",
+        "versionRange": "[21.1.0,)",
+        "ordering": "AFTER",
+        "side": "BOTH"
+      },
+      {
+        "modId": "emi",
+        "type": "optional",
+        "versionRange": "[1.1.22,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "jei",
+        "type": "optional",
+        "versionRange": "[19.21.0.247,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "rei",
+        "type": "optional",
+        "versionRange": "[16.0.744,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "amendments",
+        "type": "optional",
+        "versionRange": "[1.21-1.2.24,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "ae2",
+        "type": "optional",
+        "versionRange": "[19.0.19-beta,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "searchables",
+        "type": "optional",
+        "versionRange": "[1.0.2,)",
+        "ordering": "NONE",
+        "side": "CLIENT"
+      },
+      {
+        "modId": "additionalplacements",
+        "type": "optional",
+        "versionRange": "[2.3.1,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      }
+    ]
+  },
+  "lightmanscurrency": {
+    "id": "lightmanscurrency",
+    "version": "1.21-2.3.0.5",
+    "jar": "lightmanscurrency-1.21-2.3.0.5.jar",
+    "dependencies": [
+      {
+        "modId": "neoforge",
+        "mandatory": true,
+        "versionRange": "[21.1.197,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "minecraft",
+        "mandatory": true,
+        "versionRange": "[1.21.1,1.21.2)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      }
+    ]
+  },
+  "voicechat": {
+    "id": "voicechat",
+    "version": "1.21.1-2.6.22",
+    "jar": "voicechat-neoforge-1.21.1-2.6.22.jar",
+    "dependencies": [
+      {
+        "modId": "neoforge",
+        "type": "required",
+        "versionRange": "[21.0.0-beta,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "minecraft",
+        "type": "required",
+        "versionRange": "[1.21,1.21.1]",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "cloth_config",
+        "type": "optional",
+        "versionRange": "[15.0.127,)",
+        "ordering": "AFTER",
+        "side": "BOTH"
+      }
+    ]
+  },
+  "voicechat_api": {
+    "id": "voicechat_api",
+    "version": "2.6.20",
+    "jar": "voicechat-neoforge-1.21.1-2.6.22.jar",
+    "dependencies": []
+  },
+  "modernfix": {
+    "id": "modernfix",
+    "version": "5.27.24+mc1.21.1",
+    "jar": "modernfix-neoforge-5.27.24+mc1.21.1.jar",
+    "dependencies": [
+      {
+        "modId": "neoforge",
+        "type": "required",
+        "versionRange": "[21.0.111-beta,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "minecraft",
+        "type": "required",
+        "versionRange": "[1.21, 1.22)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "jei",
+        "type": "optional",
+        "versionRange": "[15.8.0.11,)",
+        "ordering": "NONE",
+        "side": "CLIENT"
+      }
+    ]
+  },
+  "ferritecore": {
+    "id": "ferritecore",
+    "version": "7.0.3",
+    "jar": "ferritecore-7.0.3-neoforge.jar",
+    "dependencies": [
+      {
+        "modId": "neoforge",
+        "type": "required",
+        "versionRange": "[21.1.218,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "minecraft",
+        "type": "required",
+        "versionRange": "[1.21.1,1.22)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      }
+    ]
+  },
+  "servercore": {
+    "id": "servercore",
+    "version": "1.5.19+1.21.1",
+    "jar": "servercore-neoforge-1.5.19+1.21.1.jar",
+    "dependencies": [
+      {
+        "modId": "minecraft",
+        "required": true,
+        "versionRange": "[1.21,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "neoforge",
+        "required": true,
+        "versionRange": "[20.2.86,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      }
+    ]
+  },
+  "spark": {
+    "id": "spark",
+    "version": "1.10.124",
+    "jar": "spark-1.10.124-neoforge.jar",
+    "dependencies": [
+      {
+        "modId": "neoforge",
+        "mandatory": true,
+        "versionRange": "[20,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      }
+    ]
+  },
+  "embeddium": {
+    "id": "embeddium",
+    "version": "1.0.15+mc1.21.1",
+    "jar": "embeddium-1.0.15+mc1.21.1.jar",
+    "dependencies": [
+      {
+        "modId": "neoforge",
+        "type": "required",
+        "mandatory": true,
+        "versionRange": "[21.1.15,)",
+        "ordering": "NONE",
+        "side": "CLIENT"
+      },
+      {
+        "modId": "sodium",
+        "type": "incompatible",
+        "reason": "Embeddium cannot be used if Sodium is present. If you want to use Embeddium you will have to remove Sodium.",
+        "versionRange": "[0,)",
+        "ordering": "NONE",
+        "side": "CLIENT"
+      }
+    ]
+  },
+  "chunky": {
+    "id": "chunky",
+    "version": "1.4.23",
+    "jar": "Chunky-NeoForge-1.4.23.jar",
+    "dependencies": [
+      {
+        "modId": "neoforge",
+        "type": "required",
+        "versionRange": "[21.0-beta,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "minecraft",
+        "type": "required",
+        "versionRange": "[1.21,1.22)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      }
+    ]
+  },
+  "adpother": {
+    "id": "adpother",
+    "version": "9.1.10.0",
+    "jar": "AdPother-1.21.1-9.1.10.0-NeoForge-build.1121.jar",
+    "dependencies": [
+      {
+        "modId": "neoforge",
+        "type": "required",
+        "versionRange": "[21.1.0,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "minecraft",
+        "type": "required",
+        "versionRange": "[1.21.1]",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "forgeendertech",
+        "type": "required",
+        "versionRange": "[12.1.3.0,)",
+        "ordering": "AFTER",
+        "side": "BOTH"
+      }
+    ]
+  },
+  "adchimneys": {
+    "id": "adchimneys",
+    "version": "11.1.10.0",
+    "jar": "AdChimneys-1.21.1-11.1.10.0-NeoForge-build.1121.jar",
+    "dependencies": [
+      {
+        "modId": "neoforge",
+        "type": "required",
+        "versionRange": "[21.1.0,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "minecraft",
+        "type": "required",
+        "versionRange": "[1.21.1]",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "forgeendertech",
+        "type": "required",
+        "versionRange": "[12.1.3.0,)",
+        "ordering": "AFTER",
+        "side": "BOTH"
+      }
+    ]
+  },
+  "forgeendertech": {
+    "id": "forgeendertech",
+    "version": "12.1.3.0",
+    "jar": "ForgeEndertech-1.21.1-12.1.3.0-NeoForge-build.1100.jar",
+    "dependencies": [
+      {
+        "modId": "neoforge",
+        "type": "required",
+        "versionRange": "[21.1.0,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "minecraft",
+        "type": "required",
+        "versionRange": "[1.21.1]",
+        "ordering": "NONE",
+        "side": "BOTH"
+      }
+    ]
+  },
+  "jei": {
+    "id": "jei",
+    "version": "19.51.0.418",
+    "jar": "jei-1.21.1-neoforge-19.51.0.418.jar",
+    "dependencies": [
+      {
+        "modId": "neoforge",
+        "type": "required",
+        "versionRange": "[21.1.238,)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      },
+      {
+        "modId": "minecraft",
+        "type": "required",
+        "versionRange": "[1.21, 1.21.1)",
+        "ordering": "NONE",
+        "side": "BOTH"
+      }
+    ]
+  }
+}

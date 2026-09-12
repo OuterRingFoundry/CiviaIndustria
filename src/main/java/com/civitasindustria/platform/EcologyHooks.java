@@ -18,7 +18,7 @@ public final class EcologyHooks {
     private static CellData cell(ServerLevel level,BlockPos pos){return WorldRuntime.get(level).state().cells.get(CellPos.fromBlock(pos.getX(),pos.getZ()));}
     private static void crop(CropGrowEvent.Pre event){
         if(event.getLevel() instanceof ServerLevel level){var c=cell(level,event.getPos());
-            if(c!=null&&level.random.nextDouble()>Math.max(.1,c.cropSuitability))event.setResult(CropGrowEvent.Pre.Result.DO_NOT_GROW);
+            if(c!=null&&event.getResult()!=CropGrowEvent.Pre.Result.DO_NOT_GROW&&level.random.nextDouble()>PollutionEffects.cropRate(c,ServerConfig.CROP_MIN_GROWTH.get()))event.setResult(CropGrowEvent.Pre.Result.DO_NOT_GROW);
         }
     }
     private static void fish(ItemFishedEvent event){

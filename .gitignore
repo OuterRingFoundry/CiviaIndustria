@@ -15,3 +15,5 @@ implementation-build.exit
 
 resume-evidence/
 resume-*.exit
+
+dist/

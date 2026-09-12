@@ -22,7 +22,7 @@ public final class ServerConfig {
     public static final ModConfigSpec.LongValue CRATE_CAPACITY=B.defineInRange("crateCapacity",100000L,1L,1000000000L);
     public static final ModConfigSpec.IntValue TRANSFER_BATCH=B.defineInRange("freightTransferBatch",256,1,4096);
     public static final ModConfigSpec.IntValue CARGO_NORMAL=B.defineInRange("cargoNormalLimit",512,1,1000000);
-    public static final ModConfigSpec.IntValue WARNING_TICKS=B.defineInRange("threatWarningTicks",12000,200,72000);
+    public static final ModConfigSpec.IntValue WARNING_TICKS=B.defineInRange("threatWarningTicks",1200,200,72000);
     public static final ModConfigSpec.IntValue RAID_CELL_BUDGET=B.defineInRange("raidCellBudget",24,1,24), RAID_BUDGET=B.defineInRange("raidBudget",40,1,40),
         GLOBAL_RAID_BUDGET=B.defineInRange("globalRaidBudget",80,1,80);
     public static final ModConfigSpec.DoubleValue THREAT_THRESHOLD=B.defineInRange("threatThreshold",100.0,1,1000000);
@@ -33,6 +33,11 @@ public final class ServerConfig {
         EXPOSURE_WATER=B.defineInRange("severeExposureWaterToxicity",500.0,1,1000000);
     public static final ModConfigSpec.IntValue COMMISSION_TICKS=B.defineInRange("commissioningTicks",200,20,72000);
     public static final ModConfigSpec.IntValue RAID_WAVE_SIZE=B.defineInRange("raidWaveSize",6,1,24), RAID_LIFETIME=B.defineInRange("raidLifetimeTicks",2400,200,6000);
+    public static final ModConfigSpec.DoubleValue NATIVE_EXPOSURE=B.comment("Regional exposure per native airborne pollution unit per 200 ticks; physical filters reduce this input. Existing ecological injury recovers gradually.").defineInRange("nativePollutionExposure",0.01,0.0,1.0);
+    public static final ModConfigSpec.BooleanValue ANIMAL_EFFECTS=B.comment("Gradual regional penalties to animal maximum health and passive baby growth; recovery never grants free healing.").define("animalPollutionEffects",true);
+    public static final ModConfigSpec.DoubleValue ANIMAL_MIN_HEALTH=B.defineInRange("animalMinimumHealthFactor",.6,.1,1);
+    public static final ModConfigSpec.DoubleValue ANIMAL_MIN_GROWTH=B.defineInRange("animalMinimumGrowthFactor",.35,.05,1);
+    public static final ModConfigSpec.DoubleValue CROP_MIN_GROWTH=B.defineInRange("cropMinimumGrowthFactor",.15,.05,1);
     public static final ModConfigSpec SPEC=B.build();
     private static ModConfigSpec.DoubleValue rate(String name,double value){return B.defineInRange(name,value,0,1);}
     public static SimulationSettings simulation(){return new SimulationSettings(AIR_DECAY.get(),DIFFUSION.get(),WET.get(),RUNOFF.get(),
