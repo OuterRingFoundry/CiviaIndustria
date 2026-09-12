@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "workshop_bearing": "minecraft:block/iron_block",
+    "workshop_bearing": "minecraft:block/polished_andesite",
     "workshop_brass": "minecraft:block/gold_block",
     "workshop_iron": "minecraft:block/iron_block",
     "particle": "minecraft:block/iron_block"

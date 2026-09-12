@@ -1,16 +1,16 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "filter_mesh": "minecraft:block/iron_block",
-    "workshop_bearing": "minecraft:block/iron_block",
+    "filter_mesh": "minecraft:block/iron_bars",
+    "workshop_bearing": "minecraft:block/polished_andesite",
     "workshop_brass": "minecraft:block/gold_block",
-    "workshop_cast_iron": "minecraft:block/iron_block",
-    "workshop_coil": "minecraft:block/iron_block",
-    "workshop_gauge": "minecraft:block/iron_block",
+    "workshop_cast_iron": "minecraft:block/gray_concrete",
+    "workshop_coil": "minecraft:block/copper_block",
+    "workshop_gauge": "minecraft:block/quartz_block_bottom",
     "workshop_iron": "minecraft:block/iron_block",
-    "workshop_vent": "minecraft:block/iron_block",
+    "workshop_vent": "minecraft:block/gray_concrete",
     "particle": "minecraft:block/iron_block",
-    "status": "minecraft:block/iron_block"
+    "status": "minecraft:block/redstone_lamp"
   },
   "elements": [
     {

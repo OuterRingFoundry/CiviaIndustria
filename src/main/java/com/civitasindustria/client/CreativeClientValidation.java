@@ -52,7 +52,7 @@ public final class CreativeClientValidation {
                     CivitasRegistries.ITEMS.getEntries().size(), screen.getMenu().items.size());
         }
         if (ticks == 100) org.lwjgl.glfw.GLFW.glfwSetCursorPos(mc.getWindow().getWindow(), 20, 20);
-        if (ticks == 110) capture("Industry inventory");
+        if (ticks == 110) capture("industry-inventory");
         if (ticks == 140) search("precision");
         if (ticks == 180) {
             if (screen().getMenu().items.stream().noneMatch(s -> s.is(CivitasRegistries.CONTENT.get("precision_workbench").get().asItem())))
@@ -61,7 +61,7 @@ public final class CreativeClientValidation {
                     || screen().getMenu().items.stream().anyMatch(s -> s.is(CivitasRegistries.CONTENT.get("civic_core").get().asItem())))
                 throw new AssertionError("Industry search did not filter unrelated items");
             LOG.info("CIVITAS CREATIVE SEARCH PASS: industry precision search contains workbench, filtered={}", screen().getMenu().items.size());
-            capture("Industry search");
+            capture("industry-search");
         }
         if (ticks == 210) { select(CreativeModeTabs.searchTab()); search("rotation"); }
         if (ticks == 250) {
@@ -72,7 +72,7 @@ public final class CreativeClientValidation {
                     || screen().getMenu().items.stream().anyMatch(s -> s.is(Items.OAK_LOG)))
                 throw new AssertionError("Global search did not filter unrelated items");
             LOG.info("CIVITAS CREATIVE SEARCH PASS: global rotation search, filtered={}", screen().getMenu().items.size());
-            capture("Global search");
+            capture("global-search");
             mc.gameMode.handleCreativeModeItemAdd(new ItemStack(CivitasRegistries.CONTENT.get("precision_workbench").get()), 36);
         }
         if (ticks == 280) mc.getSingleplayerServer().execute(() -> {
@@ -81,7 +81,41 @@ public final class CreativeClientValidation {
                 throw new AssertionError("Creative acquisition packet did not reach the server inventory");
             acquired = true;
         });
-        if (ticks == 320) {
+        if (ticks == 300) {
+            mc.player.closeContainer();
+            mc.getSingleplayerServer().execute(() -> {
+                var level = mc.getSingleplayerServer().overworld();
+                level.setDayTime(6000); level.setWeatherParameters(6000, 0, false, false);
+                var origin = new net.minecraft.core.BlockPos(32, -60, 32);
+                for (int x=-9; x<=9; x++) for (int z=-6; z<=14; z++) {
+                    level.setBlock(origin.offset(x,-1,z), net.minecraft.world.level.block.Blocks.STONE_BRICKS.defaultBlockState(), 3);
+                    for (int y=0; y<=5; y++) level.setBlock(origin.offset(x,y,z), net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), 3);
+                }
+                String[] gallery = {"electric_motor", "rotation_dynamo", "precision_workbench", "factory_controller", "remediation_station",
+                        "civic_core", "civic_relay", "logistics_node", "defense_node", "maintenance_depot",
+                        "cargo_crate", "market_counter", "cargo_loader", "cargo_unloader", "bulk_tank"};
+                for (int i=0; i<gallery.length; i++) {
+                    var block = CivitasRegistries.CONTENT.get(gallery[i]);
+                    if (block != null) level.setBlock(origin.offset((i%5-2)*3, 0, (i/5)*3), block.get().defaultBlockState(), 3);
+                }
+                var center=origin.offset(0,0,11);
+                for (int x=-1;x<=1;x++) for (int z=-1;z<=1;z++) level.setBlock(center.offset(x,0,z),
+                        CivitasRegistries.CONTENT.get(x==0&&z==0?"warehouse_controller":x==0&&z==-1?"warehouse_port":"warehouse_casing").get().defaultBlockState(),3);
+                var warehouse=(com.civitasindustria.common.warehouse.CargoBlockEntity)level.getBlockEntity(center);
+                if (!warehouse.available()) throw new AssertionError("Gallery warehouse did not form");
+                var port=(com.civitasindustria.common.warehouse.CargoBlockEntity)level.getBlockEntity(center.north());
+                if (!port.handler.insertItem(0,new ItemStack(Items.IRON_INGOT,32),false).isEmpty() || warehouse.total()!=32)
+                    throw new AssertionError("Gallery warehouse port did not share controller storage");
+                LOG.info("CIVITAS CREATIVE WAREHOUSE PASS: 3x3 ring formed; port inserted 32 items into controller");
+                level.getServer().getPlayerList().getPlayers().getFirst().connection.teleport(32,-57,25,0,25);
+            });
+        }
+        if (ticks == 350) { mc.options.hideGui=true; mc.getToasts().clear(); }
+        if (ticks == 390) capture("machine-gallery");
+        if (ticks == 410) mc.getSingleplayerServer().execute(() ->
+                mc.getSingleplayerServer().getPlayerList().getPlayers().getFirst().connection.teleport(37,-57,36,30,30));
+        if (ticks == 480) capture("warehouse-multiblock");
+        if (ticks == 520) {
             if (!acquired) throw new AssertionError("No creative acquisition confirmation");
             LOG.info("CIVITAS CREATIVE CLIENT PASS: actual inventory screen, category/global searches and server acquisition; no GPU benchmark");
             mc.stop();
@@ -118,6 +152,6 @@ public final class CreativeClientValidation {
     private static void capture(String label) {
         var mc = Minecraft.getInstance();
         org.lwjgl.glfw.GLFW.glfwSetCursorPos(mc.getWindow().getWindow(), 20, 20);
-        net.minecraft.client.Screenshot.grab(mc.gameDirectory, mc.getMainRenderTarget(), message -> LOG.info("{}: {}", label, message.getString()));
+        net.minecraft.client.Screenshot.grab(mc.gameDirectory, label + ".png", mc.getMainRenderTarget(), message -> LOG.info("{}: {}", label, message.getString()));
     }
 }

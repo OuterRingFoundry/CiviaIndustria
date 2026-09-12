@@ -1,14 +1,14 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "filter_mesh": "minecraft:block/iron_block",
-    "wash_window": "minecraft:block/glass",
+    "filter_mesh": "minecraft:block/iron_bars",
+    "wash_window": "minecraft:block/cyan_terracotta",
     "workshop_brass": "minecraft:block/gold_block",
-    "workshop_cast_iron": "minecraft:block/iron_block",
-    "workshop_gauge": "minecraft:block/iron_block",
+    "workshop_cast_iron": "minecraft:block/gray_concrete",
+    "workshop_gauge": "minecraft:block/quartz_block_bottom",
     "workshop_iron": "minecraft:block/iron_block",
-    "workshop_tank": "minecraft:block/iron_block",
-    "workshop_vent": "minecraft:block/iron_block",
+    "workshop_tank": "minecraft:block/oxidized_copper",
+    "workshop_vent": "minecraft:block/gray_concrete",
     "particle": "minecraft:block/iron_block"
   },
   "elements": [

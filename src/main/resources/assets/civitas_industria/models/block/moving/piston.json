@@ -1,7 +1,7 @@
 {
   "textures": {
     "unloader_front": "minecraft:block/iron_block",
-    "steel_casing": "minecraft:block/iron_block",
+    "steel_casing": "minecraft:block/polished_andesite",
     "particle": "minecraft:block/polished_andesite"
   },
   "elements": [

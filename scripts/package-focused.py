@@ -4,7 +4,7 @@ import argparse,hashlib,json,shutil,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 p=argparse.ArgumentParser();p.add_argument('--civitas',required=True,type=Path);p.add_argument('--output',required=True,type=Path);a=p.parse_args();a.output.mkdir(parents=True,exist_ok=False)
-readme='''Civitas Industria 0.5.0 development - focused pack
+readme='''Civitas Industria 0.5.1 development - focused pack
 Minecraft 1.21.1 / NeoForge 21.1.249 / Java 21 / Python 3.11+
 
 Extract into a NEW empty client or dedicated-server instance directory.
@@ -34,7 +34,7 @@ Industrial raids have a warning bar, three waves, and recovery/retreat.
 Development build: consult docs/REDESIGN_STATUS.md for actual validation scope.
 '''
 files={f'mods/{a.civitas.name}':a.civitas.read_bytes(),'INSTALL.txt':readme.encode()}
-for name in ['scripts/download-pack.py','scripts/verify-pack.py','scripts/pack_manifest.py','pack/downloads.lock.json','pack/mods.lock.json','docs/REDESIGN_STATUS.md','pack/validation/redesign-2026-09-12.json']:
+for name in ['scripts/download-pack.py','scripts/verify-pack.py','scripts/pack_manifest.py','pack/downloads.lock.json','pack/mods.lock.json','docs/REDESIGN_STATUS.md','docs/BLOCK_ART_AND_CREATIVE.md','pack/validation/redesign-2026-09-12.json']:
  files[name]=(ROOT/name).read_bytes()
 for f in (ROOT/'pack/overrides').rglob('*'):
  if f.is_file() and f.name!='server.properties':files[str(f.relative_to(ROOT/'pack/overrides'))]=f.read_bytes()
@@ -42,7 +42,7 @@ lock=json.loads(files['pack/mods.lock.json']);lock['artifacts'].append({'filenam
 files['pack/mods.lock.json']=(json.dumps(lock,indent=2)+'\n').encode()
 manifest={n:hashlib.sha256(b).hexdigest() for n,b in sorted(files.items())}
 files['SHA256.json']=(json.dumps(manifest,indent=2)+'\n').encode()
-archive=a.output/'civitas-industria-0.5.0-focused-installer.zip'
+archive=a.output/'civitas-industria-0.5.1-focused-installer.zip'
 with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:
  for name,content in files.items():z.writestr(name,content)
 print(archive,hashlib.sha256(archive.read_bytes()).hexdigest())

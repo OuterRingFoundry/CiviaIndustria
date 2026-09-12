@@ -47,5 +47,8 @@
   "item.civitas_industria.gear_blank": "Machined Gear Blank",
   "item.civitas_industria.mounting_plate": "Perforated Mounting Plate",
   "item.civitas_industria.cutting_insert": "Diamond-tipped Cutting Insert",
-  "block.civitas_industria.market_counter": "Market Counter"
+  "block.civitas_industria.market_counter": "Market Counter",
+  "tooltip.civitas_industria.warehouse.controller": "3x3 warehouse: controller in the center; eight casings or ports around it, on the same level.",
+  "tooltip.civitas_industria.warehouse.casing": "Build the eight-block ring around a warehouse controller. Ports may replace casings.",
+  "tooltip.civitas_industria.warehouse.port": "Replaces a ring casing. Connect hoppers or pipes; shares storage with one nearby controller."
 }

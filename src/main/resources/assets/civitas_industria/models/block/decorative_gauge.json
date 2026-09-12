@@ -1,6 +1,6 @@
 {
   "textures": {
-    "steel_casing": "minecraft:block/iron_block",
+    "steel_casing": "minecraft:block/polished_andesite",
     "maintenance_panel": "minecraft:block/iron_block",
     "particle": "minecraft:block/polished_andesite"
   },

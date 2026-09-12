@@ -1,13 +1,13 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "workshop_bearing": "minecraft:block/iron_block",
+    "workshop_bearing": "minecraft:block/polished_andesite",
     "workshop_brass": "minecraft:block/gold_block",
-    "workshop_cast_iron": "minecraft:block/iron_block",
-    "workshop_gauge": "minecraft:block/iron_block",
+    "workshop_cast_iron": "minecraft:block/gray_concrete",
+    "workshop_gauge": "minecraft:block/quartz_block_bottom",
     "workshop_iron": "minecraft:block/iron_block",
-    "workshop_timber": "minecraft:block/iron_block",
-    "workshop_vent": "minecraft:block/iron_block",
+    "workshop_timber": "minecraft:block/spruce_planks",
+    "workshop_vent": "minecraft:block/gray_concrete",
     "particle": "minecraft:block/iron_block"
   },
   "elements": [

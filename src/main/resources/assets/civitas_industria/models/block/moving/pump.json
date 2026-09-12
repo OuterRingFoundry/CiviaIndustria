@@ -1,6 +1,6 @@
 {
   "textures": {
-    "tank_top": "minecraft:block/iron_block",
+    "tank_top": "minecraft:block/copper_block",
     "brass_gear": "minecraft:block/gold_block",
     "particle": "minecraft:block/polished_andesite"
   },

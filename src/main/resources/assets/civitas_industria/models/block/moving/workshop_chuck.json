@@ -2,7 +2,7 @@
   "parent": "minecraft:block/block",
   "textures": {
     "workshop_iron": "minecraft:block/iron_block",
-    "workshop_cast_iron": "minecraft:block/iron_block",
+    "workshop_cast_iron": "minecraft:block/gray_concrete",
     "workshop_brass": "minecraft:block/gold_block",
     "particle": "minecraft:block/iron_block"
   },

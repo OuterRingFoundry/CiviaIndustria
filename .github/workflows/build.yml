@@ -36,10 +36,12 @@ jobs:
         run: python scripts/integration-matrix.py --artifacts ../civitas-industria-artifacts
       - name: Render menus and validate client packets
         run: python scripts/test-redesign-client.py --fixture run-matrix-full-server --output build/redesign-client
+      - name: Render creative tab and block gallery
+        run: python scripts/test-creative-client.py --fixture run-matrix-full-server --output build/creative-client
       - name: Currency process restart and damaged-save refusal
         run: python scripts/test-economy-restart.py --fixture run-matrix-core --output build/economy-restart
       - name: Assemble focused installer
-        run: python scripts/package-focused.py --civitas build/libs/civitas_industria-0.5.0-dev.jar --output build/distribution
+        run: python scripts/package-focused.py --civitas build/libs/civitas_industria-0.5.1-dev.jar --output build/distribution
       - name: Three-dimension persistence and damaged-save refusal
         run: |
           python scripts/smoke-server.py --runtime-write
@@ -65,4 +67,7 @@ jobs:
             build/redesign-client/client-validation.log
             build/redesign-client/result.json
             build/redesign-client/screenshots/
+            build/creative-client/client-validation.log
+            build/creative-client/result.json
+            build/creative-client/screenshots/
             build/distribution/

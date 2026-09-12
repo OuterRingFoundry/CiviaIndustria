@@ -2,7 +2,7 @@
   "parent": "minecraft:block/block",
   "textures": {
     "sulfate_cake": "minecraft:block/iron_block",
-    "workshop_cast_iron": "minecraft:block/iron_block",
+    "workshop_cast_iron": "minecraft:block/gray_concrete",
     "particle": "minecraft:block/iron_block"
   },
   "elements": [
