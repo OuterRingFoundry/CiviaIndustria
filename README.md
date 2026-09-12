@@ -14,8 +14,24 @@ exemptions and settlement weights, native chimney smoke, and mixed-mod power bal
 Block and entity materials now reference installed Minecraft pixel textures instead
 of noisy generated surfaces. No upstream jars or copied art are embedded.
 
-**Build/native validation is in progress.** Historical results below do not establish
-acceptance of this redesign. See [redesign status](docs/REDESIGN_STATUS.md).
+The redesigned source builds successfully and all 44 native tests pass in core,
+Create/IE, and the focused full pack. Currency also passes clean process restart
+and damaged-save refusal. Rendered-client acceptance is in progress; see
+[redesign status](docs/REDESIGN_STATUS.md) for exact evidence.
+
+The focused installer contains our JAR and verified official dependency downloads.
+Extract it into a new NeoForge 21.1.249 instance, run the commands in `INSTALL.txt`,
+and use the same selected mods on client and server. Existing mixed packs and worlds
+are preserved. See [compute/storage policy](docs/COMPUTE_STORAGE.md) for cloud builds.
+
+Craft a market counter with six planks, two iron ingots and a barrel. Right-click to
+deposit a diamond for 100 crowns or redeem 100 crowns for a diamond. Fund the market
+with existing crowns, sell goods to stock it, then trade at the displayed prices.
+`/ci money pay <player> <amount>` transfers crowns. Right-click bulk storage or the
+precision workbench for inventory menus; shift-click transfers stacks. Industrial
+raids show a one-minute warning by default, followed by three waves and recovery.
+Create Crafts & Additions motors/alternators and Civitas converters share lossy
+power limits, while Advanced Chimneys provides native factory smoke routing.
 
 ## Previous validated development checkpoint
 

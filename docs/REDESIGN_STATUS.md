@@ -13,8 +13,16 @@ Civillis 2.0.1 artifact. No binary modification or redistribution of restricted 
 Local checks: 60,229 domain assertions passed including 10,000 randomized currency
 operations, 10,000 bounded daily price changes, byte truncation/corruption refusal,
 and wave state transitions. All 261 JSON resources parse and model textures resolve.
-Tooling count expectation required updating after adding native tests. Full build,
-44 native tests and rendered menus remain pending at this checkpoint.
+Tooling: 13 tests passed. Cloud commit `ebb81f8` passes Java/NeoForge build and
+all 44 native tests in each of core, Create/IE and focused full-server profiles.
+Its currency fixture passes write/read/verify, refusal of future/truncated saves
+without changing damaged bytes, and successful restart after restoring the original.
+Rendered menus and the extended live raid event fixture are still running.
+
+Native startup exposed and fixed early optional chimney class loading and premature
+config reads. Replacing KubeJS exposed a required missing tag in the core profile;
+native bulk/heavy definitions now tolerate absent optional tags and classify coal.
+The focused installer was extracted and checked against all seven selected JARs.
 
 Market controls: Deposit converts one diamond to 100 crowns; Redeem reverses it.
 Fund donates 100 existing crowns to the shared market treasury, which initially has
@@ -28,7 +36,7 @@ leave missing content in worlds that used them; the new manifest targets fresh
 assembled instances and does not delete files from a running world.
 
 Crown ledger is saved separately from vanilla player inventory, as other Minecraft
-containers are. Clean save/restart conservation must be checked; atomic recovery
+containers are. Clean save/restart conservation passes; atomic recovery
 from a process kill between independent save files is not promised.
 
 Materials use installed vanilla files by resource reference; no texture copies.
