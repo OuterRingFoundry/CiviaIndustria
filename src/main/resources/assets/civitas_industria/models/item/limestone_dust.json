@@ -1,9 +1,9 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "limestone_surface": "civitas_industria:block/process/limestone_surface",
-    "sorbent_sack": "civitas_industria:block/process/sorbent_sack",
-    "particle": "civitas_industria:block/process/workshop_iron"
+    "limestone_surface": "minecraft:block/polished_andesite",
+    "sorbent_sack": "minecraft:block/iron_block",
+    "particle": "minecraft:block/iron_block"
   },
   "elements": [
     {

@@ -13,6 +13,7 @@ def evaluate(text, exit_code, expected):
     errors = [marker for marker in ('Encountered an unexpected exception',
                                     'CIVITAS SHARED RAILWAY FAILED', 'BUILD FAILED',
                                     'Parsing error loading recipe', 'Failed to parse recipe',
+                                    "Couldn't parse element ResourceKey[minecraft:root / minecraft:loot_table]",
                                     'Error loading KubeJS script')
               if marker in text]
     passed = (exit_code == 0 and expected > 0 and counts == [expected]

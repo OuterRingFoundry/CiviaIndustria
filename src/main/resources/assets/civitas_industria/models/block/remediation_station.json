@@ -1,15 +1,15 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "filter_mesh": "civitas_industria:block/process/filter_mesh",
-    "wash_window": "civitas_industria:block/process/wash_window",
-    "workshop_brass": "civitas_industria:block/process/workshop_brass",
-    "workshop_cast_iron": "civitas_industria:block/process/workshop_cast_iron",
-    "workshop_gauge": "civitas_industria:block/process/workshop_gauge",
-    "workshop_iron": "civitas_industria:block/process/workshop_iron",
-    "workshop_tank": "civitas_industria:block/process/workshop_tank",
-    "workshop_vent": "civitas_industria:block/process/workshop_vent",
-    "particle": "civitas_industria:block/process/workshop_iron"
+    "filter_mesh": "minecraft:block/iron_block",
+    "wash_window": "minecraft:block/glass",
+    "workshop_brass": "minecraft:block/gold_block",
+    "workshop_cast_iron": "minecraft:block/iron_block",
+    "workshop_gauge": "minecraft:block/iron_block",
+    "workshop_iron": "minecraft:block/iron_block",
+    "workshop_tank": "minecraft:block/iron_block",
+    "workshop_vent": "minecraft:block/iron_block",
+    "particle": "minecraft:block/iron_block"
   },
   "elements": [
     {

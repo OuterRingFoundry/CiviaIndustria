@@ -1,0 +1,21 @@
+{
+  "inspectedDate": "2026-09-11",
+  "pack": "AEW 1.0.0",
+  "packManifest": "/data/.tmp/AEW 1.0.0.mrpack!/modrinth.index.json",
+  "extractedPack": "/data/.tmp/AEW-compat-test",
+  "minecraft": "1.21.1",
+  "neoforge": "21.1.248",
+  "liveServerViewDistance": null,
+  "liveServerViewDistanceNote": "No server.properties in inspected directory; read the connected server's advertisement at runtime.",
+  "mapProfile": {"load_new_chunks": true, "update_chunks": true, "map_writing_distance": -1},
+  "mods": [
+    {"id": "xaeroworldmap", "version": "1.45.0", "sha256": "d60899112e84616ba52a993c1722fd891872acc4779bfac34d9b170001451c6f", "license": "All Rights Reserved"},
+    {"id": "xaerominimap", "version": "26.4.2", "sha256": "b722bcf794288f0ed51165cd1f057fc4505e20abbc723b2e17e900426e443603", "license": "All Rights Reserved"},
+    {"id": "ftbchunks", "version": "2101.1.22", "sha256": "4ba1b3352184fa7f6e2aa4bca76edd074867697d62344dfa50dcccdb4dab5217", "license": "All Rights Reserved"},
+    {"id": "ftbxaerocompat", "version": "1.1.4", "sha256": "dd27664945866d4092803c261cdd0d5ba4df755853e2cc87fae9c96cbd986681", "license": "LGPL3.0"},
+    {"id": "sablexaeromaps", "version": "1.4.0", "sha256": "e99bc926e1767c8d86757e33310b8db5178b06f4f7b0e0a8a769194f3428e22f", "license": "MIT"}
+  ],
+  "embeddedLibraries": {"xaerolib": "1.7.1 (embedded in both Xaero map JARs)"},
+  "areaRequestInspection": "javap -c -p of installed FTB RequestMapDataPacket.handle: only return; no terrain response. Xaero packet class inventory contained handshake, rules and player tracking, with no terrain area request.",
+  "thirdPartyRedistribution": "No third-party JAR is included in this source folder or the tool artifact. Existing AEW JARs were copied only into disposable client validation directories."
+}

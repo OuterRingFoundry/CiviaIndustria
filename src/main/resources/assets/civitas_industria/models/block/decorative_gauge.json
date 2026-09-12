@@ -1,8 +1,8 @@
 {
   "textures": {
-    "steel_casing": "civitas_industria:block/process/workshop_iron",
-    "maintenance_panel": "civitas_industria:block/maintenance_panel",
-    "particle": "civitas_industria:block/steel_casing"
+    "steel_casing": "minecraft:block/iron_block",
+    "maintenance_panel": "minecraft:block/iron_block",
+    "particle": "minecraft:block/polished_andesite"
   },
   "elements": [
     {

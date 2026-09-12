@@ -31,6 +31,15 @@ public final class RuntimeCommands {
             " | AQI "+c.aqi()+" | WQI "+c.waterQuality()+" | acid "+c.acidPrecursorLoad+
             " | pollutants "+java.util.Arrays.toString(c.pollutants)+" | degradation "+c.degradation);
     }
+    private static int economy(CommandSourceStack s){
+        var r=runtime(s);var cell=here(s);var network=r.networks().stream().filter(n->n.cells().contains(cell)).findFirst().orElse(null);
+        if(network==null)return reply(s,"No civic network here. Quiet wilderness homes remain viable; link civic cells for shared upkeep and defense.");
+        double cost=Math.ceil(CivilizationGraph.maintenance(network,com.civitasindustria.common.config.ServerConfig.MAINTENANCE_BASE.get(),com.civitasindustria.common.config.ServerConfig.MAINTENANCE_EDGE.get(),com.civitasindustria.common.config.ServerConfig.MAINTENANCE_AREA.get()));
+        double funds=0;int defenses=0;
+        for(var n:r.state().nodes.values())if(network.cells().contains(n.cell)){if(n.kind==WorldState.CivicNode.Kind.CORE||n.kind==WorldState.CivicNode.Kind.MAINTENANCE)funds+=n.credits;else if(n.kind==WorldState.CivicNode.Kind.DEFENSE&&n.credits>0)defenses++;}
+        var stored=r.state().cells.get(cell);
+        return reply(s,String.format(java.util.Locale.ROOT,"Civic economy: %d cells, %d exposed edges | %.0f credits / %d ticks (%.2f per cell) | treasury %.0f | %d funded defense nodes (protection applies locally) | local threat %.1f / %.1f. Compact connected districts share perimeter costs; filter industry away from homes.",network.cells().size(),network.perimeter(),cost,com.civitasindustria.common.config.ServerConfig.MAINTENANCE_INTERVAL.get(),cost/network.cells().size(),funds,defenses,stored==null?0:stored.threatPressure,com.civitasindustria.common.config.ServerConfig.THREAT_THRESHOLD.get()));
+    }
     public static void attach(LiteralArgumentBuilder<CommandSourceStack> root) {
         var env=Commands.literal("env")
             .then(Commands.literal("here").executes(c->inspect(c.getSource(),here(c.getSource()))))
@@ -77,6 +86,7 @@ public final class RuntimeCommands {
                 return reply(s,"CI queued "+count+" loaded chunks");
             }))));
         root.then(Commands.literal("civilization")
+            .then(Commands.literal("economy").executes(c->economy(c.getSource())))
             .then(Commands.literal("status").executes(c->inspect(c.getSource(),here(c.getSource()))))
             .then(Commands.literal("networks").executes(c->reply(c.getSource(),"CI networks "+runtime(c.getSource()).networks().size()+" | nodes "+runtime(c.getSource()).state().nodes.size())))
             .then(Commands.literal("recalculate").requires(s->s.hasPermission(2)).executes(c->{runtime(c.getSource()).recalculate();return reply(c.getSource(),"CI topology rebuild queued");})));

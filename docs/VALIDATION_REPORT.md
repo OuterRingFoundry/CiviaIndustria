@@ -1,3 +1,205 @@
+# Residence authority and creative inventory — verified 0.4.0-dev, 2026-09-11
+
+Source commit: `ce7d9a3`. Final JAR SHA-256:
+`dc6fa15efd41558a16817c44415ad2f2222514ad6c59c75f61d37e0296f555e6`
+(1,815,479 bytes). Build inputs match between the local Git checkout and
+`/data/.tmp/civitas-residence-creative`:
+`5a77cf428afd9410cac2bd7f0927f82d9fce0a26fb8c94c56e8467a679384744`.
+The exact digest scope, log hashes and screenshots are in `pack/residence-validation.json`.
+
+The final build passed 101 domain checks. Core and full-server each passed all 42
+required GameTests with clean saves in `/data/.tmp/civitas-residence-creative-checks-r3`.
+Creative coverage checks every registered item in the Civitas tab, search contents
+and its vanilla category without operator-only visibility. The existing optional-mod,
+workshop, cargo, parcel, ecology and raid checks passed in these two profiles.
+249 resource JSON files and 36 textures passed structural/reference checks.
+
+All seven process stages passed in `/data/.tmp/civitas-residence-restart-r5`: write,
+read, verify, future-version refusal, truncated-file refusal, envelope/snapshot
+mismatch refusal, and restored-file startup. Saved identity, cross-dimensional home
+replacement, activity progress and no unobserved restart accrual were verified.
+The three refused files retained exactly the supplied bytes. The fixture uses a
+simulated qualification clock, not ten minutes of real-player activity. Native and
+process evidence are in `pack/residence-integration-results.json` and
+`pack/residence-restart-results.json`.
+
+The process fixture exposed a lifecycle defect: shutdown saving retried a failed
+strict residence load. Save and chunk-unload callbacks now consult only an existing
+runtime. The final runner explicitly rejects that shutdown error. The interrupted
+r1 and r4 attempts remain preserved; r2/r3 were successful intermediate runs.
+
+The full client with Create, IE, KubeJS, JEI and Embeddium opened the actual creative
+screen. All 39 registered items and their models/materials appeared; the motor/dynamo
+are conditional on Create (37 items without it). The searchable Civitas tab lists
+blocks before tools/materials, and inventory items also appear in vanilla categories.
+Real typed input filters `precision` to four items and `rotation` to two. The standard
+creative acquisition packet put the workbench into the server inventory. Three PNGs
+from `/data/.tmp/civitas-creative-client-r3/screenshots` were visually inspected.
+The client saved all dimensions and exited successfully. This is Xvfb/Mesa at
+1280x720, not authenticated multiplayer or a representative GPU benchmark.
+
+Screenshot review corrected both title/search-field spacing and a test weakness:
+setting an EditBox value did not trigger Minecraft's search handler. The final fixture
+types through the actual screen and checks unrelated items disappear. Earlier client
+r1/r2 logs are not evidence of functioning query filtering; r3 is authoritative.
+
+The final artifact is available locally in
+`/home/ubuntu/codexproj/artifacts/residence-creative/civitas_industria-0.4.0-dev.jar`
+with a SHA-256 sidecar. The compiled JAR's CRC, required classes and resources were
+checked. [The editing handoff](RESIDENCE_CREATIVE_HANDOFF.md) is also saved as
+`RESIDENCE_CREATIVE_HANDOFF.md` in the server workspace. Broad support-document export
+was rejected by automatic review; the authorized task-specific handoff was saved
+instead. Credentials are not recorded in Git or documentation.
+
+World schema 3 and the other existing envelopes are unchanged; residence format is
+independently versioned at 1. No paid service depot, maintenance discount, new packet
+type, production deployment, broad staging, freight or GPU acceptance is claimed.
+Inventory construction runs on tab rebuild and residence work visits only online
+players every 20 ticks. These bounds are code behavior, not a new throughput benchmark.
+
+---
+
+# Residence authority — build/native checks passed, 2026-09-11
+
+The residence source at commit `52903e2` compiled on the designated server and passed
+**101 domain checks**. Both core and full-server profiles passed **all 41 required
+GameTests**, with clean dimension saves. The two residence tests exercise declaration,
+withdrawal, revocation, survival/location eligibility, global authority identity,
+logout, parcel deletion, strict file roundtrip and byte-preserving file refusal.
+
+Build workspace: `/data/.tmp/civitas-residence-authority`.
+Native evidence: `/data/.tmp/civitas-residence-checks-r1`.
+JAR SHA-256: `7c87d271d9b76e4fb51abee868cc951ad90ebc04a820df89607085119ffc9f05`
+(1,797,831 bytes). `pack/residence-validation.json` records the validated source scope
+and log hashes; `pack/residence-integration-results.json` records both profiles.
+The build has existing NeoForge/Gradle deprecation warnings, with no compile failures.
+
+SSH access is restored and the user explicitly authorized the committed residence
+source/test transfer. Credentials are excluded from Git and documentation. Automatic
+approval review subsequently rejected four newly added restart-validation files because
+it treated the transfer approval as covering only the previously committed files.
+Approval for these additions and necessary validation fixes has been requested.
+
+The new opt-in `ResidenceRestartChecks` and `test-residence-restart.py`, plus their
+registration/build wiring, remain **local and uncompiled**. They are designed to check
+three real server processes, damaged/future/mismatched-file startup refusal, exact
+byte preservation and restored-file startup. Those process gates have **not run**;
+the successful file roundtrip tests do not substitute for them. The pending fixture
+uses a simulated clock for qualification and does not establish ten minutes of real
+player activity. Current source includes these pending validation additions, so the
+successful artifact is specifically tied to `52903e2`, not the later working tree.
+
+No depot payments, discounts, art, GUI or network payloads were added. World schema
+3 is unchanged; residence persistence is separately versioned at 1. No client,
+multiplayer, performance, release or production deployment acceptance is claimed.
+Complete the process gates before enabling the paid services in
+[RESIDENTIAL_SERVICES.md](RESIDENTIAL_SERVICES.md).
+
+---
+
+# Perimeter raids — verified 0.4.0-dev continuation, 2026-09-11
+
+Final JAR SHA-256: `f976a47bcd0bedd1dc7849a39dc6854c5d5534b4df3a2bcd33e3a55848d62c3f` (1,776,345 bytes).
+Source/configuration digest: `1cc6d823b133d808cfc1f3bae8f0029d478a2f0b41a821b0185d046184883762`.
+`pack/perimeter-validation.json` and `pack/perimeter-integration-results.json` record
+scope and evidence. The designated server build passed 69 domain checks; 13 local
+tooling checks passed. Both core and full-server passed all 39 required GameTests
+with clean saves in `/data/.tmp/civitas-perimeter-checks-r11`.
+
+The graph caches exposed edges during existing bounded rebuild work. Wave selection
+uses a cell/network lookup and at most 24 loaded candidate checks; it neither scans
+terrain nor force-loads chunks. Raiders retain their assigned target cell for approach,
+reservation limits and online-player cleanup. Shared internal borders are excluded;
+unoccupied holes remain exposed. Large deep-interior networks may skip waves when
+random sampled edges are unloaded or outside the 192-block-per-axis approach bound.
+
+The native checks exercise exterior spawns, retained target identity, live tracking-loss
+reservation preservation, actual entity removal and last-player logout. A natural
+AI scene at a negative cell boundary begins a saboteur windup, adds a wall, verifies
+40 ticks without infrastructure damage, removes the wall and observes resumed sabotage.
+An unassigned construct also refuses to run AI. The fixture alone force-loads its
+small disposable scene; production spawn logic creates no chunk tickets.
+
+Early fixture attempts exposed both chunk-readiness assumptions and a real lifecycle
+bug. NeoForge's pinned `EntityLeaveLevelEvent` fires on tracking end, even without
+entity removal. Treating it as death, or releasing a temporarily missing UUID lookup,
+could leave a living construct without budget/target authority. Reservations now survive
+those transitions; only actual server-side removal releases them through the leave
+handler. Client tracking events cannot mutate integrated-server reservations. A mob
+that becomes accessible after expiry/offline cleanup discards before AI. Failed runs
+and the temporary diagnostic-compilation failure remain in the r1–r10 directories.
+The final r11 profiles both pass with these corrections.
+
+World schema 3, cargo envelope 2 and environment protocol 2 are unchanged; cached
+edges and raid assignments remain transient. No new block/item art, menu or rendering
+behavior was added in this increment. The workshop client fixture was adapted to the
+larger spawn area but was not rerun; previous GUI/art captures below belong to the
+preceding workshop artifact. No broader staging, freight, distribution/backup, real
+multiplayer or GPU acceptance is claimed for this JAR, and no deployment occurred.
+
+The old local packaging worktree and artifact copies were checksum-verified on the
+server before removal. [WORKSPACE.md](WORKSPACE.md) records archive recovery, including
+the preceding workshop JAR. [RESIDENTIAL_SERVICES.md](RESIDENTIAL_SERVICES.md) specifies
+the next approved milestone; those commands, saved records and paid depot remain
+unimplemented. Complex siege layouts and group combat balancing also remain open.
+
+---
+
+# Precision workshop and rivet raids — 0.4.0-dev, 2026-09-10
+
+The expansion implements the [precision workbench and wired power](PRECISION_WORKSHOP.md),
+[original mechanical raiders](RIVET_RAIDS.md), and `/ci civilization economy` readout.
+The [approved design and next queue](STEAMPUNK_EXPANSION.md) keeps further residence,
+service-depot, contract and district-heat work explicitly unfinished.
+
+Final JAR SHA-256: `1057353cbd5b2a91b145021ae503f2bbe273df82c9ba77dc8bf2d8e141d4f89e`. Source/configuration digest:
+`3a9bf40e4446ee6ee24bd384e489e5e9e794b206047091b5b4bf8a9f38268cef`. The world schema remains 3; the two new machine data
+formats are independently versioned at 1. Environment protocol remains 2.
+
+The mandatory final build passed 65 domain checks. The tooling suite passed 13 checks;
+249 JSON resources and 36 textures pass structural checks. All 38 GameTests passed in
+both standalone and full-server profiles. Only these two relevant profiles were run;
+the absent optional adapter checks in core do not establish native compatibility.
+The final matrix is in `/data/.tmp/civitas-steampunk-checks-r3` and
+`pack/steampunk-integration-results.json`.
+
+The new checks prove paid workbench calibration, no unpaid machining, exact turning
+output/stock/energy/tool-wear accounting, saved progress, quarantined future payloads,
+output-only automatic extraction, energy simulation and revoked access to an already
+open menu. Native motor/dynamo tests exercise real rotation and stress, conversion
+loss, brownout and buffer persistence. With IE present, actual LV connectors and a
+native copper wire deliver generated electricity to the workbench's FE capability.
+
+The full-core client with JEI/Embeddium opens the real GUI, sends mode-selection
+packets and observes powered turning/milling/drilling. All registered block/item
+models and added spindle/rotor models load. The original raider rig, brass/glass
+layers and role proportions render. Six screenshots record the scene, each GUI mode,
+raider lineup and live-action scene. A real breaker AI then reaches the indexed defense
+node and deducts two credits. The client saves all dimensions and exits successfully.
+This is Xvfb/Mesa at 1280×720; it is not a GPU benchmark, an authenticated multiplayer
+join or an exhaustive siege/combat test. Screenshots were visually inspected.
+
+Initial client runs informed GUI labels and stronger brass/role silhouettes; all run
+logs and copied worlds remain preserved. The final action fixture is
+`/data/.tmp/civitas-steampunk-client-action`; its log is
+`/data/.tmp/civitas-steampunk-expansion/workshop-client-action.log`. Normal remote
+version-check timeouts do not count as successful authentication.
+
+A final review found that the initial Create-absent profile passed its test count but
+logged converter loot-table errors. Conditional resource loading now fixes those
+errors, and the result parser rejects loot parsing failures. Both final profiles pass
+with this stricter check. The final build/profiles also include an override disabling
+inherited villager zombification so constructs cannot create unbudgeted secondary
+zombies. A dedicated villager-kill probe was not run; the earlier client screenshots
+cover the unchanged final renderer/GUI and the live defense-sabotage behavior.
+
+No complete eight-profile suite, large staging, freight restart, distribution or
+backup/restore rerun is claimed for this expansion. Those historical 0.3.0 results
+below remain attached to that earlier JAR. No production promotion occurred.
+`pack/steampunk-validation.json` records hashes, check scope and outstanding work.
+
+---
+
 # Pollution and process workshop — 0.3.0-dev, 2026-09-10
 
 This revision passed all 13 automated DEV stages at **2026-09-10T13:49:52.160523+00:00** on the

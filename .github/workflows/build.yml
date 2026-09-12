@@ -23,13 +23,15 @@ jobs:
         run: python scripts/download-pack.py --directory ../civitas-industria-artifacts --output-lock "$RUNNER_TEMP/downloaded-mods.lock.json"
       - name: Verify upstream artifacts against the committed lock
         run: python scripts/verify-pack.py --directory ../civitas-industria-artifacts --side client --all-artifacts
+      - name: Fetch compile-only legacy pollution API
+        run: python scripts/download-pack.py --lock pack/compile-extra.lock.json --directory ../civitas-industria-artifacts --output-lock "$RUNNER_TEMP/compile-extra.lock.json"
       - name: Tooling and content checks
         run: |
           python scripts/check-tooling.py
           python scripts/validate-content.py
       - name: Clean build and mandatory domain tests
         run: bash ./gradlew --no-daemon clean compileJava test build
-      - name: Eight dedicated-server GameTest profiles
+      - name: Core and focused dedicated-server GameTest profiles
         run: python scripts/integration-matrix.py --artifacts ../civitas-industria-artifacts
       - name: Three-dimension persistence and damaged-save refusal
         run: |

@@ -1,9 +1,9 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "sulfate_cake": "civitas_industria:block/process/sulfate_cake",
-    "workshop_cast_iron": "civitas_industria:block/process/workshop_cast_iron",
-    "particle": "civitas_industria:block/process/workshop_iron"
+    "sulfate_cake": "minecraft:block/iron_block",
+    "workshop_cast_iron": "minecraft:block/iron_block",
+    "particle": "minecraft:block/iron_block"
   },
   "elements": [
     {

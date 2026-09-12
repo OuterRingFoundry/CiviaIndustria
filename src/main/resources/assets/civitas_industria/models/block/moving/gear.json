@@ -1,7 +1,7 @@
 {
   "textures": {
-    "brass_gear": "civitas_industria:block/process/workshop_brass",
-    "particle": "civitas_industria:block/steel_casing"
+    "brass_gear": "minecraft:block/gold_block",
+    "particle": "minecraft:block/polished_andesite"
   },
   "elements": [
     {

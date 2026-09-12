@@ -1,3 +1,10 @@
+# Precision workshop expansion
+
+For 0.4.0-dev, see [precision machining and wired power](PRECISION_WORKSHOP.md) and
+[rivet scavengers and shared defense](RIVET_RAIDS.md). `/ci civilization economy`
+shows the existing network's shared upkeep, treasury and local threat. The additional
+residence/depot/contract systems are documented proposals, not current gameplay.
+
 # Four-core pack progression
 
 For the current pack, start with the [four-core gameplay guide](FOUR_CORE_INTEGRATION.md).
@@ -59,8 +66,10 @@ ordinary inventories or a Create portable storage interface for physical freight
 Create can mount crates and pallets using Civitas's long-count codec; warehouse,
 factory and tank authorities remain fixed. Moving cargo has no direct inventory menu;
 use the train's physical storage interface. Absolute int-sized slot replacement is
-unsupported for long-count cargo. The automated mounted serialization test is not a
-substitute for the outstanding long railway/multiple-train acceptance scenario.
+unsupported for long-count cargo. The automated acceptance suite also covers two scheduled trains on a 2,140-block
+physical route and a separate shared-line signal queue across process restarts.
+Mixed-direction junctions and player-operated networks remain open acceptance work;
+see the [acceptance runbook](ACCEPTANCE_RUNBOOK.md).
 
 Bulk tags affect sprinting, jumping and Elytra. Vanilla nested shulkers and bundles
 count toward mass. Ender deposits and vanilla teleport routes are blocked while

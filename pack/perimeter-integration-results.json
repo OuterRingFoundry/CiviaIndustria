@@ -1,0 +1,39 @@
+{
+  "core": {
+    "passed": true,
+    "required_tests": 39,
+    "expected_required_tests": 39,
+    "errors": [],
+    "exit": 0,
+    "seconds": 22.3,
+    "log": "/data/.tmp/civitas-perimeter-checks-r11/run-matrix-core/matrix.log",
+    "artifacts": []
+  },
+  "full-server": {
+    "passed": true,
+    "required_tests": 39,
+    "expected_required_tests": 39,
+    "errors": [],
+    "exit": 0,
+    "seconds": 28.6,
+    "log": "/data/.tmp/civitas-perimeter-checks-r11/run-matrix-full-server/matrix.log",
+    "artifacts": [
+      "AdChimneys-1.21.1-11.1.10.0-NeoForge-build.1121.jar",
+      "AdPother-1.21.1-9.1.10.0-NeoForge-build.1121.jar",
+      "Chunky-NeoForge-1.4.23.jar",
+      "ForgeEndertech-1.21.1-12.1.3.0-NeoForge-build.1100.jar",
+      "FramedBlocks-10.6.1.jar",
+      "ImmersiveEngineering-1.21.1-12.4.2-194.jar",
+      "architectury-13.0.11-neoforge.jar",
+      "create-1.21.1-6.0.10.jar",
+      "ferritecore-7.0.3-neoforge.jar",
+      "kubejs-neoforge-2101.7.2-build.374.jar",
+      "lightmanscurrency-1.21-2.3.0.5.jar",
+      "modernfix-neoforge-5.27.24+mc1.21.1.jar",
+      "rhino-2101.2.7-build.85.jar",
+      "servercore-neoforge-1.5.19+1.21.1.jar",
+      "spark-1.10.124-neoforge.jar",
+      "voicechat-neoforge-1.21.1-2.6.22.jar"
+    ]
+  }
+}

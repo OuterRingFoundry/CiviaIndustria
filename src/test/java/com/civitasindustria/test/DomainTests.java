@@ -53,6 +53,11 @@ public final class DomainTests {
         square.remove(new CellPos(1,1));check(graph.rebuild(square).getFirst().perimeter()==20,"Interior holes");
         CivilizationGraph.RebuildJob job=new CivilizationGraph.RebuildJob(square);int graphSteps=0;while(!job.advance(2))graphSteps++;
         check(graphSteps>1&&job.result().getFirst().perimeter()==20,"Incremental graph preserves holes and yields");
+        var edgeNetwork=job.result().getFirst();
+        check(edgeNetwork.edges().size()==edgeNetwork.perimeter()&&new HashSet<>(edgeNetwork.edges()).size()==20,"Cached edges preserve holes without duplicates");
+        check(edgeNetwork.edges().stream().allMatch(e->edgeNetwork.cells().contains(e.cell())&&!edgeNetwork.cells().contains(e.cell().offset(e.dx(),e.dz()))),"Raid edges exclude shared internal borders");
+        check(new HashSet<>(edgeNetwork.edges()).equals(new HashSet<>(graph.rebuild(square).getFirst().edges())),"Incremental and immediate edge geometry agree");
+        check(CivilizationGraph.isolatedEdges(new CellPos(-1,-1)).stream().allMatch(e->!CellPos.fromBlock(e.blockX(32,4),e.blockZ(32,4)).equals(e.cell())),"Assault origins lie outside negative-coordinate cells");
         Map<IndustrialLoad.Chunk,Double> loads=Map.of(new IndustrialLoad.Chunk(0,0),100.0,new IndustrialLoad.Chunk(1,0),100.0);
         check(IndustrialLoad.effective(loads,new IndustrialLoad.Chunk(0,0),.35,.15)==135,"Border load");
         BulkInventory source=new BulkInventory(4,10_000_000_000L),target=new BulkInventory(4,10_000_000_000L);
@@ -130,6 +135,7 @@ public final class DomainTests {
         check(raids.reserve(UUID.randomUUID(),UUID.randomUUID(),"end",origin),"Independent raid");
         check(!raids.reserve(UUID.randomUUID(),UUID.randomUUID(),"other",origin),"Global raid cap");
         raids.release(id);check(raids.reserve(UUID.randomUUID(),UUID.randomUUID(),"overworld",origin),"Released capacity reused");
+        checks += ResidenceChecks.run();checks += RedesignChecks.run();
         System.out.println("Domain tests: "+checks+" checks passed; 500-cell rain step "+(System.nanoTime()-start)/1_000_000.0+" ms");
     }
 }

@@ -1,0 +1,72 @@
+{
+  "date": "2026-09-11",
+  "minecraft": "1.21.1",
+  "neoforge": "21.1.248",
+  "artifact": {
+    "filename": "aew-map-survey-0.1.0.jar",
+    "sha256": "093197014160893224fb7f6617af093570e84778f801d6d5894cbe574c75e0b3",
+    "bytes": 17245,
+    "validationClassesExcluded": true
+  },
+  "sourceDigest": "819757cd69bcd0ba34525dec73b6ed94f59ffd25c4abd1ab58fe983ba48470f5",
+  "digestScope": "Sorted relative module paths under src and scripts (excluding __pycache__), plus build.gradle, settings.gradle, gradle.properties; hash path UTF-8 + NUL + raw SHA-256(file), concatenated.",
+  "build": {
+    "passed": true,
+    "domainChecks": 31,
+    "java": "OpenJDK 21.0.12"
+  },
+  "client": {
+    "passed": true,
+    "serverMods": [],
+    "clientDependencies": {
+      "xaeroworldmap-neoforge-1.21.1-1.45.0.jar": "d60899112e84616ba52a993c1722fd891872acc4779bfac34d9b170001451c6f",
+      "xaerominimap-neoforge-1.21.1-26.4.2.jar": "b722bcf794288f0ed51165cd1f057fc4505e20abbc723b2e17e900426e443603"
+    },
+    "mapFiles": [
+      "xaero/world-map/Multiplayer_127.0.0.1/server_config.txt",
+      "xaero/world-map/Multiplayer_127.0.0.1/null/dimension_config.txt",
+      "xaero/world-map/Multiplayer_127.0.0.1/null/mw$default/-1_0.zip",
+      "xaero/world-map/Multiplayer_127.0.0.1/null/mw$default/0_-1.zip",
+      "xaero/world-map/Multiplayer_127.0.0.1/null/mw$default/.lock",
+      "xaero/world-map/Multiplayer_127.0.0.1/null/mw$default/-1_-1.zip",
+      "xaero/world-map/Multiplayer_127.0.0.1/null/mw$default/0_0.zip"
+    ],
+    "screenshots": [
+      "survey-controls.png",
+      "xaero-survey-map.png"
+    ],
+    "limits": "Localhost offline validation, Xvfb/Mesa. No production AEW/GPU benchmark or distant cache freshness claim."
+  },
+  "serverWorkspace": "/data/.tmp/aew-map-survey-work",
+  "validationDirectory": "/data/.tmp/aew-map-survey-validation-r5",
+  "logs": [
+    {
+      "path": "/data/.tmp/aew-map-survey-work/final-build.log",
+      "sha256": "a03953d0290316553cc603a6b6669513d4ef431b5ae9e17334c205b5961a2d88"
+    },
+    {
+      "path": "/data/.tmp/aew-map-survey-validation-r5/server-console.log",
+      "sha256": "7cf3ebe6d00c0de86bab6ec582395c8dfe3ccc7cbcf09fbbff2484925bf2d80a"
+    },
+    {
+      "path": "/data/.tmp/aew-map-survey-validation-r5/client-console.log",
+      "sha256": "21c27eda4d3f79691015de6449a9bec6b37156620078eda8c326ef29314154a4"
+    }
+  ],
+  "screenshots": [
+    {
+      "filename": "survey-controls.png",
+      "sha256": "5f50c309d3a0a79a62c1ba5c1c2c3b90de84ab2c7a385d5cac92f96cacf5010a"
+    },
+    {
+      "filename": "xaero-survey-map.png",
+      "sha256": "7e4fdaa6ef00589b6e51bab78659dde7146ee543efa8efd392be04a696665e79"
+    }
+  ],
+  "limitations": [
+    "Test used localhost offline-mode server and Xvfb/Mesa.",
+    "No production AEW installation or full-pack/GPU benchmark.",
+    "Other-world transition cancellation covered by deterministic lease test, not a real dimension hop.",
+    "No arbitrary-coordinate or other-player terrain request."
+  ]
+}

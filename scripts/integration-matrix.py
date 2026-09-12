@@ -8,7 +8,7 @@ from gametest_results import evaluate, required_test_count
 ROOT=Path(__file__).resolve().parents[1]
 PROFILES={'core':[], 'create':['create'], 'ie':['immersiveengineering'], 'kubejs':['kubejs','rhino','architectury-api'], 'industry':['create','immersiveengineering'], 'pollution':['pollution-of-the-realms','advanced-chimneys','forgeendertech'], 'four-core':['create','immersiveengineering','pollution-of-the-realms','advanced-chimneys','forgeendertech','kubejs','rhino','architectury-api'], 'full-server':None}
 def main():
- p=argparse.ArgumentParser();p.add_argument('--artifacts',required=True,type=Path);p.add_argument('--profiles',nargs='+',choices=PROFILES,default=list(PROFILES));p.add_argument('--output',type=Path,help='New directory for isolated worlds, logs and report');args=p.parse_args();args.artifacts=args.artifacts.resolve()
+ p=argparse.ArgumentParser();p.add_argument('--artifacts',required=True,type=Path);p.add_argument('--profiles',nargs='+',choices=PROFILES,default=['core','industry','full-server']);p.add_argument('--output',type=Path,help='New directory for isolated worlds, logs and report');args=p.parse_args();args.artifacts=args.artifacts.resolve()
  if args.output:
   args.output=args.output.resolve();args.output.mkdir(parents=True,exist_ok=False)
  expected_tests=required_test_count(ROOT/'src/main/java/com/civitasindustria/test')

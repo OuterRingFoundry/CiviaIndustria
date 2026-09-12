@@ -1,8 +1,6 @@
 {
   "replace": false,
   "values": [
-    "minecraft:anvil",
-    "minecraft:water_bucket",
-    "minecraft:lava_bucket"
+    "#c:storage_blocks"
   ]
 }

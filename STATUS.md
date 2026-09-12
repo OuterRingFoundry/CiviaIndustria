@@ -1,3 +1,83 @@
+# Residence authority and creative inventory — 2026-09-11
+
+Source `ce7d9a3` builds successfully: 101 domain checks, all 42 native tests in both
+core and full-server, seven real restart/refusal stages, and an actual client creative
+inventory/search/acquisition check. All 39 registered items appear with Create;
+the two converters are absent when Create is absent. The Civitas tab is searchable
+and all inventory content also appears in matching vanilla creative categories.
+
+The compiled JAR, checksums, screenshots and logs are saved locally and on the build
+server. [Validation details](docs/VALIDATION_REPORT.md) identify exact source/artifacts.
+[The editing handoff](docs/RESIDENCE_CREATIVE_HANDOFF.md) records reproduction commands
+and is copied beside the editable sources at `/data/.tmp/civitas-residence-creative`.
+No build/transfer approval is pending for this completed checkpoint.
+
+Next: resource-paid civic depots, their supply/coverage/discount rules and client
+presentation, followed by physical contracts. Real-player activity/economy tuning,
+multiplayer, representative GPU and production release acceptance remain open.
+No paid service benefits or production deployment were enabled.
+
+---
+
+# Perimeter raids and workspace archive — 2026-09-11
+
+Raid waves now approach from cached exposed civic edges, retain their target district
+across cell borders, and perform at most 24 loaded-position probes. Shared internal
+borders are excluded. Tracking loss no longer releases a living raider's reservation;
+actual removal, expiry and logout still do. An unassigned raider discards before AI.
+
+The final focused build passed 69 domain checks and 13 tooling checks. Both standalone
+and full-server profiles passed all 39 GameTests, including natural cross-border
+windup, wall interruption without damage, resumed sabotage and budget/lifecycle checks.
+[Validation details](docs/VALIDATION_REPORT.md) record the exact JAR and source hashes.
+No new client/GPU, multiplayer, broad staging or release acceptance is claimed.
+
+Moved 131 older artifact/worktree files (about 203 MiB) to a checksum-verified server
+archive. The EC2 workspace is about 17 MiB; active source, current deliverables and
+relevant evidence remain local. [Archive and recovery](docs/WORKSPACE.md) records the
+location and complete beta-history bundle; no password is stored in Git.
+
+Next: implement [residence declarations and paid civic services](docs/RESIDENTIAL_SERVICES.md).
+The design now specifies authority, persistence, capacity, supplies, coverage, GUI and
+geometry. Residence/depot gameplay, physical contracts and district heat remain pending.
+The powered three-operation workbench, its GUI/models and Create/IE converters remain
+implemented as described in the preceding checkpoint.
+
+---
+
+# Precision workshop and rivet raids — 0.4.0-dev, 2026-09-10
+
+Implemented a powered universal precision workbench with turning, milling and drilling,
+a server-controlled inventory GUI, tool wear, saved progress, calibration, original
+geometry and visible spindle motion. [Machine operation and power wiring](docs/PRECISION_WORKSHOP.md)
+explain the recipes and bootstrap path.
+
+Native Create motor/dynamo blocks convert between rotational power and FE consumed
+by IE-compatible electrical machines. An actual IE copper-wire fixture delivers
+produced power into the workbench; stress, conversion loss and brownout checks pass.
+Original rivet runner/breaker/saboteur models replace the zombie renderer, with brass
+and glass details, role-specific proportions, metallic sounds and visible sabotage
+windups. One live breaker reached a defense node and deducted two credits. See
+[raid mechanics](docs/RIVET_RAIDS.md).
+
+`/ci civilization economy` now exposes shared perimeter upkeep, treasury, funded
+local defenses and threat. Further residence declarations, resource-paid service
+depots, physical contracts and district heat are designed and explicitly unfinished
+in the [approved expansion plan](docs/STEAMPUNK_EXPANSION.md).
+
+Focused checks: mandatory build and 65 domain assertions; 13 tooling checks; 249
+resource JSON files and 36 textures; all 38 GameTests in standalone and full-server
+profiles; actual full-core client GUI mode packets, model/texture inspection, live
+raider action, screenshots and clean save. Xvfb/Mesa at 1280×720 is not a representative
+GPU benchmark. The six other profiles, large staging and distribution/backup suites
+were not repeated for this expansion. No production promotion was performed.
+
+Source and artifact fingerprints, scope and raw evidence paths are recorded in
+`pack/steampunk-validation.json` and [VALIDATION_REPORT.md](docs/VALIDATION_REPORT.md).
+The authorized build host/workspace is recorded in AGENTS.md; no password is in Git.
+
+---
+
 # Pollution and workshop refinement — verified development build, 2026-09-10
 
 **0.3.0-dev passed the complete automated DEV acceptance suite.** Minecraft 1.21.1,
@@ -31,6 +111,22 @@ the chain; [ART_DIRECTION.md](docs/ART_DIRECTION.md) records the assets and gene
 Evidence is in `pack/pollution-*.json` and [VALIDATION_REPORT.md](docs/VALIDATION_REPORT.md).
 This is a tested development build. Authenticated multiplayer, representative GPUs,
 arbitrary junction traffic and player-economy balancing still require playtesting.
+
+## Continuation check — 2026-09-10
+
+Fresh local verification passed all 13 Python tooling checks, 214 JSON resources and
+35 texture checks. The source digest still matches the accepted 0.3.0 build. Client
+and server archive CRCs, embedded/standalone JAR hashes, all 18 dependency manifest
+entries, every packaged override, SHA256SUMS and workshop asset hash match the saved
+acceptance evidence. See `pack/pollution-continuation-integrity.json`.
+
+The [remaining acceptance runbook](docs/ACCEPTANCE_RUNBOOK.md) now gives concrete
+multiplayer, GPU, mixed-direction railway, real-client workload and progression
+procedures. Operations instructions reflect eight profiles and the 0.3.0 JAR.
+These documentation changes do not constitute a new server/client acceptance run.
+The continuation session lacks the designated server's SSH host/user/key path;
+remote execution awaits those connection details. Human clients and representative
+GPUs also remain required for their respective gates.
 
 ---
 

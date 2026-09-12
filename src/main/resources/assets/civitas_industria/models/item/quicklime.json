@@ -1,9 +1,9 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "quicklime_granules": "civitas_industria:block/process/quicklime_granules",
-    "sorbent_sack": "civitas_industria:block/process/sorbent_sack",
-    "particle": "civitas_industria:block/process/workshop_iron"
+    "quicklime_granules": "minecraft:block/iron_block",
+    "sorbent_sack": "minecraft:block/iron_block",
+    "particle": "minecraft:block/iron_block"
   },
   "elements": [
     {

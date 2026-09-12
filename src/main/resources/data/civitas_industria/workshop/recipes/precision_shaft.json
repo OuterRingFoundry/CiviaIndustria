@@ -1,0 +1,7 @@
+{
+  "mode": 0,
+  "input_tag": "c:ingots/iron",
+  "output": "civitas_industria:precision_shaft",
+  "ticks": 100,
+  "energy_per_tick": 32
+}

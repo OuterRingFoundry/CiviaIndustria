@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "filter_cloth": "civitas_industria:block/process/filter_cloth",
-    "workshop_brass": "civitas_industria:block/process/workshop_brass",
-    "workshop_cast_iron": "civitas_industria:block/process/workshop_cast_iron",
-    "workshop_tank": "civitas_industria:block/process/workshop_tank",
-    "particle": "civitas_industria:block/process/workshop_iron"
+    "filter_cloth": "minecraft:block/iron_block",
+    "workshop_brass": "minecraft:block/gold_block",
+    "workshop_cast_iron": "minecraft:block/iron_block",
+    "workshop_tank": "minecraft:block/iron_block",
+    "particle": "minecraft:block/iron_block"
   },
   "elements": [
     {

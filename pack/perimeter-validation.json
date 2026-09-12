@@ -1,0 +1,43 @@
+{
+  "date_utc": "2026-09-11T01:29:14.200057+00:00",
+  "status": "focused-checks-passed; remaining expansion and external acceptance open",
+  "version": "0.4.0-dev",
+  "source_sha256": "1cc6d823b133d808cfc1f3bae8f0029d478a2f0b41a821b0185d046184883762",
+  "jar": "civitas_industria-0.4.0-dev.jar",
+  "jar_sha256": "f976a47bcd0bedd1dc7849a39dc6854c5d5534b4df3a2bcd33e3a55848d62c3f",
+  "jar_bytes": 1776345,
+  "server_checkout": "/data/.tmp/civitas-steampunk-expansion",
+  "build_log": "/data/.tmp/civitas-steampunk-expansion/perimeter-build-r11.log",
+  "build_log_sha256": "786b095372b3a1c0942403051383a9f5ccb8a6daa7404d978601c3a3cafabde1",
+  "domain_checks": 69,
+  "tooling_checks": 13,
+  "profiles": {
+    "core": 39,
+    "full-server": 39
+  },
+  "server_evidence": "pack/perimeter-integration-results.json",
+  "server_log_sha256": {
+    "core": "b2819dcea1a8d47667be77c19e0885cdad979d241016e55a89557a9b1ae19c4a",
+    "full-server": "7b80699293cefe53695016c446a7f0373372245cf2bbb8d9bf090a225a2fc265"
+  },
+  "behavior": [
+    "Cached exposed edges exclude shared internal borders and preserve holes",
+    "Loaded-only bounded perimeter spawning with intended target-cell authority",
+    "Living tracking-loss event retains reservation; actual removal and logout release it",
+    "Unassigned construct discards before AI",
+    "Natural cross-border windup cancels behind a wall, does no damage while occluded, and resumes when cleared"
+  ],
+  "scope": [
+    "World schema 3 and cargo envelope 2 unchanged; no new payloads or saved raid authority",
+    "Final core and full-server each pass 39 tests and save cleanly",
+    "No client/rendering rerun; unchanged workshop GUI/art evidence remains attached to preceding workshop build",
+    "No repeated broad staging, railway, distribution or backup suite; no production promotion"
+  ],
+  "retained_attempts": "/data/.tmp/civitas-perimeter-checks-r1 through r10; fixture loading and temporary tracking loss investigations, including failed diagnostic compilation",
+  "remaining": [
+    "Residence declaration commands and separately versioned persistence",
+    "Paid service depot acquisition, inventory, GUI/model and coverage",
+    "Treasury-funded physical contracts and district heat/watchposts",
+    "Complex siege/group balance, authenticated multiplayer, representative GPU and railway acceptance"
+  ]
+}

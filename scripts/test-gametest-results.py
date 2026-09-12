@@ -6,27 +6,28 @@ from gametest_results import evaluate, required_test_count
 
 
 class GameTestResultsTests(unittest.TestCase):
-    good = 'All 36 required tests passed :)\nAll dimensions are saved\nBUILD SUCCESSFUL\n'
+    good = 'All 39 required tests passed :)\nAll dimensions are saved\nBUILD SUCCESSFUL\n'
 
     def test_complete_suite(self):
-        self.assertTrue(evaluate(self.good, 0, 36)['passed'])
+        self.assertTrue(evaluate(self.good, 0, 39)['passed'])
         self.assertEqual(required_test_count(Path(__file__).resolve().parents[1] /
-                         'src/main/java/com/civitasindustria/test'), 36)
+                         'src/main/java/com/civitasindustria/test'), 44)
 
     def test_empty_partial_and_duplicate_summaries(self):
-        for text in (self.good.replace('36', '0'), self.good.replace('36', '34'),
-                     self.good + 'All 36 required tests passed', 'required tests passed\nBUILD SUCCESSFUL'):
+        for text in (self.good.replace('39', '0'), self.good.replace('39', '34'),
+                     self.good + 'All 39 required tests passed', 'required tests passed\nBUILD SUCCESSFUL'):
             with self.subTest(text=text):
-                self.assertFalse(evaluate(text, 0, 36)['passed'])
-        self.assertFalse(evaluate(self.good.replace('36', '0'), 0, 0)['passed'])
+                self.assertFalse(evaluate(text, 0, 39)['passed'])
+        self.assertFalse(evaluate(self.good.replace('39', '0'), 0, 0)['passed'])
 
     def test_crash_exit_and_unsaved_world(self):
         for text, code in ((self.good, 1), (self.good.replace('All dimensions are saved', ''), 0),
                            (self.good + 'Encountered an unexpected exception', 0),
                            (self.good + 'Parsing error loading recipe', 0),
+                           (self.good + "Couldn't parse element ResourceKey[minecraft:root / minecraft:loot_table]", 0),
                            (self.good.replace('BUILD SUCCESSFUL', 'BUILD FAILED'), 0)):
             with self.subTest(text=text, code=code):
-                self.assertFalse(evaluate(text, code, 36)['passed'])
+                self.assertFalse(evaluate(text, code, 39)['passed'])
 
 
 class StagingResultsTests(unittest.TestCase):

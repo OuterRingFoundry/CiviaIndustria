@@ -24,5 +24,7 @@ for path in (assets/'models').rglob('*.json'):
 textures=list((assets/'textures').rglob('*.png'))
 for path in textures:
  raw=path.read_bytes();assert raw[:8]==b'\x89PNG\r\n\x1a\n',path
- width,height=struct.unpack('>II',raw[16:24]);assert (width,height)==(32,32),(path,width,height)
-print(f'PASS: {len(textures)} original 32x32 textures and model references')
+ width,height=struct.unpack('>II',raw[16:24])
+ if path.parent.name=='entity':assert 32<=width<=2048 and height==width,(path,width,height)
+ else:assert (width,height)==(32,32),(path,width,height)
+print(f'PASS: {len(textures)} original textures (32x32 block/item tiles, bounded entity skins) and model references')

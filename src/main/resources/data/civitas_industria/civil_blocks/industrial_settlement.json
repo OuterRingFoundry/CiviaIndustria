@@ -1,0 +1,53 @@
+{
+  "replace": false,
+  "entries": [
+    {
+      "block": "civitas_industria:civic_core",
+      "weight": 1.0
+    },
+    {
+      "block": "civitas_industria:civic_relay",
+      "weight": 0.5
+    },
+    {
+      "block": "civitas_industria:market_counter",
+      "weight": 0.7
+    },
+    {
+      "block": "civitas_industria:precision_workbench",
+      "weight": 0.6
+    },
+    {
+      "block": "civitas_industria:maintenance_depot",
+      "weight": 0.6
+    },
+    {
+      "block": "civitas_industria:warehouse_controller",
+      "weight": 0.5
+    },
+    {
+      "block": "civitas_industria:freight_terminal",
+      "weight": 0.6
+    },
+    {
+      "block": "civitas_industria:factory_controller",
+      "weight": 0.7
+    },
+    {
+      "block": "civitas_industria:defense_node",
+      "weight": 0.6
+    },
+    {
+      "block": "createaddition:electric_motor",
+      "weight": 0.5
+    },
+    {
+      "block": "createaddition:alternator",
+      "weight": 0.5
+    },
+    {
+      "block": "immersiveengineering:workbench",
+      "weight": 0.5
+    }
+  ]
+}

@@ -37,3 +37,17 @@ not world simulation.
 Railway/staging/client fixture hooks require explicit development properties. Normal
 assembled packs do not enable them. The synthetic workload and rendering fixture do
 not establish authenticated multiplayer, voice or representative GPU performance.
+
+
+## 0.4.0 precision workshop and power bridge
+
+The common workshop package owns a reloadable three-operation recipe table, authoritative
+stock/tool/output handler, FE receiver, location-bound commissioning and vanilla menu.
+The client owns only rendering and menu presentation. Native Create converter classes
+are registered behind a mod-presence guard and expose FE on non-axle faces for IE
+connectors. Missing Create also suppresses converter recipes and loot tables.
+
+Mechanical raiders reuse the bounded director and target index, with role/windup entity
+data and an original client rig. Their LOS/range checks and temporary sabotage stay on
+the server thread. The civic economy command reads existing graph snapshots on demand.
+Residence/service-depot/contract systems remain design work; see STEAMPUNK_EXPANSION.md.

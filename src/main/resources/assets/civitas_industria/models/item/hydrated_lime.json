@@ -1,9 +1,9 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "filter_cloth": "civitas_industria:block/process/filter_cloth",
-    "sorbent_sack": "civitas_industria:block/process/sorbent_sack",
-    "particle": "civitas_industria:block/process/workshop_iron"
+    "filter_cloth": "minecraft:block/iron_block",
+    "sorbent_sack": "minecraft:block/iron_block",
+    "particle": "minecraft:block/iron_block"
   },
   "elements": [
     {

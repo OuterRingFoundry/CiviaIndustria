@@ -23,6 +23,8 @@ public final class CivitasCommands {
                 }));
         RuntimeCommands.attach(root);
         ParcelCommands.attach(root);
+        ResidenceCommands.attach(root);
+        EconomyCommands.attach(root);
         event.getDispatcher().register(root);
     }
 

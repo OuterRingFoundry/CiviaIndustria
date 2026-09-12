@@ -1,0 +1,20 @@
+{
+  "checked_utc": "2026-09-10T14:54:36.106115+00:00",
+  "passed": true,
+  "scope": "Local source and download integrity only; no new Minecraft, GPU or multiplayer run",
+  "source_sha256": "18d80e7c69343aaa736b88b041c626fde660f8cb870b20367daac38969ce77e0",
+  "custom_jar_sha256": "2f06b4b605e31619dbb130c778ae4a6f9ead5ec5c7bcd4f55eb917916e62bf57",
+  "archive_sha256": {
+    "CiviaIndustria-0.3.0-pollution-dev-server.zip": "037233f4840a0ab38afbd72e6b4e0d84235b6f7c3e423dbd447b19e6e36139a7",
+    "CiviaIndustria-0.3.0-pollution-dev.mrpack": "a9ffb55f05b7fd87a15c24beba6c4ef4df221fa8ff836d72edcd5f58f94732f0"
+  },
+  "workshop_assets_sha256": "e78abb8e727c71b70af74906b2371ecc0a177154c7fd2c4330edbbf08a885db5",
+  "checks": [
+    "Current implementation/configuration source matches accepted digest",
+    "Both archives pass CRC and embed only accepted custom JAR",
+    "Every packaged override matches source",
+    "All 18 manifest entries match locked URLs, hashes, sizes and sides",
+    "Standalone JAR and workshop archive match recorded hashes",
+    "SHA256SUMS matches downloads"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "artifacts": [
+    {
+      "project_id": "SN8xUUfR",
+      "project": "pollution-of-the-realms",
+      "title": "Pollution of the Realms",
+      "version_id": "Pk8F88mH",
+      "version": "9.1.10.0",
+      "minecraft": "1.21.1",
+      "loader": "neoforge",
+      "side": "both",
+      "filename": "AdPother-1.21.1-9.1.10.0-NeoForge-build.1121.jar",
+      "url": "https://cdn.modrinth.com/data/SN8xUUfR/versions/Pk8F88mH/AdPother-1.21.1-9.1.10.0-NeoForge-build.1121.jar",
+      "size": 885815,
+      "upstream_hashes": {
+        "sha1": "dd323dbff3a0144773fc63bb419f0ffca15ecb3b",
+        "sha512": "441d98b20da8941e8f6573883bbfe02f3bbe8bf363516b5d2e7d4c1cfec9a832f817c9cde955eac951df26ece811a77c58c2015a837e8ff80a6df35a792cd001"
+      },
+      "license": {
+        "id": "CC-BY-ND-4.0",
+        "name": "Creative Commons Attribution No Derivatives 4.0 International",
+        "url": null
+      },
+      "source_url": null,
+      "project_url": "https://modrinth.com/mod/pollution-of-the-realms",
+      "dependencies": [
+        {
+          "version_id": null,
+          "project_id": "fxX3RlL5",
+          "file_name": null,
+          "dependency_type": "optional"
+        },
+        {
+          "version_id": null,
+          "project_id": "EgS8gGp8",
+          "file_name": null,
+          "dependency_type": "required"
+        }
+      ],
+      "sha256": "a70453d88abbd18d469b44dec204aed4f46f25d5bf966823828e747229092931"
+    }
+  ]
+}

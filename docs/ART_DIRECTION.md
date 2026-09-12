@@ -41,3 +41,25 @@ refinements when rebuilding. No custom renderer, block entity or packet is added
 the new static geometry. Inset housings use non-occluding rendering so adjacent solid
 blocks retain their exposed faces. Existing moving utilities retain their animations. Materials
 are shared across models and all process geometry stays inside the block/item bounds.
+
+
+## 0.4.0 precision machinery and rivet scavengers
+
+`generate-workshop-content.py` creates the original universal workbench, exposed chuck
+and drill, electrical motor/dynamo housings and shaft rotors, plus machined-part items.
+The geometry reuses the established workshop iron/brass/cast-iron/coil/gauge material
+palette. A native teal-and-brass menu provides actual inventory, operation selection,
+energy/progress and stop reasons. It is rendered by game GUI code, not a static mockup.
+
+The rivet scavenger has a native articulated model with role-dependent proportions,
+a tool arm and boiler backpack. An original generated iron/teal skin is bound as a
+standalone entity texture; brass and glass details use separate material layers.
+`STEAMPUNK_ART.json` records the exact built-in image prompt, raw-image dimensions and
+hash, and model generator paths. No generated image was repainted or resampled in
+this expansion. Block/item tiles remain 32×32; the standalone entity skin uses the
+original generated dimensions with normalized model UV coordinates.
+
+Animation reads local time/native rotation or synchronized role/windup state. No
+server ticker dedicated to animation or per-frame custom packet is introduced. The client fixture
+captures the workbench GUI and three raider silhouettes; combat tuning and representative
+GPU performance remain separate acceptance work.

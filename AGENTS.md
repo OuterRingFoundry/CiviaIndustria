@@ -22,3 +22,23 @@ Keep optional-mod and client classloading safe. Preserve corrupt/future data ins
 Never claim full-pack, client, freight, save-integrity or performance gates passed without actual tests.
 
 No sub-agent delegation is requested by this file.
+
+## Authorized continuation (2026-09-10)
+
+Designated build server: `frederick@100.98.111.18`, workspace `/data/.tmp`.
+Use SSH credentials supplied in the conversation; do not persist the password in
+Git or documentation. User authorizes machine-tool function, models, textures, GUI,
+Create/IE power conversion, custom raider behavior/art/animation, and research/design
+of steampunk settlement incentives. Follow `docs/STEAMPUNK_EXPANSION.md` and update
+its status with implementation evidence. Prefer targeted build/behavior checks over
+repeating unrelated full acceptance suites. The user explicitly requests plans and
+status committed to Git. Production deployment remains governed by release gates.
+
+## Current editing checkpoint (2026-09-11)
+
+The user approved residence restart validation and its necessary fixes, creative-mode
+content visibility, compiling the updated mod, and recording information in Git/server.
+Use `/data/.tmp/civitas-residence-creative` for the current server source/build; read
+docs/RESIDENCE_CREATIVE_HANDOFF.md and the newest validation-report entry. Residence
+authority and creative visibility are validated. Paid civic depots/contracts remain
+pending. Keep credentials out of Git/documents; record build identities and evidence.

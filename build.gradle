@@ -12,7 +12,25 @@ neoForge {
     runs {
         client {
             client()
-            gameDirectory = project.file('run-client-validation')
+            gameDirectory = project.file(providers.gradleProperty('ciClientDir').getOrElse('run-client-validation'))
+            if (providers.gradleProperty('ciCreativeValidation').isPresent()) {
+                systemProperty 'civitas.creativeValidation', 'true'
+                programArgument '--quickPlaySingleplayer'
+                programArgument 'ci-validation'
+                programArgument '--width'
+                programArgument '1280'
+                programArgument '--height'
+                programArgument '720'
+            }
+            if (providers.gradleProperty('ciWorkshopValidation').isPresent()) {
+                systemProperty 'civitas.workshopValidation', 'true'
+                programArgument '--quickPlaySingleplayer'
+                programArgument 'ci-validation'
+                programArgument '--width'
+                programArgument '1280'
+                programArgument '--height'
+                programArgument '720'
+            }
             if (providers.gradleProperty('ciClientValidation').isPresent()) {
                 systemProperty 'civitas.validation', 'true'
                 programArgument '--quickPlaySingleplayer'
@@ -33,6 +51,7 @@ neoForge {
             gameDirectory = project.file(providers.gradleProperty('ciServerDir').getOrElse('run'))
             if (providers.gradleProperty('ciStaging').isPresent()) systemProperty 'civitas.staging', 'true'
             if (providers.gradleProperty('ciStagingCombined').isPresent()) systemProperty 'civitas.stagingCombined', 'true'
+            if (providers.gradleProperty('ciResidenceRestart').isPresent()) systemProperty 'civitas.residenceRestart', providers.gradleProperty('ciResidenceRestart').get()
             if (providers.gradleProperty('ciRailwayRestart').isPresent()) systemProperty 'civitas.railwayRestart', providers.gradleProperty('ciRailwayRestart').get()
             if (providers.gradleProperty('ciRailwayRoute').isPresent()) systemProperty 'civitas.railwayRoute', providers.gradleProperty('ciRailwayRoute').get()
             if (providers.gradleProperty('ciSharedRailway').isPresent()) systemProperty 'civitas.sharedRailway', providers.gradleProperty('ciSharedRailway').get()
@@ -82,6 +101,9 @@ dependencies {
     compileOnly files(providers.gradleProperty('ciArtifactDirectory').getOrElse('../civitas-industria-artifacts') + '/ImmersiveEngineering-1.21.1-12.4.2-194.jar')
     compileOnly files(providers.gradleProperty('ciArtifactDirectory').getOrElse('../civitas-industria-artifacts') + '/AdPother-1.21.1-9.1.10.0-NeoForge-build.1121.jar')
     compileOnly files(providers.gradleProperty('ciArtifactDirectory').getOrElse('../civitas-industria-artifacts') + '/ForgeEndertech-1.21.1-12.1.3.0-NeoForge-build.1100.jar')
+    compileOnly files(providers.gradleProperty('ciArtifactDirectory').getOrElse('../civitas-industria-artifacts') + '/createaddition-1.7.0.jar')
+    compileOnly files(providers.gradleProperty('ciArtifactDirectory').getOrElse('../civitas-industria-artifacts') + '/AdChimneys-1.21.1-11.1.10.0-NeoForge-build.1121.jar')
+    compileOnly files(providers.gradleProperty('ciArtifactDirectory').getOrElse('../civitas-industria-artifacts') + '/civillis-neoforge-2.0.1-release+mc1.21.1.jar')
     // Public Create test APIs inherit types from these exact bundled libraries.
     compileOnly files(zipTree(createArtifact).matching { include 'META-INF/jarjar/*.jar' })
 }

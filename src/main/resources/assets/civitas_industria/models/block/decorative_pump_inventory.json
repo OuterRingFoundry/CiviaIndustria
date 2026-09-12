@@ -1,10 +1,10 @@
 {
   "textures": {
-    "steel_casing": "civitas_industria:block/process/workshop_iron",
-    "tank_top": "civitas_industria:block/process/workshop_bearing",
-    "brass_gear": "civitas_industria:block/process/workshop_brass",
-    "tank_side": "civitas_industria:block/process/workshop_tank",
-    "particle": "civitas_industria:block/steel_casing"
+    "steel_casing": "minecraft:block/iron_block",
+    "tank_top": "minecraft:block/iron_block",
+    "brass_gear": "minecraft:block/gold_block",
+    "tank_side": "minecraft:block/iron_block",
+    "particle": "minecraft:block/polished_andesite"
   },
   "elements": [
     {

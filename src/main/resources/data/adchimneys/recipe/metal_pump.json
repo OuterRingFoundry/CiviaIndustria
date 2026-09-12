@@ -10,10 +10,6 @@
     },
     {
       "type": "neoforge:mod_loaded",
-      "modid": "adpother"
-    },
-    {
-      "type": "neoforge:mod_loaded",
       "modid": "adchimneys"
     }
   ],

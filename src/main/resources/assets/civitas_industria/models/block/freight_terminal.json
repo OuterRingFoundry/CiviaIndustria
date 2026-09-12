@@ -1,14 +1,14 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "workshop_bearing": "civitas_industria:block/process/workshop_bearing",
-    "workshop_brass": "civitas_industria:block/process/workshop_brass",
-    "workshop_cast_iron": "civitas_industria:block/process/workshop_cast_iron",
-    "workshop_gauge": "civitas_industria:block/process/workshop_gauge",
-    "workshop_iron": "civitas_industria:block/process/workshop_iron",
-    "workshop_timber": "civitas_industria:block/process/workshop_timber",
-    "workshop_vent": "civitas_industria:block/process/workshop_vent",
-    "particle": "civitas_industria:block/process/workshop_iron"
+    "workshop_bearing": "minecraft:block/iron_block",
+    "workshop_brass": "minecraft:block/gold_block",
+    "workshop_cast_iron": "minecraft:block/iron_block",
+    "workshop_gauge": "minecraft:block/iron_block",
+    "workshop_iron": "minecraft:block/iron_block",
+    "workshop_timber": "minecraft:block/iron_block",
+    "workshop_vent": "minecraft:block/iron_block",
+    "particle": "minecraft:block/iron_block"
   },
   "elements": [
     {
