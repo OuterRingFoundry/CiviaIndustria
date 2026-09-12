@@ -1,6 +1,11 @@
 # Civitas Industria — focused industrial redesign
 
-Minecraft 1.21.1 · NeoForge 21.1.249 · Java 21 · 0.5.0-dev.
+Minecraft 1.21.1 · NeoForge 21.1.249 · Java 21 · 0.5.1-dev.
+
+The [block art and creative update](docs/BLOCK_ART_AND_CREATIVE.md) gives industrial
+blocks distinct material details and groups all content in the searchable **Civitas
+Industry** creative tab. Warehouse parts include hover instructions for their 3×3
+multiblock assembly.
 
 Current work follows [the published proposal](docs/INDUSTRIAL_REDESIGN_PROPOSAL.md).
 The active pack contains Create, Create Crafts & Additions, Immersive Engineering,

@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "filter_mesh": "minecraft:block/iron_bars",
+    "filter_mesh": "minecraft:block/gray_concrete",
     "workshop_bearing": "minecraft:block/polished_andesite",
     "workshop_brass": "minecraft:block/gold_block",
     "workshop_cast_iron": "minecraft:block/gray_concrete",

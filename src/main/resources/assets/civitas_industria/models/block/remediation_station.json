@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "filter_mesh": "minecraft:block/iron_bars",
+    "filter_mesh": "minecraft:block/gray_concrete",
     "wash_window": "minecraft:block/cyan_terracotta",
     "workshop_brass": "minecraft:block/gold_block",
     "workshop_cast_iron": "minecraft:block/gray_concrete",
