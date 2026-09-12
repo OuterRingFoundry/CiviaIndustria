@@ -1,5 +1,13 @@
 # Civitas Industria continuation
 
+## Current compute and storage (2026-09-12)
+
+The former designated build host is unavailable. The user authorized this EC2 for
+editing/light checks and GitHub Actions for full Java/NeoForge builds and runtime
+validation. This supersedes the historical server instructions below. Follow
+docs/COMPUTE_STORAGE.md; keep generated worlds, caches and dependency JARs outside
+Git history. Preserve the small source checkout and latest verified deliverables.
+
 Read docs/VALIDATION_REPORT.md and docs/IMPLEMENTATION_PLAN.md before editing.
 HANDOFF.md and RECOVERY_REPORT.md preserve earlier historical checkpoints.
 docs/REQUIREMENTS.md is the full design specification.

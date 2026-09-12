@@ -34,7 +34,7 @@ Industrial raids have a warning bar, three waves, and recovery/retreat.
 Development build: consult docs/REDESIGN_STATUS.md for actual validation scope.
 '''
 files={f'mods/{a.civitas.name}':a.civitas.read_bytes(),'INSTALL.txt':readme.encode()}
-for name in ['scripts/download-pack.py','scripts/verify-pack.py','scripts/pack_manifest.py','pack/downloads.lock.json','pack/mods.lock.json','docs/REDESIGN_STATUS.md']:
+for name in ['scripts/download-pack.py','scripts/verify-pack.py','scripts/pack_manifest.py','pack/downloads.lock.json','pack/mods.lock.json','docs/REDESIGN_STATUS.md','pack/validation/redesign-2026-09-12.json']:
  files[name]=(ROOT/name).read_bytes()
 for f in (ROOT/'pack/overrides').rglob('*'):
  if f.is_file() and f.name!='server.properties':files[str(f.relative_to(ROOT/'pack/overrides'))]=f.read_bytes()

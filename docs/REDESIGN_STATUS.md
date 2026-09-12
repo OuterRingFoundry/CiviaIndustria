@@ -17,12 +17,30 @@ Tooling: 13 tests passed. Cloud commit `ebb81f8` passes Java/NeoForge build and
 all 44 native tests in each of core, Create/IE and focused full-server profiles.
 Its currency fixture passes write/read/verify, refusal of future/truncated saves
 without changing damaged bytes, and successful restart after restoring the original.
-Rendered menus and the extended live raid event fixture are still running.
+The final code at `30e8932261a034b90a2d9f5ea8d42dced5b26569` also passes all
+three server profiles and the real integrated client in Actions run `34702681777`.
+The client exchanges deposit/redemption and bulk shift-click packets, opens the
+workbench, verifies every baked block/item model, and completes the warning,
+three native raid waves, entity deaths and recovery. Seven actual screenshots are
+captured with software rendering. This is functional rendering evidence, not a GPU
+benchmark or a long-duration multiplayer test. The complete workflow succeeded, including final three-dimension persistence,
+future/mismatched/truncated world-save refusal, installer assembly and artifact upload.
+See [the compact evidence record](../pack/validation/redesign-2026-09-12.json) and
+[the successful cloud run](https://github.com/OuterRingFoundry/CiviaIndustria/actions/runs/34702681777).
+
+Final JAR: `civitas_industria-0.5.0-dev.jar`, 750,073 bytes; SHA-256
+`9f0734ccd79321d58f825e915f1c0175dc4cbe8dff235e3bb74907adf47eba25`.
+The actual active-raid and recovery captures were inspected, along with the menus.
+The default raid warning is 60 seconds; the isolated fixture shortens it to 10 seconds.
+Each tested wave spawned six attackers; all three reached the recorded victory state.
 
 Native startup exposed and fixed early optional chimney class loading and premature
 config reads. Replacing KubeJS exposed a required missing tag in the core profile;
 native bulk/heavy definitions now tolerate absent optional tags and classify coal.
 The focused installer was extracted and checked against all seven selected JARs.
+The live event uncovered a raider crash: requesting the glass render buffer flushed
+the earlier brass buffer, then the boiler reused it. All brass geometry now draws
+before switching to glass. The complete client event passes after that correction.
 
 Market controls: Deposit converts one diamond to 100 crowns; Redeem reverses it.
 Fund donates 100 existing crowns to the shared market treasury, which initially has

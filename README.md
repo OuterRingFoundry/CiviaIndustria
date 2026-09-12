@@ -16,8 +16,9 @@ of noisy generated surfaces. No upstream jars or copied art are embedded.
 
 The redesigned source builds successfully and all 44 native tests pass in core,
 Create/IE, and the focused full pack. Currency also passes clean process restart
-and damaged-save refusal. Rendered-client acceptance is in progress; see
-[redesign status](docs/REDESIGN_STATUS.md) for exact evidence.
+and damaged-save refusal. Real menu packets, rendered models, and all three raid
+waves also pass integrated-client validation. See [redesign status](docs/REDESIGN_STATUS.md)
+for exact evidence and test scope.
 
 The focused installer contains our JAR and verified official dependency downloads.
 Extract it into a new NeoForge 21.1.249 instance, run the commands in `INSTALL.txt`,

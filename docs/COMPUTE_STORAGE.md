@@ -15,5 +15,8 @@ its replacement is verified. Preserve user worlds and unmatched files.
 Exact immutable dependency JARs can share disk in local staging directories through
 hard links after checksum comparison. Never modify a staged JAR in place. Download
 and verify its replacement separately. This task recovered 35.7 MiB this way while
-preserving file paths. Installer archives contain our mod and exact official download
+preserving file paths. After cloud validation, removing the task-owned temporary
+Java 21 extraction recovered about 288 MiB more. The EC2 then had about 930 MiB
+free. Java can be installed again when local computation needs it; full mod builds
+continue in Actions. Installer archives contain our mod and exact official download
 recipes, so restricted third-party JARs are not republished in a public repository.
