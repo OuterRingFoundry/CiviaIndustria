@@ -34,10 +34,10 @@ jobs:
         run: bash ./gradlew --no-daemon clean compileJava test build
       - name: Core and focused dedicated-server GameTest profiles
         run: python scripts/integration-matrix.py --artifacts ../civitas-industria-artifacts
-      - name: Currency process restart and damaged-save refusal
-        run: python scripts/test-economy-restart.py --fixture run-matrix-core --output build/economy-restart
       - name: Render menus and validate client packets
         run: python scripts/test-redesign-client.py --fixture run-matrix-full-server --output build/redesign-client
+      - name: Currency process restart and damaged-save refusal
+        run: python scripts/test-economy-restart.py --fixture run-matrix-core --output build/economy-restart
       - name: Assemble focused installer
         run: python scripts/package-focused.py --civitas build/libs/civitas_industria-0.5.0-dev.jar --output build/distribution
       - name: Three-dimension persistence and damaged-save refusal

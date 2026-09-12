@@ -12,5 +12,9 @@ logfile=a.output/'client-validation.log'
 with logfile.open('w') as log:code=run(['xvfb-run','-a','-s','-screen 0 1280x720x24','./gradlew','--no-daemon','runClient',f'-PciClientDir={a.output}','-PciRedesignValidation'],ROOT,log,900)
 text=logfile.read_text();captures=['market-counter','bulk-storage','precision-workbench','workshop-scene','raid-warning','raid-active','raid-victory'];passed=code==0 and 'CIVITAS REDESIGN CLIENT PASS' in text and all((a.output/'screenshots'/f'{x}.png').is_file() for x in captures)
 (a.output/'result.json').write_text(json.dumps({'passed':passed,'exit':code,'scope':'Actual integrated client screens, packets and baked models under software rendering; not a GPU performance test','captures':captures},indent=2)+'\n')
-if not passed:print('\n'.join(text.splitlines()[-160:]));raise SystemExit('Client validation failed')
+if not passed:
+ lines=text.splitlines()
+ for i,line in enumerate(lines):
+  if 'Caused by:' in line or 'AssertionError:' in line:print('\n'.join(lines[i:i+14]))
+ print('\n'.join(lines[-100:]));raise SystemExit('Client validation failed')
 print('Redesign integrated client PASS')

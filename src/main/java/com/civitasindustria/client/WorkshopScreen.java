@@ -16,7 +16,7 @@ public final class WorkshopScreen extends AbstractContainerScreen<WorkshopMenu> 
     }
     @Override protected void renderLabels(GuiGraphics g,int mx,int my){
         g.drawString(font,title,8,8,0xff404040,false);String[] modes={"Turning","Milling","Drilling"};int mode=Math.clamp(menu.data.get(2),0,2);
-        g.drawString(font,"Stock",33,39,0xff404040,false);g.drawString(font,"Tool",61,39,0xff404040,false);g.drawString(font,"Part",133,39,0xff404040,false);
+        g.drawString(font,"Raw",34,39,0xff404040,false);g.drawString(font,"Tool",61,39,0xff404040,false);g.drawString(font,"Part",133,39,0xff404040,false);
         g.drawString(font,modes[mode]+" / "+menu.data.get(0)+" FE",25,72,0xff404040,false);
         String[] states={"Machining", "Needs calibration", "Redstone stopped", "Sabotaged", "Needs stock / insert", "Output blocked", "Needs power", "Data quarantined"};
         g.drawString(font,states[Math.clamp(menu.data.get(3),0,7)],8,89,0xff404040,false);g.drawString(font,playerInventoryTitle,8,104,0xff302c28,false);

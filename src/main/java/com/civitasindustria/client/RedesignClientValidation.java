@@ -28,6 +28,7 @@ public final class RedesignClientValidation {
         if(!Boolean.getBoolean("civitas.redesignValidation"))return;
         var mc=Minecraft.getInstance();if(mc.level==null||mc.player==null||mc.getSingleplayerServer()==null)return;ticks++;
         if(ticks==1){mc.getTutorial().setStep(net.minecraft.client.tutorial.TutorialSteps.NONE);mc.options.guiScale().set(3);mc.resizeDisplay();}
+        if(ticks==130||ticks==250||ticks==350||ticks==430)mc.getToasts().clear();
         if(ticks==20)mc.getSingleplayerServer().execute(()->{
             var level=mc.getSingleplayerServer().overworld();var player=mc.getSingleplayerServer().getPlayerList().getPlayers().getFirst();
             level.setDayTime(6000);level.setWeatherParameters(6000,0,false,false);player.setGameMode(net.minecraft.world.level.GameType.SURVIVAL);player.getAbilities().invulnerable=true;player.onUpdateAbilities();player.connection.teleport(32,-60,30,0,15);
