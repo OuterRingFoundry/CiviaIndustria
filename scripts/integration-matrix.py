@@ -31,6 +31,8 @@ def main():
    try:code=run(['./gradlew','--no-daemon','runGameTestServer',f'-PciGameTestDir={directory}',f'-PciArtifactDirectory={args.artifacts}'],ROOT,out,900)
    except subprocess.TimeoutExpired:code=124
   text=logfile.read_text();verdict=evaluate(text,code,expected_tests);passed=verdict['passed']
+  if not passed:
+   print('\n'.join(text.splitlines()[-150:]),flush=True)
   results[name]={**verdict,'exit':code,'seconds':round(time.time()-start,1),'log':str(logfile),'artifacts':sorted(expected)}
   report_path.write_text(json.dumps(results,indent=2)+'\n');print(name,'PASS' if passed else 'FAIL',flush=True)
  if not all(row['passed'] for row in results.values()):raise SystemExit(1)
