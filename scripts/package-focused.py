@@ -38,6 +38,8 @@ for name in ['scripts/download-pack.py','scripts/verify-pack.py','scripts/pack_m
  files[name]=(ROOT/name).read_bytes()
 for f in (ROOT/'pack/overrides').rglob('*'):
  if f.is_file() and f.name!='server.properties':files[str(f.relative_to(ROOT/'pack/overrides'))]=f.read_bytes()
+lock=json.loads(files['pack/mods.lock.json']);lock['artifacts'].append({'filename':a.civitas.name,'side':'both','minecraft':'1.21.1','loader':'neoforge','sha256':hashlib.sha256(a.civitas.read_bytes()).hexdigest(),'project':'civitas-industria'})
+files['pack/mods.lock.json']=(json.dumps(lock,indent=2)+'\n').encode()
 manifest={n:hashlib.sha256(b).hexdigest() for n,b in sorted(files.items())}
 files['SHA256.json']=(json.dumps(manifest,indent=2)+'\n').encode()
 archive=a.output/'civitas-industria-0.5.0-focused-installer.zip'

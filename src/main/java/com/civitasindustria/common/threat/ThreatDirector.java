@@ -48,6 +48,9 @@ public final class ThreatDirector {
         event.previous=state.phase;
     }
 
+    /** Server-thread diagnostics for the current event; no world traversal. */
+    public record EventStatus(ThreatState.Phase phase,int wave,int alive,boolean won){}
+    public static EventStatus status(ServerLevel level,CellPos cell){var e=EVENTS.get(new EventKey(level.dimension().location(),cell));int alive=count(level,cell);return e==null?null:new EventStatus(e.previous,e.progress.wave(),alive,e.progress.won(alive));}
     private ThreatDirector(){}
     private static RaidBudget budget(){if(budget==null)budget=new RaidBudget(ServerConfig.GLOBAL_RAID_BUDGET.get(),ServerConfig.RAID_BUDGET.get(),ServerConfig.RAID_CELL_BUDGET.get());return budget;}
     public static boolean online(ServerLevel level,CellPos cell,UUID exclude){

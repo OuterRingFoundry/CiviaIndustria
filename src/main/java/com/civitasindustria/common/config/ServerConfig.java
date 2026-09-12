@@ -22,7 +22,7 @@ public final class ServerConfig {
     public static final ModConfigSpec.LongValue CRATE_CAPACITY=B.defineInRange("crateCapacity",100000L,1L,1000000000L);
     public static final ModConfigSpec.IntValue TRANSFER_BATCH=B.defineInRange("freightTransferBatch",256,1,4096);
     public static final ModConfigSpec.IntValue CARGO_NORMAL=B.defineInRange("cargoNormalLimit",512,1,1000000);
-    public static final ModConfigSpec.IntValue WARNING_TICKS=B.defineInRange("threatWarningTicks",12000,200,72000);
+    public static final ModConfigSpec.IntValue WARNING_TICKS=B.defineInRange("threatWarningTicks",1200,200,72000);
     public static final ModConfigSpec.IntValue RAID_CELL_BUDGET=B.defineInRange("raidCellBudget",24,1,24), RAID_BUDGET=B.defineInRange("raidBudget",40,1,40),
         GLOBAL_RAID_BUDGET=B.defineInRange("globalRaidBudget",80,1,80);
     public static final ModConfigSpec.DoubleValue THREAT_THRESHOLD=B.defineInRange("threatThreshold",100.0,1,1000000);

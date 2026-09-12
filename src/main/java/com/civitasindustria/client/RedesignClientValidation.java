@@ -17,6 +17,10 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 @EventBusSubscriber(modid="civitas_industria",value=Dist.CLIENT)
 public final class RedesignClientValidation {
     private static int ticks;
+    private static volatile boolean raidWon,warningSeen;
+    private static volatile int observedWave;
+    private static long waveStarted;
+    private static final com.civitasindustria.domain.CellPos RAID_CELL=new com.civitasindustria.domain.CellPos(0,0);
     private static final BlockPos MARKET=new BlockPos(32,-60,32),CARGO=MARKET.east(2),WORK=MARKET.west(2);
     private static final org.slf4j.Logger LOG=org.slf4j.LoggerFactory.getLogger(RedesignClientValidation.class);
     private static void capture(Minecraft mc,String name){net.minecraft.client.Screenshot.grab(mc.gameDirectory,name+".png",mc.getMainRenderTarget(),m->LOG.info("Redesign capture: {}",m.getString()));}
@@ -62,8 +66,28 @@ public final class RedesignClientValidation {
         if(ticks==440){
             var manager=mc.getModelManager();for(var block:CivitasRegistries.CONTENT.values())for(var state:block.get().getStateDefinition().getPossibleStates())if(mc.getBlockRenderer().getBlockModel(state)==manager.getMissingModel())throw new AssertionError("Missing model "+state);
             for(var item:CivitasRegistries.ITEMS.getEntries())if(mc.getItemRenderer().getModel(new ItemStack(item.get()),mc.level,mc.player,0)==manager.getMissingModel())throw new AssertionError("Missing item model "+item.getId());
-            capture(mc,"workshop-scene");LOG.info("CIVITAS REDESIGN CLIENT PASS: real screens, packets, models and captures");
+            capture(mc,"workshop-scene");LOG.info("CIVITAS REDESIGN MODELS PASS: real screens, packets, models and captures");
         }
-        if(ticks==480)mc.stop();
+        if(ticks==480)mc.getSingleplayerServer().execute(()->{
+            var level=mc.getSingleplayerServer().overworld();var player=mc.getSingleplayerServer().getPlayerList().getPlayers().getFirst();var target=MARKET.south(4);
+            level.setBlock(target,CivitasRegistries.CONTENT.get("defense_node").get().defaultBlockState(),3);
+            var runtime=com.civitasindustria.platform.WorldRuntime.get(level);runtime.nodePlaced(target,player.getUUID(),com.civitasindustria.domain.WorldState.CivicNode.Kind.DEFENSE);runtime.state().nodes.get(target.asLong()).credits=1000;
+            runtime.cell(RAID_CELL).add(com.civitasindustria.domain.Pollutant.NOISE,10000);
+            com.civitasindustria.common.config.ServerConfig.THREAT_THRESHOLD.set(1.0);com.civitasindustria.common.config.ServerConfig.WARNING_TICKS.set(200);
+        });
+        if(ticks>=500&&ticks%10==0)mc.getSingleplayerServer().execute(()->{
+            var level=mc.getSingleplayerServer().overworld();com.civitasindustria.platform.WorldRuntime.get(level).cell(RAID_CELL).add(com.civitasindustria.domain.Pollutant.NOISE,10000);var status=com.civitasindustria.common.threat.ThreatDirector.status(level,RAID_CELL);if(status==null)return;
+            if(status.phase()==com.civitasindustria.domain.ThreatState.Phase.WARNING)warningSeen=true;
+            if(status.wave()>observedWave&&status.alive()>0){observedWave=status.wave();waveStarted=level.getGameTime();LOG.info("CIVITAS REDESIGN RAID WAVE: {} with {} attackers",observedWave,status.alive());}
+            if(status.phase()==com.civitasindustria.domain.ThreatState.Phase.ACTIVE&&status.alive()>0&&level.getGameTime()-waveStarted>=60){
+                // Defeat tracked members through vanilla entity death, preserving event/budget hooks.
+                for(var raider:level.getEntities(CivitasRegistries.RAIDER.get(),new net.minecraft.world.phys.AABB(-128,-64,-128,192,320,192),e->RAID_CELL.equals(com.civitasindustria.common.threat.ThreatDirector.targetCell(e))))raider.kill();
+            }
+            if(status.phase()==com.civitasindustria.domain.ThreatState.Phase.RECOVERY&&status.won()&&observedWave==3)raidWon=true;
+        });
+        if(ticks==580){if(!warningSeen)throw new AssertionError("Raid warning event missing");capture(mc,"raid-warning");}
+        if(ticks==760)capture(mc,"raid-active");
+        if(raidWon&&ticks%20==0){capture(mc,"raid-victory");LOG.info("CIVITAS REDESIGN RAID PASS: warning, three native waves, defeated members, recovery and boss bar");LOG.info("CIVITAS REDESIGN CLIENT PASS: real screens, packets, models and raid event");mc.stop();}
+        if(ticks>=1300)throw new AssertionError("Raid event did not finish: waves="+observedWave+", warning="+warningSeen);
     }
 }
