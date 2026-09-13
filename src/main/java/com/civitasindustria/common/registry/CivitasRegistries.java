@@ -27,7 +27,7 @@ public final class CivitasRegistries {
     public static final DeferredHolder<net.minecraft.world.item.CreativeModeTab,net.minecraft.world.item.CreativeModeTab> INDUSTRY_TAB=TABS.register("industry",()->net.minecraft.world.item.CreativeModeTab.builder()
         .title(net.minecraft.network.chat.Component.translatable("itemGroup.civitas_industria.industry"))
         .icon(()->new ItemStack(CivitasRegistries.CONTENT.get("precision_workbench").get()))
-        .withSearchBar(60)
+        .withSearchBar(40)
         .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
         .displayItems(CreativeContent::displayIndustry).build());
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES=DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE,CivitasIndustria.MOD_ID);

@@ -51,7 +51,10 @@ public final class CreativeClientValidation {
             LOG.info("CIVITAS CREATIVE CONTENT PASS: registered={}, screen={}, all models/materials present",
                     CivitasRegistries.ITEMS.getEntries().size(), screen.getMenu().items.size());
         }
-        if (ticks == 100) org.lwjgl.glfw.GLFW.glfwSetCursorPos(mc.getWindow().getWindow(), 20, 20);
+        if (ticks == 100) {
+            org.lwjgl.glfw.GLFW.glfwFocusWindow(mc.getWindow().getWindow());
+            org.lwjgl.glfw.GLFW.glfwSetCursorPos(mc.getWindow().getWindow(), 1200, 40);
+        }
         if (ticks == 110) capture("industry-inventory");
         if (ticks == 140) search("precision");
         if (ticks == 180) {
@@ -154,7 +157,7 @@ public final class CreativeClientValidation {
     }
     private static void capture(String label) {
         var mc = Minecraft.getInstance();
-        org.lwjgl.glfw.GLFW.glfwSetCursorPos(mc.getWindow().getWindow(), 20, 20);
+        org.lwjgl.glfw.GLFW.glfwSetCursorPos(mc.getWindow().getWindow(), 1200, 40);
         net.minecraft.client.Screenshot.grab(mc.gameDirectory, label + ".png", mc.getMainRenderTarget(), message -> LOG.info("{}: {}", label, message.getString()));
     }
 }
