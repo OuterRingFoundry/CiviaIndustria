@@ -1,0 +1,43 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "immersiveengineering"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "adpother"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "adchimneys"
+    }
+  ],
+  "display": {
+    "icon": {
+      "id": "civitas_industria:factory_controller"
+    },
+    "title": "A commissioned factory",
+    "description": "Build a foundation, calibrate the controller and connect a serviced exhaust route.",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "acquire_0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "civitas_industria:factory_controller"
+          }
+        ]
+      }
+    }
+  },
+  "parent": "civitas_industria:industry/service"
+}

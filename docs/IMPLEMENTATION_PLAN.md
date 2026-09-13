@@ -1,8 +1,39 @@
 # Full remaining implementation plan
 
-This plan is a work queue, not a completion report. Read HANDOFF.md for the exact checkpoint.
+This plan preserves the work queue, not a completion report. Read VALIDATION_REPORT.md
+and STATUS.md for the current checkpoint; HANDOFF.md is historical.
 The original 80-section design remains authoritative in REQUIREMENTS.md. The user's later
 authorization removes the requirement to pause for review after each phase.
+
+## Approved expansion queue — 2026-09-10
+
+The user's latest direction prioritizes complete precision machinery (function, GUI,
+geometry, texture and power), Create/IE conversion, original raider actions/art, and
+stronger settlement incentives. [STEAMPUNK_EXPANSION.md](STEAMPUNK_EXPANSION.md) records
+the design, research, implementation status and staged remaining work. Server access
+is available at `frederick@100.98.111.18:/data/.tmp`; authentication is kept outside Git.
+Prefer focused builds and checks for changed behavior; do not repeat the unrelated
+full railway/distribution/performance suites without a concrete reason.
+
+## Continuation checkpoint — 2026-09-11
+
+Perimeter assault origins and intended target-cell authority are implemented; focused
+native checks cover edge reservations, logout cleanup and an interruptible cross-border
+sabotage attempt. See the latest validation report for the final run scope. Next implement
+[residence authority and resource-paid depots](RESIDENTIAL_SERVICES.md), then funded
+physical contracts. Paid depots and contracts remain pending, including their GUI/model integration.
+
+Residence authority is now validated at source `ce7d9a3`: 101 domain checks, 42
+native tests in both core and full-server, and seven process-restart/refusal stages.
+The creative inventory is searchable, categorized and client-tested, including real
+query filtering and server item acquisition. Source, build and evidence are retained
+in `/data/.tmp/civitas-residence-creative`; RESIDENCE_CREATIVE_HANDOFF.md records how
+to resume. Paid depots and physical contracts remain the next implementation work;
+there is no current validation/transfer blocker for this completed checkpoint.
+
+Older EC2 artifacts and the inactive beta worktree are now on the build server;
+[WORKSPACE.md](WORKSPACE.md) gives archive verification and retrieval instructions.
+Keep active sources and current delivery evidence local, and build on the server.
 
 ## 0. Recover a reproducible development state
 

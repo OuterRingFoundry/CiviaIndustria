@@ -1,0 +1,47 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "immersiveengineering"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "adpother"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "adchimneys"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PGP",
+    "SFS",
+    "PCP"
+  ],
+  "key": {
+    "P": {
+      "tag": "c:plates/gold"
+    },
+    "G": {
+      "tag": "c:glass_panes"
+    },
+    "S": {
+      "tag": "c:plates/steel"
+    },
+    "F": {
+      "item": "adpother:iron_filter_frame"
+    },
+    "C": {
+      "item": "civitas_industria:precision_component"
+    }
+  },
+  "result": {
+    "id": "adpother:gold_filter_frame",
+    "count": 1
+  }
+}

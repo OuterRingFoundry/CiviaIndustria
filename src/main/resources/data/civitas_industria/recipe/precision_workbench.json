@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ICI",
+    "PKP",
+    "III"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "P": {
+      "item": "civitas_industria:precision_component"
+    },
+    "K": {
+      "item": "minecraft:crafting_table"
+    }
+  },
+  "result": {
+    "id": "civitas_industria:precision_workbench"
+  }
+}

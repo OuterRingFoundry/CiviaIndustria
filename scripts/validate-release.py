@@ -2,13 +2,14 @@
 """Assemble, boot, back up, restore and reboot a new disposable DEV release candidate."""
 import argparse,datetime,hashlib,json,subprocess,sys
 from pathlib import Path
+from pack_manifest import built_mod_jar
 if sys.version_info<(3,11):raise SystemExit('Release validation requires Python 3.11+ (tomllib); no output directory created')
 ROOT=Path(__file__).resolve().parents[1]
 def main():
  p=argparse.ArgumentParser();p.add_argument('--artifacts',required=True,type=Path);p.add_argument('--installer',required=True,type=Path);p.add_argument('--runtime-cache',type=Path);p.add_argument('--world',required=True,type=Path);p.add_argument('--output',required=True,type=Path);a=p.parse_args()
  if a.output.exists():raise ValueError('Release destination must be new')
  if not (a.world/'level.dat').exists():raise ValueError('Use the three-dimension smoke-test world')
- a.output.mkdir(parents=True);jar=ROOT/'build/libs/civitas_industria-0.0.1-dev.jar';results=[]
+ a.output.mkdir(parents=True);jar=built_mod_jar(ROOT);results=[]
  def run(stage,script,*args):
   with (a.output/(stage+'.log')).open('w') as log:
    subprocess.run([sys.executable,str(ROOT/'scripts'/script),*map(str,args)],cwd=ROOT,stdin=subprocess.DEVNULL,stdout=log,stderr=subprocess.STDOUT,check=True)

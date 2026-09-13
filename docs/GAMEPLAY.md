@@ -1,3 +1,22 @@
+# Precision workshop expansion
+
+For 0.4.0-dev, see [precision machining and wired power](PRECISION_WORKSHOP.md) and
+[rivet scavengers and shared defense](RIVET_RAIDS.md). `/ci civilization economy`
+shows the existing network's shared upkeep, treasury and local threat. The additional
+residence/depot/contract systems are documented proposals, not current gameplay.
+
+# Four-core pack progression
+
+For the current pack, start with the [four-core gameplay guide](FOUR_CORE_INTEGRATION.md).
+Create, Immersive Engineering, Pollution of the Realms and Advanced Chimneys are all
+required pack components. The in-game advancement tab introduces their shared progression;
+JEI shows the current recipes. Filter materials are consumable, and clearing physical
+exhaust does not instantly heal damaged land.
+
+The controls and systems below remain part of the custom mod. In the full pack,
+JEI takes precedence over old crafting-cost descriptions because several infrastructure
+recipes now use components from the four core mods.
+
 # Current playable systems
 
 Build primitive tools normally, then make standardized components. The full pack's
@@ -47,8 +66,10 @@ ordinary inventories or a Create portable storage interface for physical freight
 Create can mount crates and pallets using Civitas's long-count codec; warehouse,
 factory and tank authorities remain fixed. Moving cargo has no direct inventory menu;
 use the train's physical storage interface. Absolute int-sized slot replacement is
-unsupported for long-count cargo. The automated mounted serialization test is not a
-substitute for the outstanding long railway/multiple-train acceptance scenario.
+unsupported for long-count cargo. The automated acceptance suite also covers two scheduled trains on a 2,140-block
+physical route and a separate shared-line signal queue across process restarts.
+Mixed-direction junctions and player-operated networks remain open acceptance work;
+see the [acceptance runbook](ACCEPTANCE_RUNBOOK.md).
 
 Bulk tags affect sprinting, jumping and Elytra. Vanilla nested shulkers and bundles
 count toward mass. Ender deposits and vanilla teleport routes are blocked while
@@ -129,3 +150,11 @@ Pumps and pushers hold no inventory, accept partial transfers, and preserve long
 storage. For powered bulk automation, use the freight machines and industrial mods.
 These utilities add no server ticker or continuous neighborhood scan. Their moving
 parts still animate locally; only interactions change synchronized control parameters.
+
+## Integrated workshop recipes
+
+The 0.3.0 four-core pack uses mechanical component assembly and a lime-based sulfur
+capture chain with spent sulfate recovered into gypsum panels. See
+[PROCESS_CHAINS.md](PROCESS_CHAINS.md) for the exact inputs, water costs, Create/IE
+machine choices, native filter servicing and the reasoning behind each operation.
+The new materials and 3D models appear in the Civitas Industria creative tab and JEI.

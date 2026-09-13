@@ -1,0 +1,9 @@
+{
+  "target": "civitas_industria:precision_workbench",
+  "industrial_load": 24,
+  "emissions": {
+    "heat": 0.4,
+    "noise": 0.5
+  },
+  "active_property": "active"
+}

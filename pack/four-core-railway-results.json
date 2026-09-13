@@ -1,0 +1,10 @@
+{
+  "scope": "Twenty actual Create train/carriage authorities; API graph travel, not scheduled physical rails",
+  "trains": 20,
+  "processes": 3,
+  "travel_blocks_each": 2048,
+  "initial_count_each": "5000000000 + train index",
+  "extracted_each_after_first_restart": 64,
+  "final_count_and_position_verified_after_second_restart": true,
+  "output": "/data/.tmp/civitas-four-core-acceptance-r1/railway-restart"
+}

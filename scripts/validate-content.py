@@ -8,7 +8,9 @@ for path in root.rglob('*.json'):
  if '/environment/emissions/' in str(path):
   assert {'target','industrial_load','emissions'}<=data.keys(),path
  if '/recipe/' in str(path) and data.get('type','').startswith('minecraft:crafting'):
-  assert data['result']['id'].startswith('civitas_industria:'),path
+  assert ':' in data['result']['id'],path
+  if '/data/civitas_industria/' not in str(path):
+   assert data.get('neoforge:conditions'),path
   assert 1<=data['result'].get('count',1)<=64,path
 print(f'PASS: {count} JSON resources parse and content schemas match')
 # All project-owned model textures must exist and remain power-of-two Minecraft assets.
@@ -22,5 +24,7 @@ for path in (assets/'models').rglob('*.json'):
 textures=list((assets/'textures').rglob('*.png'))
 for path in textures:
  raw=path.read_bytes();assert raw[:8]==b'\x89PNG\r\n\x1a\n',path
- width,height=struct.unpack('>II',raw[16:24]);assert (width,height)==(32,32),(path,width,height)
-print(f'PASS: {len(textures)} original 32x32 textures and model references')
+ width,height=struct.unpack('>II',raw[16:24])
+ if path.parent.name=='entity':assert 32<=width<=2048 and height==width,(path,width,height)
+ else:assert (width,height)==(32,32),(path,width,height)
+print(f'PASS: {len(textures)} original textures (32x32 block/item tiles, bounded entity skins) and model references')

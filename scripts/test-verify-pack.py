@@ -8,6 +8,11 @@ class VerifyPackTests(unittest.TestCase):
         self.assertTrue(module.accepts('[1.21.1,1.21.2)', '1.21.1'))
         self.assertFalse(module.accepts('[1.21.2,)', '1.21.1'))
         self.assertFalse(module.accepts('[1.21.1,1.21.2)', '1.21.2'))
+        self.assertFalse(module.accepts('[1.21,1.21.1)', '1.21.1'))
+        self.assertTrue(module.platform_accepts('minecraft','[1.21,1.21.1)', '1.21.1'))
+        self.assertFalse(module.platform_accepts('minecraft','[1.20,1.21)', '1.21.1'))
+        self.assertFalse(module.platform_accepts('minecraft','[1.21,1.21.1)', '1.21.2'))
+        self.assertFalse(module.platform_accepts('example','[1.21,1.21.1)', '1.21.1'))
     def test_valid_hashes_and_rejections(self):
         with tempfile.TemporaryDirectory() as path:
             root=Path(path);buffer=io.BytesIO()

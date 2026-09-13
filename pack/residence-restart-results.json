@@ -1,0 +1,59 @@
+{
+  "scope": "Isolated core server; residence identity, replacement and damaged-file refusal",
+  "processes": [
+    {
+      "name": "write",
+      "exit": 0,
+      "log": "/data/.tmp/civitas-residence-restart-r5/write.log",
+      "log_sha256": "b30cca636204057ac594a9f48e58b5229219edcc052ef605876c417d4b19058a",
+      "passed": true
+    },
+    {
+      "name": "read",
+      "exit": 0,
+      "log": "/data/.tmp/civitas-residence-restart-r5/read.log",
+      "log_sha256": "c7d69a320a59d8514357690cad5e78b905b65335b83fae115cd4129c37f9229b",
+      "passed": true
+    },
+    {
+      "name": "verify",
+      "exit": 0,
+      "log": "/data/.tmp/civitas-residence-restart-r5/verify.log",
+      "log_sha256": "e1b19ddd541552391626eae1187a9bddd72d311c3f21c7e8555e945da14c83fa",
+      "passed": true
+    },
+    {
+      "name": "refuse-future",
+      "exit": 0,
+      "log": "/data/.tmp/civitas-residence-restart-r5/refuse-future.log",
+      "log_sha256": "53e033d42fad441c9cb9acc89c70572851c8b10272c03ae174838d7b59c6de39",
+      "passed": true,
+      "damaged_bytes_preserved": true
+    },
+    {
+      "name": "refuse-truncated",
+      "exit": 0,
+      "log": "/data/.tmp/civitas-residence-restart-r5/refuse-truncated.log",
+      "log_sha256": "375ee6222586bda53bdd8e2288de284b3000d0f57a5fe6366bab7d347c11df12",
+      "passed": true,
+      "damaged_bytes_preserved": true
+    },
+    {
+      "name": "refuse-mismatch",
+      "exit": 0,
+      "log": "/data/.tmp/civitas-residence-restart-r5/refuse-mismatch.log",
+      "log_sha256": "ce1e94dfa29f8b3e2e4b889391e700c8454f809bfa6f5b6fedd2281f21707f58",
+      "passed": true,
+      "damaged_bytes_preserved": true
+    },
+    {
+      "name": "restored",
+      "exit": 0,
+      "log": "/data/.tmp/civitas-residence-restart-r5/restored.log",
+      "log_sha256": "236321acd9d8fbbdbc2fbab7f6a5586ed09fe889b0ef656fd56fb4701723218e",
+      "passed": true
+    }
+  ],
+  "output": "/data/.tmp/civitas-residence-restart-r5",
+  "original_residence_sha256": "e83bada838bc5b8ba6f405fcccc94592b4614040d04a635089c030a1faa019b5"
+}

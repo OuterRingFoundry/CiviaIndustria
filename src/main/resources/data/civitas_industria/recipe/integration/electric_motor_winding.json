@@ -1,0 +1,44 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "IPI",
+    "SCS",
+    "IRI"
+  ],
+  "key": {
+    "I": {
+      "tag": "c:plates/iron"
+    },
+    "P": {
+      "item": "civitas_industria:precision_component"
+    },
+    "S": {
+      "item": "createaddition:copper_spool"
+    },
+    "C": {
+      "item": "createaddition:capacitor"
+    },
+    "R": {
+      "item": "create:shaft"
+    }
+  },
+  "result": {
+    "id": "civitas_industria:electric_motor",
+    "count": 1
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "createaddition"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "immersiveengineering"
+    }
+  ]
+}

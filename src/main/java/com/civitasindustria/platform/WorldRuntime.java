@@ -19,8 +19,11 @@ import java.util.*;
 
 /** Transient identifiers only: no retained Level, Chunk, Player or BlockEntity references. */
 public final class WorldRuntime {
+    private static final boolean NATIVE_POLLUTION=net.neoforged.fml.ModList.get().isLoaded("adpother");
     private static final Map<ResourceLocation,WorldRuntime> WORLDS=new HashMap<>();
     public final CivitasSavedData saved;
+    public final ResidenceSavedData residences;
+    public final EconomySavedData economy;
     public final Map<String,RollingMetrics> metrics=new LinkedHashMap<>();
     private final Set<Long> pendingChunks=new LinkedHashSet<>();
     private final Set<Long> reloadChunks=new HashSet<>();
@@ -36,19 +39,25 @@ public final class WorldRuntime {
     private final Map<Long,Long> jams=new HashMap<>();
     private final Map<CellPos,ThreatState> threats=new HashMap<>();
     private List<CivilizationGraph.Network> networks=List.of();
+    private final Map<CellPos,CivilizationGraph.Network> networkByCell=new HashMap<>();
     private boolean graphDirty=true;
     private CivilizationGraph.RebuildJob graphJob;
     private long profileGeneration=-1, machineCursor=Long.MIN_VALUE;
     private CellPos cellCursor=new CellPos(Integer.MIN_VALUE,Integer.MIN_VALUE);
     private WorldRuntime(ServerLevel level){
+        residences=level.dimension().equals(net.minecraft.world.level.Level.OVERWORLD)?ResidenceSavedData.loadStrict(level):null;
+        economy=level.dimension().equals(net.minecraft.world.level.Level.OVERWORLD)?EconomySavedData.loadStrict(level):get(level.getServer().overworld()).economy;
         saved=CivitasSavedData.loadStrict(level);
         state().nodes.forEach((pos,node)->indexTarget(BlockPos.of(pos),node.kind==WorldState.CivicNode.Kind.DEFENSE?0:1));
-        for(String key:List.of("civilization","environment","ecology","industrial","threat","cargo","warehouse","parcel","network","packets"))
+        for(String key:List.of("civilization","environment","ecology","industrial","threat","cargo","warehouse","parcel","network","packets","residence"))
             metrics.put(key,new RollingMetrics());
     }
     public static WorldRuntime get(ServerLevel level){return WORLDS.computeIfAbsent(level.dimension().location(),key->new WorldRuntime(level));}
+    /** Shutdown must not retry a failed strict load or initialize new authority. */
+    public static Optional<WorldRuntime> existing(ServerLevel level){return Optional.ofNullable(WORLDS.get(level.dimension().location()));}
     public static void unload(ServerLevel level){WORLDS.remove(level.dimension().location());}
-    public static void clear(){WORLDS.clear();}
+    public static void clear(){WORLDS.clear();if(NATIVE_POLLUTION)com.civitasindustria.compat.pollution.PollutionBridge.clearSources();}
+    public void nativePollutionChanged(CellPos pos){cell(pos);if(loadedCells.containsKey(pos))active.add(pos);}
     public WorldState state(){return saved.state;}
     public void dirty(){saved.setDirty();}
     public CellData cell(CellPos p){
@@ -71,6 +80,7 @@ public final class WorldRuntime {
         }
         machinesByChunk.put(chunk.getPos().toLong(),positions);machines.addAll(positions);
         for(long id:positions)emissionClock.add(id,chunk.getLevel().getGameTime());
+        if(NATIVE_POLLUTION && chunk.getLevel() instanceof ServerLevel level)com.civitasindustria.compat.pollution.PollutionBridge.discover(level,this,cell);
     }
     public void chunkUnloaded(ChunkPos chunk){
         pendingChunks.remove(chunk.toLong());reloadChunks.remove(chunk.toLong());
@@ -94,6 +104,12 @@ public final class WorldRuntime {
     public void nodeRemoved(BlockPos pos){removeTarget(pos);if(state().nodes.remove(pos.asLong())!=null){graphDirty=true;dirty();}}
     public void recalculate(){graphDirty=true;}
     public List<CivilizationGraph.Network> networks(){return networks;}
+    /** Empty while topology is stale; no interior fallback through newly built walls. */
+    public List<CivilizationGraph.Edge> assaultEdges(CellPos cell){
+        if(graphDirty||graphJob!=null)return List.of();
+        var network=networkByCell.get(cell);
+        return network==null?CivilizationGraph.isolatedEdges(cell):network.edges();
+    }
     public int dirtyEntries(){return active.size();}
     public double load(BlockPos pos){return IndustrialLoad.effective(state().rawLoad,new IndustrialLoad.Chunk(pos.getX()>>4,pos.getZ()>>4),ServerConfig.CARDINAL.get(),ServerConfig.DIAGONAL.get());}
     private void setLoad(long packed,double value){
@@ -114,6 +130,7 @@ public final class WorldRuntime {
                 reloadChunks.addAll(machinesByChunk.keySet());pendingChunks.addAll(reloadChunks);
             }
             profileGeneration=generation;
+            if(NATIVE_POLLUTION)com.civitasindustria.compat.pollution.PollutionBridge.clearSources();
         }
         int discovered=0;
         var pending=pendingChunks.iterator();
@@ -136,7 +153,9 @@ public final class WorldRuntime {
         if(graphDirty){Set<CellPos> occupied=new HashSet<>();for(var n:state().nodes.values())occupied.add(n.cell);graphJob=new CivilizationGraph.RebuildJob(occupied);graphDirty=false;}
         if(!graphJob.advance(1024))return;
         for(var network:networks)for(CellPos pos:network.cells()){CellData c=state().cells.get(pos);if(c!=null)c.civilization=CellData.Civilization.WILDERNESS;}
-        networks=graphJob.result();graphJob=null;applyCivilization();dirty();
+        networks=graphJob.result();graphJob=null;networkByCell.clear();
+        for(var network:networks)for(var cell:network.cells())networkByCell.put(cell,network);
+        applyCivilization();dirty();
     }
     private void applyCivilization(){
         Map<CellPos,Integer> coreStatus=new HashMap<>();
@@ -195,8 +214,16 @@ public final class WorldRuntime {
                 var property=block.getBlock().getStateDefinition().getProperty(profile.activeProperty());
                 running=property!=null&&Boolean.TRUE.equals(block.getValue(property));
             }
-            if(running&&elapsed>0)for(var emission:profile.emissions().entrySet())
-                emissionBuffers.computeIfAbsent(CellPos.fromBlock(pos.getX(),pos.getZ()),p->new EnumMap<>(Pollutant.class)).merge(emission.getKey(),emission.getValue()*elapsed,Double::sum);
+            if(running&&elapsed>0){
+                boolean nativeAir=NATIVE_POLLUTION&&com.civitasindustria.compat.pollution.PollutionBridge.ownsAir(entity);
+                if(nativeAir)com.civitasindustria.compat.pollution.PollutionBridge.factoryEmission(level,entity,profile,elapsed);
+                BlockPos outlet=!nativeAir&&entity instanceof com.civitasindustria.common.factory.FactoryBlockEntity?com.civitasindustria.common.environment.ChimneyOutlet.find(level,pos):pos;
+                for(var emission:profile.emissions().entrySet()){
+                    if(nativeAir&&(emission.getKey()==Pollutant.PM||emission.getKey()==Pollutant.SOX))continue;
+                    BlockPos emissionPos=emission.getKey()==Pollutant.PM||emission.getKey()==Pollutant.SOX||emission.getKey()==Pollutant.NOX?outlet:pos;
+                    emissionBuffers.computeIfAbsent(CellPos.fromBlock(emissionPos.getX(),emissionPos.getZ()),p->new EnumMap<>(Pollutant.class)).merge(emission.getKey(),emission.getValue()*elapsed,Double::sum);
+                }
+            }
         }
         record("industrial",start,processed);
     }
@@ -208,6 +235,7 @@ public final class WorldRuntime {
         if(batch.isEmpty()){cellCursor=new CellPos(Integer.MIN_VALUE,Integer.MIN_VALUE);for(CellPos p:active){batch.add(p);if(batch.size()>=limit)break;}}
         if(!batch.isEmpty())cellCursor=batch.getLast();
         batch.removeIf(p->{var data=state().cells.get(p);return data==null||!force&&level.getGameTime()-data.lastEnvironmentUpdate<ServerConfig.ENVIRONMENT_INTERVAL.get();});
+        if(NATIVE_POLLUTION)for(CellPos pos:batch)com.civitasindustria.compat.pollution.PollutionBridge.expose(level,this,pos);
         int count=new EnvironmentSimulator().step(state().cells,batch,p->climate(level,p),ServerConfig.simulation(),level.getGameTime());
         // Only changed neighbors join the work set; no historical-world sweep on ordinary ticks.
         for(CellPos p:batch){if(!state().cells.containsKey(p))active.remove(p);
@@ -240,10 +268,10 @@ public final class WorldRuntime {
             ThreatState threat=threats.computeIfAbsent(p,k->new ThreatState());var previous=threat.phase;
             threat.update(level.getGameTime(),true,cell.threatPressure,ServerConfig.THREAT_THRESHOLD.get(),ServerConfig.WARNING_TICKS.get(),6000);
             if(previous!=threat.phase&&threat.phase==ThreatState.Phase.WARNING)GameplayHooks.warn(level,p);
-            if(threat.phase==ThreatState.Phase.ACTIVE&&level.getGameTime()%200==0)com.civitasindustria.common.threat.ThreatDirector.wave(level,p);
+            com.civitasindustria.common.threat.ThreatDirector.event(level,p,threat);
             cell.lastThreatUpdate=level.getGameTime();dirty();
         }
-        threats.keySet().removeIf(p->!online.contains(p));record("threat",start,online.size());
+        threats.keySet().removeIf(p->!online.contains(p));com.civitasindustria.common.threat.ThreatDirector.cancelOffline(level);record("threat",start,online.size());
     }
     private void indexTarget(BlockPos pos,int priority){targets.computeIfAbsent(CellPos.fromBlock(pos.getX(),pos.getZ()),p->new HashMap<>()).put(pos.asLong(),priority);}
     public void cargoSignal(BlockPos pos,long total){if(total>0)cargoWealth.put(pos.asLong(),Math.log10(1.0+total)*2);else cargoWealth.remove(pos.asLong());}
@@ -257,9 +285,10 @@ public final class WorldRuntime {
         return best;
     }
     public boolean jammed(BlockPos pos,long now){return jams.getOrDefault(pos.asLong(),0L)>now;}
-    public void sabotage(BlockPos pos,long now){
-        var node=state().nodes.get(pos.asLong());if(node!=null){node.credits=Math.max(0,node.credits-1);dirty();}
-        else if(machines.contains(pos.asLong()))jams.put(pos.asLong(),now+100);
+    public void sabotage(BlockPos pos,long now){sabotage(pos,now,1,100);}
+    public void sabotage(BlockPos pos,long now,int creditDamage,int jamTicks){
+        var node=state().nodes.get(pos.asLong());if(node!=null){node.credits=Math.max(0,node.credits-Math.clamp(creditDamage,1,2));dirty();}
+        else if(machines.contains(pos.asLong()))jams.put(pos.asLong(),now+Math.clamp(jamTicks,20,200));
     }
     public void record(String name,long start,long entries){metrics.get(name).record(System.currentTimeMillis()/1000,System.nanoTime()-start,entries);}
 }

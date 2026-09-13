@@ -1,0 +1,5 @@
+{
+  "target": "civitas_industria:electric_motor",
+  "industrial_load": 12,
+  "emissions": {}
+}

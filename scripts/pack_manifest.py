@@ -21,3 +21,9 @@ def fingerprint(root):
   else:
    with path.open('rb') as file:state['files'][name]=hashlib.file_digest(file,'sha256').hexdigest()
  (root/'pack-state.json').write_text(json.dumps(state,indent=2)+'\n');return state
+
+
+def built_mod_jar(root: Path) -> Path:
+    """Resolve the configured artifact exactly; never pick an older JAR by glob order."""
+    values = properties(root / 'gradle.properties')
+    return root / 'build/libs' / (values['mod_id'] + '-' + values['mod_version'] + '.jar')

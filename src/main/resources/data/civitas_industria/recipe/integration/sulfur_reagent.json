@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "immersiveengineering"
+    }
+  ],
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "item": "civitas_industria:hydrated_lime"
+    },
+    {
+      "item": "civitas_industria:hydrated_lime"
+    },
+    {
+      "item": "immersiveengineering:hemp_fiber"
+    }
+  ],
+  "results": [
+    {
+      "id": "civitas_industria:remediation_reagent",
+      "count": 2
+    }
+  ]
+}

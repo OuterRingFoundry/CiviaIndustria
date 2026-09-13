@@ -1,0 +1,9 @@
+{
+  "values": [
+    {
+      "id": "create:limestone",
+      "required": false
+    },
+    "minecraft:calcite"
+  ]
+}

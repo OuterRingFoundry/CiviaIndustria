@@ -15,7 +15,7 @@ public final class CargoMovement {
     public static void register(IEventBus bus){bus.addListener(CargoMovement::tick);bus.addListener(CargoMovement::jump);bus.addListener(CargoMovement::travel);bus.addListener(CargoMovement::teleport);bus.addListener(CargoMovement::logout);}
     private static void tick(PlayerTickEvent.Post event){
         if(!(event.getEntity() instanceof ServerPlayer player))return;
-        if(player.tickCount%100==0)com.civitasindustria.common.network.EnvironmentPayload.send(player);
+        if(player.tickCount%20==0)com.civitasindustria.common.network.EnvironmentPayload.send(player);
         int state=STATES.getOrDefault(player.getUUID(),0);
         if(player.tickCount%10==0){
             state=player.isCreative()||player.isSpectator()?0:Encumbrance.state(Encumbrance.carried(player));STATES.put(player.getUUID(),state);
@@ -34,6 +34,6 @@ public final class CargoMovement {
     private static void teleport(net.neoforged.neoforge.event.entity.EntityTeleportEvent event){
         if(event.getEntity() instanceof ServerPlayer player&&!player.isCreative()&&!player.isSpectator()&&Encumbrance.carried(player)>0)event.setCanceled(true);
     }
-    private static void logout(net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent event){STATES.remove(event.getEntity().getUUID());}
-    public static void clear(){STATES.clear();}
+    private static void logout(net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent event){STATES.remove(event.getEntity().getUUID());com.civitasindustria.common.network.EnvironmentPayload.forget(event.getEntity().getUUID());}
+    public static void clear(){STATES.clear();com.civitasindustria.common.network.EnvironmentPayload.clear();}
 }

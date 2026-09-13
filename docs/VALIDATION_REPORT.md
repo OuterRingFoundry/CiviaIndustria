@@ -1,3 +1,375 @@
+# Residence authority and creative inventory — verified 0.4.0-dev, 2026-09-11
+
+Source commit: `ce7d9a3`. Final JAR SHA-256:
+`dc6fa15efd41558a16817c44415ad2f2222514ad6c59c75f61d37e0296f555e6`
+(1,815,479 bytes). Build inputs match between the local Git checkout and
+`/data/.tmp/civitas-residence-creative`:
+`5a77cf428afd9410cac2bd7f0927f82d9fce0a26fb8c94c56e8467a679384744`.
+The exact digest scope, log hashes and screenshots are in `pack/residence-validation.json`.
+
+The final build passed 101 domain checks. Core and full-server each passed all 42
+required GameTests with clean saves in `/data/.tmp/civitas-residence-creative-checks-r3`.
+Creative coverage checks every registered item in the Civitas tab, search contents
+and its vanilla category without operator-only visibility. The existing optional-mod,
+workshop, cargo, parcel, ecology and raid checks passed in these two profiles.
+249 resource JSON files and 36 textures passed structural/reference checks.
+
+All seven process stages passed in `/data/.tmp/civitas-residence-restart-r5`: write,
+read, verify, future-version refusal, truncated-file refusal, envelope/snapshot
+mismatch refusal, and restored-file startup. Saved identity, cross-dimensional home
+replacement, activity progress and no unobserved restart accrual were verified.
+The three refused files retained exactly the supplied bytes. The fixture uses a
+simulated qualification clock, not ten minutes of real-player activity. Native and
+process evidence are in `pack/residence-integration-results.json` and
+`pack/residence-restart-results.json`.
+
+The process fixture exposed a lifecycle defect: shutdown saving retried a failed
+strict residence load. Save and chunk-unload callbacks now consult only an existing
+runtime. The final runner explicitly rejects that shutdown error. The interrupted
+r1 and r4 attempts remain preserved; r2/r3 were successful intermediate runs.
+
+The full client with Create, IE, KubeJS, JEI and Embeddium opened the actual creative
+screen. All 39 registered items and their models/materials appeared; the motor/dynamo
+are conditional on Create (37 items without it). The searchable Civitas tab lists
+blocks before tools/materials, and inventory items also appear in vanilla categories.
+Real typed input filters `precision` to four items and `rotation` to two. The standard
+creative acquisition packet put the workbench into the server inventory. Three PNGs
+from `/data/.tmp/civitas-creative-client-r3/screenshots` were visually inspected.
+The client saved all dimensions and exited successfully. This is Xvfb/Mesa at
+1280x720, not authenticated multiplayer or a representative GPU benchmark.
+
+Screenshot review corrected both title/search-field spacing and a test weakness:
+setting an EditBox value did not trigger Minecraft's search handler. The final fixture
+types through the actual screen and checks unrelated items disappear. Earlier client
+r1/r2 logs are not evidence of functioning query filtering; r3 is authoritative.
+
+The final artifact is available locally in
+`/home/ubuntu/codexproj/artifacts/residence-creative/civitas_industria-0.4.0-dev.jar`
+with a SHA-256 sidecar. The compiled JAR's CRC, required classes and resources were
+checked. [The editing handoff](RESIDENCE_CREATIVE_HANDOFF.md) is also saved as
+`RESIDENCE_CREATIVE_HANDOFF.md` in the server workspace. Broad support-document export
+was rejected by automatic review; the authorized task-specific handoff was saved
+instead. Credentials are not recorded in Git or documentation.
+
+World schema 3 and the other existing envelopes are unchanged; residence format is
+independently versioned at 1. No paid service depot, maintenance discount, new packet
+type, production deployment, broad staging, freight or GPU acceptance is claimed.
+Inventory construction runs on tab rebuild and residence work visits only online
+players every 20 ticks. These bounds are code behavior, not a new throughput benchmark.
+
+---
+
+# Residence authority — build/native checks passed, 2026-09-11
+
+The residence source at commit `52903e2` compiled on the designated server and passed
+**101 domain checks**. Both core and full-server profiles passed **all 41 required
+GameTests**, with clean dimension saves. The two residence tests exercise declaration,
+withdrawal, revocation, survival/location eligibility, global authority identity,
+logout, parcel deletion, strict file roundtrip and byte-preserving file refusal.
+
+Build workspace: `/data/.tmp/civitas-residence-authority`.
+Native evidence: `/data/.tmp/civitas-residence-checks-r1`.
+JAR SHA-256: `7c87d271d9b76e4fb51abee868cc951ad90ebc04a820df89607085119ffc9f05`
+(1,797,831 bytes). `pack/residence-validation.json` records the validated source scope
+and log hashes; `pack/residence-integration-results.json` records both profiles.
+The build has existing NeoForge/Gradle deprecation warnings, with no compile failures.
+
+SSH access is restored and the user explicitly authorized the committed residence
+source/test transfer. Credentials are excluded from Git and documentation. Automatic
+approval review subsequently rejected four newly added restart-validation files because
+it treated the transfer approval as covering only the previously committed files.
+Approval for these additions and necessary validation fixes has been requested.
+
+The new opt-in `ResidenceRestartChecks` and `test-residence-restart.py`, plus their
+registration/build wiring, remain **local and uncompiled**. They are designed to check
+three real server processes, damaged/future/mismatched-file startup refusal, exact
+byte preservation and restored-file startup. Those process gates have **not run**;
+the successful file roundtrip tests do not substitute for them. The pending fixture
+uses a simulated clock for qualification and does not establish ten minutes of real
+player activity. Current source includes these pending validation additions, so the
+successful artifact is specifically tied to `52903e2`, not the later working tree.
+
+No depot payments, discounts, art, GUI or network payloads were added. World schema
+3 is unchanged; residence persistence is separately versioned at 1. No client,
+multiplayer, performance, release or production deployment acceptance is claimed.
+Complete the process gates before enabling the paid services in
+[RESIDENTIAL_SERVICES.md](RESIDENTIAL_SERVICES.md).
+
+---
+
+# Perimeter raids — verified 0.4.0-dev continuation, 2026-09-11
+
+Final JAR SHA-256: `f976a47bcd0bedd1dc7849a39dc6854c5d5534b4df3a2bcd33e3a55848d62c3f` (1,776,345 bytes).
+Source/configuration digest: `1cc6d823b133d808cfc1f3bae8f0029d478a2f0b41a821b0185d046184883762`.
+`pack/perimeter-validation.json` and `pack/perimeter-integration-results.json` record
+scope and evidence. The designated server build passed 69 domain checks; 13 local
+tooling checks passed. Both core and full-server passed all 39 required GameTests
+with clean saves in `/data/.tmp/civitas-perimeter-checks-r11`.
+
+The graph caches exposed edges during existing bounded rebuild work. Wave selection
+uses a cell/network lookup and at most 24 loaded candidate checks; it neither scans
+terrain nor force-loads chunks. Raiders retain their assigned target cell for approach,
+reservation limits and online-player cleanup. Shared internal borders are excluded;
+unoccupied holes remain exposed. Large deep-interior networks may skip waves when
+random sampled edges are unloaded or outside the 192-block-per-axis approach bound.
+
+The native checks exercise exterior spawns, retained target identity, live tracking-loss
+reservation preservation, actual entity removal and last-player logout. A natural
+AI scene at a negative cell boundary begins a saboteur windup, adds a wall, verifies
+40 ticks without infrastructure damage, removes the wall and observes resumed sabotage.
+An unassigned construct also refuses to run AI. The fixture alone force-loads its
+small disposable scene; production spawn logic creates no chunk tickets.
+
+Early fixture attempts exposed both chunk-readiness assumptions and a real lifecycle
+bug. NeoForge's pinned `EntityLeaveLevelEvent` fires on tracking end, even without
+entity removal. Treating it as death, or releasing a temporarily missing UUID lookup,
+could leave a living construct without budget/target authority. Reservations now survive
+those transitions; only actual server-side removal releases them through the leave
+handler. Client tracking events cannot mutate integrated-server reservations. A mob
+that becomes accessible after expiry/offline cleanup discards before AI. Failed runs
+and the temporary diagnostic-compilation failure remain in the r1–r10 directories.
+The final r11 profiles both pass with these corrections.
+
+World schema 3, cargo envelope 2 and environment protocol 2 are unchanged; cached
+edges and raid assignments remain transient. No new block/item art, menu or rendering
+behavior was added in this increment. The workshop client fixture was adapted to the
+larger spawn area but was not rerun; previous GUI/art captures below belong to the
+preceding workshop artifact. No broader staging, freight, distribution/backup, real
+multiplayer or GPU acceptance is claimed for this JAR, and no deployment occurred.
+
+The old local packaging worktree and artifact copies were checksum-verified on the
+server before removal. [WORKSPACE.md](WORKSPACE.md) records archive recovery, including
+the preceding workshop JAR. [RESIDENTIAL_SERVICES.md](RESIDENTIAL_SERVICES.md) specifies
+the next approved milestone; those commands, saved records and paid depot remain
+unimplemented. Complex siege layouts and group combat balancing also remain open.
+
+---
+
+# Precision workshop and rivet raids — 0.4.0-dev, 2026-09-10
+
+The expansion implements the [precision workbench and wired power](PRECISION_WORKSHOP.md),
+[original mechanical raiders](RIVET_RAIDS.md), and `/ci civilization economy` readout.
+The [approved design and next queue](STEAMPUNK_EXPANSION.md) keeps further residence,
+service-depot, contract and district-heat work explicitly unfinished.
+
+Final JAR SHA-256: `1057353cbd5b2a91b145021ae503f2bbe273df82c9ba77dc8bf2d8e141d4f89e`. Source/configuration digest:
+`3a9bf40e4446ee6ee24bd384e489e5e9e794b206047091b5b4bf8a9f38268cef`. The world schema remains 3; the two new machine data
+formats are independently versioned at 1. Environment protocol remains 2.
+
+The mandatory final build passed 65 domain checks. The tooling suite passed 13 checks;
+249 JSON resources and 36 textures pass structural checks. All 38 GameTests passed in
+both standalone and full-server profiles. Only these two relevant profiles were run;
+the absent optional adapter checks in core do not establish native compatibility.
+The final matrix is in `/data/.tmp/civitas-steampunk-checks-r3` and
+`pack/steampunk-integration-results.json`.
+
+The new checks prove paid workbench calibration, no unpaid machining, exact turning
+output/stock/energy/tool-wear accounting, saved progress, quarantined future payloads,
+output-only automatic extraction, energy simulation and revoked access to an already
+open menu. Native motor/dynamo tests exercise real rotation and stress, conversion
+loss, brownout and buffer persistence. With IE present, actual LV connectors and a
+native copper wire deliver generated electricity to the workbench's FE capability.
+
+The full-core client with JEI/Embeddium opens the real GUI, sends mode-selection
+packets and observes powered turning/milling/drilling. All registered block/item
+models and added spindle/rotor models load. The original raider rig, brass/glass
+layers and role proportions render. Six screenshots record the scene, each GUI mode,
+raider lineup and live-action scene. A real breaker AI then reaches the indexed defense
+node and deducts two credits. The client saves all dimensions and exits successfully.
+This is Xvfb/Mesa at 1280×720; it is not a GPU benchmark, an authenticated multiplayer
+join or an exhaustive siege/combat test. Screenshots were visually inspected.
+
+Initial client runs informed GUI labels and stronger brass/role silhouettes; all run
+logs and copied worlds remain preserved. The final action fixture is
+`/data/.tmp/civitas-steampunk-client-action`; its log is
+`/data/.tmp/civitas-steampunk-expansion/workshop-client-action.log`. Normal remote
+version-check timeouts do not count as successful authentication.
+
+A final review found that the initial Create-absent profile passed its test count but
+logged converter loot-table errors. Conditional resource loading now fixes those
+errors, and the result parser rejects loot parsing failures. Both final profiles pass
+with this stricter check. The final build/profiles also include an override disabling
+inherited villager zombification so constructs cannot create unbudgeted secondary
+zombies. A dedicated villager-kill probe was not run; the earlier client screenshots
+cover the unchanged final renderer/GUI and the live defense-sabotage behavior.
+
+No complete eight-profile suite, large staging, freight restart, distribution or
+backup/restore rerun is claimed for this expansion. Those historical 0.3.0 results
+below remain attached to that earlier JAR. No production promotion occurred.
+`pack/steampunk-validation.json` records hashes, check scope and outstanding work.
+
+---
+
+# Pollution and process workshop — 0.3.0-dev, 2026-09-10
+
+This revision passed all 13 automated DEV stages at **2026-09-10T13:49:52.160523+00:00** on the
+designated server. The exact tested JAR is `civitas_industria-0.3.0-dev.jar` with SHA-256
+`2f06b4b605e31619dbb130c778ae4a6f9ead5ec5c7bcd4f55eb917916e62bf57`. The implementation/configuration source digest is
+`18d80e7c69343aaa736b88b041c626fde660f8cb870b20367daac38969ce77e0`. Historical reports below describe earlier builds.
+
+## Ecology and integration
+
+Six pollution degrees drive continuous crop and animal effects. Health uses one
+removable modifier, preserving base/other-mod attributes and avoiding free healing.
+Passive baby maturation slows; feeding, saved ages and adult breeding cooldowns retain
+their ordinary behavior. The native permanent join-time health reduction is replaced
+when the new animal system is enabled. Existing legacy base-health damage is not
+invented or erased. Animal sampling is staggered and uses due times so delayed AI
+updates do not indefinitely miss a modulo schedule. See [POLLUTION.md](POLLUTION.md).
+
+The mandatory build passed 65 domain checks, 13 Python regression checks, 214 resource
+JSON checks and 35 original 32×32 texture checks. All eight profiles passed 36 GameTests
+each. Native assertions run only where their mods are present; skipped optional tests
+do not certify compatibility. The actual four-core/full-server checks complete four
+Create deployer steps and the closing press with one deterministic component output,
+verify 250 mB slaking water and a returned manual-crafting bucket, consume sulfur
+filter reagent into sulfate cake, and reject the obsolete sulfur/fertilizer shortcut.
+Existing paid chimney routing, exposure accounting and canonical sheet checks pass.
+
+Animal/crop tests exercise real age ticks, an independent health modifier, NBT reload,
+recovery without healing, explicit feeding and 1,000 crop growth events. An earlier
+fixture used a too-strict absolute startup-tick floor; comparing age advancement with
+actual entity ticks corrected that test. The first sulfate test ran before native
+media initialization; its normal update delay is now respected. No production resource
+cost was relaxed. The r3 full acceptance run was deliberately interrupted after save
+checks to fix adjacent-face culling on the inset models. The complete r4 run certifies
+the final source. Failed/interrupted run directories were retained under `/data/.tmp`.
+
+## Visuals and logical cost
+
+The built-in image tool supplied 16 additional original material tiles. Technical grid
+crop and nearest-neighbor export produced the shipped textures. Baked JSON geometry
+covers the factory, treatment station, freight terminal, gypsum panels and process
+items; existing moving utilities use the new metal surfaces. Inset housings preserve
+neighboring visible faces. [ART_PROMPTS.json](ART_PROMPTS.json) records provenance;
+[PROCESS_CHAINS.md](PROCESS_CHAINS.md) explains recipes and the game-scale abstractions.
+
+The full client with JEI/Embeddium passed all registered block states, every inventory
+item and all six moving models, plus actual adjacent-face checks. Eight pollution
+captures and one daylight workshop capture were saved, followed by a clean world save.
+Grass tints for clean/light/moderate/heavy/severe/extreme were
+`91bd59`, `9bb45f`, `aaa469`, `a79966`, `8c7a53`, `787365`;
+disabling tint and recovery both returned `91bd59`. Evidence and
+screenshot hashes are in `pack/pollution-client-validation.json`.
+
+Client work is bounded to loaded columns/sections, with fixed queue caps and no
+synchronous whole-level tint-cache invalidation. Block-color lookups read immutable
+primitive-key snapshots. Unchanged packets are suppressed except for a heartbeat;
+climate reads are cached within each environmental step and empty pollutant channels
+are skipped. These are implementation cost reductions, not a measured GPU speedup.
+The Xvfb/Mesa fixture at 1280×720 does not establish representative FPS, audio or
+multiplayer behavior. Remote authentication/version requests can time out on this
+server without invalidating the explicitly checked local client/save results.
+
+## Full server and packaged build
+
+Save/write/read, future/mismatched/truncated-save refusal, three-process train
+persistence, the 2,140-block physical mine-stockpile → factory → warehouse route,
+and shared physical track/signals/station checks all pass. Cargo remains conserved.
+The full mixed workload measured **20.02 TPS, mean 19.63 ms, p95 23.06 ms, max 57.45 ms** over
+1,200 measured ticks, with 10,000 decorations, 1,000 furnaces (200 confirmed active),
+20 moving train fixtures, 20 receiving warehouses, 500 seeded rain cells, three
+networks, physical raids, 30 fake players and **200 AI-enabled cows**. At least
+749 animal ticks were observed, and 200 animals held the pollution health
+modifier. Warehouses received 177,920 items. This workload adds animals to the
+older baseline, so the timing difference alone is not an isolated before/after test.
+
+All 11 distribution stages passed, including standalone shipped-JAR startup,
+backup/restore and restored startup. The client/server archives embed that exact
+custom JAR and official download references for upstream dependencies. ZIP integrity,
+manifest hashes/sides, source identity and a fresh extracted server-bootstrap install
+were verified. See `pack/pollution-package-validation.json` and the other
+`pack/pollution-*.json` reports; complete server evidence is at `/data/.tmp/civitas-pollution-acceptance-r4`.
+
+Authenticated multiplayer, representative GPUs, arbitrary junction traffic,
+player-economy balance and production deployment remain external acceptance gates.
+No production world was replaced or publicly launched.
+
+---
+
+# Four-core continuation — 2026-09-10
+
+The `0.2.0-dev` revision adds the requested four-core composition on Minecraft
+1.21.1 / NeoForge 21.1.249. Earlier reports below remain historical checkpoints.
+The exact releases and progression are in [FOUR_CORE_INTEGRATION.md](FOUR_CORE_INTEGRATION.md).
+
+The mandatory source build passed 57 domain checks, 13 Python regression checks,
+and content validation. All eight profiles passed 35 GameTests each; see
+`pack/four-core-integration-results.json` for the actual upstream JARs in each row.
+Native assertions run in the pollution, four-core and full-server profiles; optional
+assertions skipped in other profiles do not certify native behavior.
+
+The new native checks verify:
+
+- Empty filters refuse capture; finite filter material is consumed and spent
+  byproducts appear. Filter inventory survives NBT save/load.
+- Custom factory emissions enter the native delayed queue and travel through a
+  real metal chimney/filter arrangement. Eight carbon units consume one leaf and
+  produce one black dye. The queue is allowed 240 ticks for its bounded batches.
+- Carbon/dust/sulfur counters feed the exact configured regional exposure dose,
+  while existing ecological injury remains. Native-covered furnaces suppress the
+  former duplicate PM/SOX path.
+- Shared machine recipes load, IE's metal press returns the canonical Create iron
+  sheet, the native pump recipe contains a Create mechanical pump, and native
+  sulfur filters accept Civitas reagent with capacity 32.
+
+The first strengthened factory regression waited only 100 ticks and failed because
+native emissions drain in small batches every three seconds. Its evidence is kept
+under `/data/.tmp/civitas-four-core-tests-r2`. The corrected 240-tick assertion passed
+in the focused r3 run and in the complete eight-profile matrix. This changes the
+fixture's observation window, not filter cost or native queue behavior.
+
+Full-client validation passed with all four cores, their dependencies, JEI and
+Embeddium using the same development source. All existing Civitas block states and
+six moving models passed the model checks. The clean/polluted/disabled/recovered
+vegetation tints were `91bd59`, `969f55`, `91bd59`, `91bc58`; four screenshots and a
+clean world save were recorded. See `pack/four-core-client-validation.json`.
+Xvfb/Mesa at 1280×720 establishes client startup and this rendering fixture; it does
+not establish representative GPU performance, working microphone/audio, exhaustive
+native-block visuals or authenticated multiplayer. The development world still
+loaded after an authentication-key fetch error; the software renderer used a
+working fallback after its GLSL 4.60 probe failed.
+
+The full automated DEV suite finished successfully at 2026-09-10 09:05:25 UTC.
+All 13 top-level stages passed, including all 11 distribution stages. Current
+server evidence is under `/data/.tmp/civitas-four-core-acceptance-r1`, summarized in
+`pack/four-core-dev-validation.json` and `pack/four-core-release-validation.json`.
+The exact JAR SHA-256 is
+`64df95ce7f32ec9af9e06e06eed55cb5b14ab9677077a88e4ed24937c1d27dc1`;
+the validated source digest is
+`ee9cdd08f5bc91a2b7da79a08b9a0f74f889c5fc7d9fd53133ce33ad2aec331d`.
+
+Save/write/read and future/mismatched/truncated-save refusal passed. The three-process
+train restart fixture, the 2,140-block physical mine-stockpile → factory → warehouse
+route, and the shared physical track/signal/station fixture all passed. Cargo was
+conserved through restart. The `pack/four-core-*-results.json` files record their
+specific scope; seeded ore and bounded shared tracks do not establish a player economy
+or arbitrary junction traffic.
+
+The full four-core combined workload measured **20.02 TPS, mean 16.16 ms, p95 18.99 ms,
+max 47.05 ms** over 1,200 ticks. It included 10,000 decorations, 1,000 furnaces with
+200 confirmed active, 20 moving native graph-fixture trains, 20 receiving warehouses,
+500 seeded rain cells, three networks, physical raids and 30 simulated players.
+Warehouses received 177,920 items and cargo was conserved. See
+`pack/four-core-staging-report.json` and `pack/four-core-staging-validation.json`.
+Compared with the earlier fixture's p95 10.43 ms, this run costs more; the change in
+pack composition is not a controlled attribution of all added cost to one mod.
+The current result remains within the configured 45 ms p95 / 19.5 TPS gate.
+
+The distribution suite assembled client and server packs, installed the pinned
+runtime, booted the shipped JAR, finalized and verified its manifest, backed up and
+restored the instance, verified it, and booted the restored world. All stages passed.
+No production promotion or background backup schedule was performed.
+
+The generated `.mrpack` and server ZIP passed CRC/hash checks. The manifest contains
+all 18 exact upstream download references with correct sides, sizes and hashes, and
+both archives embed the exact accepted custom JAR. The extracted server installer
+successfully assembled a new instance and installed NeoForge using verified caches;
+its resulting pack/config/script manifest passed verification. See
+`pack/four-core-package-validation.json`. A GUI launcher import remains untested.
+
+---
+
 # September 2026 integration continuation
 
 This supersedes the implementation status in HANDOFF.md and RECOVERY_REPORT.md.
@@ -320,3 +692,60 @@ pass the full two-train, 2,140-block mine-stockpile → physical rail → calibr
 therefore covered by both route fixtures. In-transit and final restarts preserve all
 stock; final warehouse totals are 64 and 128 iron ingots. The updated
 `pack/physical-route-results.json` identifies the run.
+
+
+## Reproducible acceptance continuation (2026-09-07 UTC)
+
+The current tested distribution is
+`/data/.tmp/civitas-industria-builds/dev-acceptance-r13/distribution`.
+Its `server` and `client` directories contain the assembled packs; `validated-server`,
+`restored` and `restored-boot` retain the standalone/restore fixtures. The custom JAR
+remains **454,425 bytes**, SHA-256
+`9ae69f1e17b6c9afe765c860872db702ac2c67d6275855bade371bb4991bc7c8`.
+No gameplay source or world/cargo schema changed in this continuation.
+
+1. Files: CI workflow; new `validate-dev.py`, explicit tooling runner and result-checking
+   modules/tests; matrix, railway/staging fixture arguments and save-refusal cleanup;
+   architecture, persistence, performance, operations/status documents and evidence JSON.
+2. Architecture: one sequential automated acceptance entry point, with fresh matrix and
+   fixture directories, per-stage logs/status, source fingerprint and built artifact hash.
+   CI now downloads pinned compile dependencies before attempting to compile Create/IE
+   adapters. The previous Phase 0-only workflow omitted those dependencies.
+3. Persistence: no new production state. World schema 3 and cargo envelope 2 are unchanged.
+   Save probes preserve original bytes and restore the disposable smoke world afterward.
+4. Update loops: no new game loops or tickers. Validation runs only through explicit commands.
+5. Network: no new game payloads or authentication changes. Mojang key/version requests
+   still intermittently time out; the tests do not interpret those as successful login.
+6. Tests: 13 Python regressions, including rejection of empty/partial/duplicated GameTest
+   summaries, nonzero exits, missing save confirmation, crashed runs, invalid timing data,
+   absent workload activity and failed cargo/performance gates. Standard unittest discovery
+   skips the hyphenated filenames; `check-tooling.py` explicitly loads each suite and
+   refuses empty suites. The failed initial discovery run is preserved under
+   `dev-acceptance-r12`; `dev-acceptance-r13` is the corrected completed suite.
+7. Performance: the combined synthetic server sample passed the enforced defaults
+   (p95 <45 ms, mean <=50 ms, observed TPS >=19.5). Measured 20.016 TPS, p95 10.426 ms,
+   mean 9.072 ms and max 26.023 ms. All 20 trains/warehouses were active, 177,920 items
+   arrived, cargo was conserved and peak raiders were six. This is one bounded sample
+   with fake players and graph trains, not production capacity or real packet evidence.
+8. Risks: authenticated multiplayer/voice/claims/combat, representative GPU rendering,
+   mixed-direction junction and realistic terrain/economy playtests remain open. No
+   staging/production promotion, pregeneration or scheduled operational backup was applied.
+   GitHub Actions execution is separate from the successful designated-server run.
+9. Results: `pack/dev-validation.json` records all 13 automated stages passed. The clean
+   build ran 57 domain checks; all six profiles passed exactly 33 required GameTests
+   and saved cleanly (optional assertions still skip without their mod). Three-dimension
+   save/restart and future/mismatched/truncated refusal passed. All three railway fixtures
+   passed write/read/verify phases. All 11 assembly/runtime/standalone/backup/restore stages
+   passed. KubeJS loaded the progression script with zero errors and warnings.
+
+`pack/client-validation.json` records the additional full-client test: verified client
+mods, actual world entry, all block/moving model checks, four tint/capture checkpoints
+and clean saved shutdown. It uses development classes with the pinned client mods under
+Xvfb/Mesa at 1280×720. The final screenshot was visually inspected: industrial materials and inventory icons
+render without missing textures. This does not establish authenticated client joins
+or representative 1080p/1440p GPU performance.
+The exact invocation and all four screenshots remain in the acceptance directory and
+`run-client-validation/screenshots/`, respectively.
+
+The complete planned production acceptance is still open. These results finish the
+available automated suite, not the human-client, gameplay-feedback or deployment gates.

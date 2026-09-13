@@ -1,0 +1,73 @@
+{
+  "date_utc": "2026-09-11T05:52:12.431171+00:00",
+  "status": "focused-residence-and-creative-checks-passed; broader-expansion-and-release-gates-open",
+  "source_commit": "ce7d9a3276ade7e2a54bd5a0a9be9c79bef53e03",
+  "version": "0.4.0-dev",
+  "build_input_sha256": "5a77cf428afd9410cac2bd7f0927f82d9fce0a26fb8c94c56e8467a679384744",
+  "digest_scope": "Sorted files under src, scripts (excluding __pycache__), pack/overrides, plus build.gradle, settings.gradle, gradle.properties, pack/mods.lock.json and pack/runtime.lock.json; relative path + NUL + SHA-256 bytes. Local/server hashes match. Repository support documents and .github are outside this build-input scope.",
+  "jar": "civitas_industria-0.4.0-dev.jar",
+  "jar_sha256": "dc6fa15efd41558a16817c44415ad2f2222514ad6c59c75f61d37e0296f555e6",
+  "jar_bytes": 1815479,
+  "local_artifact": "/home/ubuntu/codexproj/artifacts/residence-creative/civitas_industria-0.4.0-dev.jar",
+  "server_workspace": "/data/.tmp/civitas-residence-creative",
+  "domain_checks": 101,
+  "profiles": {
+    "core": 42,
+    "full-server": 42
+  },
+  "build_log": "/data/.tmp/civitas-residence-creative/final-build-r3.log",
+  "native_evidence": "pack/residence-integration-results.json",
+  "process_evidence": "pack/residence-restart-results.json",
+  "process_phases": [
+    "write",
+    "read",
+    "verify",
+    "refuse-future",
+    "refuse-truncated",
+    "refuse-mismatch",
+    "restored"
+  ],
+  "client": {
+    "passed": true,
+    "directory": "/data/.tmp/civitas-creative-client-r3",
+    "log": "/data/.tmp/civitas-residence-creative/creative-client-r3.log",
+    "registered_items": 39,
+    "industry_precision_matches": 4,
+    "global_rotation_matches": 2,
+    "server_inventory_acquisition": true,
+    "rendering": "Xvfb/Mesa, 1280x720; no GPU benchmark",
+    "screenshots_sha256": {
+      "2026-09-11_13.44.43.png": "5aac8f460c397356293ab69475fd0dc00b406b356fe89944d2972023214a269a",
+      "2026-09-11_13.44.47.png": "27385d89d639421c350b352fcfb2731805f37a3e0457c8aad638729d756a5fef",
+      "2026-09-11_13.44.50.png": "fc93cf37a615bf1a1cb5fda7d3084dfb5de38d615ea9dba483f56f9a3579f4c0"
+    },
+    "screenshots_visually_inspected": true
+  },
+  "log_sha256": {
+    "build": "5e87352359342d87b0e46f37e7e53db1742f5f19922aa445bec9d5ccf820086e",
+    "core": "393b08ee917383c41f951e8f82d90c5df353f7d041064e1b1779d1082c1f392b",
+    "full-server": "da16b2e25d30609c186037d7d163d6391ad8867d385f886fa76ce98447bc0d5a",
+    "client": "ddc05d010236e9a3f738caf0a5040f93fb1491824718e34d477ca54e29c0f1d2"
+  },
+  "resources": {
+    "json_files": 249,
+    "textures": 36,
+    "structural_checks_passed": true
+  },
+  "scope": [
+    "World schema 3 unchanged; separate residence schema 1",
+    "Creative content built on tab rebuild; online-only 20-tick residence sampling",
+    "No paid depot benefits, production deployment, new network payloads, or broad performance acceptance"
+  ],
+  "retained_attempts": [
+    "Restart r1 exposed shutdown reloading rejected files and was interrupted after preserving evidence",
+    "Restart r2 and r3 passed before the final client-only test correction",
+    "Restart r4 connection ended early; r5 is the complete final-artifact run",
+    "Client r1/r2 revealed title spacing and a false-positive search fixture; r3 uses actual typing and checks filtering"
+  ],
+  "remaining": [
+    "Paid civic depot inventory, coverage, discounts, GUI/models",
+    "Funded physical contracts and district services",
+    "Real-player activity/economy, authenticated multiplayer, representative GPUs and production acceptance"
+  ]
+}

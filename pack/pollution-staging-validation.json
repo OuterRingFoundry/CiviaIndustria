@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "max_p95_ms": 45,
+  "min_tps": 19.5,
+  "scope": "Synthetic server workload; real-client and GPU gates remain open"
+}

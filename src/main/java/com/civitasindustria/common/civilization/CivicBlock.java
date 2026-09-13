@@ -29,7 +29,7 @@ public final class CivicBlock extends Block {
             if(node!=null&&(kind==WorldState.CivicNode.Kind.CORE||kind==WorldState.CivicNode.Kind.MAINTENANCE||kind==WorldState.CivicNode.Kind.DEFENSE)){
                 node.credits=Math.min(Long.MAX_VALUE-100000,node.credits)+ServerConfig.CREDIT_PER_INGOT.get();
                 if(!player.isCreative())stack.shrink(1);runtime.dirty();
-                player.displayClientMessage(Component.literal("Maintenance credits: "+node.credits),true);
+                player.displayClientMessage(Component.literal("Maintenance supplies: "+node.credits),true);
                 return ItemInteractionResult.SUCCESS;
             }
         }
@@ -37,7 +37,7 @@ public final class CivicBlock extends Block {
     }
     @Override protected InteractionResult useWithoutItem(BlockState state,Level level,BlockPos pos,Player player,BlockHitResult hit){
         if(level instanceof ServerLevel server){var n=WorldRuntime.get(server).state().nodes.get(pos.asLong());
-            player.displayClientMessage(Component.literal(n==null?"Unregistered node; replace it.":kind+" | credits "+n.credits+" | missed payments "+n.missedPayments),false);}
+            player.displayClientMessage(Component.literal(n==null?"Unregistered node; replace it.":kind+" | supply units "+n.credits+" | missed payments "+n.missedPayments),false);}
         return InteractionResult.SUCCESS;
     }
 }

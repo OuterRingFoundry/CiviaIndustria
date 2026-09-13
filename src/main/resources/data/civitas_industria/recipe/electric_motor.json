@@ -1,0 +1,41 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ICI",
+    "PSP",
+    "IGI"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "C": {
+      "item": "minecraft:copper_block"
+    },
+    "P": {
+      "item": "civitas_industria:precision_component"
+    },
+    "S": {
+      "item": "civitas_industria:precision_shaft"
+    },
+    "G": {
+      "item": "civitas_industria:gear_blank"
+    }
+  },
+  "result": {
+    "id": "civitas_industria:electric_motor"
+  },
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create"
+    },
+    {
+      "type": "neoforge:not",
+      "value": {
+        "type": "neoforge:mod_loaded",
+        "modid": "createaddition"
+      }
+    }
+  ]
+}

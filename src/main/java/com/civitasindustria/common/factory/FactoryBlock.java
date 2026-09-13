@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.*;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import com.civitasindustria.common.registry.CivitasRegistries;
-public final class FactoryBlock extends BaseEntityBlock {
+public class FactoryBlock extends BaseEntityBlock {
     public static final net.minecraft.world.level.block.state.properties.DirectionProperty FACING=HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty ACTIVE=BooleanProperty.create("active");
     private static final MapCodec<FactoryBlock> CODEC=simpleCodec(FactoryBlock::new);

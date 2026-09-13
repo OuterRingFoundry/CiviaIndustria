@@ -43,6 +43,7 @@ public final class CargoBlockEntity extends BlockEntity {
         for(int i=0;i<16;i++)if(counts[i]>0){if(restored.count(keys[i])>0||restored.insert(keys[i],counts[i],false)!=counts[i])throw new IllegalArgumentException("Mounted key");mapped[i]=keys[i];}
         inventory=restored;System.arraycopy(mapped,0,slots,0,16);transit=ItemStack.EMPTY;quarantine=null;setChanged();
     }
+    public long slotCount(int slot){return validSlot(slot)&&slots[slot]!=null?inventory.count(slots[slot]):0;}
     public long total(){return inventory.total();}
     public boolean isQuarantined(){return quarantine!=null;}
     public void invalidateStructure(){structureDirty=true;if(level!=null)level.invalidateCapabilities(worldPosition);}

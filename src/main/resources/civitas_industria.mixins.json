@@ -7,7 +7,10 @@
     "EnderCargoMixin",
     "CreateCrusherCommissioningMixin",
     "IECommissioningMixin",
-    "IECrusherCollisionMixin"
+    "IECrusherCollisionMixin",
+    "NativePollutionChangeMixin",
+    "AnimalPollutionMixin",
+    "NativeAnimalHealthMixin"
   ],
   "injectors": {
     "defaultRequire": 1

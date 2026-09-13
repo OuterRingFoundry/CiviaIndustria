@@ -1,0 +1,29 @@
+{
+  "date_utc": "2026-09-10",
+  "scope": "Full four-core client mod set and JEI, development classes, world rendering and existing Civitas tint/model checks; Xvfb/Mesa 1280x720. No authenticated multiplayer, working audio, representative GPU benchmark or exhaustive native-block visual inspection.",
+  "passed": true,
+  "checks": {
+    "models": true,
+    "saved": true,
+    "gradle": true,
+    "four_screenshots": true,
+    "tints": true,
+    "jei": true
+  },
+  "seconds_gradle": 89,
+  "source_sha256": "ee9cdd08f5bc91a2b7da79a08b9a0f74f889c5fc7d9fd53133ce33ad2aec331d",
+  "matching_build_jar_sha256": "64df95ce7f32ec9af9e06e06eed55cb5b14ab9677077a88e4ed24937c1d27dc1",
+  "log": "/data/.tmp/civitas-four-core/four-core-client.log",
+  "log_sha256": "2fde2932c97cc51786db771b00d0443a95e56cab6b655591001840119d42cf72",
+  "screenshots": [
+    "/data/.tmp/civitas-four-core/run-client-validation/screenshots/2026-09-10_16.46.09.png",
+    "/data/.tmp/civitas-four-core/run-client-validation/screenshots/2026-09-10_16.46.31.png",
+    "/data/.tmp/civitas-four-core/run-client-validation/screenshots/2026-09-10_16.46.35.png",
+    "/data/.tmp/civitas-four-core/run-client-validation/screenshots/2026-09-10_16.46.54.png"
+  ],
+  "notes": [
+    "Client runs development classes from the same source; standalone packaged JAR is verified separately by distribution acceptance.",
+    "Unavailable sound hardware and one authentication-key fetch error were logged; the development world still loaded and saved.",
+    "A Flywheel GLSL 4.60 probe failed on software rendering; its fallback rendered the fixture."
+  ]
+}

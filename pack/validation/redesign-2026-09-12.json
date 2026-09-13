@@ -1,0 +1,132 @@
+{
+  "code_commit": "30e8932261a034b90a2d9f5ea8d42dced5b26569",
+  "workflow_run": 34702681777,
+  "workflow_url": "https://github.com/OuterRingFoundry/CiviaIndustria/actions/runs/34702681777",
+  "artifact_id": 10301031453,
+  "artifact_sha256": "42c7776eb5b59135ed6033a7d44e615b2779d787914ecea95cdafb33bca145b6",
+  "jar": {
+    "filename": "civitas_industria-0.5.0-dev.jar",
+    "size": 750073,
+    "sha256": "9f0734ccd79321d58f825e915f1c0175dc4cbe8dff235e3bb74907adf47eba25"
+  },
+  "domain_assertions": 60229,
+  "native_profiles": {
+    "core": {
+      "passed": true,
+      "required_tests": 44,
+      "expected_required_tests": 44,
+      "errors": [],
+      "artifacts": []
+    },
+    "industry": {
+      "passed": true,
+      "required_tests": 44,
+      "expected_required_tests": 44,
+      "errors": [],
+      "artifacts": [
+        "ImmersiveEngineering-1.21.1-12.4.2-194.jar",
+        "create-1.21.1-6.0.10.jar"
+      ]
+    },
+    "full-server": {
+      "passed": true,
+      "required_tests": 44,
+      "expected_required_tests": 44,
+      "errors": [],
+      "artifacts": [
+        "AdChimneys-1.21.1-11.1.10.0-NeoForge-build.1121.jar",
+        "ForgeEndertech-1.21.1-12.1.3.0-NeoForge-build.1100.jar",
+        "ImmersiveEngineering-1.21.1-12.4.2-194.jar",
+        "civillis-neoforge-2.0.1-release+mc1.21.1.jar",
+        "create-1.21.1-6.0.10.jar",
+        "createaddition-1.7.0.jar"
+      ]
+    }
+  },
+  "currency_processes": [
+    {
+      "name": "write",
+      "exit": 0,
+      "log_sha256": "16a33a9b67418d8e5dcfd5ac7a5eb2af6c69a0cf59e345e2cd0b73f751f17904",
+      "passed": true
+    },
+    {
+      "name": "read",
+      "exit": 0,
+      "log_sha256": "82eedd062bc021180085832f126104c3c39ffb12903e3ea0cbc0b0690701c3d5",
+      "passed": true
+    },
+    {
+      "name": "verify",
+      "exit": 0,
+      "log_sha256": "099d5bfd4e7430cb24b4e5e1d753e4b82a1558dce9d27173059ba99d2edcd13f",
+      "passed": true
+    },
+    {
+      "name": "refuse-future",
+      "exit": 0,
+      "log_sha256": "9f46284d1c5f535b82e3accb34ca7c3569ecfdafd871ff40aacc1658e8f7558d",
+      "passed": true,
+      "damaged_bytes_preserved": true
+    },
+    {
+      "name": "refuse-truncated",
+      "exit": 0,
+      "log_sha256": "11a70aeaabb3ab5fb7e1b0c76060bfcd8eafcf18c3d4260b7510bd717987d93b",
+      "passed": true,
+      "damaged_bytes_preserved": true
+    },
+    {
+      "name": "restored",
+      "exit": 0,
+      "log_sha256": "83d3fcae260dd8d9d359ccea31226df6f4790720def93e1277cabd7f3de31651",
+      "passed": true
+    }
+  ],
+  "client": {
+    "passed": true,
+    "exit": 0,
+    "scope": "Actual integrated client screens, packets and baked models under software rendering; not a GPU performance test",
+    "captures": [
+      "market-counter",
+      "bulk-storage",
+      "precision-workbench",
+      "workshop-scene",
+      "raid-warning",
+      "raid-active",
+      "raid-victory"
+    ]
+  },
+  "raid": {
+    "warning": true,
+    "waves": [
+      6,
+      6,
+      6
+    ],
+    "recovery": true,
+    "defeat_method": "vanilla entity death in an opt-in fixture"
+  },
+  "world_persistence": {
+    "three_dimensions": true,
+    "damaged_files_preserved": [
+      "future",
+      "mismatch",
+      "truncated"
+    ]
+  },
+  "screenshots": {
+    "bulk-storage.png": "b8a00762a82e5a3300f89406f56513a09c26086025c284ac75f1ca247eb050f0",
+    "precision-workbench.png": "90370c5e24af70ed8371c0b04389d82ff077dc4ad53d0f192bb862ad3bda76a1",
+    "raid-victory.png": "06eec4acb9033a43039ea68097bdb6ac3f36a5b3f58f5ba9e6d9cd0f29132c60",
+    "raid-warning.png": "5f64a3b3a657c7bb961e19160c7ccc7fd0c438857a0517f39755cbed1e469251",
+    "raid-active.png": "c9784e6d9077d7a4f55e4c33645ac208a22eca35d1c5017a43ae55d4ed6d5bc8",
+    "market-counter.png": "cc42da233048bb13fcd830ac7b1557ff28235432caf35e6420d0b7dd50a3d37b",
+    "workshop-scene.png": "692b014d96744c9ebfe31f05dd9e3bc84c5078c7e6ea4672adb992b8d7279667"
+  },
+  "scope_limits": [
+    "Software-rendered functional client validation; no GPU benchmark",
+    "No long-duration multiplayer soak",
+    "No atomic recovery guarantee between independently saved player inventory and ledger files"
+  ]
+}

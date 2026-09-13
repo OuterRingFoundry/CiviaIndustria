@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "version": "0.2.0-four-core-dev",
+  "source_sha256": "ee9cdd08f5bc91a2b7da79a08b9a0f74f889c5fc7d9fd53133ce33ad2aec331d",
+  "custom_jar_sha256": "64df95ce7f32ec9af9e06e06eed55cb5b14ab9677077a88e4ed24937c1d27dc1",
+  "upstream_artifacts": 18,
+  "checks": [
+    "Client manifest exact URLs, sizes, upstream hashes and client/server sides",
+    "Both archives pass ZIP CRC checks",
+    "Both archives embed only the exact tested custom JAR",
+    "Local SHA256SUMS match downloaded archives",
+    "Local source digest matches completed remote acceptance",
+    "Extracted server bootstrap installer completed Java 21/NeoForge installation in a fresh directory using verified dependency/runtime caches",
+    "Installed bootstrap instance passed exact pack/config/script verification"
+  ],
+  "server_installation": "/data/.tmp/civitas-four-core-bootstrap-installed-r1",
+  "server_installation_log": "/data/.tmp/civitas-four-core-bootstrap-r1/installation.log",
+  "downloads": "/data/.tmp/civitas-four-core-downloads-r1",
+  "archive_sha256": {
+    "CiviaIndustria-0.2.0-four-core-dev.mrpack": "e0e458454f2bc1866f35f499ec67a3931df40d5c464b61a065c3b4d99ed4e5fb",
+    "CiviaIndustria-0.2.0-four-core-dev-server.zip": "2ab2f4e9a9defe3760f9f403632efed16907af65093bd07795f159b3fc7e56c0"
+  },
+  "scope": "DEV downloads. Standalone shipped-JAR boot and restored boot are covered by four-core-release-validation.json. A GUI launcher import, authenticated clients and representative GPUs remain untested."
+}

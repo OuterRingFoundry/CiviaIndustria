@@ -18,6 +18,14 @@ def accepts(spec,current):
         return True
     return False
 
+def platform_accepts(mod_id, spec, current):
+    if accepts(spec, current):return True
+    # FancyModLoader 4.0.43/4.0.44 bundled with pinned NeoForge 21.1.249:
+    # VersionSupportMatrix treats MC 1.21 and NeoForge 21.0.166 as compatible.
+    # Keep this scoped to this pack's exact runtime, not arbitrary loader versions.
+    fallback={'minecraft':('1.21.1','1.21'),'neoforge':('21.1.249','21.0.166')}.get(mod_id)
+    return bool(fallback and current==fallback[0] and accepts(spec,fallback[1]))
+
 def metadata(data,label,depth=0):
     if depth>4 or len(data)>128*1024*1024:raise ValueError('Nested artifact bounds')
     result=[]
@@ -65,7 +73,7 @@ def verify(lock,directory,side,allow_all=False):
             if not(required and applies):continue
             id=dep['modId']
             if id not in available:raise ValueError(f"{mod['id']} missing dependency {id}")
-            if not accepts(dep.get('versionRange',''),available[id]):raise ValueError(f"{mod['id']} incompatible {id} {available[id]}: {dep.get('versionRange')}")
+            if not platform_accepts(id,dep.get('versionRange',''),available[id]):raise ValueError(f"{mod['id']} incompatible {id} {available[id]}: {dep.get('versionRange')}")
     return mods
 
 def main():

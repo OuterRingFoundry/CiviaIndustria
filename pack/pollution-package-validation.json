@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "version": "0.3.0-pollution-dev",
+  "source_sha256": "18d80e7c69343aaa736b88b041c626fde660f8cb870b20367daac38969ce77e0",
+  "custom_jar_sha256": "2f06b4b605e31619dbb130c778ae4a6f9ead5ec5c7bcd4f55eb917916e62bf57",
+  "upstream_artifacts": 18,
+  "checks": [
+    "Client manifest exact URLs, sizes, upstream hashes and client/server sides",
+    "Both archives pass ZIP CRC checks",
+    "Both archives embed only the exact tested custom JAR",
+    "All client/server override contents match the validated source",
+    "Local SHA256SUMS match downloaded archives",
+    "Downloaded standalone JAR matches the acceptance and embedded JAR hashes",
+    "Local source digest matches completed remote acceptance",
+    "Extracted server bootstrap installer completed Java 21/NeoForge installation in a fresh directory using private verified dependency/runtime caches",
+    "Installed bootstrap instance passed exact pack/config/script verification"
+  ],
+  "server_installation": "/data/.tmp/civitas-pollution-bootstrap-installed-r1",
+  "server_installation_log": "/data/.tmp/civitas-pollution-bootstrap-r1/installation.log",
+  "downloads": "/data/.tmp/civitas-pollution-downloads-r1",
+  "archive_sha256": {
+    "CiviaIndustria-0.3.0-pollution-dev-server.zip": "037233f4840a0ab38afbd72e6b4e0d84235b6f7c3e423dbd447b19e6e36139a7",
+    "CiviaIndustria-0.3.0-pollution-dev.mrpack": "a9ffb55f05b7fd87a15c24beba6c4ef4df221fa8ff836d72edcd5f58f94732f0"
+  },
+  "scope": "DEV downloads. Standalone shipped-JAR boot and restored boot are covered by pollution-release-validation.json. GUI launcher import, authenticated clients and representative GPUs remain untested.",
+  "workshop_assets": {
+    "filename": "CiviaIndustria-0.3.0-workshop-assets.zip",
+    "sha256": "e78abb8e727c71b70af74906b2371ecc0a177154c7fd2c4330edbbf08a885db5",
+    "bytes": 1983120,
+    "mode": "Built-in image generation plus repository-native Minecraft JSON geometry",
+    "prompt_set": "docs/ART_PROMPTS.json"
+  }
+}

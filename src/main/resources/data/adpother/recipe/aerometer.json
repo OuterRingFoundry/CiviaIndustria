@@ -1,0 +1,44 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "immersiveengineering"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "adpother"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "adchimneys"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " G ",
+    "PCP",
+    " R "
+  ],
+  "key": {
+    "G": {
+      "tag": "c:glass_panes"
+    },
+    "P": {
+      "tag": "c:plates/copper"
+    },
+    "C": {
+      "item": "minecraft:compass"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "id": "adpother:aerometer",
+    "count": 1
+  }
+}

@@ -1,7 +1,7 @@
 {
   "textures": {
-    "steel_casing": "civitas_industria:block/steel_casing",
-    "particle": "civitas_industria:block/steel_casing"
+    "steel_casing": "minecraft:block/polished_andesite",
+    "particle": "minecraft:block/polished_andesite"
   },
   "elements": [
     {

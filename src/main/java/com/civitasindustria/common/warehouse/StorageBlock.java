@@ -19,11 +19,11 @@ public class StorageBlock extends BaseEntityBlock {
     @Override protected net.minecraft.world.phys.shapes.VoxelShape getShape(BlockState state,BlockGetter level,BlockPos pos,net.minecraft.world.phys.shapes.CollisionContext context){return net.minecraft.core.registries.BuiltInRegistries.BLOCK.getKey(this).getPath().equals("pallet")?Block.box(0,0,0,16,4,16):super.getShape(state,level,pos,context);}
     @Override protected RenderShape getRenderShape(BlockState state){return RenderShape.MODEL;}
     @Override protected ItemInteractionResult useItemOn(ItemStack stack,BlockState state,Level level,BlockPos pos,Player player,InteractionHand hand,BlockHitResult hit){
-        if(!level.isClientSide&&level.getBlockEntity(pos) instanceof CargoBlockEntity cargo)cargo.interact(player,stack,player.isShiftKeyDown());
+        if(!level.isClientSide&&level.getBlockEntity(pos) instanceof CargoBlockEntity cargo)CargoMenu.open(player,cargo);
         return ItemInteractionResult.SUCCESS;
     }
     @Override protected InteractionResult useWithoutItem(BlockState state,Level level,BlockPos pos,Player player,BlockHitResult hit){
-        if(!level.isClientSide&&level.getBlockEntity(pos) instanceof CargoBlockEntity cargo)cargo.interact(player,ItemStack.EMPTY,player.isShiftKeyDown());
+        if(!level.isClientSide&&level.getBlockEntity(pos) instanceof CargoBlockEntity cargo)CargoMenu.open(player,cargo);
         return InteractionResult.SUCCESS;
     }
 }

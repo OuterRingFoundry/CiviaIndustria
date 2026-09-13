@@ -1,0 +1,66 @@
+{
+  "passed": true,
+  "date_utc": "2026-09-10",
+  "scope": "Same development classes as 0.3.0-dev, full client with four core mods, JEI and Embeddium; Xvfb/Mesa 1280x720. Actual world entry/model checks, six-degree captures, config toggle, recovery and clean save. No representative GPU benchmark, authenticated multiplayer or audio acceptance.",
+  "checks": {
+    "build": true,
+    "models": true,
+    "saved": true,
+    "six_distinct_severity_tints": true,
+    "disabled_and_recovered_restore_biome": true,
+    "no_assertion_failure": true,
+    "all_inventory_models": true,
+    "eight_pollution_captures": true,
+    "daylight_workshop_capture": true,
+    "neighbor_face_visibility": true
+  },
+  "tints": {
+    "clean": "91bd59",
+    "light": "9bb45f",
+    "moderate": "aaa469",
+    "heavy": "a79966",
+    "severe": "8c7a53",
+    "extreme": "787365",
+    "disabled": "91bd59",
+    "recovered": "91bd59"
+  },
+  "seconds_gradle": 99,
+  "source_sha256": "18d80e7c69343aaa736b88b041c626fde660f8cb870b20367daac38969ce77e0",
+  "log": "/data/.tmp/civitas-pollution-refinement/pollution-client-r3.log",
+  "log_sha256": "e8d20c192e9fa0d392749b22cc50f55a7f09a3a615d3b30709d73f17637068ed",
+  "screenshots": [
+    "/data/.tmp/civitas-pollution-refinement/run-client-validation/screenshots/2026-09-10_21.28.19.png",
+    "/data/.tmp/civitas-pollution-refinement/run-client-validation/screenshots/2026-09-10_21.28.24.png",
+    "/data/.tmp/civitas-pollution-refinement/run-client-validation/screenshots/2026-09-10_21.28.29.png",
+    "/data/.tmp/civitas-pollution-refinement/run-client-validation/screenshots/2026-09-10_21.28.34.png",
+    "/data/.tmp/civitas-pollution-refinement/run-client-validation/screenshots/2026-09-10_21.28.39.png",
+    "/data/.tmp/civitas-pollution-refinement/run-client-validation/screenshots/2026-09-10_21.28.42.png",
+    "/data/.tmp/civitas-pollution-refinement/run-client-validation/screenshots/2026-09-10_21.28.45.png",
+    "/data/.tmp/civitas-pollution-refinement/run-client-validation/screenshots/2026-09-10_21.29.04.png",
+    "/data/.tmp/civitas-pollution-refinement/run-client-validation/screenshots/2026-09-10_21.29.07.png"
+  ],
+  "render_bounds": {
+    "max_pending_columns": 512,
+    "max_pending_sections": 4096,
+    "columns_per_tick": 2,
+    "section_rebuilds_per_tick": 8
+  },
+  "notes": [
+    "The client fixture asserts queue bounds on every tick. No whole-level tint-cache clearing is requested by the revised renderer.",
+    "Tints are inspected through the real BiomeColors path; captures preserve the actual rendered world.",
+    "Unavailable audio and remote version/authentication requests can log warnings on this development server."
+  ],
+  "screenshot_sha256": {
+    "clean": "fd45f0fc48f2a892be7a5d071798c0bf6039d5446b92e64ef84ea5af64eda6e1",
+    "light": "71f4de5079a155f0756ecca1e6759db07823dcae8065b49bc3f371fc18bb433b",
+    "moderate": "15cd494fbcc4ebd5cd578e4498f7568b299dcb9a36cc593dc89e59a287b42337",
+    "heavy": "4231db6b1a59cf5e833947ff87ab559a55111f77585684aa32b2f4eea3a723fe",
+    "severe": "2f49edb884cd4abdb97d6118cf45c809729e48eebbaf5e0dcd652afedb35cec8",
+    "extreme": "d8776a30c9ae9bc5553780232c10a3ce197b752a65b37b73718f31c9b099f940",
+    "disabled": "58ee4326f3b2f3e92925d2ff730e52555378d0e1bc675604a8b0c28d1bc8fe51",
+    "recovered": "30e28eb3e73b27dc793a38e2021cb1a810bc29c7403bd1bbe9c1468a0c24b775",
+    "workshop": "1f5d6875acfba23720ed4bc982775dc245009873b16a5275e0b1febe20b5e019"
+  },
+  "original_textures": 35,
+  "new_material_textures": 16
+}

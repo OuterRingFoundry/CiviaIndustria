@@ -1,0 +1,47 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "create"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "immersiveengineering"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "adpother"
+    },
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "adchimneys"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DGD",
+    "SFS",
+    "DMD"
+  ],
+  "key": {
+    "D": {
+      "tag": "c:gems/diamond"
+    },
+    "G": {
+      "tag": "c:glass_panes"
+    },
+    "S": {
+      "tag": "c:plates/steel"
+    },
+    "F": {
+      "item": "adpother:gold_filter_frame"
+    },
+    "M": {
+      "item": "create:precision_mechanism"
+    }
+  },
+  "result": {
+    "id": "adpother:diamond_filter_frame",
+    "count": 1
+  }
+}

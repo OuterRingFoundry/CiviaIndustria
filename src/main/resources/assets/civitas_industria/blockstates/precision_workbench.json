@@ -1,0 +1,100 @@
+{
+  "variants": {
+    "facing=north,active=false,operation=0": {
+      "model": "civitas_industria:block/precision_workbench",
+      "y": 0
+    },
+    "facing=north,active=false,operation=1": {
+      "model": "civitas_industria:block/precision_workbench",
+      "y": 0
+    },
+    "facing=north,active=false,operation=2": {
+      "model": "civitas_industria:block/precision_workbench",
+      "y": 0
+    },
+    "facing=north,active=true,operation=0": {
+      "model": "civitas_industria:block/precision_workbench",
+      "y": 0
+    },
+    "facing=north,active=true,operation=1": {
+      "model": "civitas_industria:block/precision_workbench",
+      "y": 0
+    },
+    "facing=north,active=true,operation=2": {
+      "model": "civitas_industria:block/precision_workbench",
+      "y": 0
+    },
+    "facing=east,active=false,operation=0": {
+      "model": "civitas_industria:block/precision_workbench",
+      "y": 90
+    },
+    "facing=east,active=false,operation=1": {
+      "model": "civitas_industria:block/precision_workbench",
+      "y": 90
+    },
+    "facing=east,active=false,operation=2": {
+      "model": "civitas_industria:block/precision_workbench",
+      "y": 90
+    },
+    "facing=east,active=true,operation=0": {
+      "model": "civitas_industria:block/precision_workbench",
+      "y": 90
+    },
+    "facing=east,active=true,operation=1": {
+      "model": "civitas_industria:block/precision_workbench",
+      "y": 90
+    },
+    "facing=east,active=true,operation=2": {
+      "model": "civitas_industria:block/precision_workbench",
+      "y": 90
+    },
+    "facing=south,active=false,operation=0": {
+      "model": "civitas_industria:block/precision_workbench",
+      "y": 180
+    },
+    "facing=south,active=false,operation=1": {
+      "model": "civitas_industria:block/precision_workbench",
+      "y": 180
+    },
+    "facing=south,active=false,operation=2": {
+      "model": "civitas_industria:block/precision_workbench",
+      "y": 180
+    },
+    "facing=south,active=true,operation=0": {
+      "model": "civitas_industria:block/precision_workbench",
+      "y": 180
+    },
+    "facing=south,active=true,operation=1": {
+      "model": "civitas_industria:block/precision_workbench",
+      "y": 180
+    },
+    "facing=south,active=true,operation=2": {
+      "model": "civitas_industria:block/precision_workbench",
+      "y": 180
+    },
+    "facing=west,active=false,operation=0": {
+      "model": "civitas_industria:block/precision_workbench",
+      "y": 270
+    },
+    "facing=west,active=false,operation=1": {
+      "model": "civitas_industria:block/precision_workbench",
+      "y": 270
+    },
+    "facing=west,active=false,operation=2": {
+      "model": "civitas_industria:block/precision_workbench",
+      "y": 270
+    },
+    "facing=west,active=true,operation=0": {
+      "model": "civitas_industria:block/precision_workbench",
+      "y": 270
+    },
+    "facing=west,active=true,operation=1": {
+      "model": "civitas_industria:block/precision_workbench",
+      "y": 270
+    },
+    "facing=west,active=true,operation=2": {
+      "model": "civitas_industria:block/precision_workbench",
+      "y": 270
+    }
+  }
+}

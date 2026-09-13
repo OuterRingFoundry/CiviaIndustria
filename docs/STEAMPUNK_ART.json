@@ -1,0 +1,16 @@
+{
+  "mode": "Built-in image generation plus repository-native Minecraft geometry and GUI",
+  "prompt": "Create an original square seamless game material texture for a Minecraft steampunk workshop and riveted clockwork raider armor, visually compatible with Create mod's restrained warm industrial palette. This is a SINGLE flat front-facing TILEABLE MATERIAL SURFACE, not a concept sheet or a rendered object. Warm dark gunmetal iron, mottled oxidized teal paint, small sparse worn brass flecks and subtle square pixel scratches. Uniform material across entire image, low contrast, no large border, no rivets, no symbols, no text, no shadows, no gradients, no perspective, no lighting baked in. Crisp deliberate pixel-art blocks on a coarse 32x32 logical pixel grid, enlarged nearest-neighbor appearance; image must be square power-of-two resolution, opaque, suitable to apply directly to cuboid models as a repeating metal skin. No source assets or logos copied.",
+  "asset": "src/main/resources/assets/civitas_industria/textures/entity/rivet_raider.png",
+  "export": "Original generated pixels copied without resampling or repainting; standalone entity texture, normalized 64x64 model UV space",
+  "geometry": [
+    "scripts/generate-workshop-content.py",
+    "src/main/java/com/civitasindustria/client/RivetRaiderModel.java"
+  ],
+  "shared_materials": "Existing original workshop iron, brass, cast iron, coil, gauge and wash-window textures; no Create or IE assets extracted",
+  "sha256": "e4364bfed0e614b7bf74f2fac2ea5593b8ec277511384ccae6f2cc46fcebdfff",
+  "dimensions": [
+    1254,
+    1254
+  ]
+}

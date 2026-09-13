@@ -1,0 +1,7 @@
+{
+  "mode": 1,
+  "input_tag": "c:plates/iron",
+  "output": "civitas_industria:gear_blank",
+  "ticks": 160,
+  "energy_per_tick": 32
+}

@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "entries": [
+    {
+      "whitelist": [
+        "civitas_industria:industrial_raider"
+      ],
+      "blacklist": []
+    }
+  ]
+}

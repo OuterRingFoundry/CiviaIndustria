@@ -44,3 +44,7 @@ for direction,y in [('north',0),('east',90),('south',180),('west',270)]:
  for active in [False,True]:variants[f'active={str(active).lower()},facing={direction}']={'model':f'{NS}:block/factory_controller'+('_active' if active else ''),'y':y}
 put(Path('blockstates/factory_controller.json'),{'variants':variants})
 print('Original material models generated')
+
+# Keep the refined process geometry authoritative when regenerating materials.
+import runpy
+runpy.run_path(str(Path(__file__).with_name("generate-process-models.py")))
